@@ -108,7 +108,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
           ? Container()
           : FloatingActionButton(
               onPressed: () => _incrementCounter(context),
-              tooltip: 'Increment',
+              tooltip: 'Randomize',
               child: ImageIcon(AssetImage("assets/dice.png")),
             ),
     );
