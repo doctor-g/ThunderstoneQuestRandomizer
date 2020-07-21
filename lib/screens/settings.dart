@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tqr/domain_model.dart';
 import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:provider/provider.dart';
@@ -29,13 +30,29 @@ class SettingsPage extends StatelessWidget {
                                       }
                                     },
                                   ),
-                                  Text(quest.name)
+                                  QuestIdentifier(quest)
                                 ],
                               ))
                           .toList()),
                 ),
         ),
       ),
+    );
+  }
+}
+
+class QuestIdentifier extends StatelessWidget {
+  final Quest quest;
+
+  QuestIdentifier(Quest quest) : quest = quest;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        quest.code == null ? Container() : Text('${quest.code}: '),
+        Text(quest.name)
+      ],
     );
   }
 }

@@ -19,9 +19,4 @@ void main() {
   test('Cards asset is parseable', () {
     expect(database, isNotNull);
   });
-
-  test('All quest codes are unique', () {
-    int uniqueCodes = database.quests.map((quest) => quest.code).toSet().length;
-    expect(uniqueCodes, database.quests.length);
-  });
 }
