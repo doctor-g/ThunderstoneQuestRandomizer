@@ -1,15 +1,39 @@
 import 'package:test/test.dart';
 import 'package:flutter_tqr/parser.dart';
-import 'package:flutter_tqr/quest.dart';
+import 'package:flutter_tqr/domain_model.dart';
 
 void main() {
-  test('Get the right number of heroes', () {
-    QuestParser parser = new QuestParser();
-    Quest result = parser.parse('''
-Heroes:
-  - Name: Hero1
-  - Name: Hero2
+  group('Parse YAML', () {
+    CardDatabase db;
+    Quest quest;
+
+    setUp(() {
+      ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+      db = parser.parse('''
+- Quest: The First Quest
+  Heroes:
+    - Name: Hero1
+      Keywords: [ Human, Fighter ]
+    - Name: Hero2
     ''');
-    expect(result.heroes.length, 2);
+      quest = db.quests[0];
+    });
+
+    test('Get the right number of quests', () {
+      expect(db.quests.length, 1);
+    });
+
+    test('Get the name of the first quest', () {
+      expect(quest.name, 'The First Quest');
+    });
+
+    test('Get the right number of heroes', () {
+      expect(quest.heroes.length, 2);
+    });
+
+    test('Get the hero keywords', () {
+      expect(
+          quest.heroes[0].keywords, containsAllInOrder(['Human', 'Fighter']));
+    });
   });
 }

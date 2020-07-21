@@ -24,6 +24,7 @@ dependencies:
   yaml: ^2.2.1
   flutter:
     sdk: flutter
+  provider: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,7 +48,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/q1.yaml
+    - assets/cards.yaml
+    - assets/dice.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
