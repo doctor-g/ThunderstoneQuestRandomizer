@@ -126,7 +126,7 @@ class HeroCardWidget extends StatelessWidget {
       children: <Widget>[
         Text(
           hero.name,
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.headline4,
           textAlign: TextAlign.center,
         ),
         Row(

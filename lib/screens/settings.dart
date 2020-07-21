@@ -13,29 +13,32 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Center(
         child: Consumer<CardDatabaseModel>(
-          builder: (context, value, child) => value.database == null
-              ? Text('No data!')
-              : Consumer<SettingsModel>(
-                  builder: (context, settings, child) => Column(
-                      children: value.database.quests
-                          .map((quest) => Row(
-                                children: [
-                                  Checkbox(
-                                    value: settings.includes(quest.name),
-                                    onChanged: (value) {
-                                      if (value) {
-                                        settings.include(quest.name);
-                                      } else {
-                                        settings.exclude(quest.name);
-                                      }
-                                    },
-                                  ),
-                                  QuestIdentifier(quest)
-                                ],
-                              ))
-                          .toList()),
-                ),
-        ),
+            builder: (context, value, child) => value.database == null
+                ? Text('No data!')
+                : Column(children: <Widget>[
+                    Text('Quests',
+                        style: Theme.of(context).textTheme.headline4),
+                    Consumer<SettingsModel>(
+                      builder: (context, settings, child) => Column(
+                          children: value.database.quests
+                              .map((quest) => Row(
+                                    children: [
+                                      Checkbox(
+                                        value: settings.includes(quest.name),
+                                        onChanged: (value) {
+                                          if (value) {
+                                            settings.include(quest.name);
+                                          } else {
+                                            settings.exclude(quest.name);
+                                          }
+                                        },
+                                      ),
+                                      QuestIdentifier(quest)
+                                    ],
+                                  ))
+                              .toList()),
+                    ),
+                  ])),
       ),
     );
   }
