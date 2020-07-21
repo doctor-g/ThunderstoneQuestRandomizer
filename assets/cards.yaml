@@ -1,6 +1,6 @@
 
 - Quest: Bandits of Black Rock
-  Code: "-"
+  Code: "B"
   Sets:
   - Champion
   Heroes:
@@ -20,7 +20,7 @@
     Level: 1
     
 - Quest: Promos
-  Code: "-"
+  Code: "P"
   Sets:
   - Champion
   Heroes:

@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:flutter_tqr/models/settings.dart';
+
 import 'domain_model.dart';
 
 class Randomizer {
@@ -6,11 +8,13 @@ class Randomizer {
 
   Random _random = new Random();
 
-  List<Hero> chooseHeroes(CardDatabase db) {
+  List<Hero> chooseHeroes(CardDatabase db, SettingsModel settings) {
     // Make a master list of all the heroes
     List<Hero> allHeroes = new List();
     for (Quest quest in db.quests) {
-      allHeroes += quest.heroes;
+      if (settings.includes(quest.name)) {
+        allHeroes += quest.heroes;
+      }
     }
 
     // Try a random set of four
@@ -30,7 +34,7 @@ class Randomizer {
         .containsAll(classes)) {
       return result..sort((hero1, hero2) => hero1.name.compareTo(hero2.name));
     } else {
-      return chooseHeroes(db);
+      return chooseHeroes(db, settings);
     }
   }
 }

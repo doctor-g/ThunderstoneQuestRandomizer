@@ -1,17 +1,27 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_tqr/domain_model.dart';
 import 'package:flutter_tqr/parser.dart';
 
 void main() {
-  setUp(() {
+  CardDatabase database;
+
+  setUp(() async {
     // Ensure the asset can be loaded  via the rootbundle
     TestWidgetsFlutterBinding.ensureInitialized();
-  });
 
-  test('Cards asset is parseable', () async {
+    // Parse the data
     ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
     String string = await rootBundle.loadString('assets/cards.yaml');
-    var result = parser.parse(string);
-    expect(result, isNotNull);
+    database = parser.parse(string);
+  });
+
+  test('Cards asset is parseable', () {
+    expect(database, isNotNull);
+  });
+
+  test('All quest codes are unique', () {
+    int uniqueCodes = database.quests.map((quest) => quest.code).toSet().length;
+    expect(uniqueCodes, database.quests.length);
   });
 }

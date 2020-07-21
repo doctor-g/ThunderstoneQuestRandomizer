@@ -8,6 +8,7 @@ class CardDatabase {
 
 class Quest {
   String name;
+  String code;
   List<Hero> heroes = new List();
 }
 

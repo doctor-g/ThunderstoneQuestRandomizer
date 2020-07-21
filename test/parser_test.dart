@@ -11,6 +11,7 @@ void main() {
       ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
       db = parser.parse('''
 - Quest: The First Quest
+  Code: Q
   Heroes:
     - Name: Hero1
       Keywords: [ Human, Fighter ]
@@ -25,6 +26,10 @@ void main() {
 
     test('Get the name of the first quest', () {
       expect(quest.name, 'The First Quest');
+    });
+
+    test('Get the code of the first quest', () {
+      expect(quest.code, 'Q');
     });
 
     test('Get the right number of heroes', () {

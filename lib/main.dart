@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tqr/models/database.dart';
+import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/parser.dart';
 import 'package:flutter_tqr/randomizer.dart';
+import 'package:flutter_tqr/screens/settings.dart';
 import 'package:provider/provider.dart';
 import 'domain_model.dart' as tq;
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-        create: (context) => CardDatabaseModel(), child: TQRandomizerApp()),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(
+        create: (context) => CardDatabaseModel(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => SettingsModel(),
+      ),
+    ], child: TQRandomizerApp()),
   );
 }
 
@@ -66,8 +74,9 @@ class _RandomizerPageState extends State<RandomizerPage> {
     setState(() => _db = db);
   }
 
-  void _incrementCounter() {
-    List<tq.Hero> heroes = _randomizer.chooseHeroes(_db);
+  void _incrementCounter(BuildContext context) {
+    List<tq.Hero> heroes =
+        _randomizer.chooseHeroes(_db, Provider.of<SettingsModel>(context));
     setState(() => _heroes = heroes);
   }
 
@@ -98,7 +107,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
       floatingActionButton: _db == null
           ? Container()
           : FloatingActionButton(
-              onPressed: _incrementCounter,
+              onPressed: () => _incrementCounter(context),
               tooltip: 'Increment',
               child: ImageIcon(AssetImage("assets/dice.png")),
             ),
@@ -137,26 +146,5 @@ class HeroCardWidget extends StatelessWidget {
       }
     }
     return result;
-  }
-}
-
-class SettingsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
-      body: Center(
-        child: Consumer<CardDatabaseModel>(
-          builder: (context, value, child) => value.database == null
-              ? Text('No data!')
-              : Column(
-                  children:
-                      value.database.quests.map((e) => Text(e.name)).toList(),
-                ),
-        ),
-      ),
-    );
   }
 }

@@ -15,6 +15,7 @@ class ThunderstoneYamlCardParser {
   Quest _parseQuest(var node) {
     Quest quest = new Quest();
     quest.name = node['Quest'];
+    quest.code = node['Code'];
     for (var entry in node['Heroes']) {
       Hero hero = new Hero();
       hero.name = entry['Name'];
