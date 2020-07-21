@@ -93,16 +93,18 @@ class _RandomizerPageState extends State<RandomizerPage> {
         ],
       ),
       body: Center(
-        child: _db == null
-            ? CircularProgressIndicator()
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _heroes.isEmpty
-                    ? [Text('Ready!')]
-                    : _heroes
-                        .map((hero) => HeroCardWidget(hero: hero))
-                        .toList(),
-              ),
+        child: SingleChildScrollView(
+          child: _db == null
+              ? CircularProgressIndicator()
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _heroes.isEmpty
+                      ? [Text('Ready!')]
+                      : _heroes
+                          .map((hero) => HeroCardWidget(hero: hero))
+                          .toList(),
+                ),
+        ),
       ),
       floatingActionButton: _db == null
           ? Container()
