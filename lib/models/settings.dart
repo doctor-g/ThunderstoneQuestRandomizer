@@ -99,7 +99,6 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     List<tq.Hero> result = new List();
-    print(availableHeroes);
     HeroSelectionStrategy.classes
       ..shuffle() // Mix up what we look for first
       ..forEach((element) {
@@ -109,7 +108,6 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
         var hero;
         do {
           hero = heroesOfClass[_random.nextInt(heroesOfClass.length)];
-          print('Hero is ${hero.name}');
         } while (result.contains(hero));
         result.add(hero);
       });

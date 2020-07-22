@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/parser.dart';
 import 'package:flutter_tqr/randomizer.dart';
@@ -10,37 +9,44 @@ import 'domain_model.dart' as tq;
 
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (context) => CardDatabaseModel(),
-      ),
-      ChangeNotifierProvider(
-        create: (context) => SettingsModel(),
-      ),
-    ], child: TQRandomizerApp()),
+    ChangeNotifierProvider(
+        create: (context) => SettingsModel(), child: TQRandomizerApp()),
   );
 }
 
-class TQRandomizerApp extends StatelessWidget {
-  void _initData(BuildContext context) async {
-    String data = await rootBundle.loadString('assets/cards.yaml');
-    ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
-    var db = parser.parse(data);
-    Provider.of<CardDatabaseModel>(context).database = db;
+class TQRandomizerApp extends StatefulWidget {
+  @override
+  _TQRandomizerAppState createState() => _TQRandomizerAppState();
+}
+
+class _TQRandomizerAppState extends State<TQRandomizerApp> {
+  tq.CardDatabase _database;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCardDatabase();
   }
 
-  // This widget is the root of your application.
+  void _loadCardDatabase() {
+    rootBundle.loadString('assets/cards.yaml').then((data) {
+      ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+      var database = parser.parse(data);
+      setState(() {
+        _database = database;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<CardDatabaseModel>(context).database == null) {
-      _initData(context);
-    }
-
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => RandomizerPage(),
-        '/settings': (context) => SettingsPage()
+        '/': (context) =>
+            _database == null ? LoadingPage() : RandomizerPage(_database),
+        '/settings': (context) =>
+            _database == null ? Container() : SettingsPage(_database)
       },
       title: 'Thunderstone Quest Randomizer',
       theme: ThemeData(
@@ -51,32 +57,31 @@ class TQRandomizerApp extends StatelessWidget {
   }
 }
 
+class LoadingPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+}
+
 class RandomizerPage extends StatefulWidget {
+  final tq.CardDatabase database;
+
+  RandomizerPage(tq.CardDatabase database) : database = database;
+
   @override
   _RandomizerPageState createState() => _RandomizerPageState();
 }
 
 class _RandomizerPageState extends State<RandomizerPage> {
-  tq.CardDatabase _db;
   Randomizer _randomizer = new Randomizer();
   List<tq.Hero> _heroes = new List();
 
-  @override
-  void initState() {
-    super.initState();
-    _initData();
-  }
-
-  void _initData() async {
-    String data = await rootBundle.loadString('assets/cards.yaml');
-    ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
-    var db = parser.parse(data);
-    setState(() => _db = db);
-  }
-
-  void _incrementCounter(BuildContext context) {
-    List<tq.Hero> heroes =
-        _randomizer.chooseHeroes(_db, Provider.of<SettingsModel>(context));
+  void _generateHeroes(BuildContext context) {
+    List<tq.Hero> heroes = _randomizer.chooseHeroes(
+        widget.database, Provider.of<SettingsModel>(context));
     setState(() => _heroes = heroes);
   }
 
@@ -94,25 +99,19 @@ class _RandomizerPageState extends State<RandomizerPage> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: _db == null
-              ? CircularProgressIndicator()
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _heroes.isEmpty
-                      ? [Text('Ready!')]
-                      : _heroes
-                          .map((hero) => HeroCardWidget(hero: hero))
-                          .toList(),
-                ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _heroes.isEmpty
+                ? [Text('Ready!')]
+                : _heroes.map((hero) => HeroCardWidget(hero: hero)).toList(),
+          ),
         ),
       ),
-      floatingActionButton: _db == null
-          ? Container()
-          : FloatingActionButton(
-              onPressed: () => _incrementCounter(context),
-              tooltip: 'Randomize',
-              child: ImageIcon(AssetImage("assets/dice.png")),
-            ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _generateHeroes(context),
+        tooltip: 'Randomize',
+        child: ImageIcon(AssetImage("assets/dice.png")),
+      ),
     );
   }
 }
