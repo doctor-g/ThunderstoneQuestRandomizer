@@ -98,8 +98,6 @@ abstract class Strategy {
 abstract class HeroSelectionStrategy extends Strategy {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
-
-  int compareHeroes(hero1, hero2) => hero1.name.compareTo(hero2.name);
 }
 
 // Selects the first four heroes that match the criteria that there
@@ -125,7 +123,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
         .toSet()
         .containsAll(HeroSelectionStrategy.classes)) {
       List<tq.Hero> heroes = result.toList();
-      return heroes..sort(compareHeroes);
+      return heroes;
     } else {
       return selectHeroesFrom(availableHeroes);
     }
@@ -158,7 +156,7 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
         } while (result.contains(hero));
         result.add(hero);
       });
-    return result..sort(compareHeroes);
+    return result;
   }
 }
 

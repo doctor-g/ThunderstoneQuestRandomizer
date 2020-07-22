@@ -144,11 +144,15 @@ class _RandomizerPageState extends State<RandomizerPage> {
     );
   }
 
+  int _cardSorter(tq.Card card1, tq.Card card2) =>
+      card1.name.compareTo(card2.name);
+
   List<Widget> _section(String name, [List<tq.Card> contents]) {
     var result = <Widget>[
       Text(name, style: Theme.of(context).textTheme.subtitle1)
     ];
     if (contents != null) {
+      contents.sort(_cardSorter);
       result.addAll(contents.map((card) => CardWidget(card: card)).toList());
     }
     return result;
@@ -158,6 +162,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
     if (contents.isEmpty) {
       return <Widget>[];
     } else {
+      contents.sort(_cardSorter);
       return [
         Text(name, style: Theme.of(context).textTheme.subtitle2),
         ...contents.map((card) => CardWidget(card: card)).toList()
