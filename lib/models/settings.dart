@@ -2,12 +2,39 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/domain_model.dart' as tq;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
+  static final String _excludedQuestsKey = 'exclude';
+  static final String _heroStrategyIndexKey = 'heroStrategyIndex';
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   // The names of excluded quests
   Set<String> _excludedQuests = new Set();
 
-  HeroSelectionStrategy _heroStrategy = heroStrategies[0];
+  int _heroStrategyIndex = 0;
+
+  SettingsModel() {
+    _loadPrefs();
+  }
+
+  void _loadPrefs() async {
+    _prefs.then((prefs) {
+      _excludedQuests = prefs.getStringList(_excludedQuestsKey).toSet();
+      if (prefs.containsKey(_heroStrategyIndexKey)) {
+        _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey);
+      }
+      notifyListeners();
+    });
+  }
+
+  void clear() {
+    _prefs.then((prefs) => prefs.clear());
+    _excludedQuests = new Set();
+    _heroStrategyIndex = 0;
+    notifyListeners();
+  }
 
   bool includes(String questName) {
     return !excludes(questName);
@@ -20,6 +47,7 @@ class SettingsModel extends ChangeNotifier {
   void exclude(String questName) {
     bool newExclusion = _excludedQuests.add(questName);
     if (newExclusion) {
+      _updatePrefs();
       notifyListeners();
     }
   }
@@ -27,15 +55,24 @@ class SettingsModel extends ChangeNotifier {
   void include(String questName) {
     bool changed = _excludedQuests.remove(questName);
     if (changed) {
+      _updatePrefs();
       notifyListeners();
     }
   }
 
-  HeroSelectionStrategy get heroSelectionStrategy => _heroStrategy;
+  void _updatePrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
+    prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
+  }
+
+  HeroSelectionStrategy get heroSelectionStrategy =>
+      heroStrategies[_heroStrategyIndex];
   set heroSelectionStrategy(HeroSelectionStrategy strategy) {
-    if (_heroStrategy != strategy) {
-      _heroStrategy = strategy;
+    if (heroSelectionStrategy != strategy) {
+      _heroStrategyIndex = heroStrategies.indexOf(strategy);
       notifyListeners();
+      _updatePrefs();
     }
   }
 

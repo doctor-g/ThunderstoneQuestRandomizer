@@ -55,6 +55,10 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ],
               ),
+              Consumer<SettingsModel>(
+                  builder: (context, settings, child) => OutlineButton(
+                      child: Text('Reset Settings to Defaults'),
+                      onPressed: () => settings.clear())),
             ],
           ),
         ),
