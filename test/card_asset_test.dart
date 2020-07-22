@@ -16,7 +16,11 @@ void main() {
     database = parser.parse(string);
   });
 
-  test('Cards asset is parseable', () {
-    expect(database, isNotNull);
+  test('All cards have names', () {
+    database.quests.forEach((quest) {
+      quest.cards.forEach((card) {
+        expect(card.name, isNotNull);
+      });
+    });
   });
 }

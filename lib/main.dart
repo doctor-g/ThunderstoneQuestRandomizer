@@ -6,6 +6,7 @@ import 'package:flutter_tqr/randomizer.dart';
 import 'package:flutter_tqr/screens/settings.dart';
 import 'package:provider/provider.dart';
 import 'domain_model.dart' as tq;
+import 'models/tableau.dart';
 
 void main() {
   runApp(
@@ -77,16 +78,18 @@ class RandomizerPage extends StatefulWidget {
 
 class _RandomizerPageState extends State<RandomizerPage> {
   Randomizer _randomizer = new Randomizer();
-  List<tq.Hero> _heroes = new List();
+  Tableau _tableau;
 
-  void _generateHeroes(BuildContext context) {
-    List<tq.Hero> heroes = _randomizer.chooseHeroes(
-        widget.database, Provider.of<SettingsModel>(context));
-    setState(() => _heroes = heroes);
+  void _generateTableau(BuildContext context) {
+    setState(() {
+      _tableau = _randomizer.generateTableau(
+          widget.database, Provider.of<SettingsModel>(context));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final market = _tableau == null ? null : _tableau.marketplace;
     return Scaffold(
       appBar: AppBar(
         title: Text('Thunderstone Quest Randomizer'),
@@ -101,41 +104,98 @@ class _RandomizerPageState extends State<RandomizerPage> {
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _heroes.isEmpty
+            children: _tableau == null
                 ? [Text('Ready!')]
-                : _heroes.map((hero) => HeroCardWidget(hero: hero)).toList(),
+                : [
+                    ..._section('Heroes', _tableau.heroes),
+                    Divider(),
+                    ..._section('Marketplace'),
+                    ..._subsection('Spells', market.allSpells),
+                    ..._subsection('Items', market.allItems),
+                    ..._subsection('Weapons', market.allWeapons),
+                    ..._subsection('Allies', market.allAllies),
+                    Divider(),
+                    ..._section('Guardian', [_tableau.guardian]),
+                    Divider(),
+                    ..._section('Dungeon'),
+                    ..._subsection('Level 1', _tableau.dungeon.roomsMap[1]),
+                    ..._subsection('Level 2', _tableau.dungeon.roomsMap[2]),
+                    ..._subsection('Level 3', _tableau.dungeon.roomsMap[3]),
+                    Divider(),
+                    ..._section('Monsters'),
+                    ..._subsection('Level 1', [_tableau.monsters[0]]),
+                    ..._subsection('Level 2', [_tableau.monsters[1]]),
+                    ..._subsection('Level 3', [_tableau.monsters[2]]),
+                  ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _generateHeroes(context),
+        onPressed: () => _generateTableau(context),
         tooltip: 'Randomize',
         child: ImageIcon(AssetImage("assets/dice.png")),
       ),
     );
   }
+
+  List<Widget> _section(String name, [List<tq.Card> contents]) {
+    var result = <Widget>[
+      Text(name, style: Theme.of(context).textTheme.headline3)
+    ];
+    if (contents != null) {
+      result.addAll(contents.map((card) => CardWidget(card: card)).toList());
+    }
+    return result;
+  }
+
+  List<Widget> _subsection(String name, List<tq.Card> contents) {
+    if (contents.isEmpty) {
+      return <Widget>[];
+    } else {
+      return [
+        Text(name, style: Theme.of(context).textTheme.headline4),
+        ...contents.map((card) => CardWidget(card: card)).toList()
+      ];
+    }
+  }
 }
 
-class HeroCardWidget extends StatelessWidget {
-  final tq.Hero hero;
+class CardWidget extends StatelessWidget {
+  final tq.Card card;
 
-  HeroCardWidget({Key key, this.hero}) : super(key: key);
+  CardWidget({Key key, this.card}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Text(
-          hero.name,
-          style: Theme.of(context).textTheme.headline4,
+          card.name +
+              (card.runtimeType == tq.Guardian
+                  ? ' (Level ${_toRoman((card as tq.Guardian).level)})'
+                  : ''),
+          style: Theme.of(context).textTheme.headline6,
           textAlign: TextAlign.center,
         ),
         Row(
-          children: _makeKeywordRow(hero.keywords),
+          children: _makeKeywordRow(card.keywords),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ],
     );
+  }
+
+  String _toRoman(int level) {
+    switch (level) {
+      case 4:
+        return 'IV';
+      case 5:
+        return 'V';
+      case 6:
+        return 'VI';
+      default:
+        throw Exception('Unexpected guardian level: $level');
+    }
   }
 
   List<Widget> _makeKeywordRow(List<String> keywords) {

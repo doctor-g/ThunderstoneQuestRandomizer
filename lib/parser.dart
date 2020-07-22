@@ -26,6 +26,57 @@ class ThunderstoneYamlCardParser {
       }
       quest.heroes.add(hero);
     }
+
+    for (var entry in node['Items']) {
+      Item item = new Item();
+      item.name = entry['Name'];
+      quest.items.add(item);
+    }
+
+    for (var entry in node['Spells']) {
+      Spell spell = new Spell();
+      spell.name = entry['Name'];
+      quest.spells.add(spell);
+    }
+
+    for (var entry in node['Weapons']) {
+      Weapon weapon = new Weapon();
+      weapon.name = entry['Name'];
+      quest.weapons.add(weapon);
+    }
+
+    if (node['Allies'] != null) {
+      for (var entry in node['Allies']) {
+        Ally ally = new Ally();
+        ally.name = entry['Name'];
+        quest.allies.add(ally);
+      }
+    }
+
+    for (var entry in node['Guardians']) {
+      Guardian guardian = new Guardian();
+      guardian.name = entry['Name'];
+      quest.guardians.add(guardian);
+    }
+
+    if (node['Rooms'] != null) {
+      for (var entry in node['Rooms']) {
+        Room room = new Room();
+        room.name = entry['Name'];
+        room.level = entry['Level'];
+        quest.rooms.add(room);
+      }
+    }
+
+    if (node['Monsters'] != null) {
+      for (var entry in node['Monsters']) {
+        Monster monster = new Monster();
+        monster.name = entry['Name'];
+        monster.level = entry['Level'];
+        quest.monsters.add(monster);
+      }
+    }
+
     return quest;
   }
 }

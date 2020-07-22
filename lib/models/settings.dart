@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/domain_model.dart' as tq;
+import 'package:flutter_tqr/models/tableau.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
@@ -21,7 +22,9 @@ class SettingsModel extends ChangeNotifier {
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
-      _excludedQuests = prefs.getStringList(_excludedQuestsKey).toSet();
+      if (prefs.containsKey(_excludedQuestsKey)) {
+        _excludedQuests = prefs.getStringList(_excludedQuestsKey).toSet();
+      }
       if (prefs.containsKey(_heroStrategyIndexKey)) {
         _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey);
       }
@@ -76,6 +79,10 @@ class SettingsModel extends ChangeNotifier {
     }
   }
 
+  // For now, just return the one that is implemented
+  MarketSelectionStrategy get marketSelectionStrategy =>
+      FirstFitMarketSelectionStrategy();
+
   static final List<HeroSelectionStrategy> heroStrategies = [
     OnePerClassHeroSelectionStrategy(),
     FirstMatchHeroSelectionStrategy(),
@@ -83,11 +90,14 @@ class SettingsModel extends ChangeNotifier {
   ];
 }
 
-abstract class HeroSelectionStrategy {
-  static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
+abstract class Strategy {
   final Random _random = new Random();
-  List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
   String get name;
+}
+
+abstract class HeroSelectionStrategy extends Strategy {
+  static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
+  List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
 
   int compareHeroes(hero1, hero2) => hero1.name.compareTo(hero2.name);
 }
@@ -149,5 +159,58 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
         result.add(hero);
       });
     return result..sort(compareHeroes);
+  }
+}
+
+abstract class MarketSelectionStrategy extends Strategy {
+  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards);
+}
+
+class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
+  @override
+  String get name => 'First Fit (Supports Allies)';
+
+  @override
+  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards) {
+    Marketplace marketplace = Marketplace();
+
+    while (!marketplace.isFull) {
+      tq.Card card =
+          availableMarketCards[_random.nextInt(availableMarketCards.length)];
+      if (!marketplace.contains(card)) {
+        switch (card.runtimeType) {
+          case tq.Spell:
+            if (!marketplace.spells.isFull) {
+              marketplace.spells.add(card);
+            } else if (marketplace.anys.canTake(card)) {
+              marketplace.anys.add(card);
+            }
+            break;
+          case tq.Item:
+            if (!marketplace.items.isFull) {
+              marketplace.items.add(card);
+            } else if (marketplace.anys.canTake(card)) {
+              marketplace.anys.add(card);
+            }
+            break;
+          case tq.Weapon:
+            if (!marketplace.weapons.isFull) {
+              marketplace.weapons.add(card);
+            } else if (marketplace.anys.canTake(card)) {
+              marketplace.anys.add(card);
+            }
+            break;
+          case tq.Ally:
+            if (!marketplace.anys.isFull) {
+              marketplace.anys.add(card);
+            }
+            break;
+          default:
+            throw Exception('Unexpected type ${card.runtimeType}');
+        }
+      }
+    }
+
+    return marketplace;
   }
 }
