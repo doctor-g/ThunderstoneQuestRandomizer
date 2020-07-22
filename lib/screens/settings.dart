@@ -22,21 +22,35 @@ class SettingsPage extends StatelessWidget {
               Consumer<SettingsModel>(
                 builder: (context, settings, child) => Column(
                     children: database.quests
-                        .map((quest) => Row(
-                              children: [
-                                Checkbox(
-                                  value: settings.includes(quest.name),
-                                  onChanged: (value) {
-                                    if (value) {
-                                      settings.include(quest.name);
-                                    } else {
-                                      settings.exclude(quest.name);
-                                    }
-                                  },
-                                ),
-                                QuestIdentifier(quest)
-                              ],
-                            ))
+                        .map(
+                          (quest) => Row(
+                            children: [
+                              Checkbox(
+                                value: settings.includes(quest.name),
+                                onChanged: (value) {
+                                  if (value) {
+                                    settings.include(quest.name);
+                                  } else {
+                                    settings.exclude(quest.name);
+                                  }
+                                },
+                              ),
+                              FlatButton(
+                                child: Text((quest.code == null
+                                        ? ''
+                                        : '${quest.code}: ') +
+                                    quest.name),
+                                onPressed: () {
+                                  if (settings.includes(quest.name)) {
+                                    settings.exclude(quest.name);
+                                  } else {
+                                    settings.include(quest.name);
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        )
                         .toList()),
               ),
               Row(
@@ -63,22 +77,6 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class QuestIdentifier extends StatelessWidget {
-  final Quest quest;
-
-  QuestIdentifier(Quest quest) : quest = quest;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        quest.code == null ? Container() : Text('${quest.code}: '),
-        Text(quest.name)
-      ],
     );
   }
 }
