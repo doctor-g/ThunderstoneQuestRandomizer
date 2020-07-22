@@ -53,6 +53,12 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: TextTheme(
+          subtitle1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          subtitle2: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+          bodyText1: TextStyle(fontSize: 16),
+          bodyText2: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+        ),
       ),
     );
   }
@@ -105,7 +111,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: _tableau == null
-                ? [Text('Ready!')]
+                ? [Text('Ready!', style: Theme.of(context).textTheme.subtitle1)]
                 : [
                     ..._section('Heroes', _tableau.heroes),
                     Divider(),
@@ -140,7 +146,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
 
   List<Widget> _section(String name, [List<tq.Card> contents]) {
     var result = <Widget>[
-      Text(name, style: Theme.of(context).textTheme.headline3)
+      Text(name, style: Theme.of(context).textTheme.subtitle1)
     ];
     if (contents != null) {
       result.addAll(contents.map((card) => CardWidget(card: card)).toList());
@@ -153,7 +159,7 @@ class _RandomizerPageState extends State<RandomizerPage> {
       return <Widget>[];
     } else {
       return [
-        Text(name, style: Theme.of(context).textTheme.headline4),
+        Text(name, style: Theme.of(context).textTheme.subtitle2),
         ...contents.map((card) => CardWidget(card: card)).toList()
       ];
     }
@@ -174,11 +180,11 @@ class CardWidget extends StatelessWidget {
               (card.runtimeType == tq.Guardian
                   ? ' (Level ${_toRoman((card as tq.Guardian).level)})'
                   : ''),
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.bodyText1,
           textAlign: TextAlign.center,
         ),
         Row(
-          children: _makeKeywordRow(card.keywords),
+          children: _makeKeywordRow(context, card.keywords),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ],
@@ -198,10 +204,11 @@ class CardWidget extends StatelessWidget {
     }
   }
 
-  List<Widget> _makeKeywordRow(List<String> keywords) {
+  List<Widget> _makeKeywordRow(BuildContext context, List<String> keywords) {
     List<Widget> result = new List();
     for (var i = 0; i < keywords.length; i++) {
-      result.add(Text(keywords[i]));
+      result
+          .add(Text(keywords[i], style: Theme.of(context).textTheme.bodyText2));
       if (i < keywords.length - 1) {
         result.add(Text(' • '));
       }
