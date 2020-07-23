@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class RandomizerPage extends StatefulWidget {
   final tq.CardDatabase database;
 
-  RandomizerPage(tq.CardDatabase database) : database = database;
+  RandomizerPage(this.database);
 
   @override
   _RandomizerPageState createState() => _RandomizerPageState();
