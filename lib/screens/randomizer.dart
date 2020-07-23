@@ -183,7 +183,7 @@ class CardWidget extends StatelessWidget {
         Text(
           card.name +
               (card.runtimeType == tq.Guardian
-                  ? ' (Level ${_toRoman((card as tq.Guardian).level)})'
+                  ? '\nLevel ${_toRoman((card as tq.Guardian).level)}'
                   : ''),
           style: Theme.of(context).textTheme.bodyText1,
           textAlign: TextAlign.center,
