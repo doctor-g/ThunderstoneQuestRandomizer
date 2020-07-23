@@ -1,21 +1,29 @@
-# flutter_tqr
+# Thunderstone Quest Randomizer
 
-A new Flutter project.
+This application is a randomizer for [_Thunderstone Quest_](https://alederac.com/thunderstone). You can use it to generate randomized tableaus for playing the game in competitive mode. 
 
-## Getting Started
+[Use the Web app now!](https://doctor-g.github.io/flutter_tqr)
 
-This project is a starting point for a Flutter application.
+## Background
 
-A few resources to get you started if this is your first Flutter project:
+In 2019, I created [_TSQR_](https://doctor-g.github.io/tsqr/), which is another randomizer for _Thunderstone Quest_. It was created using a different technology stack I was investigating at the time.
+The original _TSQR_ is still [available online](https://doctor-g.github.io/tsqr/), if you prefer to use it.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+In Summer 2020, I decided to learn [Flutter](https://flutter.dev) with an eye toward using it in [a Fall 2020 course](https://www.cs.bsu.edu/~pvgestwicki/courses/cs445Fa20).
+I was inspired by the release of the [New Horizons set](https://www.kickstarter.com/projects/alderac/thunderstone-quest-new-horizons-from-aeg) to revisit the problem domain with a new technology stack. 
+I was able to add Quests 8&ndash;9 to _TSQR_ without too much difficulty except that my original randomizer contained assumptions that prevented the inclusion of the new Ally cards&mdash;at least, without requiring a significant reimplementation effort. 
+Hence, I decided to spend some time getting deeper into Flutter, and the result is this application.
 
 ## Third-party assets
 
 - [Multiple Dice Icon](https://materialdesignicons.com/icon/dice-multiple-outline)
+
+## Acknowledgements
+
+[_Thunderstone Quest_](https://alederac.com/thunderstone) is a property of [Alderac Entertainment Group](https://alderac.com).
+
+## Legal
+
+&copy;2020 Paul Gestwicki
+
+This application is licensed under [GNU GPL v3](LICENSE).
