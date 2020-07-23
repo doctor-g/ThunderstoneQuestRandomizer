@@ -114,12 +114,15 @@ abstract class Strategy {
 abstract class HeroSelectionStrategy extends Strategy {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
+  String get name;
+  String get description;
 }
 
 // Selects the first four heroes that match the criteria that there
 // is at least one of each class.
 class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'First Match';
+  String get description => 'All classes are represented.';
 
   final maxTries = 10;
 
@@ -170,6 +173,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
 
 class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'Unconstrained';
+  String get description => 'Hero classes are ignored.';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     if (availableHeroes.length < 4) {
@@ -182,7 +186,8 @@ class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
 }
 
 class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
-  String get name => 'One per class';
+  String get name => 'Traditional';
+  String get description => 'Each class has at least one hero.';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     List<tq.Hero> result = new List();
