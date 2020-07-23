@@ -10,6 +10,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle checkboxTextStyle = Theme.of(context).textTheme.bodyText1;
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -23,8 +24,20 @@ class SettingsPage extends StatelessWidget {
                 constraints: BoxConstraints(maxWidth: 400),
                 child: Column(
                   children: <Widget>[
-                    Text('Quests',
-                        style: Theme.of(context).textTheme.subtitle1),
+                    _heading(context, 'Appearance'),
+                    Consumer<SettingsModel>(
+                        builder: (context, settings, child) => Row(
+                              children: <Widget>[
+                                Checkbox(
+                                  value: settings.showMemo,
+                                  onChanged: (value) =>
+                                      settings.showMemo = value,
+                                ),
+                                Text('Show card memo.',
+                                    style: checkboxTextStyle),
+                              ],
+                            )),
+                    _heading(context, 'Quests'),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +61,7 @@ class SettingsPage extends StatelessWidget {
                                                   ? ''
                                                   : '${quest.code}: ') +
                                               quest.name,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1),
+                                          style: checkboxTextStyle),
                                       onPressed: () {
                                         if (settings.includes(quest.name)) {
                                           settings.exclude(quest.name);
@@ -65,8 +76,7 @@ class SettingsPage extends StatelessWidget {
                               .toList()),
                     ),
                     Divider(),
-                    Text('Combo Bias',
-                        style: Theme.of(context).textTheme.subtitle1),
+                    _heading(context, 'Combo Bias'),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
                         children: <Widget>[
@@ -85,8 +95,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ),
                     Divider(),
-                    Text('Hero Selection',
-                        style: Theme.of(context).textTheme.subtitle1),
+                    _heading(context, 'Hero Selection'),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
                         children: <Widget>[
@@ -129,4 +138,7 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget _heading(BuildContext context, String text) =>
+      Text(text, style: Theme.of(context).textTheme.subtitle1);
 }

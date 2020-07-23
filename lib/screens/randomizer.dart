@@ -191,11 +191,15 @@ class CardWidget extends StatelessWidget {
         ),
         card.memo == null
             ? Container()
-            : ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 400),
-                child: Text(card.memo,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText2),
+            : Consumer<SettingsModel>(
+                builder: (context, settings, Widget child) => ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 400),
+                  child: settings.showMemo
+                      ? Text(card.memo,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyText2)
+                      : Container(),
+                ),
               ),
         Container(
           height: 6,

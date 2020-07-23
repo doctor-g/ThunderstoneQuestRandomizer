@@ -9,6 +9,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
+  static final String _showMemoKey = 'showMemo';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -32,6 +33,9 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_comboBiasKey)) {
         _comboBias = prefs.getDouble(_comboBiasKey);
       }
+      if (prefs.containsKey(_showMemoKey)) {
+        _showMemo = prefs.getBool(_showMemoKey);
+      }
       notifyListeners();
     });
   }
@@ -41,6 +45,7 @@ class SettingsModel extends ChangeNotifier {
     _excludedQuests = new Set();
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
+    _showMemo = true;
     notifyListeners();
   }
 
@@ -96,6 +101,14 @@ class SettingsModel extends ChangeNotifier {
       throw Exception('Illegal combo bias value: $value must be in [0,1]');
     }
     _comboBias = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _showMemo = true;
+  bool get showMemo => _showMemo;
+  set showMemo(bool value) {
+    _showMemo = value;
     _updatePrefs();
     notifyListeners();
   }
