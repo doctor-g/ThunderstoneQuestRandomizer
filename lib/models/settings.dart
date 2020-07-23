@@ -40,6 +40,7 @@ class SettingsModel extends ChangeNotifier {
     _prefs.then((prefs) => prefs.clear());
     _excludedQuests = new Set();
     _heroStrategyIndex = 0;
+    _comboBias = 0.5;
     notifyListeners();
   }
 
