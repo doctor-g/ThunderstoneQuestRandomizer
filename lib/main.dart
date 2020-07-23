@@ -52,7 +52,7 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
       },
       title: 'Thunderstone Quest Randomizer',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Cormorant',
         textTheme: TextTheme(
@@ -61,7 +61,7 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
           subtitle2:
               TextStyle(fontSize: 22, fontStyle: FontStyle.italic, height: 1.5),
           bodyText1: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          bodyText2: TextStyle(fontSize: 14, fontFamily: 'CormorantSC'),
+          bodyText2: TextStyle(fontSize: 14),
         ),
       ),
     );

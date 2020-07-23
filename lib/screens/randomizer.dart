@@ -194,11 +194,7 @@ class CardWidget extends StatelessWidget {
         ),
         card.memo == null
             ? Container()
-            : Text(card.memo,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontFamily: 'Cormorant')),
+            : Text(card.memo, style: Theme.of(context).textTheme.bodyText2),
         Container(
           height: 6,
         )
@@ -222,8 +218,11 @@ class CardWidget extends StatelessWidget {
   List<Widget> _makeKeywordRow(BuildContext context, List<String> keywords) {
     List<Widget> result = new List();
     for (var i = 0; i < keywords.length; i++) {
-      result
-          .add(Text(keywords[i], style: Theme.of(context).textTheme.bodyText2));
+      result.add(Text(keywords[i],
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2
+              .copyWith(fontFamily: 'CormorantSC')));
       if (i < keywords.length - 1) {
         result.add(Text(' • '));
       }
