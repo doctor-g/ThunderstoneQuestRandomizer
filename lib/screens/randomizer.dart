@@ -14,15 +14,56 @@ class RandomizerPage extends StatefulWidget {
   _RandomizerPageState createState() => _RandomizerPageState();
 }
 
-class _RandomizerPageState extends State<RandomizerPage> {
+class _RandomizerPageState extends State<RandomizerPage>
+    with SingleTickerProviderStateMixin {
   Randomizer _randomizer = new Randomizer();
   Tableau _tableau;
 
+  Animation _animation;
+  AnimationController _controller;
+
+  final _forwardDuration = Duration(milliseconds: 500);
+  final _backwardDuration = Duration(milliseconds: 250);
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this, duration: _forwardDuration)
+      ..addListener(() {
+        setState(() {});
+      });
+    _animation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_controller);
+    super.initState();
+  }
+
   void _generateTableau(BuildContext context) {
-    setState(() {
-      _tableau = _randomizer.generateTableau(
-          widget.database, Provider.of<SettingsModel>(context));
-    });
+    if (_tableau != null) {
+      _controller.addStatusListener(_animationStatusListener);
+      _controller.duration = _backwardDuration;
+      _controller.reverse();
+    } else {
+      setState(() {
+        _tableau = _randomizer.generateTableau(
+            widget.database, Provider.of<SettingsModel>(context));
+        _controller.duration = _forwardDuration;
+        _controller.forward();
+      });
+    }
+  }
+
+  void _animationStatusListener(AnimationStatus status) {
+    // 'dismissed' means stopped at the beginning (a.k.a. finished reverse)
+    if (status == AnimationStatus.dismissed) {
+      _controller.removeStatusListener(_animationStatusListener);
+      setState(() {
+        _tableau = _randomizer.generateTableau(
+            widget.database, Provider.of<SettingsModel>(context));
+        _controller.reset();
+        _controller.forward();
+      });
+    }
   }
 
   @override
@@ -42,34 +83,37 @@ class _RandomizerPageState extends State<RandomizerPage> {
         ],
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _tableau == null
-                ? [Text('Ready!', style: Theme.of(context).textTheme.subtitle1)]
-                : [
-                    ..._section('Heroes', _tableau.heroes),
-                    Divider(),
-                    ..._section('Marketplace'),
-                    ..._subsection('Spells', market.allSpells),
-                    ..._subsection('Items', market.allItems),
-                    ..._subsection('Weapons', market.allWeapons),
-                    ..._subsection('Allies', market.allAllies),
-                    Divider(),
-                    ..._section('Guardian', [_tableau.guardian]),
-                    Divider(),
-                    ..._section('Dungeon'),
-                    ..._subsection('Level 1', _tableau.dungeon.roomsMap[1]),
-                    ..._subsection('Level 2', _tableau.dungeon.roomsMap[2]),
-                    ..._subsection('Level 3', _tableau.dungeon.roomsMap[3]),
-                    Divider(),
-                    ..._section('Monsters'),
-                    ..._subsection('Level 1', [_tableau.monsters[0]]),
-                    ..._subsection('Level 2', [_tableau.monsters[1]]),
-                    ..._subsection('Level 3', [_tableau.monsters[2]]),
-                  ],
-          ),
-        ),
+        child: _tableau == null
+            ? Text('Ready!', style: Theme.of(context).textTheme.subtitle1)
+            : SingleChildScrollView(
+                child: FadeTransition(
+                  opacity: _animation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ..._section('Heroes', _tableau.heroes),
+                      Divider(),
+                      ..._section('Marketplace'),
+                      ..._subsection('Spells', market.allSpells),
+                      ..._subsection('Items', market.allItems),
+                      ..._subsection('Weapons', market.allWeapons),
+                      ..._subsection('Allies', market.allAllies),
+                      Divider(),
+                      ..._section('Guardian', [_tableau.guardian]),
+                      Divider(),
+                      ..._section('Dungeon'),
+                      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1]),
+                      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2]),
+                      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3]),
+                      Divider(),
+                      ..._section('Monsters'),
+                      ..._subsection('Level 1', [_tableau.monsters[0]]),
+                      ..._subsection('Level 2', [_tableau.monsters[1]]),
+                      ..._subsection('Level 3', [_tableau.monsters[2]]),
+                    ],
+                  ),
+                ),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _generateTableau(context),
