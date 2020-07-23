@@ -1,11 +1,63 @@
 import 'database.dart';
 
-class Tableau {
+abstract class ComboFinder {
+  bool hasCombo(Card card);
+}
+
+class Tableau implements ComboFinder {
   List<Hero> heroes;
   Marketplace marketplace;
   Guardian guardian;
   Dungeon dungeon;
   List<Monster> monsters; // in order of level
+
+  // Get the set of all cards currently in play
+  Set<Card> get allCards {
+    Set<Card> result = Set();
+    if (heroes != null) result.addAll(heroes);
+    if (marketplace != null) result.addAll(marketplace.cards);
+    if (guardian != null) result.add(guardian);
+    if (dungeon != null) result.addAll(dungeon.cards);
+    if (monsters != null) result.addAll(monsters);
+    return result;
+  }
+
+  // Get all the keywords of cards currently in play
+  Set<String> get keywords {
+    Set<String> result = Set();
+    allCards.forEach((card) => result.addAll(card.keywords));
+    return result;
+  }
+
+  // Get all the combos of the cards currently in play
+  Set<String> get combos {
+    Set<String> result = Set();
+    allCards.forEach((card) => result.addAll(card.combo));
+    return result;
+  }
+
+  // Given a card, see if it comboes with anything currently on the tableau.
+  bool hasCombo(Card card) {
+    // First, check if any of the tableau's combo words
+    // match keywords on the card.
+    Set<String> comboSet = combos;
+    for (var keyword in card.keywords) {
+      if (comboSet.contains(keyword)) {
+        return true;
+      }
+    }
+
+    // Then, check if any of the card's combo words
+    // match keywords on the tableau.
+    Set<String> keywordSet = keywords;
+    for (var combo in card.combo) {
+      if (keywordSet.contains(combo)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 class Marketplace {
@@ -60,4 +112,6 @@ class AnyMarketplaceRow<Card> extends MarketplaceRow {
 class Dungeon {
   // Map level to the pair of rooms
   Map<int, List<Room>> roomsMap = {1: List(), 2: List(), 3: List()};
+
+  List<Card> get cards => List.of(roomsMap[1] + roomsMap[2] + roomsMap[3]);
 }

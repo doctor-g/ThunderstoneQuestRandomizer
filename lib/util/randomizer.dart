@@ -17,7 +17,12 @@ class Randomizer {
     for (;;) {
       try {
         tableau.heroes = chooseHeroes(db, settings);
-        break;
+        tableau.marketplace = chooseMarket(db, settings, tableau);
+        tableau.guardian = chooseGuardian(db, settings, tableau);
+        tableau.dungeon =
+            generateDungeon(db, settings); // No combos for dungeon.
+        tableau.monsters = chooseMonsters(db, settings, tableau);
+        return tableau;
       } on TableauFailureException catch (e) {
         tries++;
         print('Got exception: ${e.cause}\nTries remaining ${maxTries - tries}');
@@ -26,19 +31,6 @@ class Randomizer {
         }
       }
     }
-
-    Set<String> presentKeywords = Set();
-    tableau.heroes.forEach((hero) => presentKeywords.addAll(hero.keywords));
-
-    Set<String> seekingCombo = Set();
-    tableau.heroes.forEach((hero) => seekingCombo.addAll(hero.combo));
-
-    tableau.marketplace =
-        chooseMarket(db, settings, presentKeywords, seekingCombo);
-    tableau.guardian = chooseGuardian(db, settings);
-    tableau.dungeon = generateDungeon(db, settings);
-    tableau.monsters = chooseMonsters(db, settings);
-    return tableau;
   }
 
   List<Hero> chooseHeroes(CardDatabase db, SettingsModel settings) {
@@ -53,8 +45,8 @@ class Randomizer {
     return settings.heroSelectionStrategy.selectHeroesFrom(allHeroes);
   }
 
-  Marketplace chooseMarket(CardDatabase db, SettingsModel settings,
-      Set<String> presentKeywords, Set<String> seekingCombos) {
+  Marketplace chooseMarket(
+      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     // Get all possible market cards
     List<Card> allMarketCards = new List();
     for (Quest quest in db.quests) {
@@ -65,11 +57,12 @@ class Randomizer {
         allMarketCards += quest.allies;
       }
     }
-    return settings.marketSelectionStrategy.selectMarketCardsFrom(
-        allMarketCards, 0.5, presentKeywords, seekingCombos);
+    return settings.marketSelectionStrategy
+        .selectMarketCardsFrom(allMarketCards, settings.comboBias, tableau);
   }
 
-  Guardian chooseGuardian(CardDatabase db, SettingsModel settings) {
+  Guardian chooseGuardian(
+      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     List<Guardian> allGuardians = new List();
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
@@ -77,12 +70,21 @@ class Randomizer {
       }
     }
 
+    while (Random().nextDouble() < settings.comboBias) {
+      Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
+      if (tableau.hasCombo(guardian)) {
+        print('Combo guardian');
+        return _randomlyLevel(guardian);
+      }
+    }
+
+    // Not going for combos, just choose one.
     Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
+    return _randomlyLevel(guardian);
+  }
 
-    // This is a bit of a kludge, but it seems better than recording three
-    // levels of each guardian in the data.
+  Guardian _randomlyLevel(Guardian guardian) {
     guardian.level = 4 + _random.nextInt(3);
-
     return guardian;
   }
 
@@ -111,7 +113,8 @@ class Randomizer {
     return dungeon;
   }
 
-  List<Monster> chooseMonsters(CardDatabase db, SettingsModel settings) {
+  List<Monster> chooseMonsters(
+      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     Map<int, List<Monster>> availableMonsters = {
       1: List(),
       2: List(),
@@ -127,8 +130,20 @@ class Randomizer {
     List<Monster> result = List();
     [1, 2, 3].forEach((level) {
       List<Monster> list = availableMonsters[level];
-      Monster monster = list[_random.nextInt(list.length)];
-      result.add(monster);
+      bool done = false;
+      while (!done && _random.nextDouble() < settings.comboBias) {
+        Monster monster = list[_random.nextInt(list.length)];
+        if (tableau.hasCombo(monster)) {
+          result.add(monster);
+          done = true;
+          print('Combo monster: ${monster.name}');
+        }
+      }
+      // No combo, just pick one.
+      if (!done) {
+        Monster monster = list[_random.nextInt(list.length)];
+        result.add(monster);
+      }
     });
 
     return result;

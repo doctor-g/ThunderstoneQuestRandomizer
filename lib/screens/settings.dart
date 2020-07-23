@@ -62,6 +62,23 @@ class SettingsPage extends StatelessWidget {
                             .toList()),
                   ),
                   Divider(),
+                  Text('Combo Bias',
+                      style: Theme.of(context).textTheme.subtitle1),
+                  Consumer<SettingsModel>(
+                    builder: (context, settings, child) => Column(
+                      children: <Widget>[
+                        Text('${(settings.comboBias * 100).truncate()}%',
+                            style: Theme.of(context).textTheme.subtitle2),
+                        Slider(
+                          min: 0,
+                          max: 0.8,
+                          value: settings.comboBias,
+                          onChanged: (value) => settings.comboBias = value,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(),
                   Text('Hero Selection',
                       style: Theme.of(context).textTheme.subtitle1),
                   Consumer<SettingsModel>(

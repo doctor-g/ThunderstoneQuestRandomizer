@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
+  static final String _comboBiasKey = 'comboBias';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -27,6 +28,9 @@ class SettingsModel extends ChangeNotifier {
       }
       if (prefs.containsKey(_heroStrategyIndexKey)) {
         _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey);
+      }
+      if (prefs.containsKey(_comboBiasKey)) {
+        _comboBias = prefs.getDouble(_comboBiasKey);
       }
       notifyListeners();
     });
@@ -67,6 +71,7 @@ class SettingsModel extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
+    prefs.setDouble(_comboBiasKey, _comboBias);
   }
 
   HeroSelectionStrategy get heroSelectionStrategy =>
@@ -82,6 +87,17 @@ class SettingsModel extends ChangeNotifier {
   // For now, just return the one that is implemented
   MarketSelectionStrategy get marketSelectionStrategy =>
       FirstFitMarketSelectionStrategy();
+
+  double _comboBias = 0.5;
+  double get comboBias => _comboBias;
+  set comboBias(var value) {
+    if (value < 0 || value > 1) {
+      throw Exception('Illegal combo bias value: $value must be in [0,1]');
+    }
+    _comboBias = value;
+    _updatePrefs();
+    notifyListeners();
+  }
 
   static final List<HeroSelectionStrategy> heroStrategies = [
     OnePerClassHeroSelectionStrategy(),
@@ -196,7 +212,7 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
 
 abstract class MarketSelectionStrategy extends Strategy {
   Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards,
-      double comboBias, Set<String> presentKeywords, Set<String> seekingCombos);
+      double comboBias, final Tableau tableau);
 }
 
 class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
@@ -204,11 +220,8 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
   String get name => 'First Fit (Supports Allies)';
 
   @override
-  Marketplace selectMarketCardsFrom(
-      List<tq.Card> availableMarketCards,
-      double comboBias,
-      Set<String> presentKeywords,
-      Set<String> seekingCombos) {
+  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards,
+      double comboBias, final Tableau tableau) {
     Random random = Random();
     Marketplace marketplace = Marketplace();
 
@@ -217,22 +230,7 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
           availableMarketCards[_random.nextInt(availableMarketCards.length)];
 
       if (random.nextDouble() < comboBias) {
-        // Looking for a combo here, which can either be that this card
-        // matches one of my combos, or the combos on this card matches
-        // something I already have in the tableau.
-        bool isKeywordInSet = card.keywords.fold(
-            false,
-            (previousValue, keyword) =>
-                previousValue || seekingCombos.contains(keyword));
-        //print('$isKeywordInSet: ${card.name} has a keyword in the set!');
-
-        bool cardhasKeywordOnTableau = card.combo.fold(
-            false,
-            (previousValue, cardComboTerm) =>
-                previousValue || presentKeywords.contains(cardComboTerm));
-        //print('$cardhasKeywordOnTableau: ${card.name} has a combo with something on the table');
-
-        if (isKeywordInSet || cardhasKeywordOnTableau) {
+        if (tableau.hasCombo(card)) {
           bool added = _addIfPossible(marketplace, card);
           if (added) {
             print('Added combo card: ${card.name}');
