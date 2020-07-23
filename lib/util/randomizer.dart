@@ -17,10 +17,10 @@ class Randomizer {
     for (;;) {
       try {
         tableau.heroes = chooseHeroes(db, settings);
-        tableau.marketplace = chooseMarket(db, settings, tableau);
         tableau.guardian = chooseGuardian(db, settings, tableau);
         tableau.dungeon =
             generateDungeon(db, settings); // No combos for dungeon.
+        tableau.marketplace = chooseMarket(db, settings, tableau);
         tableau.monsters = chooseMonsters(db, settings, tableau);
         return tableau;
       } on TableauFailureException catch (e) {
