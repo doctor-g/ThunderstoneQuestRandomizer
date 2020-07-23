@@ -17,6 +17,7 @@ Hence, I decided to spend some time getting deeper into Flutter, and the result 
 ## Third-party assets
 
 - [Multiple Dice Icon](https://materialdesignicons.com/icon/dice-multiple-outline)
+- [Cormorant](https://fonts.google.com/specimen/Cormorant) and [CormorantSC](https://fonts.google.com/specimen/Cormorant+SC), used under [OFL](assets/fonts/OFL.txt)
 
 ## Acknowledgements
 

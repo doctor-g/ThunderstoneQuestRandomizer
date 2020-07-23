@@ -54,13 +54,14 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Cormorant',
         textTheme: TextTheme(
           subtitle1:
-              TextStyle(fontSize: 24, fontWeight: FontWeight.bold, height: 1.5),
+              TextStyle(fontSize: 32, fontWeight: FontWeight.bold, height: 1.5),
           subtitle2:
-              TextStyle(fontSize: 18, fontStyle: FontStyle.italic, height: 1.5),
-          bodyText1: TextStyle(fontSize: 16),
-          bodyText2: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+              TextStyle(fontSize: 22, fontStyle: FontStyle.italic, height: 1.5),
+          bodyText1: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          bodyText2: TextStyle(fontSize: 14, fontFamily: 'CormorantSC'),
         ),
       ),
     );
