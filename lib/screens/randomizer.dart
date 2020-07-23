@@ -102,9 +102,12 @@ class _RandomizerPageState extends State<RandomizerPage>
                       ..._section('Guardian', [_tableau.guardian]),
                       Divider(),
                       ..._section('Dungeon'),
-                      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1]),
-                      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2]),
-                      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3]),
+                      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1],
+                          sort: false),
+                      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2],
+                          sort: false),
+                      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3],
+                          sort: false),
                       Divider(),
                       ..._section('Monsters'),
                       ..._subsection('Level 1', [_tableau.monsters[0]]),
@@ -137,11 +140,14 @@ class _RandomizerPageState extends State<RandomizerPage>
     return result;
   }
 
-  List<Widget> _subsection(String name, List<tq.Card> contents) {
+  List<Widget> _subsection(String name, List<tq.Card> contents,
+      {bool sort = true}) {
     if (contents.isEmpty) {
       return <Widget>[];
     } else {
-      contents.sort(_cardSorter);
+      if (sort) {
+        contents.sort(_cardSorter);
+      }
       return [
         Text(name, style: Theme.of(context).textTheme.subtitle2),
         ...contents.map((card) => CardWidget(card: card)).toList()
