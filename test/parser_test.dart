@@ -17,6 +17,7 @@ void main() {
       Keywords: [ Human, Fighter ]
       Memo: Sample memo
       Combo: [ Combo1 ]
+      Meta: [ Meta1 ]
     - Name: Hero2
   Items:
     - Name: Item1
@@ -66,6 +67,10 @@ void main() {
 
     test('Read the hero combo', () {
       expect(quest.heroes[0].combo, contains('Combo1'));
+    });
+
+    test('Read the hero meta', () {
+      expect(quest.heroes[0].meta, contains('Meta1'));
     });
 
     test('Get the items', () {

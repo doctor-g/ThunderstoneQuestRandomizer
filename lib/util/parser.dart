@@ -92,5 +92,10 @@ class ThunderstoneYamlCardParser {
         card.combo.add(combo);
       }
     }
+    if (entry['Meta'] != null) {
+      for (var meta in entry['Meta']) {
+        card.meta.add(meta);
+      }
+    }
   }
 }

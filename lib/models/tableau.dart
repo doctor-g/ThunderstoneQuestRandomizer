@@ -23,25 +23,32 @@ class Tableau implements ComboFinder {
   }
 
   // Get all the keywords of cards currently in play
-  Set<String> get keywords {
+  Set<String> get _keywords {
     Set<String> result = Set();
     allCards.forEach((card) => result.addAll(card.keywords));
     return result;
   }
 
   // Get all the combos of the cards currently in play
-  Set<String> get combos {
+  Set<String> get _combos {
     Set<String> result = Set();
     allCards.forEach((card) => result.addAll(card.combo));
+    return result;
+  }
+
+  // Get all the meta on all the cards in play
+  Set<String> get _meta {
+    Set<String> result = Set();
+    allCards.forEach((card) => result.addAll(card.meta));
     return result;
   }
 
   // Given a card, see if it comboes with anything currently on the tableau.
   bool hasCombo(Card card) {
     // First, check if any of the tableau's combo words
-    // match keywords on the card.
-    Set<String> comboSet = combos;
-    for (var keyword in card.keywords) {
+    // match keywords or meta on the card.
+    Set<String> comboSet = _combos;
+    for (var keyword in List.of(card.keywords)..addAll(card.meta)) {
       if (comboSet.contains(keyword)) {
         return true;
       }
@@ -49,13 +56,23 @@ class Tableau implements ComboFinder {
 
     // Then, check if any of the card's combo words
     // match keywords on the tableau.
-    Set<String> keywordSet = keywords;
+    Set<String> keywordSet = _keywords;
     for (var combo in card.combo) {
       if (keywordSet.contains(combo)) {
         return true;
       }
     }
 
+    // Finally, check if any of the card's combo words
+    // match the meta on the tableau
+    Set<String> metaSet = _meta;
+    for (var combo in card.combo) {
+      if (metaSet.contains(combo)) {
+        return true;
+      }
+    }
+
+    // Otherwise, no combos were found.
     return false;
   }
 }

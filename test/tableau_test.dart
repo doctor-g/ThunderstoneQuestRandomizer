@@ -3,7 +3,7 @@ import 'package:flutter_tqr/models/tableau.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Tableau tests', () {
+  group('Marketplace tests', () {
     test('Initial marketplace is not full', () {
       Marketplace marketplace = new Marketplace();
       expect(marketplace.isFull, isFalse);
@@ -41,6 +41,42 @@ void main() {
       Marketplace marketplace = Marketplace();
       marketplace.anys.add(Spell());
       expect(marketplace.allSpells.length, 1);
+    });
+  });
+
+  group('Tableau Tests', () {
+    test('No combo without matching keyword', () {
+      Tableau tableau = Tableau();
+      tableau.heroes = [Hero()];
+      Monster monster = Monster();
+      expect(tableau.hasCombo(monster), isFalse);
+    });
+
+    test('Combo with keyword on tableau', () {
+      Tableau tableau = Tableau();
+      tableau.heroes = [
+        Hero()..keywords = ['X']
+      ];
+      Monster monster = Monster()..combo = ['X'].toSet();
+      expect(tableau.hasCombo(monster), isTrue);
+    });
+
+    test('Combo with combo on tableau', () {
+      Tableau tableau = Tableau();
+      tableau.heroes = [
+        Hero()..combo = ['X'].toSet()
+      ];
+      Monster monster = Monster()..keywords = ['X'];
+      expect(tableau.hasCombo(monster), isTrue);
+    });
+
+    test('Combo with meta on tableau', () {
+      Tableau tableau = Tableau();
+      tableau.heroes = [
+        Hero()..meta = ['X'].toSet()
+      ];
+      Monster monster = Monster()..combo = ['X'].toSet();
+      expect(tableau.hasCombo(monster), isTrue);
     });
   });
 }

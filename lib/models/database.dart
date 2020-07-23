@@ -35,6 +35,7 @@ class Card {
   List<String> keywords = List();
   String memo;
   Set<String> combo = Set();
+  Set<String> meta = Set();
 
   @override
   String toString() {
