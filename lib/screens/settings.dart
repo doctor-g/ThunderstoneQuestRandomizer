@@ -78,6 +78,9 @@ class SettingsPage extends StatelessWidget {
                             value: settings.comboBias,
                             onChanged: (value) => settings.comboBias = value,
                           ),
+                          Text(
+                              'The probability that, for a given card, it is accepted only if it combos with cards already selected.',
+                              style: Theme.of(context).textTheme.bodyText2),
                         ],
                       ),
                     ),
@@ -102,7 +105,7 @@ class SettingsPage extends StatelessWidget {
                               value: settings.heroSelectionStrategy),
                           Text(
                             settings.heroSelectionStrategy.description,
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyText2,
                             textAlign: TextAlign.center,
                           )
                         ],
