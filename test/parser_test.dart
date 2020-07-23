@@ -26,7 +26,7 @@ void main() {
     - Name: Ally1
   Guardians:
     - Name: Guardian1
-  Rooms:
+  Dungeon Rooms:
   - Name: Room1
     Level: 1
   Monsters:

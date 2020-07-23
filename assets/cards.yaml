@@ -76,7 +76,7 @@
   - Name: Shortsword
   Guardians:
   - Name: Smorga the Queen
-  Rooms:
+  Dungeon Rooms:
   - Name: Abandoned Gate
     Level: 1
   - Name: Mine

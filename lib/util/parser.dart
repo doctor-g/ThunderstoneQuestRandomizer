@@ -59,8 +59,8 @@ class ThunderstoneYamlCardParser {
       quest.guardians.add(guardian);
     }
 
-    if (node['Rooms'] != null) {
-      for (var entry in node['Rooms']) {
+    if (node['Dungeon Rooms'] != null) {
+      for (var entry in node['Dungeon Rooms']) {
         Room room = new Room();
         room.name = entry['Name'];
         room.level = entry['Level'];
