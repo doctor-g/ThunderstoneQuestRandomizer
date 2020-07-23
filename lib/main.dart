@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/parser.dart';
 import 'package:flutter_tqr/randomizer.dart';
+import 'package:flutter_tqr/screens/about.dart';
 import 'package:flutter_tqr/screens/settings.dart';
 import 'package:provider/provider.dart';
 import 'domain_model.dart' as tq;
@@ -47,7 +48,8 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
         '/': (context) =>
             _database == null ? LoadingPage() : RandomizerPage(_database),
         '/settings': (context) =>
-            _database == null ? Container() : SettingsPage(_database)
+            _database == null ? Container() : SettingsPage(_database),
+        '/about': (context) => AboutPage(),
       },
       title: 'Thunderstone Quest Randomizer',
       theme: ThemeData(
@@ -103,7 +105,10 @@ class _RandomizerPageState extends State<RandomizerPage> {
           IconButton(
             icon: Icon(Icons.settings),
             onPressed: () => Navigator.pushNamed(context, '/settings'),
-          )
+          ),
+          IconButton(
+              icon: Icon(Icons.info),
+              onPressed: () => Navigator.pushNamed(context, '/about')),
         ],
       ),
       body: Center(
