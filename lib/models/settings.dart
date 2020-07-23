@@ -105,7 +105,29 @@ abstract class HeroSelectionStrategy extends Strategy {
 class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'First Match';
 
+  final maxTries = 10;
+
+  @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
+    if (availableHeroes.length < 4) {
+      throw new TableauFailureException(
+          'Not enough heroes: ${availableHeroes.length}');
+    }
+
+    int tries = 0;
+    for (;;) {
+      try {
+        return _doSelection(availableHeroes);
+      } on TableauFailureException catch (e) {
+        tries++;
+        if (tries >= maxTries) {
+          throw e;
+        }
+      }
+    }
+  }
+
+  List<tq.Hero> _doSelection(List<tq.Hero> availableHeroes) {
     // Try a random set of four
     Set<tq.Hero> result = new Set();
 
@@ -116,7 +138,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
     }
 
     // If we have all the classes, we're done.
-    // If not, recursively try again.
+    // If not, throw an exception
     if (result
         .map((hero) => hero.keywords)
         .expand((element) => element)
@@ -125,7 +147,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
       List<tq.Hero> heroes = result.toList();
       return heroes;
     } else {
-      return selectHeroesFrom(availableHeroes);
+      throw TableauFailureException('Could not find a class match');
     }
   }
 }
@@ -134,6 +156,10 @@ class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'Unconstrained';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
+    if (availableHeroes.length < 4) {
+      print('Short stuff');
+      throw new TableauFailureException('Not enough heroes to choose from.');
+    }
     availableHeroes.shuffle();
     return availableHeroes.take(4).toList();
   }
