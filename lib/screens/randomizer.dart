@@ -3,6 +3,7 @@ import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:flutter_tqr/util/randomizer.dart';
+import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:provider/provider.dart';
 
 class RandomizerPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _RandomizerPageState extends State<RandomizerPage>
     with SingleTickerProviderStateMixin {
   Randomizer _randomizer = new Randomizer();
   Tableau _tableau;
+  bool _failure = false;
 
   Animation _animation;
   AnimationController _controller;
@@ -38,31 +40,37 @@ class _RandomizerPageState extends State<RandomizerPage>
     super.initState();
   }
 
-  void _generateTableau(BuildContext context) {
+  void _randomize(BuildContext context) {
+    // If there is already one being shown, fade it out.
+    // Otherwise, go ahead and generate it.
     if (_tableau != null) {
       _controller.addStatusListener(_animationStatusListener);
       _controller.duration = _backwardDuration;
       _controller.reverse();
     } else {
-      setState(() {
+      _generateTableau(context);
+    }
+  }
+
+  void _generateTableau(BuildContext context) {
+    setState(() {
+      try {
         _tableau = _randomizer.generateTableau(
             widget.database, Provider.of<SettingsModel>(context));
         _controller.duration = _forwardDuration;
         _controller.forward();
-      });
-    }
+      } on TableauFailureException {
+        _failure = true;
+        _tableau = null;
+      }
+    });
   }
 
   void _animationStatusListener(AnimationStatus status) {
     // 'dismissed' means stopped at the beginning (a.k.a. finished reverse)
     if (status == AnimationStatus.dismissed) {
       _controller.removeStatusListener(_animationStatusListener);
-      setState(() {
-        _tableau = _randomizer.generateTableau(
-            widget.database, Provider.of<SettingsModel>(context));
-        _controller.reset();
-        _controller.forward();
-      });
+      _generateTableau(context);
     }
   }
 
@@ -84,7 +92,14 @@ class _RandomizerPageState extends State<RandomizerPage>
       ),
       body: Center(
         child: _tableau == null
-            ? Text('Ready!', style: Theme.of(context).textTheme.subtitle1)
+            ? (_failure
+                ? ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 600),
+                    child: Text(
+                        'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
+                : Text('Ready!', style: Theme.of(context).textTheme.subtitle1))
             : SingleChildScrollView(
                 child: FadeTransition(
                   opacity: _animation,
@@ -119,7 +134,7 @@ class _RandomizerPageState extends State<RandomizerPage>
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _generateTableau(context),
+        onPressed: () => _randomize(context),
         tooltip: 'Randomize',
         child: ImageIcon(AssetImage("assets/dice.png")),
       ),
