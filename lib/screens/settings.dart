@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tqr/domain_model.dart';
+import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:provider/provider.dart';
 

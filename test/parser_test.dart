@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:flutter_tqr/parser.dart';
-import 'package:flutter_tqr/domain_model.dart';
+import 'package:flutter_tqr/util/parser.dart';
+import 'package:flutter_tqr/models/database.dart';
 
 void main() {
   group('Parse YAML', () {

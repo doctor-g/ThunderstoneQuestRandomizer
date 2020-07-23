@@ -1,4 +1,4 @@
-import 'package:flutter_tqr/domain_model.dart';
+import 'database.dart';
 
 class Tableau {
   List<Hero> heroes;

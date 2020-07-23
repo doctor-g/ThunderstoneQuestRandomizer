@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter_tqr/models/settings.dart';
-
-import 'domain_model.dart';
-import 'models/tableau.dart';
+import 'package:flutter_tqr/models/database.dart';
+import 'package:flutter_tqr/models/tableau.dart';
 
 class Randomizer {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];

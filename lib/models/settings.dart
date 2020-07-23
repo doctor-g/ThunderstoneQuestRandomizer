@@ -1,7 +1,6 @@
 import 'dart:math';
-
+import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter/foundation.dart';
-import 'package:flutter_tqr/domain_model.dart' as tq;
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

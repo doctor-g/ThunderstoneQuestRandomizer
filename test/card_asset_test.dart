@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_tqr/domain_model.dart';
-import 'package:flutter_tqr/parser.dart';
+import 'package:flutter_tqr/models/database.dart';
+import 'package:flutter_tqr/util/parser.dart';
 
 void main() {
   CardDatabase database;

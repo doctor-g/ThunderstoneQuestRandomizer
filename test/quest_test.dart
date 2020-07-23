@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:flutter_tqr/domain_model.dart';
+import 'package:flutter_tqr/models/database.dart';
 
 void main() {
   test('Quest cards accessor returns all cards.', () {

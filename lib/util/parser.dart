@@ -1,5 +1,5 @@
 import 'package:yaml/yaml.dart';
-import 'package:flutter_tqr/domain_model.dart';
+import 'package:flutter_tqr/models/database.dart';
 
 class ThunderstoneYamlCardParser {
   CardDatabase parse(String yaml) {

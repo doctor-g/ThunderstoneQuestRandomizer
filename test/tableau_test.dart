@@ -1,4 +1,4 @@
-import 'package:flutter_tqr/domain_model.dart';
+import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:test/test.dart';
 
