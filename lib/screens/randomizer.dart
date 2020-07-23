@@ -93,12 +93,9 @@ class _RandomizerPageState extends State<RandomizerPage>
       body: Center(
         child: _tableau == null
             ? (_failure
-                ? ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 600),
-                    child: Text(
-                        'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
-                        style: Theme.of(context).textTheme.bodyText1),
-                  )
+                ? Text(
+                    'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
+                    style: Theme.of(context).textTheme.bodyText1)
                 : Text('Ready!', style: Theme.of(context).textTheme.subtitle1))
             : SingleChildScrollView(
                 child: FadeTransition(
@@ -194,7 +191,12 @@ class CardWidget extends StatelessWidget {
         ),
         card.memo == null
             ? Container()
-            : Text(card.memo, style: Theme.of(context).textTheme.bodyText2),
+            : ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 400),
+                child: Text(card.memo,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText2),
+              ),
         Container(
           height: 6,
         )
