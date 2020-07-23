@@ -32,7 +32,14 @@ class Quest {
 
 class Card {
   String name;
-  List<String> keywords = new List();
+  List<String> keywords = List();
+  String memo;
+  Set<String> combo = Set();
+
+  @override
+  String toString() {
+    return name;
+  }
 }
 
 class Hero extends Card {}

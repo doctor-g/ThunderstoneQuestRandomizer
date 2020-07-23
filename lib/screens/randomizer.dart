@@ -177,6 +177,13 @@ class CardWidget extends StatelessWidget {
           children: _makeKeywordRow(context, card.keywords),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
+        card.memo == null
+            ? Container()
+            : Text(card.memo,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(fontFamily: 'Cormorant')),
         Container(
           height: 6,
         )

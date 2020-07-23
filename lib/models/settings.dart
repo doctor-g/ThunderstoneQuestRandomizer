@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/models/tableau.dart';
+import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
@@ -149,6 +150,14 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
         List<tq.Hero> heroesOfClass = availableHeroes
             .where((hero) => hero.keywords.contains(element))
             .toList();
+
+        // If there are no heroes of this class, or if they are
+        // all already selected, then it's a failure.
+        if (heroesOfClass.length == 0 ||
+            result.toSet().containsAll(heroesOfClass)) {
+          throw TableauFailureException('Cannot pick heroes.');
+        }
+
         var hero;
         do {
           hero = heroesOfClass[_random.nextInt(heroesOfClass.length)];
@@ -160,7 +169,8 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
 }
 
 abstract class MarketSelectionStrategy extends Strategy {
-  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards);
+  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards,
+      double comboBias, Set<String> presentKeywords, Set<String> seekingCombos);
 }
 
 class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
@@ -168,46 +178,87 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
   String get name => 'First Fit (Supports Allies)';
 
   @override
-  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards) {
+  Marketplace selectMarketCardsFrom(
+      List<tq.Card> availableMarketCards,
+      double comboBias,
+      Set<String> presentKeywords,
+      Set<String> seekingCombos) {
+    Random random = Random();
     Marketplace marketplace = Marketplace();
 
     while (!marketplace.isFull) {
       tq.Card card =
           availableMarketCards[_random.nextInt(availableMarketCards.length)];
-      if (!marketplace.contains(card)) {
-        switch (card.runtimeType) {
-          case tq.Spell:
-            if (!marketplace.spells.isFull) {
-              marketplace.spells.add(card);
-            } else if (marketplace.anys.canTake(card)) {
-              marketplace.anys.add(card);
-            }
-            break;
-          case tq.Item:
-            if (!marketplace.items.isFull) {
-              marketplace.items.add(card);
-            } else if (marketplace.anys.canTake(card)) {
-              marketplace.anys.add(card);
-            }
-            break;
-          case tq.Weapon:
-            if (!marketplace.weapons.isFull) {
-              marketplace.weapons.add(card);
-            } else if (marketplace.anys.canTake(card)) {
-              marketplace.anys.add(card);
-            }
-            break;
-          case tq.Ally:
-            if (!marketplace.anys.isFull) {
-              marketplace.anys.add(card);
-            }
-            break;
-          default:
-            throw Exception('Unexpected type ${card.runtimeType}');
+
+      if (random.nextDouble() < comboBias) {
+        // Looking for a combo here, which can either be that this card
+        // matches one of my combos, or the combos on this card matches
+        // something I already have in the tableau.
+        bool isKeywordInSet = card.keywords.fold(
+            false,
+            (previousValue, keyword) =>
+                previousValue || seekingCombos.contains(keyword));
+        //print('$isKeywordInSet: ${card.name} has a keyword in the set!');
+
+        bool cardhasKeywordOnTableau = card.combo.fold(
+            false,
+            (previousValue, cardComboTerm) =>
+                previousValue || presentKeywords.contains(cardComboTerm));
+        //print('$cardhasKeywordOnTableau: ${card.name} has a combo with something on the table');
+
+        if (isKeywordInSet || cardhasKeywordOnTableau) {
+          bool added = _addIfPossible(marketplace, card);
+          if (added) {
+            print('Added combo card: ${card.name}');
+          }
         }
+      } else {
+        _addIfPossible(marketplace, card);
       }
     }
-
     return marketplace;
+  }
+
+  bool _addIfPossible(Marketplace marketplace, tq.Card card) {
+    if (!marketplace.contains(card)) {
+      switch (card.runtimeType) {
+        case tq.Spell:
+          if (!marketplace.spells.isFull) {
+            marketplace.spells.add(card);
+            return true;
+          } else if (marketplace.anys.canTake(card)) {
+            marketplace.anys.add(card);
+            return true;
+          }
+          return false;
+        case tq.Item:
+          if (!marketplace.items.isFull) {
+            marketplace.items.add(card);
+            return true;
+          } else if (marketplace.anys.canTake(card)) {
+            marketplace.anys.add(card);
+            return true;
+          }
+          return false;
+        case tq.Weapon:
+          if (!marketplace.weapons.isFull) {
+            marketplace.weapons.add(card);
+            return true;
+          } else if (marketplace.anys.canTake(card)) {
+            marketplace.anys.add(card);
+            return true;
+          }
+          return false;
+        case tq.Ally:
+          if (!marketplace.anys.isFull) {
+            marketplace.anys.add(card);
+            return true;
+          }
+          return false;
+        default:
+          throw Exception('Unexpected type ${card.runtimeType}');
+      }
+    }
+    return false;
   }
 }

@@ -15,9 +15,12 @@ void main() {
   Heroes:
     - Name: Hero1
       Keywords: [ Human, Fighter ]
+      Memo: Sample memo
+      Combo: [ Combo1 ]
     - Name: Hero2
   Items:
     - Name: Item1
+      Keywords: [Item]
   Spells:
     - Name: Spell1
   Weapons:
@@ -57,9 +60,21 @@ void main() {
           quest.heroes[0].keywords, containsAllInOrder(['Human', 'Fighter']));
     });
 
+    test('Read the hero memo', () {
+      expect(quest.heroes[0].memo, 'Sample memo');
+    });
+
+    test('Read the hero combo', () {
+      expect(quest.heroes[0].combo, contains('Combo1'));
+    });
+
     test('Get the items', () {
       expect(quest.items.length, 1);
       expect(quest.items[0].name, 'Item1');
+    });
+
+    test('Read the keywords of the item', () {
+      expect(quest.items[0].keywords, ['Item']);
     });
 
     test('Get the spells', () {

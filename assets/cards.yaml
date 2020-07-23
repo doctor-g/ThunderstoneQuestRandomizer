@@ -1,3 +1,6 @@
+# Meta codes: Diseased
+# Spells that reference cleric and wizard are NOT tracked.
+#  Generally, cards that reference the core classes are not tracked, because those are always there.
 
 - Quest: Bandits of Black Rock
   Sets:
@@ -48,32 +51,50 @@
   - Champion
   Heroes:
   - Name: Gorlandor
-    Keywords: [ Fighter ]
+    Keywords: [ Human, Fighter, Hero ]
   - Name: Hawkswood
-    Keywords: [ Rogue ]
+    Keywords: [ Avian, Elf, Rogue, Hero ]
   - Name: Pylorian
-    Keywords: [ Wizard ]
+    Keywords: [ Human, Wizard, Hero ]
+    Memo: Arcane Spell specialist
+    Combo: [ Arcane ]
   - Name: Scathian
-    Keywords: [Rogue, Wizard]
+    Keywords: [ Halfling, Rogue, Wizard, Hero ]
   - Name: Silverhelm 
     Keywords: [Cleric, Fighter]
   - Name: Stormhand
-    Keywords: [ Fighter ]
+    Keywords: [ Dwarf, Fighter, Hero ]
+    Memo: Edged Weapon specialist
+    Combo: [ Edged ]
   Items:
   - Name: Amulet of Infravision
+    Keywords: [Magic,Item]
   - Name: Gem of Healing
+    Keywords: [Magic,Item]
   - Name: Tome of Knowledge
+    Keywords: [Item]
   Spells:
   - Name: Fireball
+    Keywords: [Elemental,Spell]
   - Name: Future Vision
+    Keywords: [Arcane,Divine,Spell]
   - Name: Magic Missile
+    Keywords: [Arcane,Spell]
   - Name: Moonlight
+    Keywords: [Elemental,Spell]
   Weapons:
   - Name: Hammer
+    Keywords: [Blunt, Weapon]
   - Name: Maul
+    Keywords: [Blunt,Weapon]
+    Combo: [Dwarf]
   - Name: Shortbow
+    Keywords: [Bow, Weapon]
+    Combo: [Elf,Rogue]
   - Name: Shortspear
+    Keywords: [Edged,Weapon]
   - Name: Shortsword
+    Keywords: [Edged, Weapon]
   Guardians:
   - Name: Smorga the Queen
   Dungeon Rooms:
@@ -91,17 +112,26 @@
     Level: 3
   Monsters:
   - Name: Kobold Skirmishers
+    Keywords: [ Humanoid ]
     Level: 1
   - Name: Goblin Grunts
+    Keywords: [ Humanoid ]
     Level: 1
   - Name: Hobgoblin Brutes
     Level: 2
+    Keywords: [ Humanoid]
+    Memo: They attack heroes and their equipment.
   - Name: Spider Terrors
+    Keywords: [Giant, Vermin]
+    Memo: They wound heavily and are drawn to equipment.
+    Meta: [Diseased]
     Level: 2
   - Name: Ancient Adventurers
     Level: 3
+    Keywords: [Undead]
   - Name: Goblin King's Guard
     Level: 3
+    Keywords: [Humanoid]
 
 
 

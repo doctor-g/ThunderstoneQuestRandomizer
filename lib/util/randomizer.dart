@@ -3,15 +3,38 @@ import 'dart:math';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/tableau.dart';
+import 'package:flutter_tqr/util/tableau_failure.dart';
 
 class Randomizer {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
   Random _random = new Random();
 
   Tableau generateTableau(CardDatabase db, SettingsModel settings) {
+    final maxTries = 10;
     Tableau tableau = new Tableau();
-    tableau.heroes = chooseHeroes(db, settings);
-    tableau.marketplace = chooseMarket(db, settings);
+
+    int tries = 0;
+    for (;;) {
+      try {
+        tableau.heroes = chooseHeroes(db, settings);
+        break;
+      } on TableauFailureException catch (e) {
+        tries++;
+        print('Got exception: ${e.cause}\nTries remaining ${maxTries - tries}');
+        if (tries >= maxTries) {
+          throw e;
+        }
+      }
+    }
+
+    Set<String> presentKeywords = Set();
+    tableau.heroes.forEach((hero) => presentKeywords.addAll(hero.keywords));
+
+    Set<String> seekingCombo = Set();
+    tableau.heroes.forEach((hero) => seekingCombo.addAll(hero.combo));
+
+    tableau.marketplace =
+        chooseMarket(db, settings, presentKeywords, seekingCombo);
     tableau.guardian = chooseGuardian(db, settings);
     tableau.dungeon = generateDungeon(db, settings);
     tableau.monsters = chooseMonsters(db, settings);
@@ -30,7 +53,8 @@ class Randomizer {
     return settings.heroSelectionStrategy.selectHeroesFrom(allHeroes);
   }
 
-  Marketplace chooseMarket(CardDatabase db, SettingsModel settings) {
+  Marketplace chooseMarket(CardDatabase db, SettingsModel settings,
+      Set<String> presentKeywords, Set<String> seekingCombos) {
     // Get all possible market cards
     List<Card> allMarketCards = new List();
     for (Quest quest in db.quests) {
@@ -41,8 +65,8 @@ class Randomizer {
         allMarketCards += quest.allies;
       }
     }
-    return settings.marketSelectionStrategy
-        .selectMarketCardsFrom(allMarketCards);
+    return settings.marketSelectionStrategy.selectMarketCardsFrom(
+        allMarketCards, 0.5, presentKeywords, seekingCombos);
   }
 
   Guardian chooseGuardian(CardDatabase db, SettingsModel settings) {
