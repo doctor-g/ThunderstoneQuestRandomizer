@@ -171,6 +171,9 @@ class CardWidget extends StatelessWidget {
           children: _makeKeywordRow(context, card.keywords),
           mainAxisAlignment: MainAxisAlignment.center,
         ),
+        Container(
+          height: 6,
+        )
       ],
     );
   }

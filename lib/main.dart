@@ -55,8 +55,10 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: TextTheme(
-          subtitle1: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          subtitle2: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+          subtitle1:
+              TextStyle(fontSize: 24, fontWeight: FontWeight.bold, height: 1.5),
+          subtitle2:
+              TextStyle(fontSize: 18, fontStyle: FontStyle.italic, height: 1.5),
           bodyText1: TextStyle(fontSize: 16),
           bodyText2: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
         ),
