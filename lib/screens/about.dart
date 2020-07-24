@@ -7,8 +7,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final name = 'Thunderstone Quest Randomizer';
     final textTheme = Theme.of(context).textTheme;
-    final titleStyle =
-        textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold);
+    final titleStyle = textTheme.subtitle1;
     final bodyTextStyle = textTheme.bodyText1;
     final linkStyle = bodyTextStyle.copyWith(color: Colors.blue);
     return Scaffold(
@@ -28,9 +27,14 @@ class AboutPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('$name ${WebVersionInfo.name}', style: titleStyle),
+                  Text('$name', style: titleStyle),
+                  Text('Version ${WebVersionInfo.name}', style: bodyTextStyle),
+                  Text('©2020 Paul Gestwicki', style: bodyTextStyle),
+                  _space(),
+                  Text('Repository:', style: bodyTextStyle),
                   _makeLink(
-                      'https://github.com/doctor-g/flutter_tqr', linkStyle),
+                      'https://github.com/doctor-g/ThunderstoneQuestRandomizer',
+                      linkStyle),
                   _space(),
                   Text('$name is licensed under the GNU GPL v3.',
                       style: bodyTextStyle),
@@ -42,7 +46,6 @@ class AboutPage extends StatelessWidget {
                       style: bodyTextStyle),
                   _makeLink('https://www.alderac.com/thunderstone', linkStyle),
                   _space(),
-                  Text('©2020 Paul Gestwicki', style: bodyTextStyle),
                 ],
               ),
             ),

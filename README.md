@@ -2,7 +2,7 @@
 
 This application is a randomizer for [_Thunderstone Quest_](https://alederac.com/thunderstone). You can use it to generate randomized tableaus for playing the game in competitive mode. 
 
-[Use the Web app now!](https://doctor-g.github.io/flutter_tqr)
+[Use the Web app now!](https://doctor-g.github.io/ThunderstoneQuestRandomizer)
 
 ## Background
 
