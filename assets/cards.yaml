@@ -3,6 +3,8 @@
 # - Thunderstone
 # - Dagger
 # - Frozen (frozen wounds)
+# - Destroy (destroy effects)
+# - Dice (involves dice)
 #
 # Spells that reference cleric and wizard are NOT tracked.
 #  Generally, cards that reference the core classes are not tracked, because those are always there.
@@ -30,7 +32,7 @@
     Keywords: [ Humanoid ]
     Level: 1
     
-- Quest: Promos
+- Quest: Champion Promos
   Sets:
   - Champion
   Heroes:
@@ -108,6 +110,7 @@
     Keywords: [Edged, Weapon]
   Guardians:
   - Name: Smorga the Queen
+    Keywords: [Humanoid, Vermin, Guardian]
   Dungeon Rooms:
   - Name: Abandoned Gate
     Level: 1
@@ -201,6 +204,7 @@
     Keywords: [ Blunt, Weapon ]
   Guardians:
   - Name: Guardian of the Sun
+    Keywords: [Elemental, Golem, Guardian]
   Dungeon Rooms:
   - Name: Fairy Meadow
     Level: 1
@@ -286,6 +290,8 @@
     Combo: [ Demon, Undead ]
   Guardians:
   - Name: Baalok, the Flesh Weaver
+    Keywords: [Undead, Lich, Guardian]
+    Meta: [Destroy]
   Dungeon Rooms:
   - Name: Alchemy Chamber
     Level: 1
@@ -369,6 +375,8 @@
     Keywords: [ Edged, Weapon ]
   Guardians:
   - Name: Miricelle, Scion Defender
+    Keywords: [Demon, Humanoid, Guardian]
+    Meta: [Dice]
   Dungeon Rooms:
   - Name: Air Temple
     Level: 1
@@ -454,6 +462,8 @@
     Keywords: [ Blunt, Magic, Weapon ]
   Guardians:
   - Name: Death Sentinel
+    Keywords: [Golem, Doomknight, Guardian]
+    Meta: [Dice]
   Dungeon Rooms:
   - Name: Gate Cavern
     Level: 1
@@ -546,6 +556,8 @@
     Combo: [ Dwarf, Triton ]
   Guardians:
   - Name: Hive Mind
+    Keywords: [Aberration, Humanoid, Guardian]
+    Meta: [Dice]
   Dungeon Rooms:
   - Name: Junction
     Level: 1
@@ -648,6 +660,7 @@
     Combo: [ Halfling ]
   Guardians:
   - Name: Orgrum Coldthunder
+    Keywords: [Elemental,Giant,Humanoid,Bloodfrost Chieftain,Guardian]
   Dungeon Rooms:
   - Name: Icy Glade
     Level: 1
@@ -769,6 +782,7 @@
     Level: 3
   Guardians:
   - Name: Amtephetes VII, The Wicked
+    Keywords: [Humanoid,Undead,Guardian]
   Dungeon Rooms:
   - Name: Dragon Blood Forest
     Level: 1
@@ -870,6 +884,7 @@
     Level: 3
   Guardians:
   - Name: Thavroh Anvilbane
+    Keywords: [Humanoid, C.C.O.V. Boss, Guardian]
   Dungeon Rooms:
   - Name: Magic Mines
     Level: 1
@@ -883,3 +898,9 @@
     Level: 3
   - Name: Twilight Portal
     Level: 3
+  
+- Quest: New Horizons Promos
+  Guardians:
+  - Name: Ezuzrius the Noble
+    Keywords: [Giant, Dragon, Guardian]
+    Meta: [Dice]
