@@ -33,8 +33,12 @@ class SettingsPage extends StatelessWidget {
                                   onChanged: (value) =>
                                       settings.showMemo = value,
                                 ),
-                                Text('Show card memo.',
-                                    style: checkboxTextStyle),
+                                FlatButton(
+                                  child: Text('Show card memo.',
+                                      style: checkboxTextStyle),
+                                  onPressed: () =>
+                                      settings.showMemo = !settings.showMemo,
+                                ),
                               ],
                             )),
                     _heading(context, 'Quests'),
