@@ -62,7 +62,7 @@ class SettingsModel extends ChangeNotifier {
     _showMemo = true;
     _showKeywords = true;
     _showQuest = false;
-    _brightness = Brightness.dark;
+    _brightness = Brightness.light;
     notifyListeners();
   }
 
