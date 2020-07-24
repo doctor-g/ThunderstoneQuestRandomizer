@@ -94,9 +94,12 @@ class _RandomizerPageState extends State<RandomizerPage>
       body: Center(
         child: _tableau == null
             ? (_failure
-                ? Text(
-                    'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
-                    style: Theme.of(context).textTheme.bodyText1)
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
                 : WelcomeMessage())
             : SingleChildScrollView(
                 child: FadeTransition(
@@ -178,9 +181,12 @@ class WelcomeMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 400),
-      child: Text(
-          'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
-          style: Theme.of(context).textTheme.bodyText1),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+            'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
+            style: Theme.of(context).textTheme.bodyText1),
+      ),
     );
   }
 }
