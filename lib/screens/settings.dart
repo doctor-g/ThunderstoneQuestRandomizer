@@ -4,6 +4,7 @@ import 'package:flutter_tqr/models/settings.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
+  static final double _maxComboBias = 0.95;
   final CardDatabase database;
 
   SettingsPage(this.database);
@@ -143,7 +144,7 @@ class SettingsPage extends StatelessWidget {
                               style: Theme.of(context).textTheme.subtitle2),
                           Slider(
                             min: 0,
-                            max: 0.8,
+                            max: _maxComboBias,
                             value: settings.comboBias,
                             onChanged: (value) => settings.comboBias = value,
                           ),
