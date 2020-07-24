@@ -31,6 +31,27 @@ class SettingsPage extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Checkbox(
+                                      value: settings.brightness ==
+                                          Brightness.light,
+                                      onChanged: (value) =>
+                                          settings.brightness = value
+                                              ? Brightness.light
+                                              : Brightness.dark,
+                                    ),
+                                    FlatButton(
+                                      child: Text('Light Mode',
+                                          style: checkboxTextStyle),
+                                      onPressed: () => settings.brightness =
+                                          settings.brightness ==
+                                                  Brightness.light
+                                              ? Brightness.dark
+                                              : Brightness.light,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Checkbox(
                                       value: settings.showKeywords,
                                       onChanged: (value) =>
                                           settings.showKeywords = value,

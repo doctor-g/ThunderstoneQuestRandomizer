@@ -41,6 +41,7 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsNotifier = Provider.of<SettingsModel>(context);
     return MaterialApp(
       initialRoute: '/',
       routes: {
@@ -52,6 +53,7 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
       },
       title: 'Thunderstone Quest Randomizer',
       theme: ThemeData(
+        brightness: settingsNotifier.brightness,
         primarySwatch: Colors.blueGrey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Cormorant',

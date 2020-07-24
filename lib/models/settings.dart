@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/models/tableau.dart';
@@ -12,6 +13,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _showMemoKey = 'showMemo';
   static final String _showKeywordsKey = 'showKeywords';
   static final String _showQuestKey = 'showQuest';
+  static final String _brightnessKey = 'lightMode';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -44,6 +46,10 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_showQuestKey)) {
         _showQuest = prefs.getBool(_showQuestKey);
       }
+      if (prefs.containsKey(_brightnessKey)) {
+        _brightness =
+            prefs.getBool(_brightnessKey) ? Brightness.light : Brightness.dark;
+      }
       notifyListeners();
     });
   }
@@ -56,6 +62,7 @@ class SettingsModel extends ChangeNotifier {
     _showMemo = true;
     _showKeywords = true;
     _showQuest = false;
+    _brightness = Brightness.dark;
     notifyListeners();
   }
 
@@ -91,6 +98,7 @@ class SettingsModel extends ChangeNotifier {
     prefs.setBool(_showKeywordsKey, _showKeywords);
     prefs.setBool(_showMemoKey, _showMemo);
     prefs.setBool(_showQuestKey, _showQuest);
+    prefs.setBool(_brightnessKey, _brightness == Brightness.light);
   }
 
   HeroSelectionStrategy get heroSelectionStrategy =>
@@ -138,6 +146,14 @@ class SettingsModel extends ChangeNotifier {
   bool get showQuest => _showQuest;
   set showQuest(bool value) {
     _showQuest = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  Brightness _brightness = Brightness.light;
+  Brightness get brightness => _brightness;
+  set brightness(Brightness value) {
+    _brightness = value;
     _updatePrefs();
     notifyListeners();
   }
