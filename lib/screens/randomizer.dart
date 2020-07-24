@@ -96,7 +96,7 @@ class _RandomizerPageState extends State<RandomizerPage>
                 ? Text(
                     'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
                     style: Theme.of(context).textTheme.bodyText1)
-                : Text('Ready!', style: Theme.of(context).textTheme.subtitle1))
+                : WelcomeMessage())
             : SingleChildScrollView(
                 child: FadeTransition(
                   opacity: _animation,
@@ -165,6 +165,18 @@ class _RandomizerPageState extends State<RandomizerPage>
         ...contents.map((card) => CardWidget(card: card)).toList()
       ];
     }
+  }
+}
+
+class WelcomeMessage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 400),
+      child: Text(
+          'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
+          style: Theme.of(context).textTheme.bodyText1),
+    );
   }
 }
 
