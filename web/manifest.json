@@ -1,11 +1,11 @@
 {
-    "name": "flutter_tqr",
-    "short_name": "flutter_tqr",
+    "name": "Thunderstone Quest Randomizer",
+    "short_name": "TQR",
     "start_url": ".",
     "display": "minimal-ui",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Thunderstone Quest Randomizer",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
