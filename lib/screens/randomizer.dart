@@ -181,11 +181,19 @@ class WelcomeMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 400),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-            'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
-            style: Theme.of(context).textTheme.bodyText1),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('Thunderstone Quest Randomizer',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.subtitle1),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+                'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
+                style: Theme.of(context).textTheme.bodyText1),
+          ),
+        ],
       ),
     );
   }
