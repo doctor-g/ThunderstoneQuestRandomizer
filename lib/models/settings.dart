@@ -10,6 +10,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
   static final String _showMemoKey = 'showMemo';
+  static final String _showKeywordsKey = 'showKeywords';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -36,6 +37,9 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_showMemoKey)) {
         _showMemo = prefs.getBool(_showMemoKey);
       }
+      if (prefs.containsKey(_showKeywordsKey)) {
+        _showKeywords = prefs.getBool(_showKeywordsKey);
+      }
       notifyListeners();
     });
   }
@@ -46,6 +50,7 @@ class SettingsModel extends ChangeNotifier {
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
     _showMemo = true;
+    _showKeywords = true;
     notifyListeners();
   }
 
@@ -109,6 +114,14 @@ class SettingsModel extends ChangeNotifier {
   bool get showMemo => _showMemo;
   set showMemo(bool value) {
     _showMemo = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _showKeywords = true;
+  bool get showKeywords => _showKeywords;
+  set showKeywords(bool value) {
+    _showKeywords = value;
     _updatePrefs();
     notifyListeners();
   }

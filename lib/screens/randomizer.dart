@@ -175,36 +175,37 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          card.name +
-              (card.runtimeType == tq.Guardian
-                  ? '\nLevel ${_toRoman((card as tq.Guardian).level)}'
-                  : ''),
-          style: Theme.of(context).textTheme.bodyText1,
-          textAlign: TextAlign.center,
-        ),
-        Row(
-          children: _makeKeywordRow(context, card.keywords),
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
-        card.memo == null
-            ? Container()
-            : Consumer<SettingsModel>(
-                builder: (context, settings, Widget child) => ConstrainedBox(
+    return Consumer<SettingsModel>(
+      builder: (BuildContext context, SettingsModel settings, Widget child) =>
+          Column(
+        children: <Widget>[
+          Text(
+            card.name +
+                (card.runtimeType == tq.Guardian
+                    ? '\nLevel ${_toRoman((card as tq.Guardian).level)}'
+                    : ''),
+            style: Theme.of(context).textTheme.bodyText1,
+            textAlign: TextAlign.center,
+          ),
+          settings.showKeywords
+              ? Row(
+                  children: _makeKeywordRow(context, card.keywords),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )
+              : Container(),
+          card.memo == null || !settings.showMemo
+              ? Container()
+              : ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 400),
-                  child: settings.showMemo
-                      ? Text(card.memo,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyText2)
-                      : Container(),
+                  child: Text(card.memo,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyText2),
                 ),
-              ),
-        Container(
-          height: 6,
-        )
-      ],
+          Container(
+            height: 6,
+          )
+        ],
+      ),
     );
   }
 

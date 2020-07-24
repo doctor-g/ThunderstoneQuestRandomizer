@@ -26,18 +26,37 @@ class SettingsPage extends StatelessWidget {
                   children: <Widget>[
                     _heading(context, 'Appearance'),
                     Consumer<SettingsModel>(
-                        builder: (context, settings, child) => Row(
+                        builder: (context, settings, child) => Column(
                               children: <Widget>[
-                                Checkbox(
-                                  value: settings.showMemo,
-                                  onChanged: (value) =>
-                                      settings.showMemo = value,
+                                Row(
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: settings.showKeywords,
+                                      onChanged: (value) =>
+                                          settings.showKeywords = value,
+                                    ),
+                                    FlatButton(
+                                      child: Text('Show keyword traits',
+                                          style: checkboxTextStyle),
+                                      onPressed: () => settings.showKeywords =
+                                          !settings.showKeywords,
+                                    ),
+                                  ],
                                 ),
-                                FlatButton(
-                                  child: Text('Show card memo.',
-                                      style: checkboxTextStyle),
-                                  onPressed: () =>
-                                      settings.showMemo = !settings.showMemo,
+                                Row(
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: settings.showMemo,
+                                      onChanged: (value) =>
+                                          settings.showMemo = value,
+                                    ),
+                                    FlatButton(
+                                      child: Text('Show card memo',
+                                          style: checkboxTextStyle),
+                                      onPressed: () => settings.showMemo =
+                                          !settings.showMemo,
+                                    ),
+                                  ],
                                 ),
                               ],
                             )),
