@@ -76,6 +76,7 @@ class _RandomizerPageState extends State<RandomizerPage>
 
   @override
   Widget build(BuildContext context) {
+    final settingsNotifier = Provider.of<SettingsModel>(context);
     final market = _tableau == null ? null : _tableau.marketplace;
     return Scaffold(
       appBar: AppBar(
@@ -133,7 +134,11 @@ class _RandomizerPageState extends State<RandomizerPage>
       floatingActionButton: FloatingActionButton(
         onPressed: () => _randomize(context),
         tooltip: 'Randomize',
-        child: ImageIcon(AssetImage("assets/dice.png")),
+        child: ImageIcon(
+          AssetImage(settingsNotifier.brightness == Brightness.light
+              ? "assets/dice_white.png"
+              : "assets/dice_black.png"),
+        ),
       ),
     );
   }

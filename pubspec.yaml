@@ -50,7 +50,8 @@ flutter:
 
   assets:
     - assets/cards.yaml
-    - assets/dice.png
+    - assets/dice_white.png
+    - assets/dice_black.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
