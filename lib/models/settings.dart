@@ -11,6 +11,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _comboBiasKey = 'comboBias';
   static final String _showMemoKey = 'showMemo';
   static final String _showKeywordsKey = 'showKeywords';
+  static final String _showQuestKey = 'showQuest';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -40,6 +41,9 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_showKeywordsKey)) {
         _showKeywords = prefs.getBool(_showKeywordsKey);
       }
+      if (prefs.containsKey(_showQuestKey)) {
+        _showQuest = prefs.getBool(_showQuestKey);
+      }
       notifyListeners();
     });
   }
@@ -51,6 +55,7 @@ class SettingsModel extends ChangeNotifier {
     _comboBias = 0.5;
     _showMemo = true;
     _showKeywords = true;
+    _showQuest = false;
     notifyListeners();
   }
 
@@ -83,6 +88,9 @@ class SettingsModel extends ChangeNotifier {
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
+    prefs.setBool(_showKeywordsKey, _showKeywords);
+    prefs.setBool(_showMemoKey, _showMemo);
+    prefs.setBool(_showQuestKey, _showQuest);
   }
 
   HeroSelectionStrategy get heroSelectionStrategy =>
@@ -122,6 +130,14 @@ class SettingsModel extends ChangeNotifier {
   bool get showKeywords => _showKeywords;
   set showKeywords(bool value) {
     _showKeywords = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _showQuest = false;
+  bool get showQuest => _showQuest;
+  set showQuest(bool value) {
+    _showQuest = value;
     _updatePrefs();
     notifyListeners();
   }

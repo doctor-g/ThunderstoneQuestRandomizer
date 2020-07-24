@@ -12,69 +12,73 @@ class ThunderstoneYamlCardParser {
     return CardDatabase(quests);
   }
 
+  // Current quest being built.
+  Quest _quest;
+
   Quest _parseQuest(var node) {
     final empty = List();
-    Quest quest = new Quest();
-    quest.name = node['Quest'];
-    quest.code = node['Code'];
+    _quest = new Quest();
+    _quest.name = node['Quest'];
+    _quest.code = node['Code'];
 
     for (var entry in node['Heroes'] ?? empty) {
       Hero hero = new Hero();
       _parseCard(entry, hero);
-      quest.heroes.add(hero);
+      _quest.heroes.add(hero);
     }
 
     for (var entry in node['Items'] ?? empty) {
       Item item = new Item();
       _parseCard(entry, item);
-      quest.items.add(item);
+      _quest.items.add(item);
     }
 
     for (var entry in node['Spells'] ?? empty) {
       Spell spell = new Spell();
       _parseCard(entry, spell);
-      quest.spells.add(spell);
+      _quest.spells.add(spell);
     }
 
     if (node['Weapons'] != null) {
       for (var entry in node['Weapons'] ?? empty) {
         Weapon weapon = new Weapon();
         _parseCard(entry, weapon);
-        quest.weapons.add(weapon);
+        _quest.weapons.add(weapon);
       }
     }
 
     for (var entry in node['Allies'] ?? empty) {
       Ally ally = new Ally();
       _parseCard(entry, ally);
-      quest.allies.add(ally);
+      _quest.allies.add(ally);
     }
 
     for (var entry in node['Guardians'] ?? empty) {
       Guardian guardian = new Guardian();
       _parseCard(entry, guardian);
-      quest.guardians.add(guardian);
+      _quest.guardians.add(guardian);
     }
 
     for (var entry in node['Dungeon Rooms'] ?? empty) {
       Room room = new Room();
       _parseCard(entry, room);
       room.level = entry['Level'];
-      quest.rooms.add(room);
+      _quest.rooms.add(room);
     }
 
     for (var entry in node['Monsters'] ?? empty) {
       Monster monster = new Monster();
       _parseCard(entry, monster);
       monster.level = entry['Level'];
-      quest.monsters.add(monster);
+      _quest.monsters.add(monster);
     }
 
-    return quest;
+    return _quest;
   }
 
   // Parse the shared elements of all cards
   void _parseCard(var entry, Card card) {
+    card.quest = _quest;
     card.name = entry['Name'];
     if (entry['Keywords'] != null) {
       for (var keyword in entry['Keywords']) {

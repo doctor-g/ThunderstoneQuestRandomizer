@@ -58,6 +58,21 @@ class SettingsPage extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                Row(
+                                  children: <Widget>[
+                                    Checkbox(
+                                      value: settings.showQuest,
+                                      onChanged: (value) =>
+                                          settings.showQuest = value,
+                                    ),
+                                    FlatButton(
+                                      child: Text('Show quest',
+                                          style: checkboxTextStyle),
+                                      onPressed: () => settings.showQuest =
+                                          !settings.showQuest,
+                                    ),
+                                  ],
+                                ),
                               ],
                             )),
                     _heading(context, 'Quests'),

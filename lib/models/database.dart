@@ -31,6 +31,7 @@ class Quest {
 }
 
 class Card {
+  Quest quest;
   String name;
   List<String> keywords = List();
   String memo;
