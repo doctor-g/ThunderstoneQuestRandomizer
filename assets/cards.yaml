@@ -421,6 +421,7 @@
   - Name: Arcanian
     Keywords: [ Human, Wizard, Hero ]
     Memo: Arcanian's sorcery changes dice rolls. She also provides Light at level 2.
+    Combo: [ Dice ]
   - Name: Dunardic
     Keywords: [ Human, Fighter, Hero ]
     Memo: Once a Town Guard, Dunardic uses your Experience Points as a resource.
