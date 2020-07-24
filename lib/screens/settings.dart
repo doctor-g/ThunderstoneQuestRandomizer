@@ -95,9 +95,9 @@ class SettingsPage extends StatelessWidget {
                                     ),
                                     FlatButton(
                                       child: Text(
-                                          (quest.code == null
+                                          (quest.number == null
                                                   ? ''
-                                                  : '${quest.code}: ') +
+                                                  : 'Quest ${quest.number}: ') +
                                               quest.name,
                                           style: checkboxTextStyle),
                                       onPressed: () {

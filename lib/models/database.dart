@@ -8,7 +8,7 @@ class CardDatabase {
 
 class Quest {
   String name;
-  String code;
+  int number;
   final List<Hero> heroes = new List();
   final List<Item> items = new List();
   final List<Spell> spells = new List();

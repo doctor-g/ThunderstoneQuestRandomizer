@@ -19,7 +19,9 @@ class ThunderstoneYamlCardParser {
     final empty = List();
     _quest = new Quest();
     _quest.name = node['Quest'];
-    _quest.code = node['Code'];
+    _quest.number = node['Number'];
+
+    print('Quest number is ${_quest.number}');
 
     for (var entry in node['Heroes'] ?? empty) {
       Hero hero = new Hero();

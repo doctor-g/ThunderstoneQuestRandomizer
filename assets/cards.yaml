@@ -58,7 +58,7 @@
   Monsters: []
 
 - Quest: A Mirror in the Dark
-  Code: Q1
+  Number: 1
   Sets:
   - Base Game
   - Champion
@@ -148,7 +148,7 @@
     Keywords: [Humanoid]
 
 - Quest: Total Eclipse of the Sun
-  Code: Q2
+  Number: 2
   Sets:
   - Base Game
   - Champion
@@ -239,7 +239,7 @@
     Level: 3
 
 - Quest: Risen from the Mire
-  Code: Q3
+  Number: 3
   Sets:
   - Champion
   Heroes:
@@ -326,7 +326,7 @@
     Level: 3
 
 - Quest: At the Foundations of the World
-  Code: Q4
+  Number: 4
   Sets:
   - Champion
   Heroes:
@@ -411,7 +411,7 @@
     Level: 3
 
 - Quest: Ripples in Time
-  Code: Q5
+  Number: 5
   Sets:
   - Champion
   Heroes:
@@ -492,7 +492,7 @@
     Level: 3
 
 - Quest: What Lies Beneath
-  Code: Q6
+  Number: 6
   Sets:
   - To the Barricades
   Heroes:
@@ -597,7 +597,7 @@
 
 
 - Quest: Frozen in Time
-  Code: Q7
+  Number: 7
   Sets:
   - To the Barricades
   Heroes:
@@ -699,7 +699,7 @@
     Level: 3
 
 - Quest: Vengeful Sands
-  Code: Q8
+  Number: 8
   Sets:
   - New Horizons
   Heroes:
@@ -798,7 +798,7 @@
     Level: 3
 
 - Quest: Clockwork Destiny
-  Code: Q9
+  Number: 9
   Sets:
   - New Horizons
   Heroes:

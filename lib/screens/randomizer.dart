@@ -187,7 +187,11 @@ class CardWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1,
             textAlign: TextAlign.center,
           ),
-          settings.showQuest ? Text(card.quest.name) : Container(),
+          settings.showQuest
+              ? Text(card.quest.number == null
+                  ? card.quest.name
+                  : 'Quest ${card.quest.number}: ${card.quest.name}')
+              : Container(),
           settings.showKeywords
               ? Row(
                   children: _makeKeywordRow(context, card.keywords),
