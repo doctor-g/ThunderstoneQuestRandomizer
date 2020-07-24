@@ -23,6 +23,8 @@ Hence, I decided to spend some time getting deeper into Flutter, and the result 
 
 [_Thunderstone Quest_](https://alederac.com/thunderstone) is a property of [Alderac Entertainment Group](https://alderac.com).
 
+Thanks to Alex for his invaluable assistance with encoding the card data.
+
 ## Legal
 
 &copy;2020 Paul Gestwicki
