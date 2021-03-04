@@ -55,8 +55,8 @@ class _RandomizerPageState extends State<RandomizerPage>
   void _generateTableau(BuildContext context) {
     setState(() {
       try {
-        _tableau = _randomizer.generateTableau(
-            widget.database, Provider.of<SettingsModel>(context));
+        _tableau = _randomizer.generateTableau(widget.database,
+            Provider.of<SettingsModel>(context, listen: false));
         _controller.duration = _forwardDuration;
         _controller.forward();
       } on TableauFailureException {
