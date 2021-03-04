@@ -29,7 +29,7 @@ class AboutPage extends StatelessWidget {
                 children: <Widget>[
                   Text('$name', style: titleStyle),
                   Text('Version ${WebVersionInfo.name}', style: bodyTextStyle),
-                  Text('©2020 Paul Gestwicki', style: bodyTextStyle),
+                  Text('©2020–2021 Paul Gestwicki', style: bodyTextStyle),
                   _space(),
                   Text('Repository:', style: bodyTextStyle),
                   _makeLink(
