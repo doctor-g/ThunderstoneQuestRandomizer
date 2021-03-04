@@ -9,14 +9,14 @@ class CardDatabase {
 class Quest {
   String name;
   int number;
-  final List<Hero> heroes = new List();
-  final List<Item> items = new List();
-  final List<Spell> spells = new List();
-  final List<Weapon> weapons = new List();
-  final List<Ally> allies = new List();
-  final List<Guardian> guardians = new List();
-  final List<Room> rooms = new List();
-  final List<Monster> monsters = new List();
+  final List<Hero> heroes = [];
+  final List<Item> items = [];
+  final List<Spell> spells = [];
+  final List<Weapon> weapons = [];
+  final List<Ally> allies = [];
+  final List<Guardian> guardians = [];
+  final List<Room> rooms = [];
+  final List<Monster> monsters = [];
 
   List<Card> get cards => <Card>[
         ...heroes,
@@ -33,7 +33,7 @@ class Quest {
 class Card {
   Quest quest;
   String name;
-  List<String> keywords = List();
+  List<String> keywords = [];
   String memo;
   Set<String> combo = Set();
   Set<String> meta = Set();

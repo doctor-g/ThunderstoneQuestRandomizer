@@ -102,7 +102,7 @@ class Marketplace {
 }
 
 class MarketplaceRow<T extends Card> {
-  List<T> _slots = List();
+  List<T> _slots = [];
 
   void add(T card) {
     assert(!isFull);
@@ -128,7 +128,7 @@ class AnyMarketplaceRow<Card> extends MarketplaceRow {
 
 class Dungeon {
   // Map level to the pair of rooms
-  Map<int, List<Room>> roomsMap = {1: List(), 2: List(), 3: List()};
+  Map<int, List<Room>> roomsMap = {1: [], 2: [], 3: []};
 
   List<Card> get cards => List.of(roomsMap[1] + roomsMap[2] + roomsMap[3]);
 }

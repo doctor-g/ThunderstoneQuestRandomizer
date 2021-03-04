@@ -3,7 +3,7 @@ import 'package:flutter_tqr/models/database.dart';
 
 class ThunderstoneYamlCardParser {
   CardDatabase parse(String yaml) {
-    List<Quest> quests = new List();
+    List<Quest> quests = [];
     var document = loadYaml(yaml);
     for (var questNode in document) {
       Quest quest = _parseQuest(questNode);
@@ -16,7 +16,7 @@ class ThunderstoneYamlCardParser {
   Quest _quest;
 
   Quest _parseQuest(var node) {
-    final empty = List();
+    final empty = [];
     _quest = new Quest();
     _quest.name = node['Quest'];
     _quest.number = node['Number'];

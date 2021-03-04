@@ -249,7 +249,7 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
   String get description => 'Each class has at least one hero.';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
-    List<tq.Hero> result = new List();
+    List<tq.Hero> result = [];
     HeroSelectionStrategy.classes
       ..shuffle() // Mix up what we look for first
       ..forEach((element) {

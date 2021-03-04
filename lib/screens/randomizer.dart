@@ -259,7 +259,7 @@ class CardWidget extends StatelessWidget {
   }
 
   List<Widget> _makeKeywordRow(BuildContext context, List<String> keywords) {
-    List<Widget> result = new List();
+    List<Widget> result = [];
     for (var i = 0; i < keywords.length; i++) {
       result.add(Text(keywords[i],
           style: Theme.of(context)

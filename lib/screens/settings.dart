@@ -39,7 +39,7 @@ class SettingsPage extends StatelessWidget {
                                               ? Brightness.light
                                               : Brightness.dark,
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       child: Text('Light Mode',
                                           style: checkboxTextStyle),
                                       onPressed: () => settings.brightness =
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                                       onChanged: (value) =>
                                           settings.showKeywords = value,
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       child: Text('Show card keyword traits',
                                           style: checkboxTextStyle),
                                       onPressed: () => settings.showKeywords =
@@ -72,7 +72,7 @@ class SettingsPage extends StatelessWidget {
                                       onChanged: (value) =>
                                           settings.showMemo = value,
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       child: Text('Show card memo',
                                           style: checkboxTextStyle),
                                       onPressed: () => settings.showMemo =
@@ -87,7 +87,7 @@ class SettingsPage extends StatelessWidget {
                                       onChanged: (value) =>
                                           settings.showQuest = value,
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       child: Text('Show card quest',
                                           style: checkboxTextStyle),
                                       onPressed: () => settings.showQuest =
@@ -115,7 +115,7 @@ class SettingsPage extends StatelessWidget {
                                         }
                                       },
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       child: Text(
                                           (quest.number == null
                                                   ? ''
@@ -184,7 +184,7 @@ class SettingsPage extends StatelessWidget {
                     Text('Miscellaneous',
                         style: Theme.of(context).textTheme.subtitle1),
                     Consumer<SettingsModel>(
-                      builder: (context, settings, child) => OutlineButton(
+                      builder: (context, settings, child) => OutlinedButton(
                         child: Text('Reset Settings to Defaults',
                             style: Theme.of(context).textTheme.bodyText1),
                         onPressed: () => settings.clear(),

@@ -35,7 +35,7 @@ class Randomizer {
 
   List<Hero> chooseHeroes(CardDatabase db, SettingsModel settings) {
     // Make a master list of all the heroes
-    List<Hero> allHeroes = new List();
+    List<Hero> allHeroes = [];
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         allHeroes += quest.heroes;
@@ -48,7 +48,7 @@ class Randomizer {
   Marketplace chooseMarket(
       CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     // Get all possible market cards
-    List<Card> allMarketCards = new List();
+    List<Card> allMarketCards = [];
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         allMarketCards += quest.spells;
@@ -63,7 +63,7 @@ class Randomizer {
 
   Guardian chooseGuardian(
       CardDatabase db, SettingsModel settings, ComboFinder tableau) {
-    List<Guardian> allGuardians = new List();
+    List<Guardian> allGuardians = [];
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         allGuardians += quest.guardians;
@@ -89,11 +89,7 @@ class Randomizer {
   }
 
   Dungeon generateDungeon(CardDatabase db, SettingsModel settings) {
-    Map<int, List<Room>> availableRooms = {
-      1: List<Room>(),
-      2: List<Room>(),
-      3: List<Room>()
-    };
+    Map<int, List<Room>> availableRooms = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         quest.rooms.forEach((element) {
@@ -115,11 +111,7 @@ class Randomizer {
 
   List<Monster> chooseMonsters(
       CardDatabase db, SettingsModel settings, ComboFinder tableau) {
-    Map<int, List<Monster>> availableMonsters = {
-      1: List(),
-      2: List(),
-      3: List()
-    };
+    Map<int, List<Monster>> availableMonsters = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         quest.monsters.forEach(
@@ -127,7 +119,7 @@ class Randomizer {
       }
     }
 
-    List<Monster> result = List();
+    List<Monster> result = [];
     [1, 2, 3].forEach((level) {
       List<Monster> list = availableMonsters[level];
       bool done = false;
