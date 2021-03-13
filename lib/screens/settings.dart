@@ -56,6 +56,7 @@ class SettingsPage extends StatelessWidget {
                                         !settings.showQuest),
                               ],
                             )),
+                    Divider(),
                     _heading(context, 'Quests'),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
