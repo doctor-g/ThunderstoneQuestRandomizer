@@ -13,7 +13,7 @@ jobs:
 
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.0.0'
+          flutter-version: '2.0.2'
 
       - name: Download Dependencies
         run: flutter pub get
@@ -23,6 +23,9 @@ jobs:
 
       - name: Build
         run: flutter build web
+
+      - name: Fix service worker for GitHub Pages
+        run: sed -i '/ \"\/\",$/d' build/web/flutter_service_worker.js
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
