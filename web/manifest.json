@@ -1,11 +1,11 @@
 {
     "name": "Thunderstone Quest Randomizer",
-    "short_name": "TQR",
+    "short_name": "TSQ Randomizer",
     "start_url": ".",
-    "display": "minimal-ui",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Thunderstone Quest Randomizer",
+    "display": "standalone",
+    "background_color": "#607D8B",
+    "theme_color": "#607D8B",
+    "description": "Creates random card selections for playing Thunderstone Quest",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
