@@ -29,72 +29,31 @@ class SettingsPage extends StatelessWidget {
                     Consumer<SettingsModel>(
                         builder: (context, settings, child) => Column(
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                      value: settings.brightness ==
-                                          Brightness.light,
-                                      onChanged: (value) =>
-                                          settings.brightness = value
-                                              ? Brightness.light
-                                              : Brightness.dark,
-                                    ),
-                                    TextButton(
-                                      child: Text('Light Mode',
-                                          style: checkboxTextStyle),
-                                      onPressed: () => settings.brightness =
-                                          settings.brightness ==
-                                                  Brightness.light
-                                              ? Brightness.dark
-                                              : Brightness.light,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                      value: settings.showKeywords,
-                                      onChanged: (value) =>
-                                          settings.showKeywords = value,
-                                    ),
-                                    TextButton(
-                                      child: Text('Show card keyword traits',
-                                          style: checkboxTextStyle),
-                                      onPressed: () => settings.showKeywords =
-                                          !settings.showKeywords,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                      value: settings.showMemo,
-                                      onChanged: (value) =>
-                                          settings.showMemo = value,
-                                    ),
-                                    TextButton(
-                                      child: Text('Show card memo',
-                                          style: checkboxTextStyle),
-                                      onPressed: () => settings.showMemo =
-                                          !settings.showMemo,
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Checkbox(
-                                      value: settings.showQuest,
-                                      onChanged: (value) =>
-                                          settings.showQuest = value,
-                                    ),
-                                    TextButton(
-                                      child: Text('Show card quest',
-                                          style: checkboxTextStyle),
-                                      onPressed: () => settings.showQuest =
-                                          !settings.showQuest,
-                                    ),
-                                  ],
-                                ),
+                                _makeCheckbox(
+                                    context,
+                                    'Light Mode',
+                                    settings.brightness == Brightness.light,
+                                    (value) => settings.brightness = value
+                                        ? Brightness.light
+                                        : Brightness.dark),
+                                _makeCheckbox(
+                                    context,
+                                    'Show card keyword traits',
+                                    settings.showKeywords,
+                                    (value) => settings.showKeywords =
+                                        !settings.showKeywords),
+                                _makeCheckbox(
+                                    context,
+                                    'Show card memo',
+                                    settings.showMemo,
+                                    (value) =>
+                                        settings.showMemo = !settings.showMemo),
+                                _makeCheckbox(
+                                    context,
+                                    'Show card quest',
+                                    settings.showQuest,
+                                    (value) => settings.showQuest =
+                                        !settings.showQuest),
                               ],
                             )),
                     _heading(context, 'Quests'),
@@ -102,37 +61,19 @@ class SettingsPage extends StatelessWidget {
                       builder: (context, settings, child) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: database.quests
-                              .map(
-                                (quest) => Row(
-                                  children: [
-                                    Checkbox(
-                                      value: settings.includes(quest.name),
-                                      onChanged: (value) {
-                                        if (value) {
-                                          settings.include(quest.name);
-                                        } else {
-                                          settings.exclude(quest.name);
-                                        }
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text(
-                                          (quest.number == null
-                                                  ? ''
-                                                  : 'Quest ${quest.number}: ') +
-                                              quest.name,
-                                          style: checkboxTextStyle),
-                                      onPressed: () {
-                                        if (settings.includes(quest.name)) {
-                                          settings.exclude(quest.name);
-                                        } else {
-                                          settings.include(quest.name);
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              )
+                              .map((quest) => _makeCheckbox(
+                                      context,
+                                      (quest.number == null
+                                              ? ''
+                                              : 'Quest ${quest.number}: ') +
+                                          quest.name,
+                                      settings.includes(quest.name), (value) {
+                                    if (settings.includes(quest.name)) {
+                                      settings.exclude(quest.name);
+                                    } else {
+                                      settings.include(quest.name);
+                                    }
+                                  }))
                               .toList()),
                     ),
                     Divider(),
@@ -196,6 +137,26 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  // See https://github.com/flutter/flutter/issues/39731 to explain
+  // why a StatefulBuilder is needed here and not just a list tile.
+  Widget _makeCheckbox(BuildContext context, String title, bool value,
+      void onChanged(bool value)) {
+    final TextStyle checkboxTextStyle = Theme.of(context).textTheme.bodyText1;
+    return StatefulBuilder(
+      builder: (context, _setState) => CheckboxListTile(
+        title: Text(
+          title,
+          style: checkboxTextStyle,
+        ),
+        controlAffinity: ListTileControlAffinity.leading,
+        value: value,
+        onChanged: (value) {
+          _setState(() => onChanged(value));
+        },
       ),
     );
   }
