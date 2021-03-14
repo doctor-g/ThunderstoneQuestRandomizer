@@ -24,6 +24,7 @@ class _RandomizerPageState extends State<RandomizerPage>
   Animation _animation;
   AnimationController _controller;
 
+  final _maxWidthForSingleColumn = 600;
   final _forwardDuration = Duration(milliseconds: 500);
   final _backwardDuration = Duration(milliseconds: 250);
 
@@ -77,7 +78,7 @@ class _RandomizerPageState extends State<RandomizerPage>
   @override
   Widget build(BuildContext context) {
     final settingsNotifier = Provider.of<SettingsModel>(context);
-    final market = _tableau == null ? null : _tableau.marketplace;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Thunderstone Quest Randomizer'),
@@ -104,33 +105,31 @@ class _RandomizerPageState extends State<RandomizerPage>
             : SingleChildScrollView(
                 child: FadeTransition(
                   opacity: _animation,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ..._section('Heroes', _tableau.heroes),
-                      Divider(),
-                      ..._section('Marketplace'),
-                      ..._subsection('Spells', market.allSpells),
-                      ..._subsection('Items', market.allItems),
-                      ..._subsection('Weapons', market.allWeapons),
-                      ..._subsection('Allies', market.allAllies),
-                      Divider(),
-                      ..._section('Guardian', [_tableau.guardian]),
-                      Divider(),
-                      ..._section('Dungeon'),
-                      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1],
-                          sort: false),
-                      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2],
-                          sort: false),
-                      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3],
-                          sort: false),
-                      Divider(),
-                      ..._section('Monsters'),
-                      ..._subsection('Level 1', [_tableau.monsters[0]]),
-                      ..._subsection('Level 2', [_tableau.monsters[1]]),
-                      ..._subsection('Level 3', [_tableau.monsters[2]]),
-                    ],
-                  ),
+                  child: MediaQuery.of(context).size.width >
+                          _maxWidthForSingleColumn
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [..._heroes_and_marketplace()],
+                              ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [..._guardian_dungeon_monsters()],
+                              ),
+                            )
+                          ],
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ..._heroes_and_marketplace(),
+                            Divider(),
+                            ..._guardian_dungeon_monsters()
+                          ],
+                        ),
                 ),
               ),
       ),
@@ -173,6 +172,35 @@ class _RandomizerPageState extends State<RandomizerPage>
         ...contents.map((card) => CardWidget(card: card)).toList()
       ];
     }
+  }
+
+  List<Widget> _heroes_and_marketplace() {
+    final market = _tableau == null ? null : _tableau.marketplace;
+    return [
+      ..._section('Heroes', _tableau.heroes),
+      Divider(),
+      ..._section('Marketplace'),
+      ..._subsection('Spells', market.allSpells),
+      ..._subsection('Items', market.allItems),
+      ..._subsection('Weapons', market.allWeapons),
+      ..._subsection('Allies', market.allAllies)
+    ];
+  }
+
+  List<Widget> _guardian_dungeon_monsters() {
+    return [
+      ..._section('Guardian', [_tableau.guardian]),
+      Divider(),
+      ..._section('Dungeon'),
+      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1], sort: false),
+      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2], sort: false),
+      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3], sort: false),
+      Divider(),
+      ..._section('Monsters'),
+      ..._subsection('Level 1', [_tableau.monsters[0]]),
+      ..._subsection('Level 2', [_tableau.monsters[1]]),
+      ..._subsection('Level 3', [_tableau.monsters[2]]),
+    ];
   }
 }
 
