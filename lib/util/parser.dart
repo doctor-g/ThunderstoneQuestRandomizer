@@ -24,53 +24,33 @@ class ThunderstoneYamlCardParser {
     for (var entry in node['Heroes'] ?? empty) {
       Hero hero = new Hero();
       _parseCard(entry, hero);
-      _quest.heroes.add(hero);
+      _quest.add(hero);
     }
 
-    for (var entry in node['Items'] ?? empty) {
-      Item item = new Item();
-      _parseCard(entry, item);
-      _quest.items.add(item);
-    }
-
-    for (var entry in node['Spells'] ?? empty) {
-      Spell spell = new Spell();
-      _parseCard(entry, spell);
-      _quest.spells.add(spell);
-    }
-
-    if (node['Weapons'] != null) {
-      for (var entry in node['Weapons'] ?? empty) {
-        Weapon weapon = new Weapon();
-        _parseCard(entry, weapon);
-        _quest.weapons.add(weapon);
-      }
-    }
-
-    for (var entry in node['Allies'] ?? empty) {
-      Ally ally = new Ally();
-      _parseCard(entry, ally);
-      _quest.allies.add(ally);
+    for (var entry in node['Marketplace'] ?? empty) {
+      MarketplaceCard card = new MarketplaceCard();
+      _parseCard(entry, card);
+      _quest.add(card);
     }
 
     for (var entry in node['Guardians'] ?? empty) {
       Guardian guardian = new Guardian();
       _parseCard(entry, guardian);
-      _quest.guardians.add(guardian);
+      _quest.add(guardian);
     }
 
     for (var entry in node['Dungeon Rooms'] ?? empty) {
       Room room = new Room();
       _parseCard(entry, room);
       room.level = entry['Level'];
-      _quest.rooms.add(room);
+      _quest.add(room);
     }
 
     for (var entry in node['Monsters'] ?? empty) {
       Monster monster = new Monster();
       _parseCard(entry, monster);
       monster.level = entry['Level'];
-      _quest.monsters.add(monster);
+      _quest.add(monster);
     }
 
     return _quest;

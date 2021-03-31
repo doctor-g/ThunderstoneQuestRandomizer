@@ -19,15 +19,15 @@ void main() {
       Combo: [ Combo1 ]
       Meta: [ Meta1 ]
     - Name: Hero2
-  Items:
+  Marketplace:
     - Name: Item1
       Keywords: [Item]
-  Spells:
     - Name: Spell1
-  Weapons:
+      Keywords: [Spell]
     - Name: Weapon1
-  Allies:
+      Keywords: [Weapon]
     - Name: Ally1
+      Keywords: [Ally]
   Guardians:
     - Name: Guardian1
   Dungeon Rooms:

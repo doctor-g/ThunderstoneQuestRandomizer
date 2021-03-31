@@ -309,42 +309,39 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
 
   bool _addIfPossible(Marketplace marketplace, tq.Card card) {
     if (!marketplace.contains(card)) {
-      switch (card.runtimeType) {
-        case tq.Spell:
-          if (!marketplace.spells.isFull) {
-            marketplace.spells.add(card);
-            return true;
-          } else if (marketplace.anys.canTake(card)) {
-            marketplace.anys.add(card);
-            return true;
-          }
-          return false;
-        case tq.Item:
-          if (!marketplace.items.isFull) {
-            marketplace.items.add(card);
-            return true;
-          } else if (marketplace.anys.canTake(card)) {
-            marketplace.anys.add(card);
-            return true;
-          }
-          return false;
-        case tq.Weapon:
-          if (!marketplace.weapons.isFull) {
-            marketplace.weapons.add(card);
-            return true;
-          } else if (marketplace.anys.canTake(card)) {
-            marketplace.anys.add(card);
-            return true;
-          }
-          return false;
-        case tq.Ally:
-          if (!marketplace.anys.isFull) {
-            marketplace.anys.add(card);
-            return true;
-          }
-          return false;
-        default:
-          throw Exception('Unexpected type ${card.runtimeType}');
+      if (card.keywords.contains("Spell")) {
+        if (!marketplace.spells.isFull) {
+          marketplace.spells.add(card);
+          return true;
+        } else if (marketplace.anys.canTake(card)) {
+          marketplace.anys.add(card);
+          return true;
+        }
+        return false;
+      } else if (card.keywords.contains("Item")) {
+        if (!marketplace.items.isFull) {
+          marketplace.items.add(card);
+          return true;
+        } else if (marketplace.anys.canTake(card)) {
+          marketplace.anys.add(card);
+          return true;
+        }
+        return false;
+      } else if (card.keywords.contains("Weapon")) {
+        if (!marketplace.weapons.isFull) {
+          marketplace.weapons.add(card);
+          return true;
+        } else if (marketplace.anys.canTake(card)) {
+          marketplace.anys.add(card);
+          return true;
+        }
+        return false;
+      } else if (card.keywords.contains("Ally")) {
+        if (!marketplace.anys.isFull) {
+          marketplace.anys.add(card);
+          return true;
+        }
+        return false;
       }
     }
     return false;

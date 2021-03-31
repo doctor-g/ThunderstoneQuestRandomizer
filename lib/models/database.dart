@@ -9,25 +9,72 @@ class CardDatabase {
 class Quest {
   String name;
   int number;
-  final List<Hero> heroes = [];
-  final List<Item> items = [];
-  final List<Spell> spells = [];
-  final List<Weapon> weapons = [];
-  final List<Ally> allies = [];
-  final List<Guardian> guardians = [];
-  final List<Room> rooms = [];
-  final List<Monster> monsters = [];
+  final List<Hero> _heroes = [];
+  final List<MarketplaceCard> _marketplaceCards = [];
+  final List<Guardian> _guardians = [];
+  final List<Room> _rooms = [];
+  final List<Monster> _monsters = [];
+
+  List<Hero> get heroes => _heroes;
+  List<MarketplaceCard> get marketplaceCards => _marketplaceCards;
+  List<MarketplaceCard> get spells => _marketplaceCards
+      .where((card) => card.keywords.contains("Spell"))
+      .toList();
+  List<MarketplaceCard> get items => _marketplaceCards
+      .where((card) => card.keywords.contains("Item"))
+      .toList();
+  List<MarketplaceCard> get weapons => _marketplaceCards
+      .where((card) => card.keywords.contains("Weapon"))
+      .toList();
+  List<MarketplaceCard> get allies => _marketplaceCards
+      .where((card) => card.keywords.contains("Ally"))
+      .toList();
+  List<Guardian> get guardians => _guardians;
+  List<Room> get rooms => _rooms;
+  List<Monster> get monsters => _monsters;
 
   List<Card> get cards => <Card>[
-        ...heroes,
-        ...items,
-        ...spells,
-        ...weapons,
-        ...allies,
-        ...guardians,
-        ...rooms,
-        ...monsters,
+        ..._heroes,
+        ..._marketplaceCards,
+        ..._guardians,
+        ..._rooms,
+        ..._monsters,
       ];
+
+  void add(Card card) {
+    switch (card.runtimeType) {
+      case Hero:
+        {
+          _heroes.add(card);
+        }
+        break;
+      case MarketplaceCard:
+        {
+          _marketplaceCards.add(card);
+        }
+        break;
+      case Guardian:
+        {
+          _guardians.add(card);
+        }
+        break;
+      case Room:
+        {
+          _rooms.add(card);
+        }
+        break;
+      case Monster:
+        {
+          _monsters.add(card);
+        }
+        break;
+      default:
+        {
+          throw new Exception("Illegal State");
+        }
+        break;
+    }
+  }
 }
 
 class Card {
@@ -46,13 +93,7 @@ class Card {
 
 class Hero extends Card {}
 
-class Item extends Card {}
-
-class Spell extends Card {}
-
-class Weapon extends Card {}
-
-class Ally extends Card {}
+class MarketplaceCard extends Card {}
 
 class Guardian extends Card {
   int level;

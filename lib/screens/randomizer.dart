@@ -112,12 +112,12 @@ class _RandomizerPageState extends State<RandomizerPage>
                           children: [
                             Expanded(
                               child: Column(
-                                children: [..._heroes_and_marketplace()],
+                                children: [..._heroesAndMarketplace()],
                               ),
                             ),
                             Expanded(
                               child: Column(
-                                children: [..._guardian_dungeon_monsters()],
+                                children: [..._guardianAndDungeonAndMonsters()],
                               ),
                             )
                           ],
@@ -125,9 +125,9 @@ class _RandomizerPageState extends State<RandomizerPage>
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ..._heroes_and_marketplace(),
+                            ..._heroesAndMarketplace(),
                             Divider(),
-                            ..._guardian_dungeon_monsters()
+                            ..._guardianAndDungeonAndMonsters()
                           ],
                         ),
                 ),
@@ -174,7 +174,7 @@ class _RandomizerPageState extends State<RandomizerPage>
     }
   }
 
-  List<Widget> _heroes_and_marketplace() {
+  List<Widget> _heroesAndMarketplace() {
     final market = _tableau == null ? null : _tableau.marketplace;
     return [
       ..._section('Heroes', _tableau.heroes),
@@ -187,7 +187,7 @@ class _RandomizerPageState extends State<RandomizerPage>
     ];
   }
 
-  List<Widget> _guardian_dungeon_monsters() {
+  List<Widget> _guardianAndDungeonAndMonsters() {
     return [
       ..._section('Guardian', [_tableau.guardian]),
       Divider(),

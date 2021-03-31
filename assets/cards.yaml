@@ -15,14 +15,12 @@
   - Name: Edlin
     Keywords: [ Human, Fighter, Hero ]
     Combo: [ Weapon ]
-  Items:
+  Marketplace:
   - Name: Scionic Annals
     Keywords: [ Magic, Item ]
     Combo: [ Spell ]
-  Spells:
   - Name: Dark Fire Touch
     Keywords: [ Chaos, Elemental, Spell ]
-  Weapons:
   - Name: Rapier
     Keywords: [ Edged, Weapon ]
     Combo: [ Human, Humanoid, Rogue ]
@@ -44,13 +42,11 @@
     Memo: Stalker uses Gear tokens for strength and provides Light at level 3.
   - Name: The Yellow Knight
     Keywords: [ Human, Fighter, Hero ]
-  Items:
+  Marketplace:
   - Name: Necklace of Dawn
     Keywords: [ Magic, Item ]
-  Spells:
   - Name: Form of the Juggernaut
     Keywords: [ Arcane, Spell ]
-  Weapons:
   - Name: Hand Axe
     Keywords: [ Edged, Weapon ]
     Combo: [ Dwarf, Giant, Plant ]
@@ -82,7 +78,7 @@
     Keywords: [ Dwarf, Fighter, Hero ]
     Memo: Edged Weapon specialist
     Combo: [ Edged ]
-  Items:
+  Marketplace:
   - Name: Amulet of Infravision
     Keywords: [Magic,Item]
     Combo: [Rogue]
@@ -90,7 +86,6 @@
     Keywords: [Magic,Item]
   - Name: Tome of Knowledge
     Keywords: [Item]
-  Spells:
   - Name: Fireball
     Keywords: [Elemental,Spell]
   - Name: Future Vision
@@ -102,7 +97,6 @@
   - Name: Moonlight
     Keywords: [Elemental,Spell]
     Combo: [ Wizard ]
-  Weapons:
   - Name: Hammer
     Keywords: [Blunt, Weapon]
   - Name: Maul
@@ -179,7 +173,7 @@
     Combo: [ Weapon ]
   - Name: Sephilest
     Keywords: [ Elf, Fighter, Hero ]
-  Items:
+  Marketplace:
   - Name: Elven Ring
     Keywords: [ Magic, Item ]
     Combo: [ Elf, Discard ]
@@ -190,7 +184,6 @@
   - Name: Wand of Light
     Keywords: [ Magic, Item ]
     Combo: [ Cleric, Wizard, Rogue ]
-  Spells:
   - Name: Arcane Touch
     Keywords: [ Arcane, Spell ]
     Combo: [ Wizard ]
@@ -203,7 +196,6 @@
   - Name: Nature's Fury
     Keywords: [ Elemental, Spell ]
     Combo: [ Wizard ]
-  Weapons:
   - Name: Longbow
     Keywords: [ Bow, Weapon ]
   - Name: Longsword
@@ -275,7 +267,7 @@
     Keywords: [ Elf, Rogue, Hero ]
   - Name: Regalen
     Keywords: [ Elf, Wizard, Hero ]
-  Items:
+  Marketplace:
   - Name: Crystal of Scrying
     Keywords: [ Magic, Item ]
   - Name: Holy Symbol
@@ -286,7 +278,6 @@
   - Name: Ring of Learning
     Keywords: [ Magic, Item ]
     Combo: [ Weapon ]
-  Spells:
   - Name: Arcane Aura
     Keywords: [ Arcane, Spell ]
     Combo: [ Wizard ]
@@ -298,7 +289,6 @@
     Combo: [ Wizard, Weapon ]
   - Name: Vampiric Touch
     Keywords: [ Chaos, Spell ]
-  Weapons:
   - Name: Battle Axe
     Keywords: [ Edged, Weapon ]
   - Name: Boomerang
@@ -372,7 +362,7 @@
   - Name: Stormskull
     Keywords: [ Human, Orc, Wizard, Hero ]
     Combo: [ Spell ]
-  Items:
+  Marketplace:
   - Name: Damilu Huskie
     Keywords: [ Ally, Item ]
     Combo: [ Discard, Destroy ]
@@ -383,7 +373,6 @@
     Keywords: [ Magic, Item ]
   - Name: Ring of Proficiency
     Keywords: [ Magic, Item ]
-  Spells:
   - Name: Death Pact
     Keywords: [ Chaos, Spell ]
     Combo: [ Wizard ]
@@ -395,7 +384,6 @@
   - Name: True Seeing
     Keywords: [ Arcane, Divine, Spell ]
     Combo: [ Wizard, Cleric ]
-  Weapons:
   - Name: Broadsword
     Keywords: [ Edged, Weapon ]
   - Name: Crossbow
@@ -470,7 +458,7 @@
     Keywords: [ Elf, Wizard, Hero ]
     Memo: Veris has the ability to make Weapons glow bright.
     Combo: [ Weapon ]
-  Items:
+  Marketplace:
   - Name: Amulet of Power
     Keywords: [ Magic, Item ]
   - Name: Lightstone Gem
@@ -480,7 +468,6 @@
   - Name: Ring of Spell Storing
     Keywords: [ Magic, Item ]
     Combo: [ Spell ]
-  Spells:
   - Name: Creeping Death
     Keywords: [ Chaos, Spell ]
     Combo: [ Wizard ]
@@ -493,7 +480,6 @@
   - Name: Summon Storm
     Keywords: [ Elemental, Spell ]
     Combo: [ Wizard ]
-  Weapons:
   - Name: Cursed Mace
     Keywords: [ Blunt, Cursed, Weapon ]
     Combo: [ Cleric ]
@@ -567,7 +553,7 @@
     Memo: Wiltran brews potions and focuses his efforts on healing your Diseased Wounds by discarding them straight out of your deck. He learns the Wizardly arts at level 2.
     Combo: [ Diseased, Discard ]
     Meta: [ Discard ]
-  Items:
+  Marketplace:
   - Name: Bracers of Cleansing
     Keywords: [ Magic, Item ]
     Combo: [ Diseased ]
@@ -581,7 +567,6 @@
   - Name: Wand of Illumination
     Keywords: [ Magic, Item ]
     Combo: [ Cleric, Wizard, Halfling ]
-  Spells:
   - Name: Acid Burst
     Keywords: [ Arcane, Elemental, Spell ]
     Combo: [ Aberration, Golem, Humanoid, Wizard ]
@@ -594,7 +579,6 @@
   - Name: Haste
     Keywords: [ Chaos, Spell ]
     Combo: [ Discard ]
-  Weapons:
   - Name: Bastard Sword
     Keywords: [ Edged, Weapon ]
     Combo: [ Human, Fighter ]
@@ -647,7 +631,6 @@
     Meta: [ Diseased ]
     Level: 3
 
-
 - Quest: Frozen in Time
   Number: 7
   Sets:
@@ -676,7 +659,7 @@
   - Name: Samly Thrackson
     Keywords: [ Human, Orc, Cleric, Fighter, Hero ]
     Memo: Samly destroys the impurities and inefficencies he finds in decks.
-  Items:
+  Marketplace:
   - Name: Eternal Flame
     Keywords: [ Elemental, Magic, Item ]
     Combo: [ Dwarf, Cleric ]
@@ -688,7 +671,6 @@
     Combo: [ Frozen, Discard ]
   - Name: Tent
     Keywords: [ Item ]
-  Spells:
   - Name: Blizzard
     Keywords: [ Elemental, Spell ]
     Combo: [ Frozen ]
@@ -701,7 +683,6 @@
   - Name: Inner Fire
     Keywords: [ Arcane, Divine, Elemental, Spell ]
     Combo: [ Cleric, Wizard ]
-  Weapons:
   - Name: Fire Rod
     Keywords: [ Magic, Elemental, Weapon ]
     Combo: [ Human, Cleric, Wizard, Rogue ]
@@ -787,7 +768,7 @@
   - Name: Cirrok
     Keywords: [ Avian, Beast, Rogue, Hero ]
     Memo: Cirrok maximizes your Village Phases, though is not strong in battle.
-  Items:
+  Marketplace:
   - Name: Spices
     Keywords: [ Item ]
   - Name: Bag of Gems
@@ -796,7 +777,6 @@
   - Name: Thunderstone Potion
     Keywords: [ Magic, Item ]
     Meta: [ Thunderstone ]
-  Spells:
   - Name: Mummify
     Keywords: [ Chaos, Divine, Spell ]
     Combo: [ Cleric ]
@@ -810,7 +790,6 @@
   - Name: Summon Help
     Keywords: [ Arcane, Chaos, Spell ]
     Combo: [ Wizard ]
-  Weapons:
   - Name: Avian Bow
     Keywords: [ Magic, Bow, Weapon ]
     Combo: [ Avian ]
@@ -818,7 +797,6 @@
     Keywords: [ Edged, Weapon ]
   - Name: Scimitar
     Keywords: [ Edged, Weapon ]
-  Allies:
   - Name: Camel
     Keywords: [ Beast, Ally ]
     Meta: [ Static ]
@@ -895,7 +873,7 @@
     Keywords: [ Urquean, Rogue, Hero]
     Memo: As Caslech levels up, he unlocks his magical potenetial, and imbues it in his Bow.
     Combo: [Bow, Spell]
-  Items:
+  Marketplace:
   - Name: Crystal Light
     Keywords: [ Magic, Item ]
     Combo: [ Thunderstone ]
@@ -908,7 +886,6 @@
   - Name: Thunderstone Ore
     Keywords: [ Magic, Item ]
     Meta: [ Thunderstone ]
-  Spells:
   - Name: Animate Dead
     Keywords: [ Arcane, Divine, Chaos, Spell ]
     Combo: [ Cleric, Wizard, Destroy ]
@@ -924,7 +901,6 @@
     Meta: [ Thunderstone ]
   - Name: Transmutation
     Keywords: [ Chaos, Elemental, Spell ]
-  Weapons:
   - Name: Keltarian Bow
     Keywords: [ Bow, Weapon ]
     Combo: [ Elf, Human, Urquean ]

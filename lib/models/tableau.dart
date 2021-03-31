@@ -78,9 +78,9 @@ class Tableau implements ComboFinder {
 }
 
 class Marketplace {
-  final MarketplaceRow<Spell> spells = MarketplaceRow();
-  final MarketplaceRow<Item> items = MarketplaceRow();
-  final MarketplaceRow<Weapon> weapons = MarketplaceRow();
+  final MarketplaceRow spells = MarketplaceRow();
+  final MarketplaceRow items = MarketplaceRow();
+  final MarketplaceRow weapons = MarketplaceRow();
   final AnyMarketplaceRow anys = AnyMarketplaceRow();
 
   List<Card> get cards =>
@@ -91,38 +91,51 @@ class Marketplace {
   bool get isFull =>
       spells.isFull && items.isFull && weapons.isFull && anys.isFull;
 
-  List<Spell> get allSpells =>
-      spells.cards + List<Spell>.of(anys.cards.whereType<Spell>());
-  List<Item> get allItems =>
-      items.cards + List<Item>.of(anys.cards.whereType<Item>());
-  List<Weapon> get allWeapons =>
-      weapons.cards + List<Weapon>.of(anys.cards.whereType<Weapon>());
+  List<MarketplaceCard> get allSpells =>
+      spells.cards +
+      anys.cards.where((card) => card.keywords.contains("Spell")).toList();
+  List<MarketplaceCard> get allItems =>
+      items.cards +
+      anys.cards.where((card) => card.keywords.contains("Item")).toList();
+  List<MarketplaceCard> get allWeapons =>
+      weapons.cards +
+      anys.cards.where((card) => card.keywords.contains("Weapon")).toList();
   List<Card> get allAllies =>
-      anys.cards.where((card) => card.runtimeType == Ally).toList();
+      anys.cards.where((card) => card.keywords.contains("Ally")).toList();
 }
 
-class MarketplaceRow<T extends Card> {
-  List<T> _slots = [];
+class MarketplaceRow {
+  List<MarketplaceCard> _slots = [];
 
-  void add(T card) {
+  void add(MarketplaceCard card) {
     assert(!isFull);
     _slots.add(card);
   }
 
   bool get isFull => _slots.length == 2;
 
-  List<T> get cards => List.of(_slots);
+  List<MarketplaceCard> get cards => List.of(_slots);
 }
 
 // The special case of the "Any" row
-class AnyMarketplaceRow<Card> extends MarketplaceRow {
+class AnyMarketplaceRow extends MarketplaceRow {
   // As long as there
   bool canTake(Card card) {
     if (isFull) return false;
-    if (_slots.length == 1 && _slots[0].runtimeType == card.runtimeType)
+    if (_slots.length == 1 && !_haveDifferentTypes(_slots[0], card))
       return false;
     else
       return true;
+  }
+
+  bool _haveDifferentTypes(MarketplaceCard card1, MarketplaceCard card2) {
+    const List<String> types = ["Spell", "Item", "Ally", "Weapon"];
+    Set<String> card1Types =
+        Set.of(card1.keywords.where((keyword) => types.contains(keyword)));
+    Set<String> card2Types =
+        Set.of(card2.keywords.where((keyword) => types.contains(keyword)));
+    // There are different types if the difference is nonempty.
+    return (card1Types.difference(card2Types)).isNotEmpty;
   }
 }
 

@@ -9,13 +9,25 @@ void main() {
       expect(marketplace.isFull, isFalse);
     });
 
+    MarketplaceCard _withKeyword(String keyword) {
+      var card = MarketplaceCard();
+      card.keywords = [keyword];
+      return card;
+    }
+
+    MarketplaceCard _spell() => _withKeyword("Spell");
+    MarketplaceCard _item() => _withKeyword("Item");
+    MarketplaceCard _weapon() => _withKeyword("Weapon");
+    MarketplaceCard _ally() => _withKeyword("Ally");
+
     test('Full marketplace is full', () {
       Marketplace marketplace = new Marketplace();
-      [Spell(), Spell()].forEach((element) => marketplace.spells.add(element));
-      [Item(), Item()].forEach((element) => marketplace.items.add(element));
-      [Weapon(), Weapon()]
+      [_spell(), _spell()]
+          .forEach((element) => marketplace.spells.add(element));
+      [_item(), _item()].forEach((element) => marketplace.items.add(element));
+      [_weapon(), _weapon()]
           .forEach((element) => marketplace.weapons.add(element));
-      [Ally(), Ally()].forEach((element) => marketplace.anys.add(element));
+      [_ally(), _ally()].forEach((element) => marketplace.anys.add(element));
       expect(marketplace.isFull, isTrue);
     });
 
@@ -26,20 +38,20 @@ void main() {
 
     test('Marketplace row with one element is not full', () {
       MarketplaceRow row = MarketplaceRow();
-      row.add(Card());
+      row.add(MarketplaceCard());
       expect(row.isFull, isFalse);
     });
 
     test('Marketplace row with two elements is full', () {
       MarketplaceRow row = MarketplaceRow();
-      row.add(Card());
-      row.add(Card());
+      row.add(MarketplaceCard());
+      row.add(MarketplaceCard());
       expect(row.isFull, isTrue);
     });
 
     test('Marketplace with a spell in any slot will return it as a spell', () {
       Marketplace marketplace = Marketplace();
-      marketplace.anys.add(Spell());
+      marketplace.anys.add(_spell());
       expect(marketplace.allSpells.length, 1);
     });
   });

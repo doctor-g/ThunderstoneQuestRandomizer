@@ -11,7 +11,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle checkboxTextStyle = Theme.of(context).textTheme.bodyText1;
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
