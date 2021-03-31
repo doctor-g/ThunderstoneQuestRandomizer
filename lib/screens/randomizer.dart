@@ -252,9 +252,10 @@ class CardWidget extends StatelessWidget {
                   : 'Quest ${card.quest.number}: ${card.quest.name}')
               : Container(),
           settings.showKeywords
-              ? Row(
+              ? Wrap(
                   children: _makeKeywordRow(context, card.keywords),
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  direction: Axis.horizontal,
+                  alignment: WrapAlignment.center,
                 )
               : Container(),
           card.memo == null || !settings.showMemo
