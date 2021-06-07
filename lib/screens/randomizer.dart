@@ -176,14 +176,28 @@ class _RandomizerPageState extends State<RandomizerPage>
 
   List<Widget> _heroesAndMarketplace() {
     final market = _tableau == null ? null : _tableau.marketplace;
+
+    // Compute this ahead of time so that we don't have to recompute
+    // it below.
+    final allItems = market.allItems;
+
+    // Damilu Husky is an item and an ally, but a card like this
+    // should be listed only once. Hence, we need to remove cards
+    // like this from the allies list. As of this writing, the Husky
+    // is the only Item and Ally card, but we search for it by these
+    // properties rather than by name.
+    final List<tq.Card> nonItemAllies = market.allAllies
+        .where((element) => !allItems.contains(element))
+        .toList();
+
     return [
       ..._section('Heroes', _tableau.heroes),
       Divider(),
       ..._section('Marketplace'),
       ..._subsection('Spells', market.allSpells),
-      ..._subsection('Items', market.allItems),
+      ..._subsection('Items', allItems),
       ..._subsection('Weapons', market.allWeapons),
-      ..._subsection('Allies', market.allAllies)
+      ..._subsection('Allies', nonItemAllies)
     ];
   }
 
