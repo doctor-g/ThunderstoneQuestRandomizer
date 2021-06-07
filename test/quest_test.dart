@@ -1,11 +1,13 @@
 import 'package:test/test.dart';
 import 'package:flutter_tqr/models/database.dart';
 
+import 'test_util.dart';
+
 void main() {
   test('Quest cards accessor returns all cards.', () {
     Quest quest = new Quest("Test Quest");
-    quest.add(new Hero());
-    quest.add(new MarketplaceCard());
+    quest.add(makeHero());
+    quest.add(makeMarketplaceCard());
     expect(quest.cards.length, 2);
   });
 }

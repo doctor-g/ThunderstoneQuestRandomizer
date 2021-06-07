@@ -1,6 +1,7 @@
 import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:test/test.dart';
+import 'test_util.dart';
 
 void main() {
   group('Marketplace tests', () {
@@ -10,9 +11,11 @@ void main() {
     });
 
     MarketplaceCard _withKeyword(String keyword) {
-      var card = MarketplaceCard();
-      card.keywords = [keyword];
-      return card;
+      var cardBuilder = MarketplaceCardBuilder();
+      cardBuilder.keywords = [keyword];
+      cardBuilder.quest = Quest("Test");
+      cardBuilder.name = "Test";
+      return cardBuilder.build();
     }
 
     MarketplaceCard _spell() => _withKeyword("Spell");
@@ -38,14 +41,14 @@ void main() {
 
     test('Marketplace row with one element is not full', () {
       MarketplaceRow row = MarketplaceRow();
-      row.add(MarketplaceCard());
+      row.add(makeMarketplaceCard());
       expect(row.isFull, isFalse);
     });
 
     test('Marketplace row with two elements is full', () {
       MarketplaceRow row = MarketplaceRow();
-      row.add(MarketplaceCard());
-      row.add(MarketplaceCard());
+      row.add(makeMarketplaceCard());
+      row.add(makeMarketplaceCard());
       expect(row.isFull, isTrue);
     });
 
@@ -59,35 +62,35 @@ void main() {
   group('Tableau Tests', () {
     test('No combo without matching keyword', () {
       Tableau tableau = Tableau();
-      tableau.heroes = [Hero()];
-      Monster monster = Monster();
+      tableau.heroes = [makeHero()];
+      Monster monster = makeMonster();
       expect(tableau.hasCombo(monster), isFalse);
     });
 
     test('Combo with keyword on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        Hero()..keywords = ['X']
+        makeHero(keywords: ['X'])
       ];
-      Monster monster = Monster()..combo = ['X'].toSet();
+      Monster monster = makeMonster(combo: ['X']);
       expect(tableau.hasCombo(monster), isTrue);
     });
 
     test('Combo with combo on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        Hero()..combo = ['X'].toSet()
+        makeHero(combo: ['X'])
       ];
-      Monster monster = Monster()..keywords = ['X'];
+      Monster monster = makeMonster(keywords: ['X']);
       expect(tableau.hasCombo(monster), isTrue);
     });
 
     test('Combo with meta on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        Hero()..meta = ['X'].toSet()
+        makeHero(meta: ['X'])
       ];
-      Monster monster = Monster()..combo = ['X'].toSet();
+      Monster monster = makeMonster(combo: ['X']);
       expect(tableau.hasCombo(monster), isTrue);
     });
   });

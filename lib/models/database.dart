@@ -76,32 +76,109 @@ class Quest {
   }
 }
 
-class Card {
+class CannotBuildException implements Exception {
+  String cause;
+  CannotBuildException(this.cause);
+}
+
+abstract class Card {
+  late Quest quest;
+  late String name;
+  List<String> keywords = [];
+  String? memo;
+  Set<String> combo = Set();
+  Set<String> meta = Set();
+
+  Card(CardBuilder builder)
+      : memo = builder.memo,
+        keywords = builder.keywords,
+        combo = builder.combo,
+        meta = builder.meta {
+    if (builder.quest == null) {
+      throw CannotBuildException("Card has no quest");
+    }
+    if (builder.name == null) {
+      throw CannotBuildException("Card has no name");
+    }
+    this.quest = builder.quest!;
+    this.name = builder.name!;
+  }
+
+  @override
+  String toString() {
+    return name;
+  }
+}
+
+abstract class CardBuilder {
   Quest? quest;
   String? name;
   List<String> keywords = [];
   String? memo;
   Set<String> combo = Set();
   Set<String> meta = Set();
+}
 
-  @override
-  String toString() {
-    return name ?? "Unnamed Card";
+class Hero extends Card {
+  Hero(HeroBuilder builder) : super(builder);
+}
+
+class HeroBuilder extends CardBuilder {
+  Hero build() {
+    return Hero(this);
   }
 }
 
-class Hero extends Card {}
+class MarketplaceCard extends Card {
+  MarketplaceCard(MarketplaceCardBuilder builder) : super(builder);
+}
 
-class MarketplaceCard extends Card {}
+class MarketplaceCardBuilder extends CardBuilder {
+  MarketplaceCard build() {
+    return MarketplaceCard(this);
+  }
+}
 
 class Guardian extends Card {
   int? level;
+
+  Guardian(GuardianBuilder builder)
+      : level = builder.level,
+        super(builder);
+}
+
+class GuardianBuilder extends CardBuilder {
+  int? level;
+  Guardian build() {
+    return new Guardian(this);
+  }
 }
 
 class Room extends Card {
   int? level;
+
+  Room(RoomBuilder builder)
+      : this.level = builder.level,
+        super(builder);
+}
+
+class RoomBuilder extends CardBuilder {
+  int? level;
+  Room build() {
+    return new Room(this);
+  }
 }
 
 class Monster extends Card {
   int? level;
+  Monster(MonsterBuilder builder)
+      : this.level = builder.level,
+        super(builder);
+}
+
+class MonsterBuilder extends CardBuilder {
+  int? level;
+  Monster build() {
+    return new Monster(this);
+  }
 }

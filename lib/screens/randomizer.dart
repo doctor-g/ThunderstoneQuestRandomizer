@@ -145,13 +145,8 @@ class _RandomizerPageState extends State<RandomizerPage>
     );
   }
 
-  int _cardSorter(tq.Card card1, tq.Card card2) {
-    if (card1.name == null || card2.name == null) {
-      throw new Exception("Card is missing a name");
-    } else {
-      return card1.name!.compareTo(card2.name!);
-    }
-  }
+  int _cardSorter(tq.Card card1, tq.Card card2) =>
+      card1.name.compareTo(card2.name);
 
   List<Widget> _section(String name, [List<tq.Card>? contents]) {
     var result = <Widget>[
@@ -268,7 +263,7 @@ class CardWidget extends StatelessWidget {
           Column(
         children: <Widget>[
           Text(
-            card.name! +
+            card.name +
                 (card.runtimeType == tq.Guardian
                     ? '\nLevel ${_toRoman((card as tq.Guardian).level!)}'
                     : ''),
@@ -276,9 +271,9 @@ class CardWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           settings.showQuest
-              ? Text(card.quest!.number == null
-                  ? card.quest!.name
-                  : 'Quest ${card.quest!.number}: ${card.quest!.name}')
+              ? Text(card.quest.number == null
+                  ? card.quest.name
+                  : 'Quest ${card.quest.number}: ${card.quest.name}')
               : Container(),
           settings.showKeywords
               ? Wrap(
