@@ -1,3 +1,3 @@
 class WebVersionInfo {
-  static const String name = '1.0.9';
+  static const String name = '1.0.10';
 }

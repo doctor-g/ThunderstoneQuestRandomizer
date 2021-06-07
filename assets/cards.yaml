@@ -30,6 +30,7 @@
   - Name: Black Rock Bandits
     Keywords: [ Humanoid ]
     Level: 1
+    Memo: They attack your Marketplace cards.
 
 - Quest: Champion Promos
   Sets:
@@ -140,7 +141,7 @@
   - Name: Spider Terrors
     Keywords: [Giant, Vermin]
     Meta: [ Diseased ]
-    Memo: They wound heavily and are drawn to equipment.
+    Memo: They wound heavily (Wounds and Wound Cards) and are drawn to equipment.
     Level: 2
   - Name: Ancient Adventurers
     Level: 3
@@ -232,18 +233,23 @@
     Keywords: [ Fey ]
     Meta: [ Diseased ]
     Level: 1
+    Memo: They deal Wound Cards.
   - Name: Corrupted Elves
     Keywords: [ Humanoid ]
     Level: 2
+    Memo: Destroy your XP or suffer their wrath.
   - Name: Foundational Keepers
     Keywords: [ Elemental, Giant, Humanoid ]
     Level: 2
+    Memo: These Ogres attack as soon as they refill the Dungeon (but not at game setup).
   - Name: Corrupted Centaurs
     Keywords: [ Beast, Humanoid ]
     Level: 3
+    Memo: They are each susceptible to a particular Class, but resilient against others.
   - Name: Treefolk
     Keywords: [ Giant, Plant ]
     Level: 3
+    Memo: They are worth much more if you defeat them convincingly.
 
 - Quest: Risen from the Mire
   Number: 3
@@ -326,19 +332,24 @@
     Keywords: [ Undead ]
     Meta: [ Diseased ]
     Level: 1
+    Memo: They deal Wound Cards.
   - Name: Chaos Lizards
     Keywords: [ Humanoid ]
     Meta: [ Dice ]
     Level: 2
+    Memo: They discard your cards based no the outcome of dice rolls.
   - Name: Moor Skeletons
     Keywords: [ Undead ]
     Level: 2
+    Memo: They deal Wound Cards and are resistant to Physical Attack and Edged Weapons.
   - Name: Marsh Trolls
     Keywords: [ Giant ]
     Level: 3
+    Memo: They have immunities to different cards.
   - Name: Swamp Spirits
     Keywords: [ Undead ]
     Level: 3
+    Memo: They hunger for (attack) your Heroes.
 
 - Quest: At the Foundations of the World
   Number: 4
@@ -414,23 +425,29 @@
   - Name: Air Servitors
     Keywords: [ Elemental ]
     Level: 1
+    Memo: They tend to be vulnerable to Magic Attack.
   - Name: Water Servitors
     Keywords: [ Elemental ]
     Level: 1
+    Memo: They move throughout the Dungeon, making it unpredictable.
   - Name: Earth Servitors
     Keywords: [ Elemental ]
     Level: 2
+    Memo: They are strong against Physical Attack.
   - Name: Fire Servitors
     Keywords: [ Elemental ]
     Combo: [ Weapon ]
     Level: 2
+    Memo: They attack your Skill and Weapons.
   - Name: Divine Founders
     Keywords: [ Elemental, Celestial ]
     Level: 3
+    Memo: They judge (attack) your Heroes harshly.
   - Name: Abyssal Founders
     Keywords: [ Elemental, Demon ]
     Level: 3
     Meta: [ Dice ]
+    Memo: The chaotic nature of their dice rolls make them unpredictable.
 
 - Quest: Ripples in Time
   Number: 5
@@ -504,23 +521,29 @@
   - Name: Doomknights
     Keywords: [ Undead ]
     Level: 1
+    Memo: They attack Heroes who try to move through their room.
   - Name: Gnoll Raiders
     Keywords: [ Humanoid ]
     Combo: [ Weapon ]
     Level: 1
+    Memo: They destroy your Weapons and Gear.
   - Name: Minions of Chaos
     Keywords: [ Demon ]
     Meta: [ Destroy ]
     Level: 2
+    Memo: They destroy your Heroes based on the outcome of dice rolls.
   - Name: Torments
     Keywords: [ Elemental ]
     Level: 2
+    Memo: They are strong against Magic Attack.
   - Name: Ancient Wyrms
     Keywords: [ Dragon ]
     Level: 3
+    Memo: They like to snack on (attack) your Heroes.
   - Name: Ancient Protectors
     Keywords: [ Golem ]
     Level: 3
+    Memo: They are immune to Heroes with low Skill.
 
 - Quest: What Lies Beneath
   Number: 6
@@ -611,25 +634,31 @@
   - Name: Drain Dwellers
     Keywords: [ Beast ]
     Level: 1
+    Memo: They attack you when you try to move out of their room.
   - Name: Plague Rats
     Keywords: [ Vermin, Swarm ]
     Meta: [ Diseased, Dice ]
     Level: 1
+    Memo: This swarm can number in dozens or hundreds, but it often brings disease. (This Swarm gains +1d6 Health.)
   - Name: Ghoulish Scavengers
     Keywords: [ Undead ]
     Meta: [ Diseased ]
     Level: 2
+    Memo: THey use your diseases against you.
   - Name: Sewer Trogs
     Keywords: [ Humanoid ]
     Level: 2
+    Memo: The Sewer Trogs are heavy wounders.
   - Name: Shapeless Spawns
     Keywords: [ Aberration ]
     Meta: [ Diseased ]
     Level: 3
+    Memo: These Aberrations of the deep grow stronger with your Wound Cards.
   - Name: Waste Wyrms
     Keywords: [ Giant, Vermin ]
     Meta: [ Diseased ]
     Level: 3
+    Memo: Heavy wounders that deal both Wound Cards and Wounds.
 
 - Quest: Frozen in Time
   Number: 7
@@ -717,26 +746,32 @@
     Keywords: [ Beast ]
     Meta: [ Frozen ]
     Level: 1
+    Memo: Arctic Animals are well-adapted to stalking their chilled prey, attacking as you enter or leave the room.
   - Name: Abyssal Servants
     Keywords: [ Elemental, Demon ]
     Meta: [ Frozen ]
     Level: 1
+    Memo: Abyssal Servants chill your bones, reducing your HP.
   - Name: Bloodfrost Clan
     Keywords: [ Elemental, Humanoid ]
     Meta: [ Frozen ]
     Level: 2
+    Memo: Unimpeded by the cold, the Bloodfrost Clan strikes hard and fast, both before and after battle.
   - Name: Tundra Wolf Pack
     Keywords: [ Beast, Swarm ]
     Meta: [ Frozen, Dice ]
     Level: 2
+    Memo: A Tundra Wolf Pack's numbers and attacks are as fast as they are unpredictable, striking before and after battle. (This Swarm gains +1d6 Health.)
   - Name: Frozen Natives
     Keywords: [ Humanoid, Beast ]
     Meta: [ Frozen ]
     Level: 3
+    Memo: An ancient race of half-dog, half-humas, the Adlet attacks are devestatingly unpredictable.
   - Name: Ice Behemoths
     Keywords: [ Elemental, Giant, Humanoid ]
     Meta: [ Frozen ]
     Level: 3
+    Memo: The arctic wastes abound with high Health behemoths who ask no questions.
 
 - Quest: Vengeful Sands
   Number: 8
@@ -808,6 +843,7 @@
     Keywords: [ Vermin, Swarm ]
     Meta: [ Dice ]
     Level: 1
+    Memo: This Swarm has +1d6 Health and feasts on (destroys) your tokens.
   - Name: Desert Dwellers
     Keywords: [ Beast ]
     Meta: [ Diseased ]
@@ -816,19 +852,23 @@
     Keywords: [ Beast, Fey, Humanoid ]
     Meta: [ Diseased ]
     Level: 2
+    Memo: These snake-people are very quick, unless you know their tactics.
   - Name: Sand Spirits
     Keywords: [ Demon, Djinn ]
     Meta: [ Diseased ]
     Level: 2
+    Memo: They discard your cards Left and Right. DO NOT USE IN SOLO MODE.
   - Name: Arid Atrocities
     Keywords: [ Giant, Beast ]
     Combo: [ Ally ]
     Meta: [ Destroy ]
     Level: 3
+    Memo: These relentless brutes assault (destroy) your Allies and Heroes.
   - Name: Amtephetes's Forces
     Keywords: [ Undead ]
     Meta: [ Diseased ]
     Level: 3
+    Memo: These (mostly) undead Monsters strike you hardest in the dark.
   Guardians:
   - Name: Amtephetes VII, The Wicked
     Keywords: [Humanoid,Undead,Guardian]
@@ -916,24 +956,30 @@
   - Name: Material Spirits
     Keywords: [ Elemental, Undead ]
     Level: 1
+    Memo: The Clockwork LIich has gathered these Elementals, many of whom are Djinn.
   - Name: Mystical Kobolds
     Keywords: [ Fey, Humanoid ]
     Combo: [ Thunderstone ]
     Level: 1
+    Memo: These Fey creatures steal your Thunderstones when you leave and give them to others. DO NOT USE IN SOLO MODE.
   - Name: C.C.O.V. Gang
     Keywords: [ Humanoid, Golem ]
     Level: 2
+    Memo: These enhanced ruffians strike hard and fast when you enter and leave the room.
   - Name: Gremlins
     Keywords: [ Humanoid, Demon, Swarm ]
     Meta: [ Dice ]
     Level: 2
+    Memo: This unpredictable Swarm has +1d6 Health and eats (destroys) your Thunderstones.
   - Name: Automatons
     Keywords: [ Golem, Swarm ]
     Meta: [ Dice, Thunderstone ]
     Level: 3
+    Memo: This Thunderstone-powerered swarm has +2d6 Health and also, if you do not have your own Thunderstones, +1d6 Armor.
   - Name: Mech Menaces
     Keywords: [ Giant, Golem ]
     Level: 3
+    Memo: These half-beast, half-machine monstrosities are heavily armored, but weakened as Guardian Keys are found.
   Guardians:
   - Name: Thavroh Anvilbane
     Keywords: [Humanoid, C.C.O.V. Boss, Guardian]
