@@ -29,26 +29,26 @@ class SettingsModel extends ChangeNotifier {
   void _loadPrefs() async {
     _prefs.then((prefs) {
       if (prefs.containsKey(_excludedQuestsKey)) {
-        _excludedQuests = prefs.getStringList(_excludedQuestsKey).toSet();
+        _excludedQuests = prefs.getStringList(_excludedQuestsKey)!.toSet();
       }
       if (prefs.containsKey(_heroStrategyIndexKey)) {
-        _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey);
+        _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey)!;
       }
       if (prefs.containsKey(_comboBiasKey)) {
-        _comboBias = prefs.getDouble(_comboBiasKey);
+        _comboBias = prefs.getDouble(_comboBiasKey)!;
       }
       if (prefs.containsKey(_showMemoKey)) {
-        _showMemo = prefs.getBool(_showMemoKey);
+        _showMemo = prefs.getBool(_showMemoKey)!;
       }
       if (prefs.containsKey(_showKeywordsKey)) {
-        _showKeywords = prefs.getBool(_showKeywordsKey);
+        _showKeywords = prefs.getBool(_showKeywordsKey)!;
       }
       if (prefs.containsKey(_showQuestKey)) {
-        _showQuest = prefs.getBool(_showQuestKey);
+        _showQuest = prefs.getBool(_showQuestKey)!;
       }
       if (prefs.containsKey(_brightnessKey)) {
         _brightness =
-            prefs.getBool(_brightnessKey) ? Brightness.light : Brightness.dark;
+            prefs.getBool(_brightnessKey)! ? Brightness.light : Brightness.dark;
       }
       notifyListeners();
     });
@@ -311,34 +311,34 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
     if (!marketplace.contains(card)) {
       if (card.keywords.contains("Spell")) {
         if (!marketplace.spells.isFull) {
-          marketplace.spells.add(card);
+          marketplace.spells.add(card as tq.MarketplaceCard);
           return true;
         } else if (marketplace.anys.canTake(card)) {
-          marketplace.anys.add(card);
+          marketplace.anys.add(card as tq.MarketplaceCard);
           return true;
         }
         return false;
       } else if (card.keywords.contains("Item")) {
         if (!marketplace.items.isFull) {
-          marketplace.items.add(card);
+          marketplace.items.add(card as tq.MarketplaceCard);
           return true;
         } else if (marketplace.anys.canTake(card)) {
-          marketplace.anys.add(card);
+          marketplace.anys.add(card as tq.MarketplaceCard);
           return true;
         }
         return false;
       } else if (card.keywords.contains("Weapon")) {
         if (!marketplace.weapons.isFull) {
-          marketplace.weapons.add(card);
+          marketplace.weapons.add(card as tq.MarketplaceCard);
           return true;
         } else if (marketplace.anys.canTake(card)) {
-          marketplace.anys.add(card);
+          marketplace.anys.add(card as tq.MarketplaceCard);
           return true;
         }
         return false;
       } else if (card.keywords.contains("Ally")) {
         if (!marketplace.anys.isFull) {
-          marketplace.anys.add(card);
+          marketplace.anys.add(card as tq.MarketplaceCard);
           return true;
         }
         return false;

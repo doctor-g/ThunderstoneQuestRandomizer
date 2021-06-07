@@ -46,7 +46,7 @@ class Randomizer {
   }
 
   Marketplace chooseMarket(
-      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
+      CardDatabase db, SettingsModel settings, Tableau tableau) {
     // Get all possible market cards
     List<Card> allMarketCards = [];
     for (Quest quest in db.quests) {
@@ -93,17 +93,17 @@ class Randomizer {
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         quest.rooms.forEach((element) {
-          availableRooms[element.level].add(element);
+          availableRooms[element.level]!.add(element);
         });
       }
     }
 
     Dungeon dungeon = new Dungeon();
     [1, 2, 3].forEach((level) {
-      List<Room> rooms = availableRooms[level];
+      List<Room> rooms = availableRooms[level]!;
       [1, 2].forEach((_i) {
         Room room = rooms.removeAt(_random.nextInt(rooms.length));
-        dungeon.roomsMap[level].add(room);
+        dungeon.roomsMap[level]!.add(room);
       });
     });
     return dungeon;
@@ -115,13 +115,13 @@ class Randomizer {
     for (Quest quest in db.quests) {
       if (settings.includes(quest.name)) {
         quest.monsters.forEach(
-            (monster) => availableMonsters[monster.level].add(monster));
+            (monster) => availableMonsters[monster.level]!.add(monster));
       }
     }
 
     List<Monster> result = [];
     [1, 2, 3].forEach((level) {
-      List<Monster> list = availableMonsters[level];
+      List<Monster> list = availableMonsters[level]!;
       bool done = false;
       while (!done && _random.nextDouble() < settings.comboBias) {
         Monster monster = list[_random.nextInt(list.length)];

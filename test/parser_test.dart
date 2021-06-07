@@ -4,8 +4,8 @@ import 'package:flutter_tqr/models/database.dart';
 
 void main() {
   group('Parse YAML', () {
-    CardDatabase db;
-    Quest quest;
+    late CardDatabase db;
+    late Quest quest;
 
     setUp(() {
       ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();

@@ -18,11 +18,11 @@ class RandomizerPage extends StatefulWidget {
 class _RandomizerPageState extends State<RandomizerPage>
     with SingleTickerProviderStateMixin {
   Randomizer _randomizer = new Randomizer();
-  Tableau _tableau;
+  Tableau? _tableau;
   bool _failure = false;
 
-  Animation _animation;
-  AnimationController _controller;
+  late Animation<double> _animation;
+  late AnimationController _controller;
 
   final _maxWidthForSingleColumn = 600;
   final _forwardDuration = Duration(milliseconds: 500);
@@ -145,10 +145,15 @@ class _RandomizerPageState extends State<RandomizerPage>
     );
   }
 
-  int _cardSorter(tq.Card card1, tq.Card card2) =>
-      card1.name.compareTo(card2.name);
+  int _cardSorter(tq.Card card1, tq.Card card2) {
+    if (card1.name == null || card2.name == null) {
+      throw new Exception("Card is missing a name");
+    } else {
+      return card1.name!.compareTo(card2.name!);
+    }
+  }
 
-  List<Widget> _section(String name, [List<tq.Card> contents]) {
+  List<Widget> _section(String name, [List<tq.Card>? contents]) {
     var result = <Widget>[
       Text(name, style: Theme.of(context).textTheme.subtitle1)
     ];
@@ -175,7 +180,11 @@ class _RandomizerPageState extends State<RandomizerPage>
   }
 
   List<Widget> _heroesAndMarketplace() {
-    final market = _tableau == null ? null : _tableau.marketplace;
+    if (_tableau == null) {
+      return [];
+    }
+
+    final Marketplace market = _tableau!.marketplace!;
 
     // Compute this ahead of time so that we don't have to recompute
     // it below.
@@ -191,7 +200,7 @@ class _RandomizerPageState extends State<RandomizerPage>
         .toList();
 
     return [
-      ..._section('Heroes', _tableau.heroes),
+      ..._section('Heroes', _tableau!.heroes),
       Divider(),
       ..._section('Marketplace'),
       ..._subsection('Spells', market.allSpells),
@@ -202,19 +211,23 @@ class _RandomizerPageState extends State<RandomizerPage>
   }
 
   List<Widget> _guardianAndDungeonAndMonsters() {
-    return [
-      ..._section('Guardian', [_tableau.guardian]),
-      Divider(),
-      ..._section('Dungeon'),
-      ..._subsection('Level 1', _tableau.dungeon.roomsMap[1], sort: false),
-      ..._subsection('Level 2', _tableau.dungeon.roomsMap[2], sort: false),
-      ..._subsection('Level 3', _tableau.dungeon.roomsMap[3], sort: false),
-      Divider(),
-      ..._section('Monsters'),
-      ..._subsection('Level 1', [_tableau.monsters[0]]),
-      ..._subsection('Level 2', [_tableau.monsters[1]]),
-      ..._subsection('Level 3', [_tableau.monsters[2]]),
-    ];
+    if (_tableau == null) {
+      return [];
+    } else {
+      return [
+        ..._section('Guardian', [_tableau!.guardian!]),
+        Divider(),
+        ..._section('Dungeon'),
+        ..._subsection('Level 1', _tableau!.dungeon!.roomsMap[1]!, sort: false),
+        ..._subsection('Level 2', _tableau!.dungeon!.roomsMap[2]!, sort: false),
+        ..._subsection('Level 3', _tableau!.dungeon!.roomsMap[3]!, sort: false),
+        Divider(),
+        ..._section('Monsters'),
+        ..._subsection('Level 1', [_tableau!.monsters![0]]),
+        ..._subsection('Level 2', [_tableau!.monsters![1]]),
+        ..._subsection('Level 3', [_tableau!.monsters![2]]),
+      ];
+    }
   }
 }
 
@@ -242,28 +255,30 @@ class WelcomeMessage extends StatelessWidget {
 }
 
 class CardWidget extends StatelessWidget {
-  final tq.Card card;
+  late final tq.Card card;
 
-  CardWidget({Key key, this.card}) : super(key: key);
+  CardWidget({Key? key, required tq.Card card}) : super(key: key) {
+    this.card = card;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<SettingsModel>(
-      builder: (BuildContext context, SettingsModel settings, Widget child) =>
+      builder: (BuildContext context, SettingsModel settings, Widget? child) =>
           Column(
         children: <Widget>[
           Text(
-            card.name +
+            card.name! +
                 (card.runtimeType == tq.Guardian
-                    ? '\nLevel ${_toRoman((card as tq.Guardian).level)}'
+                    ? '\nLevel ${_toRoman((card as tq.Guardian).level!)}'
                     : ''),
             style: Theme.of(context).textTheme.bodyText1,
             textAlign: TextAlign.center,
           ),
           settings.showQuest
-              ? Text(card.quest.number == null
-                  ? card.quest.name
-                  : 'Quest ${card.quest.number}: ${card.quest.name}')
+              ? Text(card.quest!.number == null
+                  ? card.quest!.name
+                  : 'Quest ${card.quest!.number}: ${card.quest!.name}')
               : Container(),
           settings.showKeywords
               ? Wrap(
@@ -276,7 +291,7 @@ class CardWidget extends StatelessWidget {
               ? Container()
               : ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 400),
-                  child: Text(card.memo,
+                  child: Text(card.memo!,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyText2),
                 ),
@@ -307,7 +322,7 @@ class CardWidget extends StatelessWidget {
       result.add(Text(keywords[i],
           style: Theme.of(context)
               .textTheme
-              .bodyText2
+              .bodyText2!
               .copyWith(fontFamily: 'CormorantSC')));
       if (i < keywords.length - 1) {
         result.add(Text(' • '));

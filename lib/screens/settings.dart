@@ -110,7 +110,8 @@ class SettingsPage extends StatelessWidget {
                                       value: strategy))
                                   .toList(),
                               onChanged: (value) {
-                                settings.heroSelectionStrategy = value;
+                                settings.heroSelectionStrategy =
+                                    value as HeroSelectionStrategy;
                               },
                               value: settings.heroSelectionStrategy),
                           Text(
@@ -145,7 +146,8 @@ class SettingsPage extends StatelessWidget {
   // why a StatefulBuilder is needed here and not just a list tile.
   Widget _makeCheckbox(BuildContext context, String title, bool value,
       void onChanged(bool value)) {
-    final TextStyle checkboxTextStyle = Theme.of(context).textTheme.bodyText1;
+    final TextStyle checkboxTextStyle =
+        Theme.of(context).textTheme.bodyText1 as TextStyle;
     return StatefulBuilder(
       builder: (context, _setState) => CheckboxListTile(
         title: Text(
@@ -155,7 +157,7 @@ class SettingsPage extends StatelessWidget {
         controlAffinity: ListTileControlAffinity.leading,
         value: value,
         onChanged: (value) {
-          _setState(() => onChanged(value));
+          _setState(() => onChanged(value!));
         },
       ),
     );

@@ -5,20 +5,20 @@ abstract class ComboFinder {
 }
 
 class Tableau implements ComboFinder {
-  List<Hero> heroes;
-  Marketplace marketplace;
-  Guardian guardian;
-  Dungeon dungeon;
-  List<Monster> monsters; // in order of level
+  List<Hero>? heroes;
+  Marketplace? marketplace;
+  Guardian? guardian;
+  Dungeon? dungeon;
+  List<Monster>? monsters; // in order of level
 
   // Get the set of all cards currently in play
   Set<Card> get allCards {
     Set<Card> result = Set();
-    if (heroes != null) result.addAll(heroes);
-    if (marketplace != null) result.addAll(marketplace.cards);
-    if (guardian != null) result.add(guardian);
-    if (dungeon != null) result.addAll(dungeon.cards);
-    if (monsters != null) result.addAll(monsters);
+    if (heroes != null) result.addAll(heroes!);
+    if (marketplace != null) result.addAll(marketplace!.cards);
+    if (guardian != null) result.add(guardian!);
+    if (dungeon != null) result.addAll(dungeon!.cards);
+    if (monsters != null) result.addAll(monsters!);
     return result;
   }
 
@@ -122,7 +122,8 @@ class AnyMarketplaceRow extends MarketplaceRow {
   // As long as there
   bool canTake(Card card) {
     if (isFull) return false;
-    if (_slots.length == 1 && !_haveDifferentTypes(_slots[0], card))
+    if (_slots.length == 1 &&
+        !_haveDifferentTypes(_slots[0], card as MarketplaceCard))
       return false;
     else
       return true;
@@ -143,5 +144,5 @@ class Dungeon {
   // Map level to the pair of rooms
   Map<int, List<Room>> roomsMap = {1: [], 2: [], 3: []};
 
-  List<Card> get cards => List.of(roomsMap[1] + roomsMap[2] + roomsMap[3]);
+  List<Card> get cards => List.of(roomsMap[1]! + roomsMap[2]! + roomsMap[3]!);
 }

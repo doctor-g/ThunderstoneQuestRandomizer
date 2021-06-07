@@ -1,14 +1,12 @@
 class CardDatabase {
-  List<Quest> quests;
+  late List<Quest> quests;
 
-  CardDatabase(List<Quest> quests) {
-    this.quests = quests;
-  }
+  CardDatabase(this.quests);
 }
 
 class Quest {
-  String name;
-  int number;
+  late String name;
+  int? number;
   final List<Hero> _heroes = [];
   final List<MarketplaceCard> _marketplaceCards = [];
   final List<Guardian> _guardians = [];
@@ -41,53 +39,54 @@ class Quest {
         ..._monsters,
       ];
 
+  Quest(this.name);
+
   void add(Card card) {
     switch (card.runtimeType) {
       case Hero:
         {
-          _heroes.add(card);
+          _heroes.add(card as Hero);
         }
         break;
       case MarketplaceCard:
         {
-          _marketplaceCards.add(card);
+          _marketplaceCards.add(card as MarketplaceCard);
         }
         break;
       case Guardian:
         {
-          _guardians.add(card);
+          _guardians.add(card as Guardian);
         }
         break;
       case Room:
         {
-          _rooms.add(card);
+          _rooms.add(card as Room);
         }
         break;
       case Monster:
         {
-          _monsters.add(card);
+          _monsters.add(card as Monster);
         }
         break;
       default:
         {
           throw new Exception("Illegal State");
         }
-        break;
     }
   }
 }
 
 class Card {
-  Quest quest;
-  String name;
+  Quest? quest;
+  String? name;
   List<String> keywords = [];
-  String memo;
+  String? memo;
   Set<String> combo = Set();
   Set<String> meta = Set();
 
   @override
   String toString() {
-    return name;
+    return name ?? "Unnamed Card";
   }
 }
 
@@ -96,13 +95,13 @@ class Hero extends Card {}
 class MarketplaceCard extends Card {}
 
 class Guardian extends Card {
-  int level;
+  int? level;
 }
 
 class Room extends Card {
-  int level;
+  int? level;
 }
 
 class Monster extends Card {
-  int level;
+  int? level;
 }

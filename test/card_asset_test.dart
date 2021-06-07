@@ -4,7 +4,7 @@ import 'package:flutter_tqr/models/database.dart';
 import 'package:flutter_tqr/util/parser.dart';
 
 void main() {
-  CardDatabase database;
+  late CardDatabase database;
 
   setUp(() async {
     // Ensure the asset can be loaded  via the rootbundle

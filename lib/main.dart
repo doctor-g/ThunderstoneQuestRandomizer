@@ -21,7 +21,7 @@ class TQRandomizerApp extends StatefulWidget {
 }
 
 class _TQRandomizerAppState extends State<TQRandomizerApp> {
-  tq.CardDatabase _database;
+  tq.CardDatabase? _database;
 
   @override
   void initState() {
@@ -46,9 +46,9 @@ class _TQRandomizerAppState extends State<TQRandomizerApp> {
       initialRoute: '/',
       routes: {
         '/': (context) =>
-            _database == null ? LoadingPage() : RandomizerPage(_database),
+            _database == null ? LoadingPage() : RandomizerPage(_database!),
         '/settings': (context) =>
-            _database == null ? Container() : SettingsPage(_database),
+            _database == null ? Container() : SettingsPage(_database!),
         '/about': (context) => AboutPage(),
       },
       title: 'Thunderstone Quest Randomizer',
