@@ -198,8 +198,8 @@ class _RandomizerPageState extends State<RandomizerPage>
       ..._section('Heroes', _tableau!.heroes),
       Divider(),
       ..._section('Marketplace'),
-      ..._subsection('Spells', market.allSpells),
       ..._subsection('Items', allItems),
+      ..._subsection('Spells', market.allSpells),
       ..._subsection('Weapons', market.allWeapons),
       ..._subsection('Allies', nonItemAllies)
     ];
