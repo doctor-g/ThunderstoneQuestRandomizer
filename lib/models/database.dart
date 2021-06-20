@@ -2,6 +2,18 @@ class CardDatabase {
   late List<Quest> quests;
 
   CardDatabase(this.quests);
+
+  CardDatabase where(bool Function(Card card) filter) {
+    return CardDatabase(quests.map((quest) {
+      Quest newQuest = Quest(quest.name);
+      quest.cards.forEach((element) {
+        if (filter.call(element)) {
+          newQuest.add(element);
+        }
+      });
+      return newQuest;
+    }).toList());
+  }
 }
 
 class Quest {

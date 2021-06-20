@@ -74,17 +74,21 @@ class Randomizer {
       Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
       if (tableau.hasCombo(guardian)) {
         print('Combo guardian');
-        return _randomlyLevel(guardian);
+        return _randomlyLevel(settings, guardian);
       }
     }
 
     // Not going for combos, just choose one.
     Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
-    return _randomlyLevel(guardian);
+    return _randomlyLevel(settings, guardian);
   }
 
-  Guardian _randomlyLevel(Guardian guardian) {
-    guardian.level = 4 + _random.nextInt(3);
+  Guardian _randomlyLevel(SettingsModel settings, Guardian guardian) {
+    if (settings.barricadesMode) {
+      guardian.level = 7;
+    } else {
+      guardian.level = 4 + _random.nextInt(3);
+    }
     return guardian;
   }
 

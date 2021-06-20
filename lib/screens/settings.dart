@@ -77,6 +77,22 @@ class SettingsPage extends StatelessWidget {
                               .toList()),
                     ),
                     Divider(),
+                    _heading(context, 'Mode'),
+                    Consumer<SettingsModel>(
+                      builder: (context, settings, child) => Column(
+                        children: [
+                          _makeCheckbox(
+                              context,
+                              'Barricades Mode',
+                              settings.barricadesMode,
+                              (value) => settings.barricadesMode =
+                                  !settings.barricadesMode),
+                          _makeDescription(context,
+                              'Use Level VII Enemies. Filter out cards unfit for Barricades play.'),
+                        ],
+                      ),
+                    ),
+                    Divider(),
                     _heading(context, 'Combo Bias'),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
@@ -89,9 +105,8 @@ class SettingsPage extends StatelessWidget {
                             value: settings.comboBias,
                             onChanged: (value) => settings.comboBias = value,
                           ),
-                          Text(
-                              'The probability that, for a given card, it is accepted only if it combos with cards already selected.',
-                              style: Theme.of(context).textTheme.bodyText2),
+                          _makeDescription(context,
+                              'The probability that, for a given card, it is accepted only if it combos with cards already selected.'),
                         ],
                       ),
                     ),
@@ -114,11 +129,8 @@ class SettingsPage extends StatelessWidget {
                                     value as HeroSelectionStrategy;
                               },
                               value: settings.heroSelectionStrategy),
-                          Text(
-                            settings.heroSelectionStrategy.description,
-                            style: Theme.of(context).textTheme.bodyText2,
-                            textAlign: TextAlign.center,
-                          )
+                          _makeDescription(context,
+                              settings.heroSelectionStrategy.description),
                         ],
                       ),
                     ),
@@ -165,4 +177,8 @@ class SettingsPage extends StatelessWidget {
 
   Widget _heading(BuildContext context, String text) =>
       Text(text, style: Theme.of(context).textTheme.subtitle1);
+
+  Widget _makeDescription(BuildContext context, String text) => Text(text,
+      style: Theme.of(context).textTheme.bodyText2,
+      textAlign: TextAlign.center);
 }

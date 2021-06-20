@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/models/tableau.dart';
+import 'package:flutter_tqr/util/barricades_blacklist.dart';
 import 'package:flutter_tqr/util/randomizer.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:provider/provider.dart';
@@ -56,8 +57,13 @@ class _RandomizerPageState extends State<RandomizerPage>
   void _generateTableau(BuildContext context) {
     setState(() {
       try {
-        _tableau = _randomizer.generateTableau(widget.database,
-            Provider.of<SettingsModel>(context, listen: false));
+        var settings = Provider.of<SettingsModel>(context, listen: false);
+        var database = widget.database;
+        if (settings.barricadesMode) {
+          database = database
+              .where((card) => !barricadesBlacklist.contains(card.name));
+        }
+        _tableau = _randomizer.generateTableau(database, settings);
         _controller.duration = _forwardDuration;
         _controller.forward();
       } on TableauFailureException {
@@ -306,6 +312,8 @@ class CardWidget extends StatelessWidget {
         return 'V';
       case 6:
         return 'VI';
+      case 7:
+        return 'VII';
       default:
         throw Exception('Unexpected guardian level: $level');
     }

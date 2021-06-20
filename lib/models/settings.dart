@@ -14,6 +14,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _showKeywordsKey = 'showKeywords';
   static final String _showQuestKey = 'showQuest';
   static final String _brightnessKey = 'lightMode';
+  static final String _barricadesModeKey = 'barricadesMode';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -50,6 +51,9 @@ class SettingsModel extends ChangeNotifier {
         _brightness =
             prefs.getBool(_brightnessKey)! ? Brightness.light : Brightness.dark;
       }
+      if (prefs.containsKey(_barricadesModeKey)) {
+        _barricadesMode = prefs.getBool(_barricadesModeKey)!;
+      }
       notifyListeners();
     });
   }
@@ -63,6 +67,7 @@ class SettingsModel extends ChangeNotifier {
     _showKeywords = true;
     _showQuest = false;
     _brightness = Brightness.light;
+    _barricadesMode = false;
     notifyListeners();
   }
 
@@ -99,6 +104,7 @@ class SettingsModel extends ChangeNotifier {
     prefs.setBool(_showMemoKey, _showMemo);
     prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
+    prefs.setBool(_barricadesModeKey, _barricadesMode);
   }
 
   HeroSelectionStrategy get heroSelectionStrategy =>
@@ -154,6 +160,14 @@ class SettingsModel extends ChangeNotifier {
   Brightness get brightness => _brightness;
   set brightness(Brightness value) {
     _brightness = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _barricadesMode = false;
+  bool get barricadesMode => _barricadesMode;
+  set barricadesMode(bool value) {
+    _barricadesMode = value;
     _updatePrefs();
     notifyListeners();
   }

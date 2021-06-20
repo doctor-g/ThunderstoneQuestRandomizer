@@ -1,9 +1,12 @@
 import 'package:flutter_tqr/models/database.dart';
 
 CardBuilder _assembleBuilder(CardBuilder builder,
-    {List<String>? keywords, List<String>? combo, List<String>? meta}) {
+    {String? name,
+    List<String>? keywords,
+    List<String>? combo,
+    List<String>? meta}) {
   builder.quest = Quest("Quest");
-  builder.name = "Name";
+  builder.name = name ?? "Name";
 
   if (keywords != null) builder.keywords = keywords;
   if (combo != null) builder.combo = combo.toSet();
@@ -20,15 +23,23 @@ Monster makeMonster(
 }
 
 Hero makeHero(
-    {List<String>? keywords, List<String>? combo, List<String>? meta}) {
+    {String? name,
+    List<String>? keywords,
+    List<String>? combo,
+    List<String>? meta}) {
   var builder = HeroBuilder();
-  _assembleBuilder(builder, keywords: keywords, combo: combo, meta: meta);
+  _assembleBuilder(builder,
+      name: name, keywords: keywords, combo: combo, meta: meta);
   return builder.build();
 }
 
 MarketplaceCard makeMarketplaceCard(
-    {List<String>? keywords, List<String>? combo, List<String>? meta}) {
+    {String? name,
+    List<String>? keywords,
+    List<String>? combo,
+    List<String>? meta}) {
   var builder = MarketplaceCardBuilder();
-  _assembleBuilder(builder, keywords: keywords, combo: combo, meta: meta);
+  _assembleBuilder(builder,
+      name: name, keywords: keywords, combo: combo, meta: meta);
   return builder.build();
 }
