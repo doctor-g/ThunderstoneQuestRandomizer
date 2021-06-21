@@ -13,6 +13,13 @@ class Randomizer {
     final maxTries = 10;
     Tableau tableau = new Tableau();
 
+    if (settings.barricadesMode) {
+      tableau.modes.add(GameMode.Barricades);
+    }
+    if (settings.soloMode) {
+      tableau.modes.add(GameMode.Solo);
+    }
+
     int tries = 0;
     for (;;) {
       try {

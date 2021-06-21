@@ -113,19 +113,26 @@ class _RandomizerPageState extends State<RandomizerPage>
                   opacity: _animation,
                   child: MediaQuery.of(context).size.width >
                           _maxWidthForSingleColumn
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      ? Column(
                           children: [
-                            Expanded(
-                              child: Column(
-                                children: [..._heroesAndMarketplace()],
-                              ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    children: [..._heroesAndMarketplace()],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      ..._guardianAndDungeonAndMonsters()
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                children: [..._guardianAndDungeonAndMonsters()],
-                              ),
-                            )
+                            _makeModeReminder(context),
                           ],
                         )
                       : Column(
@@ -133,7 +140,8 @@ class _RandomizerPageState extends State<RandomizerPage>
                           children: [
                             ..._heroesAndMarketplace(),
                             Divider(),
-                            ..._guardianAndDungeonAndMonsters()
+                            ..._guardianAndDungeonAndMonsters(),
+                            _makeModeReminder(context),
                           ],
                         ),
                 ),
@@ -228,6 +236,37 @@ class _RandomizerPageState extends State<RandomizerPage>
         ..._subsection('Level 2', [_tableau!.monsters![1]]),
         ..._subsection('Level 3', [_tableau!.monsters![2]]),
       ];
+    }
+  }
+
+  Widget _makeModeReminder(BuildContext context) {
+    String reminder = "";
+
+    final bool barricadesMode = _tableau!.modes.contains(GameMode.Barricades);
+    final bool soloMode = _tableau!.modes.contains(GameMode.Solo);
+
+    if (barricadesMode) {
+      reminder += 'Barricades';
+    }
+    if (barricadesMode && soloMode) {
+      reminder += ' • ';
+    }
+    if (soloMode) {
+      reminder += 'Solo';
+    }
+    if (reminder != "") {
+      return Column(
+        children: [
+          Divider(),
+          Text(reminder,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2!
+                  .copyWith(fontFamily: 'CormorantSC')),
+        ],
+      );
+    } else {
+      return SizedBox();
     }
   }
 }

@@ -4,12 +4,19 @@ abstract class ComboFinder {
   bool hasCombo(Card card);
 }
 
+enum GameMode { Solo, Barricades }
+
 class Tableau implements ComboFinder {
   List<Hero>? heroes;
   Marketplace? marketplace;
   Guardian? guardian;
   Dungeon? dungeon;
   List<Monster>? monsters; // in order of level
+
+  // Tracks whether this tableau was created in barricades mode.
+  // This is needed to show in the UI a hint about this, independently of
+  // the current state of the settings model.
+  Set<GameMode> modes = Set();
 
   // Get the set of all cards currently in play
   Set<Card> get allCards {
