@@ -15,6 +15,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _showQuestKey = 'showQuest';
   static final String _brightnessKey = 'lightMode';
   static final String _barricadesModeKey = 'barricadesMode';
+  static final String _soloModeKey = 'soloMode';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -53,6 +54,9 @@ class SettingsModel extends ChangeNotifier {
       }
       if (prefs.containsKey(_barricadesModeKey)) {
         _barricadesMode = prefs.getBool(_barricadesModeKey)!;
+      }
+      if (prefs.containsKey(_soloModeKey)) {
+        _soloMode = prefs.getBool(_soloModeKey)!;
       }
       notifyListeners();
     });
@@ -105,6 +109,7 @@ class SettingsModel extends ChangeNotifier {
     prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
     prefs.setBool(_barricadesModeKey, _barricadesMode);
+    prefs.setBool(_soloModeKey, _soloMode);
   }
 
   HeroSelectionStrategy get heroSelectionStrategy =>
@@ -168,6 +173,14 @@ class SettingsModel extends ChangeNotifier {
   bool get barricadesMode => _barricadesMode;
   set barricadesMode(bool value) {
     _barricadesMode = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _soloMode = false;
+  bool get soloMode => _soloMode;
+  set soloMode(bool value) {
+    _soloMode = value;
     _updatePrefs();
     notifyListeners();
   }

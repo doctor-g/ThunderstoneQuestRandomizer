@@ -48,6 +48,13 @@ class ThunderstoneYamlCardParser {
     for (var entry in node['Monsters'] ?? empty) {
       MonsterBuilder builder = new MonsterBuilder();
       _parseCard(entry, builder);
+      if (entry['Restriction'] != null) {
+        for (var restriction in entry['Restriction']) {
+          if (restriction == 'NoSolo') {
+            builder.soloRestriction = true;
+          }
+        }
+      }
       builder.level = entry['Level'];
       _quest!.add(builder.build());
     }

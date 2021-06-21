@@ -36,6 +36,9 @@ void main() {
   Monsters:
   - Name: Monster1
     Level: 1
+  - Name: Monster2
+    Level: 2
+    Restriction: [NoSolo]
 ''');
       quest = db.quests[0];
     });
@@ -108,8 +111,11 @@ void main() {
     });
 
     test('Get the monsters', () {
-      expect(quest.monsters.length, 1);
+      expect(quest.monsters.length, 2);
       expect(quest.monsters[0].name, 'Monster1');
+      expect(quest.monsters[1].name, 'Monster2');
+      expect(quest.monsters[0].soloRestriction, isFalse);
+      expect(quest.monsters[1].soloRestriction, isTrue);
     });
   });
 }

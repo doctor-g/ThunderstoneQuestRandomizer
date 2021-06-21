@@ -183,13 +183,18 @@ class RoomBuilder extends CardBuilder {
 
 class Monster extends Card {
   int? level;
+  bool soloRestriction;
   Monster(MonsterBuilder builder)
       : this.level = builder.level,
+        this.soloRestriction = builder.soloRestriction ?? false,
         super(builder);
 }
 
 class MonsterBuilder extends CardBuilder {
   int? level;
+
+  bool? soloRestriction;
+
   Monster build() {
     return new Monster(this);
   }

@@ -123,6 +123,13 @@ class Randomizer {
       }
     }
 
+    if (settings.soloMode) {
+      [1, 2, 3].forEach((level) {
+        availableMonsters[level]!
+            .removeWhere((monster) => monster.soloRestriction);
+      });
+    }
+
     List<Monster> result = [];
     [1, 2, 3].forEach((level) {
       List<Monster> list = availableMonsters[level]!;

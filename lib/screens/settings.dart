@@ -89,6 +89,15 @@ class SettingsPage extends StatelessWidget {
                                   !settings.barricadesMode),
                           _makeDescription(context,
                               'Use Level VII Enemies. Filter out cards unfit for Barricades play.'),
+                          _makeVerticalSpace(),
+                          _makeCheckbox(
+                              context,
+                              'Solo Mode',
+                              settings.soloMode,
+                              (value) =>
+                                  settings.soloMode = !settings.soloMode),
+                          _makeDescription(context,
+                              'Filter out cards inappropriate for solo mode.'),
                         ],
                       ),
                     ),
@@ -144,6 +153,7 @@ class SettingsPage extends StatelessWidget {
                         onPressed: () => settings.clear(),
                       ),
                     ),
+                    _makeVerticalSpace(),
                   ],
                 ),
               ),
@@ -181,4 +191,8 @@ class SettingsPage extends StatelessWidget {
   Widget _makeDescription(BuildContext context, String text) => Text(text,
       style: Theme.of(context).textTheme.bodyText2,
       textAlign: TextAlign.center);
+
+  // This is used to add a little space between options that look too tight
+  // otherwise.
+  Widget _makeVerticalSpace() => SizedBox(height: 10);
 }

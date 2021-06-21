@@ -857,7 +857,8 @@
     Keywords: [ Demon, Djinn ]
     Meta: [ Diseased ]
     Level: 2
-    Memo: They discard your cards Left and Right. DO NOT USE IN SOLO MODE.
+    Memo: They discard your cards Left and Right.
+    Restriction: [NoSolo]
   - Name: Arid Atrocities
     Keywords: [ Giant, Beast ]
     Combo: [ Ally ]
@@ -961,7 +962,8 @@
     Keywords: [ Fey, Humanoid ]
     Combo: [ Thunderstone ]
     Level: 1
-    Memo: These Fey creatures steal your Thunderstones when you leave and give them to others. DO NOT USE IN SOLO MODE.
+    Memo: These Fey creatures steal your Thunderstones when you leave and give them to others.
+    Restriction: [ NoSolo ]
   - Name: C.C.O.V. Gang
     Keywords: [ Humanoid, Golem ]
     Level: 2
