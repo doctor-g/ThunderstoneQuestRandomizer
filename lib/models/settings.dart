@@ -6,6 +6,8 @@ import 'package:flutter_tqr/models/tableau.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'database.dart';
+
 class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
@@ -75,24 +77,20 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool includes(String questName) {
-    return !excludes(questName);
-  }
+  bool includes(Quest quest) => !excludes(quest);
 
-  bool excludes(String questName) {
-    return _excludedQuests.contains(questName);
-  }
+  bool excludes(Quest quest) => _excludedQuests.contains(quest.canonicalName);
 
-  void exclude(String questName) {
-    bool newExclusion = _excludedQuests.add(questName);
-    if (newExclusion) {
+  void exclude(Quest quest) {
+    bool isNewExclusion = _excludedQuests.add(quest.canonicalName);
+    if (isNewExclusion) {
       _updatePrefs();
       notifyListeners();
     }
   }
 
-  void include(String questName) {
-    bool changed = _excludedQuests.remove(questName);
+  void include(Quest quest) {
+    bool changed = _excludedQuests.remove(quest.canonicalName);
     if (changed) {
       _updatePrefs();
       notifyListeners();
@@ -201,14 +199,12 @@ abstract class HeroSelectionStrategy extends Strategy {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
   String get name;
-  String get description;
 }
 
 // Selects the first four heroes that match the criteria that there
 // is at least one of each class.
 class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'First Match';
-  String get description => 'All classes are represented.';
 
   final maxTries = 10;
 
@@ -257,9 +253,10 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   }
 }
 
+// There are no constraints on this strategy: it just picks
+// completely at random.
 class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'Unconstrained';
-  String get description => 'Hero classes are ignored.';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     if (availableHeroes.length < 4) {
@@ -271,9 +268,10 @@ class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   }
 }
 
+// Each class has at least one hero. This is the selection strategy
+// from the rulebook.
 class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'Traditional';
-  String get description => 'Each class has at least one hero.';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     List<tq.Hero> result = [];

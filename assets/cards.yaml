@@ -1,3 +1,7 @@
+# Cards Database
+#
+## Meta
+#
 # For things that are not keywords, you can use one of these as Meta:
 # - Diseased
 # - Thunderstone
@@ -7,6 +11,18 @@
 # - Dice (involves dice)
 # - Discard (involves discarding or searching through discarded cards)
 # - Static (can gain the static keyword, but doesn't have it inherently)
+#
+## Localization
+#
+# The user-facing fields can be specified in multiple languages by appending an
+# underscore and the language code to the end of the key. For example:
+# - Quest: Bandits of Black Rock
+#   Quest_es: Banditos de Black Rock
+#   Quest_fr: Bandits de Black Rock
+#
+# The following entries can be localized: Quest, Name (Hero, Marketplace cards,
+# Dungeon rooms, Guardians, and Monsters), and Memo.
+#
 
 - Quest: Bandits of Black Rock
   Sets:

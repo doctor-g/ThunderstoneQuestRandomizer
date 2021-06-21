@@ -2,12 +2,14 @@ import 'package:flutter_tqr/models/database.dart';
 
 CardBuilder _assembleBuilder(CardBuilder builder,
     {String? name,
+    String? canonicalName,
     List<String>? keywords,
     List<String>? combo,
     List<String>? meta}) {
   builder.quest = Quest("Quest");
   builder.name = name ?? "Name";
 
+  if (canonicalName == null) builder.canonicalName = builder.name;
   if (keywords != null) builder.keywords = keywords;
   if (combo != null) builder.combo = combo.toSet();
   if (meta != null) builder.meta = meta.toSet();

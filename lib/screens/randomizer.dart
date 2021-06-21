@@ -6,6 +6,7 @@ import 'package:flutter_tqr/util/barricades_blacklist.dart';
 import 'package:flutter_tqr/util/randomizer.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RandomizerPage extends StatefulWidget {
   final tq.CardDatabase database;
@@ -60,8 +61,8 @@ class _RandomizerPageState extends State<RandomizerPage>
         var settings = Provider.of<SettingsModel>(context, listen: false);
         var database = widget.database;
         if (settings.barricadesMode) {
-          database = database
-              .where((card) => !barricadesBlacklist.contains(card.name));
+          database = database.where(
+              (card) => !barricadesBlacklist.contains(card.canonicalName));
         }
         _tableau = _randomizer.generateTableau(database, settings);
         _controller.duration = _forwardDuration;
@@ -87,7 +88,7 @@ class _RandomizerPageState extends State<RandomizerPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thunderstone Quest Randomizer'),
+        title: Text(AppLocalizations.of(context)!.appTitle),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
@@ -103,8 +104,7 @@ class _RandomizerPageState extends State<RandomizerPage>
             ? (_failure
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        'No possible tableau found.\nPlease check your quest selection on the Settings page and try again.',
+                    child: Text(AppLocalizations.of(context)!.home_no_tableau,
                         style: Theme.of(context).textTheme.bodyText1),
                   )
                 : WelcomeMessage())
@@ -149,7 +149,7 @@ class _RandomizerPageState extends State<RandomizerPage>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _randomize(context),
-        tooltip: 'Randomize',
+        tooltip: AppLocalizations.of(context)!.home_randomize,
         child: ImageIcon(
           AssetImage(settingsNotifier.brightness == Brightness.light
               ? "assets/dice_white.png"
@@ -209,13 +209,17 @@ class _RandomizerPageState extends State<RandomizerPage>
         .toList();
 
     return [
-      ..._section('Heroes', _tableau!.heroes),
+      ..._section(
+          AppLocalizations.of(context)!.tableau_heroes, _tableau!.heroes),
       Divider(),
-      ..._section('Marketplace'),
-      ..._subsection('Items', allItems),
-      ..._subsection('Spells', market.allSpells),
-      ..._subsection('Weapons', market.allWeapons),
-      ..._subsection('Allies', nonItemAllies)
+      ..._section(AppLocalizations.of(context)!.tableau_marketplace),
+      ..._subsection(AppLocalizations.of(context)!.tableau_items, allItems),
+      ..._subsection(
+          AppLocalizations.of(context)!.tableau_spells, market.allSpells),
+      ..._subsection(
+          AppLocalizations.of(context)!.tableau_weapons, market.allWeapons),
+      ..._subsection(
+          AppLocalizations.of(context)!.tableau_allies, nonItemAllies)
     ];
   }
 
@@ -224,17 +228,27 @@ class _RandomizerPageState extends State<RandomizerPage>
       return [];
     } else {
       return [
-        ..._section('Guardian', [_tableau!.guardian!]),
+        ..._section(AppLocalizations.of(context)!.tableau_guardian,
+            [_tableau!.guardian!]),
         Divider(),
-        ..._section('Dungeon'),
-        ..._subsection('Level 1', _tableau!.dungeon!.roomsMap[1]!, sort: false),
-        ..._subsection('Level 2', _tableau!.dungeon!.roomsMap[2]!, sort: false),
-        ..._subsection('Level 3', _tableau!.dungeon!.roomsMap[3]!, sort: false),
+        ..._section(AppLocalizations.of(context)!.tableau_dungeon),
+        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(1),
+            _tableau!.dungeon!.roomsMap[1]!,
+            sort: false),
+        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(2),
+            _tableau!.dungeon!.roomsMap[2]!,
+            sort: false),
+        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(3),
+            _tableau!.dungeon!.roomsMap[3]!,
+            sort: false),
         Divider(),
-        ..._section('Monsters'),
-        ..._subsection('Level 1', [_tableau!.monsters![0]]),
-        ..._subsection('Level 2', [_tableau!.monsters![1]]),
-        ..._subsection('Level 3', [_tableau!.monsters![2]]),
+        ..._section(AppLocalizations.of(context)!.tableau_monsters),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1),
+            [_tableau!.monsters![0]]),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(2),
+            [_tableau!.monsters![1]]),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(3),
+            [_tableau!.monsters![2]]),
       ];
     }
   }
@@ -246,13 +260,13 @@ class _RandomizerPageState extends State<RandomizerPage>
     final bool soloMode = _tableau!.modes.contains(GameMode.Solo);
 
     if (barricadesMode) {
-      reminder += 'Barricades';
+      reminder += AppLocalizations.of(context)!.tableau_barricades_hint;
     }
     if (barricadesMode && soloMode) {
       reminder += ' • ';
     }
     if (soloMode) {
-      reminder += 'Solo';
+      reminder += AppLocalizations.of(context)!.tableau_solo_hint;
     }
     if (reminder != "") {
       return Column(
@@ -279,13 +293,12 @@ class WelcomeMessage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('Thunderstone Quest Randomizer',
+          Text(AppLocalizations.of(context)!.appTitle,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.subtitle1),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-                'Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.',
+            child: Text(AppLocalizations.of(context)!.home_instructions,
                 style: Theme.of(context).textTheme.bodyText1),
           ),
         ],
@@ -310,7 +323,9 @@ class CardWidget extends StatelessWidget {
           Text(
             card.name +
                 (card.runtimeType == tq.Guardian
-                    ? '\nLevel ${_toRoman((card as tq.Guardian).level!)}'
+                    ? '\n' +
+                        AppLocalizations.of(context)!.tableau_guardian_level(
+                            _toRoman((card as tq.Guardian).level!))
                     : ''),
             style: Theme.of(context).textTheme.bodyText1,
             textAlign: TextAlign.center,
@@ -318,7 +333,8 @@ class CardWidget extends StatelessWidget {
           settings.showQuest
               ? Text(card.quest.number == null
                   ? card.quest.name
-                  : 'Quest ${card.quest.number}: ${card.quest.name}')
+                  : AppLocalizations.of(context)!.tableau_quest_source(
+                      card.quest.number!, card.quest.name))
               : Container(),
           settings.showKeywords
               ? Wrap(

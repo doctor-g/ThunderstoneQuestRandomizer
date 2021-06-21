@@ -1,3 +1,16 @@
+import 'package:flutter/foundation.dart';
+
+class CardDatabaseModel extends ChangeNotifier {
+  CardDatabase? _database;
+
+  CardDatabase? get database => _database;
+
+  set database(CardDatabase? db) {
+    _database = db;
+    notifyListeners();
+  }
+}
+
 class CardDatabase {
   late List<Quest> quests;
 
@@ -18,6 +31,7 @@ class CardDatabase {
 
 class Quest {
   late String name;
+  late String canonicalName;
   int? number;
   final List<Hero> _heroes = [];
   final List<MarketplaceCard> _marketplaceCards = [];
@@ -95,7 +109,12 @@ class CannotBuildException implements Exception {
 
 abstract class Card {
   late Quest quest;
+
+  /// The localized name of a card, appropriate for showing users.
   late String name;
+
+  /// The canonical name, appropriate for filters, blacklists, processing, etc.
+  late String canonicalName;
   List<String> keywords = [];
   String? memo;
   Set<String> combo = Set();
@@ -106,14 +125,19 @@ abstract class Card {
         keywords = builder.keywords,
         combo = builder.combo,
         meta = builder.meta {
+    // Process the required elements, without which we cannot build a card.
     if (builder.quest == null) {
       throw CannotBuildException("Card has no quest");
     }
     if (builder.name == null) {
       throw CannotBuildException("Card has no name");
     }
+    if (builder.canonicalName == null) {
+      throw CannotBuildException("Card has no canonical name");
+    }
     this.quest = builder.quest!;
     this.name = builder.name!;
+    this.canonicalName = builder.canonicalName!;
   }
 
   @override
@@ -125,6 +149,7 @@ abstract class Card {
 abstract class CardBuilder {
   Quest? quest;
   String? name;
+  String? canonicalName;
   List<String> keywords = [];
   String? memo;
   Set<String> combo = Set();

@@ -44,7 +44,7 @@ class Randomizer {
     // Make a master list of all the heroes
     List<Hero> allHeroes = [];
     for (Quest quest in db.quests) {
-      if (settings.includes(quest.name)) {
+      if (settings.includes(quest)) {
         allHeroes += quest.heroes;
       }
     }
@@ -57,7 +57,7 @@ class Randomizer {
     // Get all possible market cards
     List<Card> allMarketCards = [];
     for (Quest quest in db.quests) {
-      if (settings.includes(quest.name)) {
+      if (settings.includes(quest)) {
         allMarketCards += quest.spells;
         allMarketCards += quest.items;
         allMarketCards += quest.weapons;
@@ -72,7 +72,7 @@ class Randomizer {
       CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     List<Guardian> allGuardians = [];
     for (Quest quest in db.quests) {
-      if (settings.includes(quest.name)) {
+      if (settings.includes(quest)) {
         allGuardians += quest.guardians;
       }
     }
@@ -102,7 +102,7 @@ class Randomizer {
   Dungeon generateDungeon(CardDatabase db, SettingsModel settings) {
     Map<int, List<Room>> availableRooms = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
-      if (settings.includes(quest.name)) {
+      if (settings.includes(quest)) {
         quest.rooms.forEach((element) {
           availableRooms[element.level]!.add(element);
         });
@@ -124,7 +124,7 @@ class Randomizer {
       CardDatabase db, SettingsModel settings, ComboFinder tableau) {
     Map<int, List<Monster>> availableMonsters = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
-      if (settings.includes(quest.name)) {
+      if (settings.includes(quest)) {
         quest.monsters.forEach(
             (monster) => availableMonsters[monster.level]!.add(monster));
       }

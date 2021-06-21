@@ -4,6 +4,17 @@ This application is a randomizer for [_Thunderstone Quest_](https://alederac.com
 
 [Use the Web app now!](https://doctor-g.github.io/ThunderstoneQuestRandomizer)
 
+## Localization
+
+The [`cards.yml`](assets/cards.yml) file can be localized into different languages.
+See that files for translation instructions. Currently, the language chosen by
+the app is based on the user's locale. Adding manual selection is future work.
+
+The rest of the app also supports localization using the Intl package
+[as described in the docs](https://flutter.dev/docs/development/accessibility-and-localization/internationalization). A new language could
+be added by creating a new `.arb` for the given language (e.g. `app_fr.erb` for 
+French).
+
 ## Background
 
 In 2019, I created [_TSQR_](https://doctor-g.github.io/tsqr/), which is another randomizer for _Thunderstone Quest_. It was created using a different technology stack I was investigating at the time.

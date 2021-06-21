@@ -1,0 +1,320 @@
+{
+  "appTitle": "Thunderstone Quest Randomizer",
+  "@appTitle": {
+    "description": "The application title shown in the titlebar and main screen."
+  },
+
+  "about_title": "About",
+  "@about_title": {
+    "description": "The name of the 'About' page.",
+    "context": "About page"
+  },
+
+  "about_version": "Version",
+  "@about_version": {
+    "description": "The text to precede the release version number.",
+    "context": "About page"
+  },
+
+  "about_repository": "Repository",
+  "@about_repository": {
+    "description": "Prefixes the GitHub repository url",
+    "context": "About page"
+  },
+
+  "about_license": "Thunderstone Quest Randomizer is licensed under the GNU GPL v3.",
+  "@about_license": {
+    "description": "Explains the license of this software.",
+    "context" : "About page"
+  },
+
+  "about_ownership": "Thunderstone Quest is a property of Alderac Entertainment Group",
+  "@about_ownership": {
+    "description": "Acknowledges who owns the IP for the game.",
+    "context": "About page"
+  },
+
+  "home_instructions": "Use the dice button in the bottom corner to generate a tableau of cards or customize your collection in the application settings with the gear button.",
+  "@home_instructions": {
+    "description": "Explain to the user how to use the app.",
+    "context": "Home page before tableau generation"
+  },
+
+  "home_randomize": "Randomize",
+  "@home_randomize": {
+    "description": "Tooltip for the randomize (dice) button",
+    "context": "Home page"
+  },
+
+  "home_no_tableau": "No possible tableau found.\nPlease check your quest selection on the Settings page and try again.",
+  "@home_no_tableau": {
+    "description": "Message to the user when tableau generation fails, e.g. due to impossible constraints such as not enough heroes in the selected quests.",
+    "context": "Home page"
+  },
+
+  "tableau_heroes": "Heroes",
+  "@tableau_heroes": {
+    "description": "Section header for listing the heroes in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_marketplace": "Marketplace",
+  "@tableau_marketplace": {
+    "description": "Section header for listing the marketplace in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_items": "Items",
+  "@tableau_items": {
+    "description": "Subsection header for listing the items in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_spells": "Spells",
+  "@tableau_spells": {
+    "description": "Subsection header for listing the spells in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_weapons": "Weapons",
+  "@tableau_weapons": {
+    "description": "Subsection header for listing the weapons in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_allies": "Allies",
+  "@tableau_allies": {
+    "description": "Subsection header for listing the allies in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_guardian": "Guardian",
+  "@tableau_guardian": {
+    "description": "Section header for listing the guardian in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_guardian_level": "Level {romanNumeral}",
+  "@tableau_guardian_level": {
+    "description": "Label showing the level of the guardian",
+    "placeholders": {
+      "romanNumeral": {
+        "example": "IV",
+        "description": "Roman numeral string for the guardian level"
+      }
+    }
+  },
+
+  "tableau_dungeon": "Dungeon",
+  "@tableau_dungeon": {
+    "description": "Section header for listing the dungeon in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_dungeon_level": "Level {number}",
+  "@tableau_dungeon_level": {
+    "description": "Subsection label listing the nth level of the dungeon",
+    "placeholders": {
+      "number": {
+        "example": "2",
+        "description": "The level number of the dungeon"
+      }
+    }
+  },
+
+  "tableau_monsters": "Monsters",
+  "@tableau_monsters": {
+    "description": "Section header for listing the monsters in the tableau",
+    "context": "Home page with random tableau"
+  },
+
+  "tableau_monster_level": "Level {number}",
+  "@tableau_monster_level": {
+    "description": "Subsection label listing the monsters of nth level",
+    "placeholders": {
+      "number": {
+        "example": "2",
+        "description": "The level number of the monster"
+      }
+    }
+  },
+
+  "tableau_barricades_hint": "Barricades",
+  "@tableau_barricades_hint": {
+    "description": "Reminder text that the tableau was generated for Barricades mode."
+  },
+
+  "tableau_solo_hint": "Solo",
+  "@tableau_solo_hint": {
+    "description": "Reminder text that the tableau was generated for Solo mode."
+  },
+
+  "tableau_quest_source": "Quest {number}: {name}",
+  "@tableau_quest_source": {
+    "description": "The label indicating the quest that a card comes from.",
+    "placeholders": {
+      "number": {
+        "example": "1",
+        "description": "The quest number. Note that if the quest has no number, only the quest name will be used."
+      },
+      "name": {
+        "example": "What Lies Beneath",
+        "description": "The name of the quest"
+      }
+    }
+  },
+
+  "settings_title": "Settings",
+  "@settings_title": {
+    "description": "Settings page title, shown in the app bar",
+    "context": "Settings page"
+  },
+
+  "settings_section_appearance": "Appearance",
+  "@settings_section_appearance": {
+    "description": "Section heading for application appearance options",
+    "context": "Settings page"
+  },
+
+  "settings_lightMode": "Light Mode",
+  "@settings_lightMode": {
+    "description": "Option to toggle 'light mode'",
+    "context": "Settings > Appearance"
+  },
+
+  "settings_showKeywords": "Show card keyword traits",
+  "@settings_showKeywords": {
+    "description": "Option to show cards' keyword traits, such as FIGHTER or HERO",
+    "context": "Settings > Appearance"
+  },
+
+  "settings_showMemo": "Show card memo",
+  "@settings_showMemo": {
+    "description": "Option to show cards' memos--the text that provides flavor about the card",
+    "context": "Settings > Appearance"
+  },
+
+  "settings_showQuest": "Show card quest",
+  "@settings_showQuest": {
+    "description": "Show the quest that the card comes from",
+    "context": "Settings > Appearance"
+  },
+
+  "settings_section_quests": "Quests",
+  "@settings_section_quests": {
+    "description": "Section heading for quest filters",
+    "context": "Settings page"
+  },
+
+  "settings_quest": "Quest {number}: {name}",
+  "@settings_quest": {
+    "description": "Shows a quest that can be toggled on or off for inclusion",
+    "placeholders": {
+      "number": {
+        "example": "1",
+        "description": "The quest number. Note that if the quest has no number, only the quest name will be used."
+      },
+      "name": {
+        "example": "What Lies Beneath",
+        "description": "The name of the quest"
+      }
+    }
+  },
+
+  "settings_section_mode": "Mode",
+  "@settings_section_mode": {
+    "description": "Section heading for gameplay mode options",
+    "context": "Settings page"
+  },
+
+  "settings_barricadesMode": "Barricades Mode",
+  "@settings_barricadesMode": {
+    "description": "Option for enabling barricades mode",
+    "context": "Settings > Mode"
+  },
+
+  "settings_barricadesMode_hint": "Use Level VII Enemies. Filter out cards unfit for Barricades play.",
+  "@settings_barricadesMode_hint": {
+    "description": "Explanation of what happens when Barricades Mode is selected",
+    "context": "Settings > Mode"
+  },
+
+  "settings_soloMode": "Solo Mode",
+  "@settings_soloMode": {
+    "description": "Option for enabling solo mode",
+    "context": "Settings > Mode"
+  },
+
+  "settings_soloMode_hint": "Filter out cards inappropriate for solo mode.",
+  "@settings_soloMode_hint": {
+    "description": "Explanation of what happens when Solo Mode is selected",
+    "context": "Settings > Mode"
+  },
+
+  "settings_section_comboBias": "Combo Bias",
+  "@settings_section_comboBias": {
+    "description": "Section heading for combo bias specification",
+    "context": "Settings page"
+  },
+
+
+  "settings_comboBias_hint": "The probability that, for a given card, it is accepted only if it combos with cards already selected.",
+  "@settings_comboBias_hint": {
+    "description": "Explanation of what combo bias is.",
+    "context": "Settings > Combo Bias"
+  },
+
+  "settings_section_hero_selection": "Hero Selection",
+  "@settings_section_hero_selection": {
+    "description": "Section heading for hero selection strategy options",
+    "context": "Settings page"
+  },
+
+  "settings_section_misc": "Miscellaneous",
+  "@settings_section_misc": {
+    "description": "Section heading for miscellaneous controls (contains the reset button)",
+    "context": "Settings page"
+  },
+
+  "settings_reset": "Reset Settings to Defaults",
+  "@settings_reset": {
+    "description": "Text for the settings reset button.",
+    "context": "Settings > Misc"
+  },
+
+  "heroselection_traditional_name": "Traditional",
+  "@heroselection_traditional_name": {
+    "description": "The name of the traditional (rulebook) hero selection strategy",
+    "context": "Settings > Hero Selection"
+  },
+
+  "heroselection_traditional_desc": "Each class has at least one hero.",
+  "@heroselection_traditional_desc": {
+    "description": "Explanation of the traditional (rulebook) hero selection strategy",
+    "context": "Settings > Hero Selection"
+  },
+
+  "heroselection_firstmatch_name": "First Match",
+  "@heroselection_firstmatch_name": {
+    "description": "The name of the 'first match' hero selection strategy",
+    "context": "Settings > Hero Selection"
+  },
+
+  "heroselection_firstmatch_desc": "All classes are represented.",
+  "@heroselection_firstmatch_desc": {
+    "description": "Explanation of the traditional (rulebook) hero selection strategy",
+    "context": "Settings > Hero Selection"
+  },
+
+  "heroselection_unconstrained_name": "Unconstrained",
+  "@heroselection_unconstrained_name": {
+    "description": "The name of the 'unconstrained' hero selection strategy",
+    "context": "Settings > Hero Selection"
+  },
+
+  "heroselection_unconstrained_desc": "Hero classes are ignored.",
+  "@heroselection_unconstrained_desc": {
+    "description": "Explanation of the unconstrained hero selection strategy",
+    "context": "Settings > Hero Selection"
+  }
+}
