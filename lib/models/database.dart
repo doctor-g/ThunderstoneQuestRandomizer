@@ -31,7 +31,10 @@ class CardDatabase {
 
 class Quest {
   late String name;
-  late String canonicalName;
+
+  /// Maps language codes (such as "es") to localized names for the card.
+  final Map<String, String> localizedNames = {};
+
   int? number;
   final List<Hero> _heroes = [];
   final List<MarketplaceCard> _marketplaceCards = [];
@@ -100,6 +103,11 @@ class Quest {
         }
     }
   }
+
+  /// Get the quest's name in the given localized code, or the canonical name if
+  /// it is not localized
+  String getLocalizedName(String languageCode) =>
+      localizedNames[languageCode] ?? name;
 }
 
 class CannotBuildException implements Exception {
@@ -110,18 +118,25 @@ class CannotBuildException implements Exception {
 abstract class Card {
   late Quest quest;
 
-  /// The localized name of a card, appropriate for showing users.
+  /// The canonical (English) name of the card.
+  ///
+  /// This is appropriate to use for filtering the collection. Use
+  /// [getLocalizedName] for localized, user-friendly names.
   late String name;
 
-  /// The canonical name, appropriate for filters, blacklists, processing, etc.
-  late String canonicalName;
+  /// Maps language codes (e.g. "es") to the localized name of the card
+  late final Map<String, String> localizedNames;
+
   List<String> keywords = [];
   String? memo;
+  late final Map<String, String> localizedMemos;
   Set<String> combo = Set();
   Set<String> meta = Set();
 
   Card(CardBuilder builder)
-      : memo = builder.memo,
+      : localizedNames = builder.localizedNames,
+        memo = builder.memo,
+        localizedMemos = builder.localizedMemos,
         keywords = builder.keywords,
         combo = builder.combo,
         meta = builder.meta {
@@ -132,13 +147,21 @@ abstract class Card {
     if (builder.name == null) {
       throw CannotBuildException("Card has no name");
     }
-    if (builder.canonicalName == null) {
-      throw CannotBuildException("Card has no canonical name");
-    }
     this.quest = builder.quest!;
     this.name = builder.name!;
-    this.canonicalName = builder.canonicalName!;
   }
+
+  /// Get the name of this card, localized to the given language code.
+  /// If that language code has no localization, return the canonical name.
+  String getLocalizedName(String languageCode) =>
+      localizedNames[languageCode] ?? name;
+
+  /// Get the memo for this card, localized to the given language code.
+  ///
+  /// If there is no such localization, the canonical memo is returned instead,
+  /// if any.
+  String? getLocalizedMemo(String languageCode) =>
+      localizedMemos[languageCode] ?? memo;
 
   @override
   String toString() {
@@ -149,9 +172,10 @@ abstract class Card {
 abstract class CardBuilder {
   Quest? quest;
   String? name;
-  String? canonicalName;
+  final Map<String, String> localizedNames = {};
   List<String> keywords = [];
   String? memo;
+  final Map<String, String> localizedMemos = {};
   Set<String> combo = Set();
   Set<String> meta = Set();
 }

@@ -16,6 +16,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _showKeywordsKey = 'showKeywords';
   static final String _showQuestKey = 'showQuest';
   static final String _brightnessKey = 'lightMode';
+  static final String _languageKey = 'lang';
   static final String _barricadesModeKey = 'barricadesMode';
   static final String _soloModeKey = 'soloMode';
 
@@ -60,6 +61,9 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_soloModeKey)) {
         _soloMode = prefs.getBool(_soloModeKey)!;
       }
+      if (prefs.containsKey(_languageKey)) {
+        _language = prefs.getString(_languageKey)!;
+      }
       notifyListeners();
     });
   }
@@ -74,15 +78,16 @@ class SettingsModel extends ChangeNotifier {
     _showQuest = false;
     _brightness = Brightness.light;
     _barricadesMode = false;
+    _language = 'en';
     notifyListeners();
   }
 
   bool includes(Quest quest) => !excludes(quest);
 
-  bool excludes(Quest quest) => _excludedQuests.contains(quest.canonicalName);
+  bool excludes(Quest quest) => _excludedQuests.contains(quest.name);
 
   void exclude(Quest quest) {
-    bool isNewExclusion = _excludedQuests.add(quest.canonicalName);
+    bool isNewExclusion = _excludedQuests.add(quest.name);
     if (isNewExclusion) {
       _updatePrefs();
       notifyListeners();
@@ -90,7 +95,7 @@ class SettingsModel extends ChangeNotifier {
   }
 
   void include(Quest quest) {
-    bool changed = _excludedQuests.remove(quest.canonicalName);
+    bool changed = _excludedQuests.remove(quest.name);
     if (changed) {
       _updatePrefs();
       notifyListeners();
@@ -106,6 +111,7 @@ class SettingsModel extends ChangeNotifier {
     prefs.setBool(_showMemoKey, _showMemo);
     prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
+    prefs.setString(_languageKey, _language);
     prefs.setBool(_barricadesModeKey, _barricadesMode);
     prefs.setBool(_soloModeKey, _soloMode);
   }
@@ -163,6 +169,14 @@ class SettingsModel extends ChangeNotifier {
   Brightness get brightness => _brightness;
   set brightness(Brightness value) {
     _brightness = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  String _language = 'en';
+  String get language => _language;
+  set language(String language) {
+    _language = language;
     _updatePrefs();
     notifyListeners();
   }

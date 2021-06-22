@@ -61,8 +61,8 @@ class _RandomizerPageState extends State<RandomizerPage>
         var settings = Provider.of<SettingsModel>(context, listen: false);
         var database = widget.database;
         if (settings.barricadesMode) {
-          database = database.where(
-              (card) => !barricadesBlacklist.contains(card.canonicalName));
+          database = database
+              .where((card) => !barricadesBlacklist.contains(card.name));
         }
         _tableau = _randomizer.generateTableau(database, settings);
         _controller.duration = _forwardDuration;
@@ -321,7 +321,7 @@ class CardWidget extends StatelessWidget {
           Column(
         children: <Widget>[
           Text(
-            card.name +
+            card.getLocalizedName(settings.language) +
                 (card.runtimeType == tq.Guardian
                     ? '\n' +
                         AppLocalizations.of(context)!.tableau_guardian_level(
@@ -343,11 +343,11 @@ class CardWidget extends StatelessWidget {
                   alignment: WrapAlignment.center,
                 )
               : Container(),
-          card.memo == null || !settings.showMemo
+          card.getLocalizedMemo(settings.language) == null || !settings.showMemo
               ? Container()
               : ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: 400),
-                  child: Text(card.memo!,
+                  child: Text(card.getLocalizedMemo(settings.language)!,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyText2),
                 ),

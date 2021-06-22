@@ -19,7 +19,7 @@ void main() {
 class _TQRandomizerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final settingsNotifier = Provider.of<SettingsModel>(context);
+    final settings = Provider.of<SettingsModel>(context);
     return ChangeNotifierProvider<tq.CardDatabaseModel>(
       create: (context) => tq.CardDatabaseModel(),
       child: MaterialApp(
@@ -40,7 +40,7 @@ class _TQRandomizerApp extends StatelessWidget {
         onGenerateTitle: (BuildContext context) =>
             AppLocalizations.of(context)!.appTitle,
         theme: ThemeData(
-          brightness: settingsNotifier.brightness,
+          brightness: settings.brightness,
           primarySwatch: Colors.blueGrey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Cormorant',
@@ -78,10 +78,8 @@ class _LoadingPageState extends State<_LoadingPage> {
     // there is no translation in place, so it would be premature
     // to implement.
     rootBundle.loadString('assets/cards.yaml').then((data) {
-      var languageCode = Localizations.localeOf(context).languageCode;
       ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
-      var database = parser.parse(data,
-          languageCode: languageCode != "en" ? languageCode : null);
+      var database = parser.parse(data);
       widget.dbmodel.database = database;
     });
     super.initState();

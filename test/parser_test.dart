@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tqr/util/parser.dart';
 import 'package:flutter_tqr/models/database.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   group('Parse YAML', () {
@@ -121,28 +119,19 @@ void main() {
     });
   });
 
-  group('Parse localized YAML', () {
-    late CardDatabase db;
+  group('Localized cards', () {
     late Quest quest;
 
     setUp(() {
       ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
-      db = parser.parse('''
-- Quest: The First Quest
-  Quest_es: La Búsqueda Primera
-  Number: 1
+      CardDatabase db = parser.parse('''
+- Quest: One
+  Quest_es: Uno
   Heroes:
-    - Name: Hero1
-      Name_es: HeroUno
-      Keywords: [ Human, Fighter ]
-      Memo: Sample memo
-      Memo_es: Spanish memo
-      Combo: [ Combo1 ]
-      Meta: [ Meta1 ]
-    - Name: Hero2
-      Memo: Untranslated memo
-    - Name: Hero3
-      Memo_es: Solo Español
+    - Name: Blue
+      Name_es: Azul
+      Memo: Blue Man
+      Memo_es: Hombre Azul
   Marketplace:
     - Name: Item1
       Name_es: Articulo
@@ -167,53 +156,24 @@ void main() {
   - Name: Monster2
     Level: 2
     Restriction: [NoSolo]
-- Quest: Untranslated Quest
-''', languageCode: 'es');
+''');
       quest = db.quests[0];
     });
 
-    // This is a learning test to help ensure that I understand the
-    // localization plumbing.
-    testWidgets('Changing locale works as expected',
-        (WidgetTester tester) async {
-      await tester.pumpAndSettle();
-
-      var placeholder = Placeholder();
-
-      var localizations = Localizations(
-          delegates: AppLocalizations.localizationsDelegates,
-          locale: Locale('es'),
-          child: placeholder);
-      expect(localizations.locale.languageCode == 'es', isTrue);
+    test("Localized name is stored in the quest", () {
+      expect(quest.localizedNames["es"], equals('Uno'));
     });
 
-    test('Parse Spanish names', () {
-      expect(quest.name, equals('La Búsqueda Primera'));
-      expect(quest.heroes[0].name, equals('HeroUno'));
-      expect(quest.heroes[0].memo, equals('Spanish memo'));
-      expect(quest.items[0].name, equals('Articulo'));
-      expect(quest.guardians[0].name, equals('Guardiana'));
-      expect(quest.rooms[0].name, equals('Habitación'));
-      expect(quest.monsters[0].name, equals('Monstruo'));
+    test("Localized name is stored in the cards", () {
+      expect(quest.heroes[0].localizedNames["es"], equals('Azul'));
+      expect(quest.items[0].localizedNames['es'], equals('Articulo'));
+      expect(quest.guardians[0].localizedNames['es'], equals('Guardiana'));
+      expect(quest.rooms[0].localizedNames['es'], equals('Habitación'));
+      expect(quest.monsters[0].localizedNames['es'], equals('Monstruo'));
     });
 
-    test('English card names are retained as canonical names', () {
-      expect(quest.canonicalName, equals('The First Quest'));
-      expect(quest.heroes[0].canonicalName, equals('Hero1'));
-      expect(quest.items[0].canonicalName, equals('Item1'));
-      expect(quest.guardians[0].canonicalName, equals('Guardian1'));
-      expect(quest.rooms[0].canonicalName, equals('Room1'));
-      expect(quest.monsters[0].canonicalName, equals('Monster1'));
-    });
-
-    test('English is used as fallback when there is no translation', () {
-      expect(db.quests[1].name, equals('Untranslated Quest'));
-      expect(quest.heroes[1].name, equals('Hero2'));
-      expect(quest.heroes[1].memo, equals('Untranslated memo'));
-    });
-
-    test('Use Spanish memo even if there is no English one', () {
-      expect(quest.heroes[2].memo, equals('Solo Español'));
+    test("Localized memos", () {
+      expect(quest.heroes[0].localizedMemos["es"], equals('Hombre Azul'));
     });
   });
 }

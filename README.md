@@ -7,8 +7,9 @@ This application is a randomizer for [_Thunderstone Quest_](https://alederac.com
 ## Localization
 
 The [`cards.yml`](assets/cards.yml) file can be localized into different languages.
-See that files for translation instructions. Currently, the language chosen by
-the app is based on the user's locale. Adding manual selection is future work.
+See that files for translation instructions. To enable a language in the settings
+page, add (or uncomment) an appropriate line in the definition of `_supportedLanguages`
+in [settings.dart](screens/settings.dart) 
 
 The rest of the app also supports localization using the Intl package
 [as described in the docs](https://flutter.dev/docs/development/accessibility-and-localization/internationalization). A new language could

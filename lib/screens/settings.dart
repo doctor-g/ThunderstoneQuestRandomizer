@@ -6,6 +6,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   static final double _maxComboBias = 0.95;
+  static final Map<String, String> _supportedLanguages = {
+    "en": "English",
+    // "fr": "French"
+  };
   final CardDatabase database;
 
   SettingsPage(this.database);
@@ -61,6 +65,23 @@ class SettingsPage extends StatelessWidget {
                                     settings.showQuest,
                                     (value) => settings.showQuest =
                                         !settings.showQuest),
+                                _supportedLanguages.length > 1
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                              AppLocalizations.of(context)!
+                                                  .settings_language,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1),
+                                          SizedBox(width: 8),
+                                          _makeLanguageSelectionSetting(
+                                              context),
+                                        ],
+                                      )
+                                    : SizedBox(width: 0)
                               ],
                             )),
                     Divider(),
@@ -73,10 +94,13 @@ class SettingsPage extends StatelessWidget {
                               .map((quest) => _makeCheckbox(
                                       context,
                                       (quest.number == null
-                                          ? quest.name
+                                          ? quest.getLocalizedName(
+                                              settings.language)
                                           : AppLocalizations.of(context)!
                                               .settings_quest(
-                                                  quest.number!, quest.name)),
+                                                  quest.number!,
+                                                  quest.getLocalizedName(
+                                                      settings.language))),
                                       settings.includes(quest), (value) {
                                     if (settings.includes(quest)) {
                                       settings.exclude(quest);
@@ -252,4 +276,26 @@ class SettingsPage extends StatelessWidget {
   // This is used to add a little space between options that look too tight
   // otherwise.
   Widget _makeVerticalSpace() => SizedBox(height: 10);
+
+  Widget _makeLanguageSelectionSetting(BuildContext context) {
+    return Consumer<SettingsModel>(
+      builder: (context, settings, child) => DropdownButton(
+        items: _supportedLanguages.entries
+            .map((entry) => DropdownMenuItem(
+                  child: Text(entry.value,
+                      style: Theme.of(context).textTheme.bodyText1),
+                  value: entry.key,
+                ))
+            .toList(),
+        onChanged: (String? code) {
+          print(
+              'You selected ${code == null ? "Nothing" : _supportedLanguages[code]}');
+          if (code != null) {
+            settings.language = code;
+          }
+        },
+        value: settings.language,
+      ),
+    );
+  }
 }

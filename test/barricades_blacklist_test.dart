@@ -25,7 +25,7 @@ void main() {
       });
     });
     var filteredCards =
-        cards.where((card) => barricadesBlacklist.contains(card.canonicalName));
+        cards.where((card) => barricadesBlacklist.contains(card.name));
     expect(filteredCards.length == barricadesBlacklist.length, isTrue);
   });
 }

@@ -200,6 +200,12 @@
     "context": "Settings > Appearance"
   },
 
+  "settings_language": "Card Language",
+  "@settings_language": {
+    "description": "Label before the card language selection dropdown box",
+    "context": "Settings > Appearance"
+  },
+
   "settings_section_quests": "Quests",
   "@settings_section_quests": {
     "description": "Section heading for quest filters",

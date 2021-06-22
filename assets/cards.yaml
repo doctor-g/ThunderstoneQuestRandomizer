@@ -25,6 +25,7 @@
 #
 
 - Quest: Bandits of Black Rock
+  Quest_fr: Bandits de Black Rock
   Sets:
   - Champion
   Heroes:
@@ -33,6 +34,7 @@
     Combo: [ Weapon ]
   Marketplace:
   - Name: Scionic Annals
+    Name_fr: Annales Scioniques
     Keywords: [ Magic, Item ]
     Combo: [ Spell ]
   - Name: Dark Fire Touch

@@ -14,7 +14,7 @@ void main() {
       var cardBuilder = MarketplaceCardBuilder();
       cardBuilder.keywords = [keyword];
       cardBuilder.quest = Quest("Test");
-      cardBuilder.name = cardBuilder.canonicalName = "Test";
+      cardBuilder.name = "Test";
       return cardBuilder.build();
     }
 
