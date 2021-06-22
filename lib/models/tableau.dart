@@ -1,10 +1,12 @@
+import 'dart:collection';
+
 import 'database.dart';
 
 abstract class ComboFinder {
   bool hasCombo(Card card);
 }
 
-enum GameMode { Solo, Barricades }
+enum GameMode { Solo, Barricades, SmallTableau }
 
 class Tableau implements ComboFinder {
   List<Hero>? heroes;
@@ -84,19 +86,63 @@ class Tableau implements ComboFinder {
   }
 }
 
-class Marketplace {
+abstract class Marketplace {
+  List<MarketplaceCard> get cards;
+
+  bool contains(Card card) => cards.contains(card);
+
+  bool get isFull;
+
+  List<MarketplaceCard> get allSpells;
+  List<MarketplaceCard> get allItems;
+  List<MarketplaceCard> get allWeapons;
+  List<MarketplaceCard> get allAllies;
+}
+
+/// Marketplace for use in Barricades Solo mode.
+///
+/// In this mode, the marketplace contains four cards of arbitrary type.
+class SoloModeMarketplace extends Marketplace {
+  List<MarketplaceCard> _cards = [];
+
+  List<MarketplaceCard> get cards => UnmodifiableListView(_cards);
+
+  bool get isFull => cards.length == 4;
+
+  void add(MarketplaceCard card) {
+    _cards.add(card);
+  }
+
+  List<MarketplaceCard> get allAllies =>
+      cards.where((card) => card.keywords.contains("Ally")).toList();
+
+  @override
+  List<MarketplaceCard> get allItems =>
+      cards.where((card) => card.keywords.contains("Item")).toList();
+
+  @override
+  List<MarketplaceCard> get allSpells =>
+      cards.where((card) => card.keywords.contains("Spell")).toList();
+
+  @override
+  List<MarketplaceCard> get allWeapons =>
+      cards.where((card) => card.keywords.contains("Weapon")).toList();
+}
+
+/// Standard marketplace
+///
+/// This marketplace is full when all its rows are full.
+class StandardMarketplace extends Marketplace {
   final MarketplaceRow spells = MarketplaceRow();
   final MarketplaceRow items = MarketplaceRow();
   final MarketplaceRow weapons = MarketplaceRow();
   final AnyMarketplaceRow anys = AnyMarketplaceRow();
 
-  List<Card> get cards =>
-      anys.cards + spells.cards + items.cards + weapons.cards;
-
-  bool contains(Card card) => cards.contains(card);
-
   bool get isFull =>
       spells.isFull && items.isFull && weapons.isFull && anys.isFull;
+
+  List<MarketplaceCard> get cards =>
+      anys.cards + spells.cards + items.cards + weapons.cards;
 
   List<MarketplaceCard> get allSpells =>
       spells.cards +
@@ -107,7 +153,7 @@ class Marketplace {
   List<MarketplaceCard> get allWeapons =>
       weapons.cards +
       anys.cards.where((card) => card.keywords.contains("Weapon")).toList();
-  List<Card> get allAllies =>
+  List<MarketplaceCard> get allAllies =>
       anys.cards.where((card) => card.keywords.contains("Ally")).toList();
 }
 

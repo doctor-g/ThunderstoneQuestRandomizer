@@ -254,20 +254,25 @@ class _RandomizerPageState extends State<RandomizerPage>
   }
 
   Widget _makeModeReminder(BuildContext context) {
-    String reminder = "";
+    List<String> reminders = [];
 
     final bool barricadesMode = _tableau!.modes.contains(GameMode.Barricades);
     final bool soloMode = _tableau!.modes.contains(GameMode.Solo);
+    final bool smallTableauMode =
+        _tableau!.modes.contains(GameMode.SmallTableau);
 
     if (barricadesMode) {
-      reminder += AppLocalizations.of(context)!.tableau_barricades_hint;
-    }
-    if (barricadesMode && soloMode) {
-      reminder += ' • ';
+      reminders.add(AppLocalizations.of(context)!.tableau_barricades_hint);
     }
     if (soloMode) {
-      reminder += AppLocalizations.of(context)!.tableau_solo_hint;
+      reminders.add(AppLocalizations.of(context)!.tableau_solo_hint);
     }
+    if (smallTableauMode) {
+      reminders.add(AppLocalizations.of(context)!.tableau_smallTableau_hint);
+    }
+
+    String reminder = reminders.join(" • ");
+
     if (reminder != "") {
       return Column(
         children: [

@@ -138,6 +138,18 @@ class SettingsPage extends StatelessWidget {
                               context,
                               AppLocalizations.of(context)!
                                   .settings_soloMode_hint),
+                          _makeVerticalSpace(),
+                          _makeCheckbox(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_smallTableau,
+                              settings.smallTableau,
+                              (value) => settings.smallTableau =
+                                  !settings.smallTableau),
+                          _makeDescription(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_smallTableau_hint),
                         ],
                       ),
                     ),

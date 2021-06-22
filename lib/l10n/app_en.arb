@@ -141,12 +141,21 @@
 
   "tableau_barricades_hint": "Barricades",
   "@tableau_barricades_hint": {
-    "description": "Reminder text that the tableau was generated for Barricades mode."
+    "description": "Reminder text that the tableau was generated for Barricades mode.",
+    "context": "Home with generated tableau"
   },
 
   "tableau_solo_hint": "Solo",
   "@tableau_solo_hint": {
-    "description": "Reminder text that the tableau was generated for Solo mode."
+    "description": "Reminder text that the tableau was generated for Solo mode.",
+    "context": "Home with generated tableau"
+
+  },
+
+  "tableau_smallTableau_hint": "Small Tableau",
+  "@tableau_smallTableau_hint": {
+    "description": "Reminder text that the tableau was generated in Barricades small solo mode",
+    "context": "Home with generated tableau"
   },
 
   "tableau_quest_source": "Quest {number}: {name}",
@@ -227,7 +236,7 @@
     }
   },
 
-  "settings_section_mode": "Mode",
+  "settings_section_mode": "Gameplay Options",
   "@settings_section_mode": {
     "description": "Section heading for gameplay mode options",
     "context": "Settings page"
@@ -254,6 +263,18 @@
   "settings_soloMode_hint": "Filter out cards inappropriate for solo mode.",
   "@settings_soloMode_hint": {
     "description": "Explanation of what happens when Solo Mode is selected",
+    "context": "Settings > Mode"
+  },
+
+  "settings_smallTableau": "Use Restricted Solo Mode Tableau",
+  "@settings_smallTableau": {
+    "description": "Label for the 'small tableau' checkbox",
+    "context": "Settings > Mode"
+  },
+
+  "settings_smallTableau_hint": "Use only two heroes and four random marketplace items",
+  "@settings_smallTableau_hint": {
+    "description": "Explanation for the 'small tableau' setting",
     "context": "Settings > Mode"
   },
 

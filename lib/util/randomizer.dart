@@ -19,6 +19,9 @@ class Randomizer {
     if (settings.soloMode) {
       tableau.modes.add(GameMode.Solo);
     }
+    if (settings.smallTableau) {
+      tableau.modes.add(GameMode.SmallTableau);
+    }
 
     int tries = 0;
     for (;;) {
@@ -49,13 +52,15 @@ class Randomizer {
       }
     }
 
-    return settings.heroSelectionStrategy.selectHeroesFrom(allHeroes);
+    List<Hero> result =
+        settings.heroSelectionStrategy.selectHeroesFrom(allHeroes);
+    return result;
   }
 
   Marketplace chooseMarket(
       CardDatabase db, SettingsModel settings, Tableau tableau) {
     // Get all possible market cards
-    List<Card> allMarketCards = [];
+    List<MarketplaceCard> allMarketCards = [];
     for (Quest quest in db.quests) {
       if (settings.includes(quest)) {
         allMarketCards += quest.spells;

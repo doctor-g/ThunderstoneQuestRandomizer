@@ -4,9 +4,9 @@ import 'package:test/test.dart';
 import 'test_util.dart';
 
 void main() {
-  group('Marketplace tests', () {
+  group('StandardMarketplace tests', () {
     test('Initial marketplace is not full', () {
-      Marketplace marketplace = new Marketplace();
+      Marketplace marketplace = StandardMarketplace();
       expect(marketplace.isFull, isFalse);
     });
 
@@ -24,7 +24,7 @@ void main() {
     MarketplaceCard _ally() => _withKeyword("Ally");
 
     test('Full marketplace is full', () {
-      Marketplace marketplace = new Marketplace();
+      StandardMarketplace marketplace = StandardMarketplace();
       [_spell(), _spell()]
           .forEach((element) => marketplace.spells.add(element));
       [_item(), _item()].forEach((element) => marketplace.items.add(element));
@@ -53,9 +53,25 @@ void main() {
     });
 
     test('Marketplace with a spell in any slot will return it as a spell', () {
-      Marketplace marketplace = Marketplace();
+      StandardMarketplace marketplace = StandardMarketplace();
       marketplace.anys.add(_spell());
       expect(marketplace.allSpells.length, 1);
+    });
+  });
+
+  group('Solo Marketplace Tests', () {
+    test('Starts empty', () {
+      SoloModeMarketplace marketplace = SoloModeMarketplace();
+      expect(marketplace.isFull, isFalse);
+    });
+
+    test('Is full with four cards', () {
+      SoloModeMarketplace marketplace = SoloModeMarketplace();
+      for (var i = 0; i < 4; i++) {
+        var card = makeMarketplaceCard();
+        marketplace.add(card);
+      }
+      expect(marketplace.isFull, isTrue);
     });
   });
 

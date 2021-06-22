@@ -19,6 +19,7 @@ class SettingsModel extends ChangeNotifier {
   static final String _languageKey = 'lang';
   static final String _barricadesModeKey = 'barricadesMode';
   static final String _soloModeKey = 'soloMode';
+  static final String _smallTableauKey = 'smallTableau';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -64,6 +65,9 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_languageKey)) {
         _language = prefs.getString(_languageKey)!;
       }
+      if (prefs.containsKey(_smallTableauKey)) {
+        _smallTableau = prefs.getBool(_smallTableauKey)!;
+      }
       notifyListeners();
     });
   }
@@ -79,6 +83,7 @@ class SettingsModel extends ChangeNotifier {
     _brightness = Brightness.light;
     _barricadesMode = false;
     _language = 'en';
+    _smallTableau = false;
     notifyListeners();
   }
 
@@ -114,21 +119,25 @@ class SettingsModel extends ChangeNotifier {
     prefs.setString(_languageKey, _language);
     prefs.setBool(_barricadesModeKey, _barricadesMode);
     prefs.setBool(_soloModeKey, _soloMode);
+    prefs.setBool(_smallTableauKey, _smallTableau);
   }
 
-  HeroSelectionStrategy get heroSelectionStrategy =>
-      heroStrategies[_heroStrategyIndex];
+  /// Get the current hero selection strategy
+  HeroSelectionStrategy get heroSelectionStrategy => _smallTableau
+      ? RandomHeroSelectionStrategy(heroes: 2)
+      : heroStrategies[_heroStrategyIndex];
   set heroSelectionStrategy(HeroSelectionStrategy strategy) {
-    if (heroSelectionStrategy != strategy) {
-      _heroStrategyIndex = heroStrategies.indexOf(strategy);
+    final int selectedIndex = heroStrategies.indexOf(strategy);
+    if (_heroStrategyIndex != selectedIndex) {
+      _heroStrategyIndex = selectedIndex;
       notifyListeners();
       _updatePrefs();
     }
   }
 
-  // For now, just return the one that is implemented
-  MarketSelectionStrategy get marketSelectionStrategy =>
-      FirstFitMarketSelectionStrategy();
+  MarketSelectionStrategy get marketSelectionStrategy => _smallTableau
+      ? SoloModeMarketSelectionStrategy()
+      : FirstFitMarketSelectionStrategy();
 
   double _comboBias = 0.5;
   double get comboBias => _comboBias;
@@ -197,6 +206,14 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _smallTableau = false;
+  bool get smallTableau => _smallTableau;
+  set smallTableau(bool value) {
+    _smallTableau = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
   static final List<HeroSelectionStrategy> heroStrategies = [
     OnePerClassHeroSelectionStrategy(),
     FirstMatchHeroSelectionStrategy(),
@@ -221,6 +238,8 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'First Match';
 
   final maxTries = 10;
+
+  FirstMatchHeroSelectionStrategy();
 
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
@@ -271,14 +290,20 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
 // completely at random.
 class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   String get name => 'Unconstrained';
+
+  int heroes;
+
+  RandomHeroSelectionStrategy({this.heroes = 4}) {
+    assert(heroes >= 0);
+  }
+
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
-    if (availableHeroes.length < 4) {
-      print('Short stuff');
+    if (availableHeroes.length < heroes) {
       throw new TableauFailureException('Not enough heroes to choose from.');
     }
     availableHeroes.shuffle();
-    return availableHeroes.take(4).toList();
+    return availableHeroes.take(heroes).toList();
   }
 }
 
@@ -314,8 +339,10 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
 }
 
 abstract class MarketSelectionStrategy extends Strategy {
-  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards,
-      double comboBias, final Tableau tableau);
+  Marketplace selectMarketCardsFrom(
+      List<tq.MarketplaceCard> availableMarketCards,
+      double comboBias,
+      final Tableau tableau);
 }
 
 class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
@@ -323,10 +350,12 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
   String get name => 'First Fit (Supports Allies)';
 
   @override
-  Marketplace selectMarketCardsFrom(List<tq.Card> availableMarketCards,
-      double comboBias, final Tableau tableau) {
+  Marketplace selectMarketCardsFrom(
+      List<tq.MarketplaceCard> availableMarketCards,
+      double comboBias,
+      final Tableau tableau) {
     Random random = Random();
-    Marketplace marketplace = Marketplace();
+    StandardMarketplace marketplace = StandardMarketplace();
 
     while (!marketplace.isFull) {
       tq.Card card =
@@ -346,7 +375,7 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
     return marketplace;
   }
 
-  bool _addIfPossible(Marketplace marketplace, tq.Card card) {
+  bool _addIfPossible(StandardMarketplace marketplace, tq.Card card) {
     if (!marketplace.contains(card)) {
       if (card.keywords.contains("Spell")) {
         if (!marketplace.spells.isFull) {
@@ -384,5 +413,34 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
       }
     }
     return false;
+  }
+}
+
+class SoloModeMarketSelectionStrategy extends MarketSelectionStrategy {
+  @override
+  String get name => 'Small Tableau Solo Mode';
+
+  @override
+  Marketplace selectMarketCardsFrom(
+      List<tq.MarketplaceCard> availableMarketCards,
+      double comboBias,
+      Tableau tableau) {
+    Random random = Random();
+    SoloModeMarketplace marketplace = SoloModeMarketplace();
+    while (!marketplace.isFull) {
+      int index = random.nextInt(availableMarketCards.length);
+      MarketplaceCard card = availableMarketCards[index];
+      if (!marketplace.contains(card)) {
+        if (random.nextDouble() < comboBias) {
+          if (tableau.hasCombo(card)) {
+            marketplace.add(card);
+            print('Added combo card: ${card.name}');
+          }
+        } else {
+          marketplace.add(card);
+        }
+      }
+    }
+    return marketplace;
   }
 }
