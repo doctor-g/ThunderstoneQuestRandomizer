@@ -337,9 +337,10 @@ class CardWidget extends StatelessWidget {
           ),
           settings.showQuest
               ? Text(card.quest.number == null
-                  ? card.quest.name
+                  ? card.quest.getLocalizedName(settings.language)
                   : AppLocalizations.of(context)!.tableau_quest_source(
-                      card.quest.number!, card.quest.name))
+                      card.quest.number!,
+                      card.quest.getLocalizedName(settings.language)))
               : Container(),
           settings.showKeywords
               ? Wrap(
