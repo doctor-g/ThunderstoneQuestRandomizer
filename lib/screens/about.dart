@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tqr/util/web_version_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-class AboutPage extends StatelessWidget {
+class AboutPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _AboutPageState();
+}
+
+class _AboutPageState extends State<AboutPage> {
+  PackageInfo? _packageInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() => _packageInfo = info);
+  }
+
   @override
   Widget build(BuildContext context) {
     final name = AppLocalizations.of(context)!.appTitle;
@@ -16,44 +34,49 @@ class AboutPage extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.about_title),
       ),
       body: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: 600,
-          ),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('$name', style: titleStyle),
-                  Text(
-                      '${AppLocalizations.of(context)!.about_version} ${WebVersionInfo.name}',
-                      style: bodyTextStyle),
-                  Text('©2020–2021 Paul Gestwicki', style: bodyTextStyle),
-                  _space(),
-                  Text('${AppLocalizations.of(context)!.about_repository}:',
-                      style: bodyTextStyle),
-                  _makeLink(
-                      'https://github.com/doctor-g/ThunderstoneQuestRandomizer',
-                      linkStyle),
-                  _space(),
-                  Text(AppLocalizations.of(context)!.about_license,
-                      style: bodyTextStyle),
-                  _makeLink('https://www.gnu.org/licenses/gpl-3.0.en.html',
-                      linkStyle),
-                  _space(),
-                  Text(AppLocalizations.of(context)!.about_ownership,
-                      style: bodyTextStyle),
-                  _makeLink('https://www.alderac.com/thunderstone', linkStyle),
-                  _space(),
-                ],
+        child: _packageInfo == null
+            ? CircularProgressIndicator()
+            : ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 600,
+                ),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('$name', style: titleStyle),
+                        Text(
+                            '${AppLocalizations.of(context)!.about_version} ${_packageInfo!.version}',
+                            style: bodyTextStyle),
+                        Text('©2020–2021 Paul Gestwicki', style: bodyTextStyle),
+                        _space(),
+                        Text(
+                            '${AppLocalizations.of(context)!.about_repository}:',
+                            style: bodyTextStyle),
+                        _makeLink(
+                            'https://github.com/doctor-g/ThunderstoneQuestRandomizer',
+                            linkStyle),
+                        _space(),
+                        Text(AppLocalizations.of(context)!.about_license,
+                            style: bodyTextStyle),
+                        _makeLink(
+                            'https://www.gnu.org/licenses/gpl-3.0.en.html',
+                            linkStyle),
+                        _space(),
+                        Text(AppLocalizations.of(context)!.about_ownership,
+                            style: bodyTextStyle),
+                        _makeLink(
+                            'https://www.alderac.com/thunderstone', linkStyle),
+                        _space(),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }
