@@ -13,6 +13,12 @@ class Randomizer {
     final maxTries = 10;
     Tableau tableau = new Tableau();
 
+    if (settings.randomizeWilderness) {
+      tableau.wildernessMonster = (_random.nextDouble() <= settings.ratChance)
+          ? WildernessMonster.GiantRat
+          : WildernessMonster.ArcticMosquitoes;
+    }
+
     if (settings.barricadesMode) {
       tableau.modes.add(GameMode.Barricades);
     }

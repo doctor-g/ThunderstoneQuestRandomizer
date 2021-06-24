@@ -122,6 +122,24 @@
     }
   },
 
+  "tableau_wilderness": "Wilderness",
+  "@tableau_wilderness": {
+    "description": "Subsection heading for the top level of the dungeon",
+    "context": "Home page with random tableau and wilderness generation enabled"
+  },
+
+  "tableau_wilderness_rat": "Giant Rat",
+  "@tableau_wilderness_rat": {
+    "description": "The name of the default wilderness monster (Giant Rat).",
+    "context": "Home page with random tableau and wilderness generation enabled"
+  },
+
+  "tableau_wilderness_mosquitoes": "Arctic Mosquitoes",
+  "@tableau_wilderness_mosquitoes": {
+    "description": "The name of the alternative wilderness monster",
+    "context": "Home page with random tableau and wilderness generation enabled"
+  },
+
   "tableau_monsters": "Monsters",
   "@tableau_monsters": {
     "description": "Section header for listing the monsters in the tableau",
@@ -240,6 +258,30 @@
   "@settings_section_mode": {
     "description": "Section heading for gameplay mode options",
     "context": "Settings page"
+  },
+
+  "settings_wilderness": "Randomize Wilderness",
+  "@settings_wilderness": {
+    "description": "Label for the toggle to include Wilderness (level 0) monster randomization",
+    "context": "Settings > Mode"
+  },
+
+  "settings_ratChance": "Chance of Giant Rat: {percent}",
+  "@settings_ratChance": {
+    "description": "Label for the slider indicating the chance of giant rats",
+    "context": "Settings > Mode",
+    "placeholders": {
+      "percent": {
+        "example": "75",
+        "description": "The percent chance"
+      }
+    }
+  },
+
+  "settings_ratChance_hint": "Probability of Giant Rat vs. Arctic Mosquitoes. Requires Quest 7.",
+  "@settings_ratChance_hint": {
+    "description": "Explanation of the probability slider for giant rat chance.",
+    "context": "Settings > Mode"
   },
 
   "settings_barricadesMode": "Barricades Mode",

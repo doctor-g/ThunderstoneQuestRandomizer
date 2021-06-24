@@ -20,6 +20,8 @@ class SettingsModel extends ChangeNotifier {
   static final String _barricadesModeKey = 'barricadesMode';
   static final String _soloModeKey = 'soloMode';
   static final String _smallTableauKey = 'smallTableau';
+  static final String _randomizeWildernessKey = 'randomizeWilderness';
+  static final String _ratChanceKey = 'ratChance';
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -68,6 +70,12 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_smallTableauKey)) {
         _smallTableau = prefs.getBool(_smallTableauKey)!;
       }
+      if (prefs.containsKey(_randomizeWildernessKey)) {
+        _randomizeWilderness = prefs.getBool(_randomizeWildernessKey)!;
+      }
+      if (prefs.containsKey(_ratChanceKey)) {
+        _ratChance = prefs.getDouble(_ratChanceKey)!;
+      }
       notifyListeners();
     });
   }
@@ -84,6 +92,8 @@ class SettingsModel extends ChangeNotifier {
     _barricadesMode = false;
     _language = 'en';
     _smallTableau = false;
+    _randomizeWilderness = false;
+    _ratChance = 0.75;
     notifyListeners();
   }
 
@@ -120,6 +130,8 @@ class SettingsModel extends ChangeNotifier {
     prefs.setBool(_barricadesModeKey, _barricadesMode);
     prefs.setBool(_soloModeKey, _soloMode);
     prefs.setBool(_smallTableauKey, _smallTableau);
+    prefs.setBool(_randomizeWildernessKey, _randomizeWilderness);
+    prefs.setDouble(_ratChanceKey, _ratChance);
   }
 
   /// Get the current hero selection strategy
@@ -210,6 +222,23 @@ class SettingsModel extends ChangeNotifier {
   bool get smallTableau => _smallTableau;
   set smallTableau(bool value) {
     _smallTableau = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  bool _randomizeWilderness = false;
+  bool get randomizeWilderness => _randomizeWilderness;
+  set randomizeWilderness(bool value) {
+    _randomizeWilderness = value;
+    _updatePrefs();
+    notifyListeners();
+  }
+
+  double _ratChance = 0.75;
+  double get ratChance => _ratChance;
+  set ratChance(double value) {
+    assert(value >= 0 && value <= 1);
+    _ratChance = value;
     _updatePrefs();
     notifyListeners();
   }

@@ -182,11 +182,14 @@ class _RandomizerPageState extends State<RandomizerPage>
         contents.sort(_cardSorter);
       }
       return [
-        Text(name, style: Theme.of(context).textTheme.subtitle2),
+        _subsectionHeading(name),
         ...contents.map((card) => CardWidget(card: card)).toList()
       ];
     }
   }
+
+  Text _subsectionHeading(String content) =>
+      Text(content, style: Theme.of(context).textTheme.subtitle2);
 
   List<Widget> _heroesAndMarketplace() {
     if (_tableau == null) {
@@ -243,6 +246,18 @@ class _RandomizerPageState extends State<RandomizerPage>
             sort: false),
         Divider(),
         ..._section(AppLocalizations.of(context)!.tableau_monsters),
+        _tableau!.wildernessMonster == null
+            ? Container()
+            : Column(children: [
+                _subsectionHeading(
+                    AppLocalizations.of(context)!.tableau_wilderness),
+                Text(
+                    _tableau!.wildernessMonster == WildernessMonster.GiantRat
+                        ? AppLocalizations.of(context)!.tableau_wilderness_rat
+                        : AppLocalizations.of(context)!
+                            .tableau_wilderness_mosquitoes,
+                    style: Theme.of(context).textTheme.bodyText1),
+              ]),
         ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1),
             [_tableau!.monsters![0]]),
         ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(2),

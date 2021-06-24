@@ -8,7 +8,10 @@ abstract class ComboFinder {
 
 enum GameMode { Solo, Barricades, SmallTableau }
 
+enum WildernessMonster { GiantRat, ArcticMosquitoes }
+
 class Tableau implements ComboFinder {
+  WildernessMonster? wildernessMonster;
   List<Hero>? heroes;
   Marketplace? marketplace;
   Guardian? guardian;

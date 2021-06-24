@@ -118,6 +118,29 @@ class SettingsPage extends StatelessWidget {
                         children: [
                           _makeCheckbox(
                               context,
+                              AppLocalizations.of(context)!.settings_wilderness,
+                              settings.randomizeWilderness,
+                              (value) => settings.randomizeWilderness =
+                                  !settings.randomizeWilderness),
+                          Text(
+                              AppLocalizations.of(context)!.settings_ratChance(
+                                  _formatPercent(settings.ratChance)),
+                              style: Theme.of(context).textTheme.bodyText1),
+                          Slider(
+                            min: 0,
+                            max: 1,
+                            value: settings.ratChance,
+                            onChanged: settings.randomizeWilderness
+                                ? (value) => settings.ratChance = value
+                                : null,
+                          ),
+                          _makeDescription(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_ratChance_hint),
+                          _makeVerticalSpace(),
+                          _makeCheckbox(
+                              context,
                               AppLocalizations.of(context)!
                                   .settings_barricadesMode,
                               settings.barricadesMode,
@@ -310,4 +333,6 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  String _formatPercent(double percent) => '${(percent * 100).truncate()}%';
 }
