@@ -8,6 +8,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'database.dart';
 
+class BoolPreference extends ChangeNotifier {
+  final String key;
+  final bool defaultValue;
+  bool _value;
+
+  BoolPreference({required this.key, required this.defaultValue})
+      : _value = defaultValue;
+
+  bool get value => _value;
+  set value(value) {
+    _value = value;
+    notifyListeners();
+  }
+
+  /// Read the value of this preference from the shared preferences.
+  _load(SharedPreferences prefs) {
+    if (prefs.containsKey(key)) {
+      _value = prefs.getBool(key)!;
+    }
+  }
+
+  /// Write the current value of this preference to the shared preferences object.
+  _update(SharedPreferences prefs) {
+    prefs.setBool(key, value);
+  }
+
+  /// Set to its default value
+  _reset() {
+    value = defaultValue;
+  }
+}
+
 class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
@@ -30,12 +62,18 @@ class SettingsModel extends ChangeNotifier {
 
   int _heroStrategyIndex = 0;
 
+  late final List<BoolPreference> allPrefs;
+
   SettingsModel() {
+    allPrefs = [_showMemo];
+    allPrefs.forEach((element) => element.addListener(() => _updatePrefs()));
     _loadPrefs();
   }
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
+      allPrefs.forEach((preference) => preference._load(prefs));
+
       if (prefs.containsKey(_excludedQuestsKey)) {
         _excludedQuests = prefs.getStringList(_excludedQuestsKey)!.toSet();
       }
@@ -44,9 +82,6 @@ class SettingsModel extends ChangeNotifier {
       }
       if (prefs.containsKey(_comboBiasKey)) {
         _comboBias = prefs.getDouble(_comboBiasKey)!;
-      }
-      if (prefs.containsKey(_showMemoKey)) {
-        _showMemo = prefs.getBool(_showMemoKey)!;
       }
       if (prefs.containsKey(_showKeywordsKey)) {
         _showKeywords = prefs.getBool(_showKeywordsKey)!;
@@ -82,10 +117,12 @@ class SettingsModel extends ChangeNotifier {
 
   void clear() {
     _prefs.then((prefs) => prefs.clear());
+
+    allPrefs.forEach((element) => element._reset());
+
     _excludedQuests = new Set();
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
-    _showMemo = true;
     _showKeywords = true;
     _showQuest = false;
     _brightness = Brightness.light;
@@ -123,7 +160,7 @@ class SettingsModel extends ChangeNotifier {
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
     prefs.setBool(_showKeywordsKey, _showKeywords);
-    prefs.setBool(_showMemoKey, _showMemo);
+    prefs.setBool(_showMemoKey, showMemo);
     prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
     prefs.setString(_languageKey, _language);
@@ -162,13 +199,10 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _showMemo = true;
-  bool get showMemo => _showMemo;
-  set showMemo(bool value) {
-    _showMemo = value;
-    _updatePrefs();
-    notifyListeners();
-  }
+  final BoolPreference _showMemo =
+      BoolPreference(key: 'showMemoKey', defaultValue: true);
+  bool get showMemo => _showMemo.value;
+  set showMemo(bool value) => _showMemo.value = value;
 
   bool _showKeywords = true;
   bool get showKeywords => _showKeywords;
