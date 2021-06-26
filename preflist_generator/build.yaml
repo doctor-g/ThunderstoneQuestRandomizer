@@ -1,0 +1,8 @@
+builders:
+  preflistGeneratorBuilder:
+    import: 'package:preflist_generator/generators.dart'
+    builder_factories: ['preflistGeneratorBuilder']
+    auto_apply: dependents
+    build_extensions: {".dart": [".preflist.part"]}
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

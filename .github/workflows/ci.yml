@@ -18,6 +18,9 @@ jobs:
       - name: Download Dependencies
         run: flutter pub get
 
+      - name: Run code generation
+        run: flutter pub run build_runner build
+
       - name: Run Unit Tests
         run: flutter test
 

@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      preflist_generator|preflistGeneratorBuilder:
+        enabled: true
+        generate_for:
+          - lib/models/settings.dart
+          
