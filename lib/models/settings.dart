@@ -20,6 +20,12 @@ class BoolPreference extends ChangeNotifier {
   set value(value) {
     _value = value;
     notifyListeners();
+    _updatePrefs();
+  }
+
+  void _updatePrefs() async {
+    var preferences = await SharedPreferences.getInstance();
+    preferences.setBool(key, value);
   }
 
   /// Read the value of this preference from the shared preferences.
@@ -27,11 +33,6 @@ class BoolPreference extends ChangeNotifier {
     if (prefs.containsKey(key)) {
       _value = prefs.getBool(key)!;
     }
-  }
-
-  /// Write the current value of this preference to the shared preferences object.
-  _update(SharedPreferences prefs) {
-    prefs.setBool(key, value);
   }
 
   /// Set to its default value
@@ -156,8 +157,6 @@ class SettingsModel extends ChangeNotifier {
 
   void _updatePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    allPrefs.forEach((preference) => preference._update(prefs));
 
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
