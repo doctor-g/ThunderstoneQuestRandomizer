@@ -156,11 +156,13 @@ class SettingsModel extends ChangeNotifier {
 
   void _updatePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    allPrefs.forEach((preference) => preference._update(prefs));
+
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
     prefs.setBool(_showKeywordsKey, _showKeywords);
-    prefs.setBool(_showMemoKey, showMemo);
     prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
     prefs.setString(_languageKey, _language);
