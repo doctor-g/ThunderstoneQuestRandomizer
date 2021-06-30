@@ -14,7 +14,9 @@ class BoolPreference extends ChangeNotifier {
   bool _value;
 
   BoolPreference({required this.key, required this.defaultValue})
-      : _value = defaultValue;
+      : _value = defaultValue {
+        _loadFromSharedPreferences();
+      }
 
   bool get value => _value;
   set value(value) {
@@ -25,11 +27,18 @@ class BoolPreference extends ChangeNotifier {
 
   void _updatePrefs() async {
     var preferences = await SharedPreferences.getInstance();
-    preferences.setBool(key, value);
+    // If the user's preference is not the default value, record it.
+    // Otherwise, just clear it from storage, because the default is used.
+    if (value!=defaultValue) {
+      preferences.setBool(key, value);
+    } else {
+      preferences.remove(key);
+    }
   }
 
   /// Read the value of this preference from the shared preferences.
-  _load(SharedPreferences prefs) {
+  _loadFromSharedPreferences() async {
+    var prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(key)) {
       _value = prefs.getBool(key)!;
     }
@@ -45,7 +54,6 @@ class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
-  static final String _showMemoKey = 'showMemo';
   static final String _showKeywordsKey = 'showKeywords';
   static final String _showQuestKey = 'showQuest';
   static final String _brightnessKey = 'lightMode';
@@ -67,14 +75,12 @@ class SettingsModel extends ChangeNotifier {
 
   SettingsModel() {
     allPrefs = [_showMemo];
-    allPrefs.forEach((element) => element.addListener(() => _updatePrefs()));
+    allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
     _loadPrefs();
   }
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
-      allPrefs.forEach((preference) => preference._load(prefs));
-
       if (prefs.containsKey(_excludedQuestsKey)) {
         _excludedQuests = prefs.getStringList(_excludedQuestsKey)!.toSet();
       }
