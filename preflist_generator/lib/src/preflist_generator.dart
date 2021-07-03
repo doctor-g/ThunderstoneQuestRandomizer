@@ -1,0 +1,26 @@
+import 'dart:async';
+
+import 'package:build/build.dart';
+import 'package:source_gen/source_gen.dart';
+
+class PrefListGenerator extends Generator {
+  @override
+  FutureOr<String> generate(LibraryReader library, BuildStep buildStep) {
+    var buffer = StringBuffer();
+
+    for (final classElement in library.classes) {
+      var prefs = classElement.fields.where((element) =>
+          element.type.getDisplayString(withNullability: false) ==
+          'BoolPreference');
+
+      if (prefs.length > 0) {
+        buffer.write(
+            'extension PrefList on SettingsModel {\n List<BoolPreference> get allPrefs => [');
+        var names = prefs.map((element) => '${element.name}').toList();
+        buffer.write(names.join(','));
+        buffer.writeln('];\n}');
+      }
+    }
+    return buffer.toString();
+  }
+}

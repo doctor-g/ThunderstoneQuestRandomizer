@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'database.dart';
 
+part 'settings.g.dart';
+
 class BoolPreference extends ChangeNotifier {
   final String key;
   final bool defaultValue;
@@ -15,8 +17,8 @@ class BoolPreference extends ChangeNotifier {
 
   BoolPreference({required this.key, required this.defaultValue})
       : _value = defaultValue {
-        _loadFromSharedPreferences();
-      }
+    _loadFromSharedPreferences();
+  }
 
   bool get value => _value;
   set value(value) {
@@ -29,7 +31,7 @@ class BoolPreference extends ChangeNotifier {
     var preferences = await SharedPreferences.getInstance();
     // If the user's preference is not the default value, record it.
     // Otherwise, just clear it from storage, because the default is used.
-    if (value!=defaultValue) {
+    if (value != defaultValue) {
       preferences.setBool(key, value);
     } else {
       preferences.remove(key);

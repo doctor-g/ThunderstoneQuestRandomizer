@@ -4,6 +4,16 @@ This application is a randomizer for [_Thunderstone Quest_](https://alederac.com
 
 [Use the Web app now!](https://doctor-g.github.io/ThunderstoneQuestRandomizer)
 
+## Building
+
+This app uses [`source_gen`](https://pub.dev/packages/source_gen) to process
+the `SettingsModel` implementation. Before the rest of the application can
+be built, `build_runner` has to be invoked. This is done with the command:
+```
+flutter pub run build_runner build
+```
+That can be invoked in VSCode via Ctrl-Shift-B.
+
 ## Localization
 
 The [`cards.yml`](assets/cards.yml) file can be localized into different languages.
