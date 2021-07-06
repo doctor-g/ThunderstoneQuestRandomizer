@@ -73,10 +73,7 @@ class SettingsModel extends ChangeNotifier {
 
   int _heroStrategyIndex = 0;
 
-  late final List<BoolPreference> allPrefs;
-
   SettingsModel() {
-    allPrefs = [_showMemo];
     allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
     _loadPrefs();
   }
@@ -210,8 +207,6 @@ class SettingsModel extends ChangeNotifier {
 
   final BoolPreference _showMemo =
       BoolPreference(key: 'showMemoKey', defaultValue: true);
-  bool get showMemo => _showMemo.value;
-  set showMemo(bool value) => _showMemo.value = value;
 
   bool _showKeywords = true;
   bool get showKeywords => _showKeywords;

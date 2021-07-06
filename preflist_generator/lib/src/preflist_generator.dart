@@ -18,7 +18,19 @@ class PrefListGenerator extends Generator {
             'extension PrefList on SettingsModel {\n List<BoolPreference> get allPrefs => [');
         var names = prefs.map((element) => '${element.name}').toList();
         buffer.write(names.join(','));
-        buffer.writeln('];\n}');
+        buffer.writeln('];\n');
+
+        prefs.forEach((pref) {
+          if (pref.name[0] != '_') {
+            throw UnsupportedError('Preference variables must be private');
+          }
+          var name = '${pref.name}'.substring(1); // Strip off leading '_'
+          buffer.writeln('bool get $name => ${pref.name}.value;');
+          buffer
+              .writeln('set $name(bool value) => ${pref.name}.value = value;');
+        });
+
+        buffer.writeln('}');
       }
     }
     return buffer.toString();
