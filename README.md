@@ -14,6 +14,14 @@ flutter pub run build_runner build
 ```
 That can be invoked in VSCode via Ctrl-Shift-B.
 
+### Automatic building in Visual Studio Code
+
+[`.vscode/tasks.json`](.vscode/tasks.json) is configured so that the build_runner
+watcher will start when the folder opens. However, each VSCode instance needs
+to be configured to allow this to happen. Do this through the command palette
+(Ctrl-Shift-P) and running "Tasks: Configure Automatic Tasks in Folder",
+which will give an option to enable to tasks.
+
 ## Localization
 
 The [`cards.yml`](assets/cards.yml) file can be localized into different languages.
