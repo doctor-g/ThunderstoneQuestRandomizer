@@ -56,15 +56,24 @@ class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
-  static final String _showKeywordsKey = 'showKeywords';
-  static final String _showQuestKey = 'showQuest';
   static final String _brightnessKey = 'lightMode';
   static final String _languageKey = 'lang';
-  static final String _barricadesModeKey = 'barricadesMode';
-  static final String _soloModeKey = 'soloMode';
-  static final String _smallTableauKey = 'smallTableau';
-  static final String _randomizeWildernessKey = 'randomizeWilderness';
   static final String _ratChanceKey = 'ratChance';
+
+  final BoolPreference _showMemo =
+      BoolPreference(key: 'showMemoKey', defaultValue: true);
+  final BoolPreference _showKeywords =
+      BoolPreference(key: 'showKeywordsKey', defaultValue: true);
+  final BoolPreference _showQuest =
+      BoolPreference(key: 'showQuestKey', defaultValue: false);
+  final BoolPreference _barricadesMode =
+      BoolPreference(key: 'barricadesModeKey', defaultValue: false);
+  final BoolPreference _soloMode =
+      BoolPreference(key: 'soloModeKey', defaultValue: false);
+  final BoolPreference _smallTableau =
+      BoolPreference(key: 'smallTableauKey', defaultValue: false);
+  final BoolPreference _randomizeWilderness =
+      BoolPreference(key: 'randomizeWildernessKey', defaultValue: false);
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -89,30 +98,12 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_comboBiasKey)) {
         _comboBias = prefs.getDouble(_comboBiasKey)!;
       }
-      if (prefs.containsKey(_showKeywordsKey)) {
-        _showKeywords = prefs.getBool(_showKeywordsKey)!;
-      }
-      if (prefs.containsKey(_showQuestKey)) {
-        _showQuest = prefs.getBool(_showQuestKey)!;
-      }
       if (prefs.containsKey(_brightnessKey)) {
         _brightness =
             prefs.getBool(_brightnessKey)! ? Brightness.light : Brightness.dark;
       }
-      if (prefs.containsKey(_barricadesModeKey)) {
-        _barricadesMode = prefs.getBool(_barricadesModeKey)!;
-      }
-      if (prefs.containsKey(_soloModeKey)) {
-        _soloMode = prefs.getBool(_soloModeKey)!;
-      }
       if (prefs.containsKey(_languageKey)) {
         _language = prefs.getString(_languageKey)!;
-      }
-      if (prefs.containsKey(_smallTableauKey)) {
-        _smallTableau = prefs.getBool(_smallTableauKey)!;
-      }
-      if (prefs.containsKey(_randomizeWildernessKey)) {
-        _randomizeWilderness = prefs.getBool(_randomizeWildernessKey)!;
       }
       if (prefs.containsKey(_ratChanceKey)) {
         _ratChance = prefs.getDouble(_ratChanceKey)!;
@@ -129,13 +120,8 @@ class SettingsModel extends ChangeNotifier {
     _excludedQuests = new Set();
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
-    _showKeywords = true;
-    _showQuest = false;
     _brightness = Brightness.light;
-    _barricadesMode = false;
     _language = 'en';
-    _smallTableau = false;
-    _randomizeWilderness = false;
     _ratChance = 0.75;
     notifyListeners();
   }
@@ -166,19 +152,13 @@ class SettingsModel extends ChangeNotifier {
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
-    prefs.setBool(_showKeywordsKey, _showKeywords);
-    prefs.setBool(_showQuestKey, _showQuest);
     prefs.setBool(_brightnessKey, _brightness == Brightness.light);
     prefs.setString(_languageKey, _language);
-    prefs.setBool(_barricadesModeKey, _barricadesMode);
-    prefs.setBool(_soloModeKey, _soloMode);
-    prefs.setBool(_smallTableauKey, _smallTableau);
-    prefs.setBool(_randomizeWildernessKey, _randomizeWilderness);
     prefs.setDouble(_ratChanceKey, _ratChance);
   }
 
   /// Get the current hero selection strategy
-  HeroSelectionStrategy get heroSelectionStrategy => _smallTableau
+  HeroSelectionStrategy get heroSelectionStrategy => _smallTableau.value
       ? RandomHeroSelectionStrategy(heroes: 2)
       : heroStrategies[_heroStrategyIndex];
   set heroSelectionStrategy(HeroSelectionStrategy strategy) {
@@ -190,7 +170,7 @@ class SettingsModel extends ChangeNotifier {
     }
   }
 
-  MarketSelectionStrategy get marketSelectionStrategy => _smallTableau
+  MarketSelectionStrategy get marketSelectionStrategy => _smallTableau.value
       ? SoloModeMarketSelectionStrategy()
       : FirstFitMarketSelectionStrategy();
 
@@ -201,25 +181,6 @@ class SettingsModel extends ChangeNotifier {
       throw Exception('Illegal combo bias value: $value must be in [0,1]');
     }
     _comboBias = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  final BoolPreference _showMemo =
-      BoolPreference(key: 'showMemoKey', defaultValue: true);
-
-  bool _showKeywords = true;
-  bool get showKeywords => _showKeywords;
-  set showKeywords(bool value) {
-    _showKeywords = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  bool _showQuest = false;
-  bool get showQuest => _showQuest;
-  set showQuest(bool value) {
-    _showQuest = value;
     _updatePrefs();
     notifyListeners();
   }
@@ -236,38 +197,6 @@ class SettingsModel extends ChangeNotifier {
   String get language => _language;
   set language(String language) {
     _language = language;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  bool _barricadesMode = false;
-  bool get barricadesMode => _barricadesMode;
-  set barricadesMode(bool value) {
-    _barricadesMode = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  bool _soloMode = false;
-  bool get soloMode => _soloMode;
-  set soloMode(bool value) {
-    _soloMode = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  bool _smallTableau = false;
-  bool get smallTableau => _smallTableau;
-  set smallTableau(bool value) {
-    _smallTableau = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  bool _randomizeWilderness = false;
-  bool get randomizeWilderness => _randomizeWilderness;
-  set randomizeWilderness(bool value) {
-    _randomizeWilderness = value;
     _updatePrefs();
     notifyListeners();
   }
