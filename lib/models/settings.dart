@@ -12,7 +12,6 @@ import 'database.dart';
 part 'settings.g.dart';
 
 class SettingsModel extends ChangeNotifier {
-  static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
   static final String _languageKey = 'lang';
   static final String _ratChanceKey = 'ratChance';
@@ -35,10 +34,10 @@ class SettingsModel extends ChangeNotifier {
       BoolPreference(key: 'randomizeWildernessKey', defaultValue: false);
   final BrightnessPreference _brightness =
       BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
+  final IntPreference _heroStrategyIndex =
+      IntPreference(key: 'heroStrategyIndex', defaultValue: 0);
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
-  int _heroStrategyIndex = 0;
 
   SettingsModel() {
     allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
@@ -47,9 +46,6 @@ class SettingsModel extends ChangeNotifier {
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
-      if (prefs.containsKey(_heroStrategyIndexKey)) {
-        _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey)!;
-      }
       if (prefs.containsKey(_comboBiasKey)) {
         _comboBias = prefs.getDouble(_comboBiasKey)!;
       }
@@ -68,7 +64,6 @@ class SettingsModel extends ChangeNotifier {
 
     allPrefs.forEach((element) => element.reset());
 
-    _heroStrategyIndex = 0;
     _comboBias = 0.5;
     _language = 'en';
     _ratChance = 0.75;
@@ -86,7 +81,6 @@ class SettingsModel extends ChangeNotifier {
   void _updatePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
     prefs.setString(_languageKey, _language);
     prefs.setDouble(_ratChanceKey, _ratChance);
@@ -95,13 +89,11 @@ class SettingsModel extends ChangeNotifier {
   /// Get the current hero selection strategy
   HeroSelectionStrategy get heroSelectionStrategy => _smallTableau.value
       ? RandomHeroSelectionStrategy(heroes: 2)
-      : heroStrategies[_heroStrategyIndex];
+      : heroStrategies[_heroStrategyIndex.value];
   set heroSelectionStrategy(HeroSelectionStrategy strategy) {
     final int selectedIndex = heroStrategies.indexOf(strategy);
-    if (_heroStrategyIndex != selectedIndex) {
-      _heroStrategyIndex = selectedIndex;
-      notifyListeners();
-      _updatePrefs();
+    if (_heroStrategyIndex.value != selectedIndex) {
+      _heroStrategyIndex.value = selectedIndex;
     }
   }
 

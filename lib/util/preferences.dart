@@ -67,6 +67,17 @@ class BoolPreference extends Preference<bool> {
   _writeValue(SharedPreferences prefs) => prefs.setBool(key, value);
 }
 
+class IntPreference extends Preference<int> {
+  IntPreference({required key, required defaultValue})
+      : super(key: key, defaultValue: defaultValue);
+
+  @override
+  int _loadFrom(SharedPreferences prefs) => prefs.getInt(key)!;
+
+  @override
+  _writeValue(SharedPreferences prefs) => prefs.setInt(key, value);
+}
+
 class BrightnessPreference extends Preference<Brightness> {
   BrightnessPreference({required key, required defaultValue})
       : super(key: key, defaultValue: defaultValue);
