@@ -5,15 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:flutter_tqr/util/preferences.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'database.dart';
 
 part 'settings.g.dart';
 
 class SettingsModel extends ChangeNotifier {
-  static final String _languageKey = 'lang';
-
   final StringSetPreference _excludedQuests =
       StringSetPreference(key: 'exclude');
   final BoolPreference _showMemo =
@@ -38,29 +35,16 @@ class SettingsModel extends ChangeNotifier {
       DoublePreference(key: 'comboBias', defaultValue: 0.4);
   final DoublePreference _ratChance =
       DoublePreference(key: 'ratChance', defaultValue: 0.75);
-
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final StringPreference _language =
+      StringPreference(key: 'lang', defaultValue: 'en');
 
   SettingsModel() {
     allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
-    _loadPrefs();
-  }
-
-  void _loadPrefs() async {
-    _prefs.then((prefs) {
-      if (prefs.containsKey(_languageKey)) {
-        _language = prefs.getString(_languageKey)!;
-      }
-      notifyListeners();
-    });
   }
 
   void clear() {
-    _prefs.then((prefs) => prefs.clear());
-
-    allPrefs.forEach((element) => element.reset());
-
-    _language = 'en';
+    // We will notify all the listeners once, after resetting the values.
+    allPrefs.forEach((element) => element.reset(notifyListeners: false));
     notifyListeners();
   }
 
@@ -71,12 +55,6 @@ class SettingsModel extends ChangeNotifier {
   void exclude(Quest quest) => _excludedQuests.exclude(quest.name);
 
   void include(Quest quest) => _excludedQuests.include(quest.name);
-
-  void _updatePrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString(_languageKey, _language);
-  }
 
   /// Get the current hero selection strategy
   HeroSelectionStrategy get heroSelectionStrategy => _smallTableau.value
@@ -92,14 +70,6 @@ class SettingsModel extends ChangeNotifier {
   MarketSelectionStrategy get marketSelectionStrategy => _smallTableau.value
       ? SoloModeMarketSelectionStrategy()
       : FirstFitMarketSelectionStrategy();
-
-  String _language = 'en';
-  String get language => _language;
-  set language(String language) {
-    _language = language;
-    _updatePrefs();
-    notifyListeners();
-  }
 
   static final List<HeroSelectionStrategy> heroStrategies = [
     OnePerClassHeroSelectionStrategy(),

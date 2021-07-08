@@ -30,8 +30,16 @@ abstract class Preference<T> extends ChangeNotifier {
   T _loadFrom(SharedPreferences prefs);
 
   /// Reset this preference to its default value.
-  reset() {
-    value = defaultValue;
+  reset({bool notifyListeners = true}) {
+    // If we should notify listeners, simply call the mutator method.
+    if (notifyListeners) {
+      value = defaultValue;
+    }
+    // Otherwise, set the value and update prefs, but do not notify
+    else {
+      _value = defaultValue;
+      _updatePrefs();
+    }
   }
 
   T get value => _value;
@@ -87,6 +95,17 @@ class DoublePreference extends Preference<double> {
 
   @override
   _writeValue(SharedPreferences prefs) => prefs.setDouble(key, value);
+}
+
+class StringPreference extends Preference<String> {
+  StringPreference({required key, required defaultValue})
+      : super(key: key, defaultValue: defaultValue);
+
+  @override
+  String _loadFrom(SharedPreferences prefs) => prefs.getString(key)!;
+
+  @override
+  _writeValue(SharedPreferences prefs) => prefs.setString(key, value);
 }
 
 class BrightnessPreference extends Preference<Brightness> {
