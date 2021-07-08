@@ -12,12 +12,13 @@ import 'database.dart';
 part 'settings.g.dart';
 
 class SettingsModel extends ChangeNotifier {
-  static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
   static final String _languageKey = 'lang';
   static final String _ratChanceKey = 'ratChance';
 
+  final StringSetPreference _excludedQuests =
+      StringSetPreference(key: 'exclude');
   final BoolPreference _showMemo =
       BoolPreference(key: 'showMemoKey', defaultValue: true);
   final BoolPreference _showKeywords =
@@ -37,9 +38,6 @@ class SettingsModel extends ChangeNotifier {
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  // The names of excluded quests
-  Set<String> _excludedQuests = new Set();
-
   int _heroStrategyIndex = 0;
 
   SettingsModel() {
@@ -49,9 +47,6 @@ class SettingsModel extends ChangeNotifier {
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
-      if (prefs.containsKey(_excludedQuestsKey)) {
-        _excludedQuests = prefs.getStringList(_excludedQuestsKey)!.toSet();
-      }
       if (prefs.containsKey(_heroStrategyIndexKey)) {
         _heroStrategyIndex = prefs.getInt(_heroStrategyIndexKey)!;
       }
@@ -73,7 +68,6 @@ class SettingsModel extends ChangeNotifier {
 
     allPrefs.forEach((element) => element.reset());
 
-    _excludedQuests = new Set();
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
     _language = 'en';
@@ -81,30 +75,17 @@ class SettingsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool includes(Quest quest) => !excludes(quest);
+  bool includes(Quest quest) => _excludedQuests.includes(quest.name);
 
-  bool excludes(Quest quest) => _excludedQuests.contains(quest.name);
+  bool excludes(Quest quest) => _excludedQuests.excludes(quest.name);
 
-  void exclude(Quest quest) {
-    bool isNewExclusion = _excludedQuests.add(quest.name);
-    if (isNewExclusion) {
-      _updatePrefs();
-      notifyListeners();
-    }
-  }
+  void exclude(Quest quest) => _excludedQuests.exclude(quest.name);
 
-  void include(Quest quest) {
-    bool changed = _excludedQuests.remove(quest.name);
-    if (changed) {
-      _updatePrefs();
-      notifyListeners();
-    }
-  }
+  void include(Quest quest) => _excludedQuests.include(quest.name);
 
   void _updatePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
     prefs.setString(_languageKey, _language);
