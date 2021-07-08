@@ -12,9 +12,7 @@ import 'database.dart';
 part 'settings.g.dart';
 
 class SettingsModel extends ChangeNotifier {
-  static final String _comboBiasKey = 'comboBias';
   static final String _languageKey = 'lang';
-  static final String _ratChanceKey = 'ratChance';
 
   final StringSetPreference _excludedQuests =
       StringSetPreference(key: 'exclude');
@@ -36,6 +34,10 @@ class SettingsModel extends ChangeNotifier {
       BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
   final IntPreference _heroStrategyIndex =
       IntPreference(key: 'heroStrategyIndex', defaultValue: 0);
+  final DoublePreference _comboBias =
+      DoublePreference(key: 'comboBias', defaultValue: 0.4);
+  final DoublePreference _ratChance =
+      DoublePreference(key: 'ratChance', defaultValue: 0.75);
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -46,14 +48,8 @@ class SettingsModel extends ChangeNotifier {
 
   void _loadPrefs() async {
     _prefs.then((prefs) {
-      if (prefs.containsKey(_comboBiasKey)) {
-        _comboBias = prefs.getDouble(_comboBiasKey)!;
-      }
       if (prefs.containsKey(_languageKey)) {
         _language = prefs.getString(_languageKey)!;
-      }
-      if (prefs.containsKey(_ratChanceKey)) {
-        _ratChance = prefs.getDouble(_ratChanceKey)!;
       }
       notifyListeners();
     });
@@ -64,9 +60,7 @@ class SettingsModel extends ChangeNotifier {
 
     allPrefs.forEach((element) => element.reset());
 
-    _comboBias = 0.5;
     _language = 'en';
-    _ratChance = 0.75;
     notifyListeners();
   }
 
@@ -81,9 +75,7 @@ class SettingsModel extends ChangeNotifier {
   void _updatePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setDouble(_comboBiasKey, _comboBias);
     prefs.setString(_languageKey, _language);
-    prefs.setDouble(_ratChanceKey, _ratChance);
   }
 
   /// Get the current hero selection strategy
@@ -101,30 +93,10 @@ class SettingsModel extends ChangeNotifier {
       ? SoloModeMarketSelectionStrategy()
       : FirstFitMarketSelectionStrategy();
 
-  double _comboBias = 0.5;
-  double get comboBias => _comboBias;
-  set comboBias(var value) {
-    if (value < 0 || value > 1) {
-      throw Exception('Illegal combo bias value: $value must be in [0,1]');
-    }
-    _comboBias = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
   String _language = 'en';
   String get language => _language;
   set language(String language) {
     _language = language;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  double _ratChance = 0.75;
-  double get ratChance => _ratChance;
-  set ratChance(double value) {
-    assert(value >= 0 && value <= 1);
-    _ratChance = value;
     _updatePrefs();
     notifyListeners();
   }

@@ -78,6 +78,17 @@ class IntPreference extends Preference<int> {
   _writeValue(SharedPreferences prefs) => prefs.setInt(key, value);
 }
 
+class DoublePreference extends Preference<double> {
+  DoublePreference({required key, required defaultValue})
+      : super(key: key, defaultValue: defaultValue);
+
+  @override
+  double _loadFrom(SharedPreferences prefs) => prefs.getDouble(key)!;
+
+  @override
+  _writeValue(SharedPreferences prefs) => prefs.setDouble(key, value);
+}
+
 class BrightnessPreference extends Preference<Brightness> {
   BrightnessPreference({required key, required defaultValue})
       : super(key: key, defaultValue: defaultValue);
