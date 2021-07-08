@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
+import 'package:analyzer/dart/element/element.dart';
 
 class PrefListGenerator extends Generator {
   @override
@@ -9,13 +9,13 @@ class PrefListGenerator extends Generator {
     var buffer = StringBuffer();
 
     for (final classElement in library.classes) {
-      var prefs = classElement.fields.where((element) =>
-          element.type.getDisplayString(withNullability: false) ==
-          'BoolPreference');
+      var prefs = classElement.fields.where((element) => element.type
+          .getDisplayString(withNullability: false)
+          .endsWith('Preference'));
 
       if (prefs.length > 0) {
         buffer.write(
-            'extension PrefList on SettingsModel {\n List<BoolPreference> get allPrefs => [');
+            'extension PreferenceManager on SettingsModel {\n List<Preference> get allPrefs => [');
         var names = prefs.map((element) => '${element.name}').toList();
         buffer.write(names.join(','));
         buffer.writeln('];\n');
@@ -24,10 +24,22 @@ class PrefListGenerator extends Generator {
           if (pref.name[0] != '_') {
             throw UnsupportedError('Preference variables must be private');
           }
-          var name = '${pref.name}'.substring(1); // Strip off leading '_'
-          buffer.writeln('bool get $name => ${pref.name}.value;');
+
+          // Strip off leading '_'
+          var name = '${pref.name}'.substring(1);
+
+          // Find the type of preference (the parameter to Preference<T>)
+          var type = (pref.type.element as ClassElement)
+              .allSupertypes
+              .where((element) => element
+                  .getDisplayString(withNullability: false)
+                  .startsWith('Preference'))
+              .first
+              .typeArguments[0];
+
+          buffer.writeln('$type get $name => ${pref.name}.value;');
           buffer
-              .writeln('set $name(bool value) => ${pref.name}.value = value;');
+              .writeln('set $name($type value) => ${pref.name}.value = value;');
         });
 
         buffer.writeln('}');

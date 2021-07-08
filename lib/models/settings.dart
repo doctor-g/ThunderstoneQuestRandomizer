@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/models/tableau.dart';
+import 'package:flutter_tqr/util/preferences.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,53 +11,10 @@ import 'database.dart';
 
 part 'settings.g.dart';
 
-class BoolPreference extends ChangeNotifier {
-  final String key;
-  final bool defaultValue;
-  bool _value;
-
-  BoolPreference({required this.key, required this.defaultValue})
-      : _value = defaultValue {
-    _loadFromSharedPreferences();
-  }
-
-  bool get value => _value;
-  set value(value) {
-    _value = value;
-    notifyListeners();
-    _updatePrefs();
-  }
-
-  void _updatePrefs() async {
-    var preferences = await SharedPreferences.getInstance();
-    // If the user's preference is not the default value, record it.
-    // Otherwise, just clear it from storage, because the default is used.
-    if (value != defaultValue) {
-      preferences.setBool(key, value);
-    } else {
-      preferences.remove(key);
-    }
-  }
-
-  /// Read the value of this preference from the shared preferences.
-  _loadFromSharedPreferences() async {
-    var prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey(key)) {
-      _value = prefs.getBool(key)!;
-    }
-  }
-
-  /// Set to its default value
-  _reset() {
-    value = defaultValue;
-  }
-}
-
 class SettingsModel extends ChangeNotifier {
   static final String _excludedQuestsKey = 'exclude';
   static final String _heroStrategyIndexKey = 'heroStrategyIndex';
   static final String _comboBiasKey = 'comboBias';
-  static final String _brightnessKey = 'lightMode';
   static final String _languageKey = 'lang';
   static final String _ratChanceKey = 'ratChance';
 
@@ -74,6 +32,8 @@ class SettingsModel extends ChangeNotifier {
       BoolPreference(key: 'smallTableauKey', defaultValue: false);
   final BoolPreference _randomizeWilderness =
       BoolPreference(key: 'randomizeWildernessKey', defaultValue: false);
+  final BrightnessPreference _brightness =
+      BrightnessPreference(key: 'lightMode', defaultValue: true);
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -98,10 +58,6 @@ class SettingsModel extends ChangeNotifier {
       if (prefs.containsKey(_comboBiasKey)) {
         _comboBias = prefs.getDouble(_comboBiasKey)!;
       }
-      if (prefs.containsKey(_brightnessKey)) {
-        _brightness =
-            prefs.getBool(_brightnessKey)! ? Brightness.light : Brightness.dark;
-      }
       if (prefs.containsKey(_languageKey)) {
         _language = prefs.getString(_languageKey)!;
       }
@@ -115,12 +71,11 @@ class SettingsModel extends ChangeNotifier {
   void clear() {
     _prefs.then((prefs) => prefs.clear());
 
-    allPrefs.forEach((element) => element._reset());
+    allPrefs.forEach((element) => element.reset());
 
     _excludedQuests = new Set();
     _heroStrategyIndex = 0;
     _comboBias = 0.5;
-    _brightness = Brightness.light;
     _language = 'en';
     _ratChance = 0.75;
     notifyListeners();
@@ -152,7 +107,6 @@ class SettingsModel extends ChangeNotifier {
     prefs.setStringList(_excludedQuestsKey, _excludedQuests.toList());
     prefs.setInt(_heroStrategyIndexKey, _heroStrategyIndex);
     prefs.setDouble(_comboBiasKey, _comboBias);
-    prefs.setBool(_brightnessKey, _brightness == Brightness.light);
     prefs.setString(_languageKey, _language);
     prefs.setDouble(_ratChanceKey, _ratChance);
   }
@@ -181,14 +135,6 @@ class SettingsModel extends ChangeNotifier {
       throw Exception('Illegal combo bias value: $value must be in [0,1]');
     }
     _comboBias = value;
-    _updatePrefs();
-    notifyListeners();
-  }
-
-  Brightness _brightness = Brightness.light;
-  Brightness get brightness => _brightness;
-  set brightness(Brightness value) {
-    _brightness = value;
     _updatePrefs();
     notifyListeners();
   }
