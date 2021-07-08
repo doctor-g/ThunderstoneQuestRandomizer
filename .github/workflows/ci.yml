@@ -13,7 +13,7 @@ jobs:
 
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.0.2'
+          channel: 'stable'
 
       - name: Download Dependencies
         run: flutter pub get
