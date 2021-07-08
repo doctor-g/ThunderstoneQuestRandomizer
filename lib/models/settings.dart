@@ -19,19 +19,19 @@ class SettingsModel extends ChangeNotifier {
   final StringSetPreference _excludedQuests =
       StringSetPreference(key: 'exclude');
   final BoolPreference _showMemo =
-      BoolPreference(key: 'showMemoKey', defaultValue: true);
+      BoolPreference(key: 'showMemo', defaultValue: true);
   final BoolPreference _showKeywords =
-      BoolPreference(key: 'showKeywordsKey', defaultValue: true);
+      BoolPreference(key: 'showKeywords', defaultValue: true);
   final BoolPreference _showQuest =
-      BoolPreference(key: 'showQuestKey', defaultValue: false);
+      BoolPreference(key: 'showQuest', defaultValue: false);
   final BoolPreference _barricadesMode =
-      BoolPreference(key: 'barricadesModeKey', defaultValue: false);
+      BoolPreference(key: 'barricadesMode', defaultValue: false);
   final BoolPreference _soloMode =
-      BoolPreference(key: 'soloModeKey', defaultValue: false);
+      BoolPreference(key: 'soloMode', defaultValue: false);
   final BoolPreference _smallTableau =
-      BoolPreference(key: 'smallTableauKey', defaultValue: false);
+      BoolPreference(key: 'smallTableau', defaultValue: false);
   final BoolPreference _randomizeWilderness =
-      BoolPreference(key: 'randomizeWildernessKey', defaultValue: false);
+      BoolPreference(key: 'randomizeWilderness', defaultValue: false);
   final BrightnessPreference _brightness =
       BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
   final IntPreference _heroStrategyIndex =
