@@ -34,7 +34,7 @@ class SettingsModel extends ChangeNotifier {
   final BoolPreference _randomizeWilderness =
       BoolPreference(key: 'randomizeWildernessKey', defaultValue: false);
   final BrightnessPreference _brightness =
-      BrightnessPreference(key: 'lightMode', defaultValue: true);
+      BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
