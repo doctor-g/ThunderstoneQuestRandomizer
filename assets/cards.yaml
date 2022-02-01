@@ -73,6 +73,12 @@
   Dungeon Rooms: []
   Monsters: []
 
+- Quest: New Horizons Promos
+  Guardians:
+  - Name: Ezuzrius the Noble
+    Keywords: [Giant, Dragon, Guardian]
+    Meta: [Dice, Destroy]
+
 - Quest: A Mirror in the Dark
   Number: 1
   Sets:
@@ -1205,9 +1211,3 @@
     Level: 3
   - Name: Split Cathedral
     Level: 3
-
-- Quest: New Horizons Promos
-  Guardians:
-  - Name: Ezuzrius the Noble
-    Keywords: [Giant, Dragon, Guardian]
-    Meta: [Dice, Destroy]
