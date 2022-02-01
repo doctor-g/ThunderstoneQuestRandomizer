@@ -1018,6 +1018,101 @@
   - Name: Twilight Portal
     Level: 3
 
+- Quest: Darkness Rising
+  Number: 10
+  Sets:
+  - The Enemies Among Us
+  Heroes:
+  - Name: Mirak Haskas
+    Keywords: [Human, Cleric, Rogue, Hero]
+    Combo: [Corruption]
+  - Name: Barmin Ironclaw
+    Keywords: [Dwarf, Fighter, Hero]
+  - Name: Kaiya Winters
+    Keywords: [Human, Fighter, Wizard, Hero]
+  - Name: Stelias the Dark
+    Keywords: [Halfling, Rogue, Hero]
+  - Name: Karn Wulfric
+    Keywords: [Human, Cleric, Hero]
+  - Name: Ursulette
+    Keywords: [Elf, Wizard, Hero]
+    Combo: [Arcane, Chaos]
+  Marketplace:
+  - Name: Dreamcatcher
+    Keywords: [Cursed, Magic, Item]
+    Meta: [Corruption]
+  - Name: Torch
+    Keywords: [Item]
+    Combo: [Beast, Vermin]
+  - Name: Grimwood Wand
+    Keywords: [Magic, Item]
+    Combo: [Aberration, Djinn, Undead, Golem]
+  - Name: Black Cat
+    Keywords: [Beast, Rogue, Ally]
+  - Name: Balanced Staff
+    Keywords: [Blunt, Edged, Weapon]
+  - Name: Whip
+    Keywords: [Weapon]
+    Combo: [Cleric]
+  - Name: Bow of the Beast
+    Keywords: [Magic, Bow, Weapon]
+    Combo: [Rogue, Beast, Vermin, Lycanthrope, Undead]
+  - Name: Pitchfork
+    Keywords: [Blunt, Edged, Weapon]
+  - Name: Morning Dawn
+    Keywords: [Arcane, Divine, Elemental, Spell]
+    Combo: [Undead, Lycanthrope]
+  - Name: Dance with the Devil
+    Keywords: [Arcane, Chaos, Spell]
+    Combo: [Corruption]
+  - Name: Superior Mind
+    Keywords: [Arcane, Spell]
+  - Name: Exorcise
+    Keywords: [Divine, Spell]
+    Combo: [Cleric]
+  Monsters:
+  - Name: Bloodthirsty Beasts
+    Keywords: [Vermin, Swarm]
+    Memo: These swarming vermin are minions of Count Mortas, spreading his Corruption.
+    Level: 1
+  - Name: Possessed Objects
+    Keywords: [Golem]
+    Memo: Even the furniture in Mortas' castle is a corruption of life, Golems that strike at you when your back is turned.
+    Level: 1
+  - Name: Fearsome Phantasms
+    Memo: The Ebonwood has given life to the nightmares of its people. Now these bizarre creations prey on your Heroes, gaining strength as they do.
+    Level: 2
+  - Name: Enthralled Villagers
+    Keywords: [Humanoid]
+    Memo: The citizens of the Ebonwood have lived in fear of Mortas for centuries. Their paranoia causes them to lash out at anyone bearing the Count's Corruption.
+    Level: 2
+  - Name: Lost Lycanthropes
+    Keywords: [Beast, Humanoid]
+    Memo: These Humanoids turned primal Beasts only respond to their own kind. Only those who share their bestial nature can avoid their strongest attacks.
+    Level: 3
+  - Name: Vicious Vampires
+    Level: 3
+    Keywords: [Humanoid, Undead]
+    Memo: As the Ebonwood traverses the world, Mortas' craving for life has seduced others to his ways. These gladly spread his Corruption to draw more under his thrall.
+  Guardians:
+  - Name: Count Leander Mortas
+    Keywords: [Humanoid, Undead, Guardian]
+    Meta: [Dice]
+    Combo: [Corruption]
+  Dungeon Rooms:
+  - Name: Village Square
+    Level: 1
+  - Name: Foggy Forest
+    Level: 1
+  - Name: Great Hall
+    Level: 2
+  - Name: The Pens
+    Level: 2
+  - Name: Shallow Graves
+    Level: 3
+  - Name: Count's Quarters
+    Level: 3
+
 - Quest: New Horizons Promos
   Guardians:
   - Name: Ezuzrius the Noble
