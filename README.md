@@ -57,6 +57,6 @@ Thanks to Alex for his invaluable assistance with encoding the card data.
 
 ## Legal
 
-&copy;2020&ndash;2021 Paul Gestwicki
+&copy;2020&ndash;2022 Paul Gestwicki
 
 This application is licensed under [GNU GPL v3](LICENSE).
