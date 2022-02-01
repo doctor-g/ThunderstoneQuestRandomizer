@@ -1113,6 +1113,99 @@
   - Name: Count's Quarters
     Level: 3
 
+- Quest: Miricelle's Return
+  Number: 11
+  Sets:
+  - The Enemies Among Us
+  Heroes:
+  - Name: Sibyl
+    Keywords: [Elf, Elemental, Cleric, Wizard, Hero]
+    Combo: [Elemental]
+  - Name: Armatir the Proud
+    Keywords: [Elf, Orc, Fighter, Hero]
+  - Name: Gilora the Trickster
+    Keywords: [Halfling, Wizard, Rogue, Hero]
+  - Name: Corster the Shade
+    Keywords: [Halfling, Rogue, Hero]
+  - Name: Leila and Zurien
+    Keywords: [Human, Undead, Cleric, Rogue, Hero]
+    Combo: [Celestial, Demon]
+  - Name: Donatien Pinnick
+    Keywords: [Human, Fighter, Hero]
+  Marketplace:
+  - Name: Potion of Giant Strength
+    Keywords: [Magic, Item]
+  - Name: Manacles
+    Keywords: [Item]
+  - Name: Traveling Merchant
+    Keywords: [Magic, Ally]
+  - Name: Riftling
+    Keywords: [Aberration, Beast, Ally]
+    Meta: [Static]
+  - Name: Glaive
+    Keywords: [Blunt, Bow, Edged, Weapon]
+  - Name: Stone Maul
+    Keywords: [Blunt, Elemental, Magic, Weapon]
+    Combo: [Elemental]
+  - Name: Midnight Katana
+    Keywords: [Edged, Magic, Weapon]
+  - Name: Throwing Dagger
+    Keywords: [Bow, Edged, Weapon]
+    Combo: [Dagger]
+    Meta: [Dagger]
+  - Name: Phantasm
+    Keywords: [Arcane, Chaos, Elemental, Spell]
+  - Name: Sonic Scream
+    Keywords: [Arcane, Elemental, Spell]
+  - Name: Spirit Shield
+    Keywords: [Divine, Spell]
+    Combo: [Aberration, Demon, Undead]
+  - Name: Banish
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Aberration, Celestial, Demon, Undead]
+  Monsters:
+  - Name: Treacherous Turncoats
+    Level: 1
+    Keywords: [Humanoid]
+    Memo: These former Heroes have seen Miricelle's return as a changing in the tide, and they have no desire to get crushed by the wave.
+  - Name: Possessed Protagonists
+    Level: 1
+    Keywords: [Humanoid]
+    Memo: As the Scions take possession of the life in this world, they inevitably have taken control of some of the Keep's most revered Heroes. Drive out the Scion within and bring them back to your side.
+  - Name: Orcish Allies
+    Level: 2
+    Keywords: [Humanoid]
+    Memo: The last of a dwindling orc bloodline, the Wrathpride Clan have aligned themselves with Miricelle out of desparation. Their envy drives them now, making them more ferocious the better off you are.
+  - Name: Resurrected Remnants
+    Level: 2
+    Keywords: [Humanoid, Undead]
+    Memo: In their frantic quest to establish themselves in this world, the Scions have taken to animating corpses of Thunderstone Keep's fallen Heroes.
+  - Name: Rift Natives
+    Level: 3
+    Keywords: [Aberration, Beast, Vermin]
+    Memo: Miricelle's ritual has opened portals throughout the region to usher the Scions forth, but not all of them access the Stormlands. These Monsters are the Aberrations that live in the spaces between dimensions.
+  - Name: Scion Invaders
+    Level: 3
+    Keywords: [Celestial, Demon, Undead, Swarm]
+    Memo: The Scions, ancestral spirits to both Celestials and Demons, were thwarted in their efforts to create a new world for themselves. Now they desire this one instead, but Divine Clerics can help keep these powerful poltergiests at bay.
+  Guardians:
+  - Name: Miricelle, World Destroyer
+    Keywords: [Humanoid, Celestial, Demon, Guardian]
+    Combo: [Ally, Hero, Item, Spell, Weapon]
+  Dungeon Rooms:
+  - Name: Broken Road
+    Level: 1
+  - Name: Village Breach
+    Level: 1
+  - Name: Mixed Marsh
+    Level: 2
+  - Name: Warped Wood
+    Level: 2
+  - Name: Shattered Cave
+    Level: 3
+  - Name: Split Cathedral
+    Level: 3
+
 - Quest: New Horizons Promos
   Guardians:
   - Name: Ezuzrius the Noble
