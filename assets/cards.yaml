@@ -1140,17 +1140,24 @@
   - Name: Sibyl
     Keywords: [Elf, Elemental, Cleric, Wizard, Hero]
     Combo: [Elemental]
+    Memo: A denizen from the Earth Temple, this half-gargoyle is an Elemental master, offering some great deck-cycling abilities under the right circumstances.
   - Name: Armatir the Proud
     Keywords: [Elf, Orc, Fighter, Hero]
+    Memo: This young half-breed fighter has a lot to prove to the world, preferring to take on foes himself whenever possible.
   - Name: Gilora the Trickster
     Keywords: [Halfling, Wizard, Rogue, Hero]
+    Memo: A master illusionist, Gilora can pull from her experience to create temporary additions to your hand, becoming more versatile as she advances.
   - Name: Corster the Shade
     Keywords: [Halfling, Rogue, Hero]
+    Memo: A master of the shadows, this diminutive ninja gets stronger the darker the Dungeon Room.
   - Name: Leila and Zurien
     Keywords: [Human, Undead, Cleric, Rogue, Hero]
-    Combo: [Celestial, Demon]
+    Combo: [Celestial, Demon, Divine]
+    Memo: Leila was a simple priestess until she was possessed by an invading Scion, Zurien. However, Zurien is a renegade among her own people, disagreeing with their hostile takeover. As a result, Zurien has formed a symbiotic relationship with Leila as they work together to show the Scions another way.
   - Name: Donatien Pinnick
     Keywords: [Human, Fighter, Hero]
+    Combo: [Dagger]
+    Memo: A Fighter with deadly accuracy from a distance, this Hero is most effective with lots of Daggers and turns any Weapon into a Bow.
   Marketplace:
   - Name: Potion of Giant Strength
     Keywords: [Magic, Item]
