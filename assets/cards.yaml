@@ -11,6 +11,7 @@
 # - Dice (involves dice)
 # - Discard (involves discarding or searching through discarded cards)
 # - Static (can gain the static keyword, but doesn't have it inherently)
+# - Lycanthrope (heroes who become lycanthropes as they level up)
 #
 ## Localization
 #
@@ -1031,18 +1032,30 @@
   Heroes:
   - Name: Mirak Haskas
     Keywords: [Human, Cleric, Rogue, Hero]
-    Combo: [Corruption]
+    Combo: [Corruption, Blunt]
+    Memo: A unique dual-class Hero with a calming After Battle influence on others.
   - Name: Barmin Ironclaw
     Keywords: [Dwarf, Fighter, Hero]
+    Meta: [ Lycanthrope ]
+    Memo: Barmin is a back-alley Fighter who thrives off the intimidation that keeps lesser warriors from delving too deep into the Dungeon.
   - Name: Kaiya Winters
     Keywords: [Human, Fighter, Wizard, Hero]
+    Memo: A dual-class monster hunter who is deadly with a whip, Kaiya can help control the call of the darkness, enabling you to discard Static Corruptions.
   - Name: Stelias the Dark
     Keywords: [Halfling, Rogue, Hero]
+    Combo: [Ally]
+    Meta: [Undead]
+    Memo: A brazen thief, Stelias draws strength from other Heroes in battle and learns from every battle he finds himself in.
   - Name: Karn Wulfric
     Keywords: [Human, Cleric, Hero]
+    Meta: [Lycanthrope]
+    Combo: [Corruption]
+    Memo: This inquisitive healer revels in the strength offered by Mortas' corrupting influence. But he may lose himself on the journey.
   - Name: Ursulette
     Keywords: [Elf, Wizard, Hero]
     Combo: [Arcane, Chaos]
+    Meta: [Undead]
+    Memo: As a wielder of magic, Ursulette dances on the line of light and dark. Under Mortas' influence, she moves even closer to the darkness.
   Marketplace:
   - Name: Dreamcatcher
     Keywords: [Cursed, Magic, Item]
