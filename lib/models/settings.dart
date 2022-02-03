@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
-import 'package:flutter/foundation.dart';
 import 'package:flutter_tqr/models/tableau.dart';
 import 'package:flutter_tqr/util/preferences.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
