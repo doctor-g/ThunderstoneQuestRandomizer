@@ -173,6 +173,17 @@ class SettingsPage extends StatelessWidget {
                               context,
                               AppLocalizations.of(context)!
                                   .settings_smallTableau_hint),
+                          _makeCheckbox(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_useCorruption,
+                              settings.useCorruption,
+                              (value) => settings.useCorruption =
+                                  !settings.useCorruption),
+                          _makeDescription(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_useCorruption_hint),
                         ],
                       ),
                     ),

@@ -1093,6 +1093,7 @@
   Monsters:
   - Name: Bloodthirsty Beasts
     Keywords: [Vermin, Swarm]
+    Meta: [Corruption]
     Memo: These swarming vermin are minions of Count Mortas, spreading his Corruption.
     Level: 1
   - Name: Possessed Objects
@@ -1102,17 +1103,21 @@
   - Name: Fearsome Phantasms
     Memo: The Ebonwood has given life to the nightmares of its people. Now these bizarre creations prey on your Heroes, gaining strength as they do.
     Level: 2
+    Meta: [Corruption]
   - Name: Enthralled Villagers
     Keywords: [Humanoid]
+    Combo: [Corruption]
     Memo: The citizens of the Ebonwood have lived in fear of Mortas for centuries. Their paranoia causes them to lash out at anyone bearing the Count's Corruption.
     Level: 2
   - Name: Lost Lycanthropes
     Keywords: [Beast, Humanoid]
+    Combo: [Corruption]
     Memo: These Humanoids turned primal Beasts only respond to their own kind. Only those who share their bestial nature can avoid their strongest attacks.
     Level: 3
   - Name: Vicious Vampires
     Level: 3
     Keywords: [Humanoid, Undead]
+    Combo: [Corruption]
     Memo: As the Ebonwood traverses the world, Mortas' craving for life has seduced others to his ways. These gladly spread his Corruption to draw more under his thrall.
   Guardians:
   - Name: Count Leander Mortas

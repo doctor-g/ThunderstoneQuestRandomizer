@@ -320,6 +320,18 @@
     "context": "Settings > Mode"
   },
 
+  "settings_useCorruption": "Use Corruption Cards",
+  "@settings_useCorruption": {
+    "description": "Label for the 'use corruption cards' toggle",
+    "context": "Settings > Mode"
+  },
+
+  "settings_useCorruption_hint": "Use Corruption-related cards from Quest 10.",
+  "@settings_useCorruption_hint": {
+    "description": "Explanation for the 'use corruption cards' setting",
+    "context": "Settings > Mode"
+  },
+
   "settings_section_comboBias": "Combo Bias",
   "@settings_section_comboBias": {
     "description": "Section heading for combo bias specification",

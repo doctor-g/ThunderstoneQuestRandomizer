@@ -28,6 +28,10 @@ class Randomizer {
     if (settings.smallTableau) {
       tableau.modes.add(GameMode.SmallTableau);
     }
+    if (!settings.useCorruption) {
+      db = db
+          .where((card) => !card.combo.union(card.meta).contains('Corruption'));
+    }
 
     int tries = 0;
     for (;;) {

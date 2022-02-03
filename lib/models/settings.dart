@@ -36,6 +36,8 @@ class SettingsModel extends ChangeNotifier {
       DoublePreference(key: 'ratChance', defaultValue: 0.75);
   final StringPreference _language =
       StringPreference(key: 'lang', defaultValue: 'en');
+  final BoolPreference _useCorruption =
+      BoolPreference(key: 'useCorruption', defaultValue: true);
 
   SettingsModel() {
     allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
