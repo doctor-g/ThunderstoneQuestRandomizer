@@ -1122,12 +1122,14 @@
   Dungeon Rooms:
   - Name: Village Square
     Level: 1
+    Combo: [Corruption]
   - Name: Foggy Forest
     Level: 1
   - Name: Great Hall
     Level: 2
   - Name: The Pens
     Level: 2
+    Combo: [Corruption]
   - Name: Shallow Graves
     Level: 3
   - Name: Count's Quarters
