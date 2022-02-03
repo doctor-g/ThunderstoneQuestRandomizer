@@ -1059,7 +1059,7 @@
   Marketplace:
   - Name: Dreamcatcher
     Keywords: [Cursed, Magic, Item]
-    Meta: [Corruption]
+    Meta: [Corruption, Discard]
   - Name: Torch
     Keywords: [Item]
     Combo: [Beast, Vermin]
@@ -1084,6 +1084,7 @@
   - Name: Dance with the Devil
     Keywords: [Arcane, Chaos, Spell]
     Combo: [Corruption]
+    Meta: [Discard]
   - Name: Superior Mind
     Keywords: [Arcane, Spell]
   - Name: Exorcise
