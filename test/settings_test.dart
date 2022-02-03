@@ -1,5 +1,5 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tqr/models/settings.dart';
-import 'package:test/test.dart';
 
 void main() {
   test('Preferences accessor has been generated through source-gen', () {
