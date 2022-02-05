@@ -1148,6 +1148,7 @@
   - Name: Sibyl
     Keywords: [Elf, Elemental, Cleric, Wizard, Hero]
     Combo: [Elemental]
+    Meta: [Discard]
     Memo: A denizen from the Earth Temple, this half-gargoyle is an Elemental master, offering some great deck-cycling abilities under the right circumstances.
   - Name: Armatir the Proud
     Keywords: [Elf, Orc, Fighter, Hero]
