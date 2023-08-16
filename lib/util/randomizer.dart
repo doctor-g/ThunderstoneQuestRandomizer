@@ -79,8 +79,12 @@ class Randomizer {
         allMarketCards += quest.allies;
       }
     }
-    return settings.marketSelectionStrategy
-        .selectMarketCardsFrom(allMarketCards, settings.comboBias, tableau);
+    return settings.marketSelectionStrategy.selectMarketCardsFrom(
+        allMarketCards,
+        // If not using combo bias, then the bias is essentially 0%.
+        // That is, we never worry about whether a card has a combo or not.
+        settings.useComboBias ? settings.comboBias : 0.0,
+        tableau);
   }
 
   Guardian chooseGuardian(
@@ -92,7 +96,7 @@ class Randomizer {
       }
     }
 
-    while (Random().nextDouble() < settings.comboBias) {
+    while (_seekCombo(settings)) {
       Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
       if (tableau.hasCombo(guardian)) {
         print('Combo guardian');
@@ -104,6 +108,9 @@ class Randomizer {
     Guardian guardian = allGuardians[_random.nextInt(allGuardians.length)];
     return _randomlyLevel(settings, guardian);
   }
+
+  bool _seekCombo(SettingsModel settings) =>
+      settings.useComboBias && Random().nextDouble() < settings.comboBias;
 
   Guardian _randomlyLevel(SettingsModel settings, Guardian guardian) {
     if (settings.barricadesMode) {
@@ -156,7 +163,7 @@ class Randomizer {
     [1, 2, 3].forEach((level) {
       List<Monster> list = availableMonsters[level]!;
       bool done = false;
-      while (!done && _random.nextDouble() < settings.comboBias) {
+      while (!done && _seekCombo(settings)) {
         Monster monster = list[_random.nextInt(list.length)];
         if (tableau.hasCombo(monster)) {
           result.add(monster);

@@ -195,18 +195,36 @@ class SettingsPage extends StatelessWidget {
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => Column(
                         children: <Widget>[
-                          Text('${(settings.comboBias * 100).truncate()}%',
-                              style: Theme.of(context).textTheme.titleSmall),
+                          _makeCheckbox(
+                              context,
+                              AppLocalizations.of(context)!
+                                  .settings_useComboBias,
+                              settings.useComboBias,
+                              (value) => settings.useComboBias =
+                                  !settings.useComboBias),
+                          _makeDescription(
+                            context,
+                            AppLocalizations.of(context)!
+                                .settings_useComboBias_hint,
+                          ),
                           Slider(
                             min: 0,
                             max: _maxComboBias,
                             value: settings.comboBias,
-                            onChanged: (value) => settings.comboBias = value,
+                            onChanged: settings.useComboBias
+                                ? (value) => settings.comboBias = value
+                                : null,
+                          ),
+                          Text(
+                            '${(settings.comboBias * 100).truncate()}%',
+                            style:
+                                _createComboBiasLabelTheme(context, settings),
                           ),
                           _makeDescription(
-                              context,
-                              AppLocalizations.of(context)!
-                                  .settings_comboBias_hint),
+                            context,
+                            AppLocalizations.of(context)!
+                                .settings_comboBias_hint,
+                          ),
                         ],
                       ),
                     ),
@@ -346,4 +364,11 @@ class SettingsPage extends StatelessWidget {
   }
 
   String _formatPercent(double percent) => '${(percent * 100).truncate()}%';
+
+  _createComboBiasLabelTheme(BuildContext context, SettingsModel settings) {
+    final theme = Theme.of(context).textTheme.titleSmall!;
+    return settings.useComboBias
+        ? theme
+        : theme.copyWith(color: Theme.of(context).disabledColor);
+  }
 }

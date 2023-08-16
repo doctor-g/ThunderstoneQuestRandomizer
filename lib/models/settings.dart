@@ -30,6 +30,8 @@ class SettingsModel extends ChangeNotifier {
       BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
   final IntPreference _heroStrategyIndex =
       IntPreference(key: 'heroStrategyIndex', defaultValue: 0);
+  final BoolPreference _useComboBias =
+      BoolPreference(key: 'useComboBias', defaultValue: true);
   final DoublePreference _comboBias =
       DoublePreference(key: 'comboBias', defaultValue: 0.4);
   final DoublePreference _ratChance =

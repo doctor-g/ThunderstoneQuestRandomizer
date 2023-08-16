@@ -338,11 +338,22 @@
     "context": "Settings page"
   },
 
+  "settings_useComboBias": "Use Combo Bias",
+  "@settings_useComboBias": {
+    "description": "Label for the 'use combo bias' toggle",
+    "context": "Settings > Combo"
+  },
+
+  "settings_useComboBias_hint": "Whether to look for combos or build a purely random tableau",
+  "@settings_useComboBias_hint": {
+    "description": "Explanation for the 'use combo bias' toggle",
+    "context": "Settings > Combo"
+  },
 
   "settings_comboBias_hint": "The probability that, for a given card, it is accepted only if it combos with cards already selected.",
   "@settings_comboBias_hint": {
     "description": "Explanation of what combo bias is.",
-    "context": "Settings > Combo Bias"
+    "context": "Settings > Combo"
   },
 
   "settings_section_hero_selection": "Hero Selection",
