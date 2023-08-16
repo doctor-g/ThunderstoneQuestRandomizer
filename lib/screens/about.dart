@@ -26,8 +26,8 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     final name = AppLocalizations.of(context)!.appTitle;
     final textTheme = Theme.of(context).textTheme;
-    final titleStyle = textTheme.subtitle1;
-    final bodyTextStyle = textTheme.bodyText1;
+    final titleStyle = textTheme.titleMedium;
+    final bodyTextStyle = textTheme.bodyLarge;
     final linkStyle = bodyTextStyle!.copyWith(color: Colors.blue);
     return Scaffold(
       appBar: AppBar(

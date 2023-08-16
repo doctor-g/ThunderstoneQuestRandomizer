@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
                                                   .settings_language,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyText1),
+                                                  .bodyLarge),
                                           SizedBox(width: 8),
                                           _makeLanguageSelectionSetting(
                                               context),
@@ -125,7 +125,7 @@ class SettingsPage extends StatelessWidget {
                           Text(
                               AppLocalizations.of(context)!.settings_ratChance(
                                   _formatPercent(settings.ratChance)),
-                              style: Theme.of(context).textTheme.bodyText1),
+                              style: Theme.of(context).textTheme.bodyLarge),
                           Slider(
                             min: 0,
                             max: 1,
@@ -196,7 +196,7 @@ class SettingsPage extends StatelessWidget {
                       builder: (context, settings, child) => Column(
                         children: <Widget>[
                           Text('${(settings.comboBias * 100).truncate()}%',
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.titleSmall),
                           Slider(
                             min: 0,
                             max: _maxComboBias,
@@ -225,7 +225,7 @@ class SettingsPage extends StatelessWidget {
                                           _localizeName(context, strategy),
                                           style: Theme.of(context)
                                               .textTheme
-                                              .bodyText1),
+                                              .bodyLarge),
                                       value: strategy))
                                   .toList(),
                               onChanged: (value) {
@@ -242,12 +242,12 @@ class SettingsPage extends StatelessWidget {
                     ),
                     Divider(),
                     Text(AppLocalizations.of(context)!.settings_section_misc,
-                        style: Theme.of(context).textTheme.subtitle1),
+                        style: Theme.of(context).textTheme.titleMedium),
                     Consumer<SettingsModel>(
                       builder: (context, settings, child) => OutlinedButton(
                         child: Text(
                             AppLocalizations.of(context)!.settings_reset,
-                            style: Theme.of(context).textTheme.bodyText1),
+                            style: Theme.of(context).textTheme.bodyLarge),
                         onPressed: () => settings.clear(),
                       ),
                     ),
@@ -267,7 +267,7 @@ class SettingsPage extends StatelessWidget {
   Widget _makeCheckbox(BuildContext context, String title, bool value,
       void onChanged(bool value)) {
     final TextStyle checkboxTextStyle =
-        Theme.of(context).textTheme.bodyText1 as TextStyle;
+        Theme.of(context).textTheme.bodyLarge as TextStyle;
     return StatefulBuilder(
       builder: (context, _setState) => CheckboxListTile(
         title: Text(
@@ -284,10 +284,10 @@ class SettingsPage extends StatelessWidget {
   }
 
   Widget _heading(BuildContext context, String text) =>
-      Text(text, style: Theme.of(context).textTheme.subtitle1);
+      Text(text, style: Theme.of(context).textTheme.titleMedium);
 
   Widget _makeDescription(BuildContext context, String text) => Text(text,
-      style: Theme.of(context).textTheme.bodyText2,
+      style: Theme.of(context).textTheme.bodyMedium,
       textAlign: TextAlign.center);
 
   String _localizeDescription(
@@ -329,7 +329,7 @@ class SettingsPage extends StatelessWidget {
         items: _supportedLanguages.entries
             .map((entry) => DropdownMenuItem(
                   child: Text(entry.value,
-                      style: Theme.of(context).textTheme.bodyText1),
+                      style: Theme.of(context).textTheme.bodyLarge),
                   value: entry.key,
                 ))
             .toList(),

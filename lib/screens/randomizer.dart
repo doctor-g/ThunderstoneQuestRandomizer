@@ -105,7 +105,7 @@ class _RandomizerPageState extends State<RandomizerPage>
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(AppLocalizations.of(context)!.home_no_tableau,
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme.of(context).textTheme.bodyLarge),
                   )
                 : WelcomeMessage())
             : SingleChildScrollView(
@@ -164,7 +164,7 @@ class _RandomizerPageState extends State<RandomizerPage>
 
   List<Widget> _section(String name, [List<tq.Card>? contents]) {
     var result = <Widget>[
-      Text(name, style: Theme.of(context).textTheme.subtitle1)
+      Text(name, style: Theme.of(context).textTheme.titleMedium)
     ];
     if (contents != null) {
       contents.sort(_cardSorter);
@@ -189,7 +189,7 @@ class _RandomizerPageState extends State<RandomizerPage>
   }
 
   Text _subsectionHeading(String content) =>
-      Text(content, style: Theme.of(context).textTheme.subtitle2);
+      Text(content, style: Theme.of(context).textTheme.titleSmall);
 
   List<Widget> _heroesAndMarketplace() {
     if (_tableau == null) {
@@ -256,7 +256,7 @@ class _RandomizerPageState extends State<RandomizerPage>
                         ? AppLocalizations.of(context)!.tableau_wilderness_rat
                         : AppLocalizations.of(context)!
                             .tableau_wilderness_mosquitoes,
-                    style: Theme.of(context).textTheme.bodyText1),
+                    style: Theme.of(context).textTheme.bodyLarge),
               ]),
         ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1),
             [_tableau!.monsters![0]]),
@@ -295,7 +295,7 @@ class _RandomizerPageState extends State<RandomizerPage>
           Text(reminder,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .copyWith(fontFamily: 'CormorantSC')),
         ],
       );
@@ -315,11 +315,11 @@ class WelcomeMessage extends StatelessWidget {
         children: <Widget>[
           Text(AppLocalizations.of(context)!.appTitle,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.subtitle1),
+              style: Theme.of(context).textTheme.titleMedium),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(AppLocalizations.of(context)!.home_instructions,
-                style: Theme.of(context).textTheme.bodyText1),
+                style: Theme.of(context).textTheme.bodyLarge),
           ),
         ],
       ),
@@ -347,7 +347,7 @@ class CardWidget extends StatelessWidget {
                         AppLocalizations.of(context)!.tableau_guardian_level(
                             _toRoman((card as tq.Guardian).level!))
                     : ''),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           ),
           settings.showQuest
@@ -370,7 +370,7 @@ class CardWidget extends StatelessWidget {
                   constraints: BoxConstraints(maxWidth: 400),
                   child: Text(card.getLocalizedMemo(settings.language)!,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2),
+                      style: Theme.of(context).textTheme.bodyMedium),
                 ),
           Container(
             height: 6,
@@ -401,7 +401,7 @@ class CardWidget extends StatelessWidget {
       result.add(Text(keywords[i],
           style: Theme.of(context)
               .textTheme
-              .bodyText2!
+              .bodyMedium!
               .copyWith(fontFamily: 'CormorantSC')));
       if (i < keywords.length - 1) {
         result.add(Text(' • '));

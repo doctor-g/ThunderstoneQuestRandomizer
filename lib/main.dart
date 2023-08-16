@@ -45,12 +45,12 @@ class _TQRandomizerApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Cormorant',
           textTheme: TextTheme(
-            subtitle1: TextStyle(
+            titleMedium: TextStyle(
                 fontSize: 32, fontWeight: FontWeight.bold, height: 1.5),
-            subtitle2: TextStyle(
+            titleSmall: TextStyle(
                 fontSize: 22, fontStyle: FontStyle.italic, height: 1.5),
-            bodyText1: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            bodyText2: TextStyle(fontSize: 14),
+            bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            bodyMedium: TextStyle(fontSize: 14),
           ),
         ),
         localizationsDelegates: AppLocalizations.localizationsDelegates,

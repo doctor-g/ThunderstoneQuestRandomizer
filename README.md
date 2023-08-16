@@ -10,9 +10,15 @@ This app uses [`source_gen`](https://pub.dev/packages/source_gen) to process
 the `SettingsModel` implementation. Before the rest of the application can
 be built, `build_runner` has to be invoked. This is done with the command:
 ```
-flutter pub run build_runner build
+dart run build_runner build
 ```
 That can be invoked in VSCode via Ctrl-Shift-B.
+
+Using the `watch` command instead will start a process that rebuilds on
+changes, as in:
+```
+dart run build_runner watch
+```
 
 ### Automatic building in Visual Studio Code
 
@@ -24,10 +30,10 @@ which will give an option to enable to tasks.
 
 ## Localization
 
-The [`cards.yml`](assets/cards.yml) file can be localized into different languages.
+The [`cards.yml`](assets/cards.yaml) file can be localized into different languages.
 See that files for translation instructions. To enable a language in the settings
 page, add (or uncomment) an appropriate line in the definition of `_supportedLanguages`
-in [settings.dart](screens/settings.dart) 
+in [settings.dart](lib/screens/settings.dart) 
 
 The rest of the app also supports localization using the Intl package
 [as described in the docs](https://flutter.dev/docs/development/accessibility-and-localization/internationalization). A new language could
@@ -57,6 +63,6 @@ Thanks to Alex for his invaluable assistance with encoding the card data.
 
 ## Legal
 
-&copy;2020&ndash;2022 Paul Gestwicki
+&copy;2020&ndash;2023 Paul Gestwicki
 
 This application is licensed under [GNU GPL v3](LICENSE).
