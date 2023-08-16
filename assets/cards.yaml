@@ -80,6 +80,12 @@
     Keywords: [Giant, Dragon, Guardian]
     Meta: [Dice, Destroy]
 
+- Quest: Ezuzrius's Hatchlings
+  Monsters:
+  - Name: Dragon Whelps
+    Keywords: [ Dragon, Swarm, Ezuzrius's Hatchling ]
+    Level: 3
+
 - Quest: A Mirror in the Dark
   Number: 1
   Sets:
