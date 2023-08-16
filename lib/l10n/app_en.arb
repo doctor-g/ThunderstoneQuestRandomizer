@@ -221,9 +221,9 @@
     "context": "Settings > Appearance"
   },
 
-  "settings_showQuest": "Show card quest",
+  "settings_showQuest": "Show card set",
   "@settings_showQuest": {
-    "description": "Show the quest that the card comes from",
+    "description": "Show the card set that the card comes from",
     "context": "Settings > Appearance"
   },
 
@@ -233,7 +233,7 @@
     "context": "Settings > Appearance"
   },
 
-  "settings_section_quests": "Quests",
+  "settings_section_quests": "Card Sets",
   "@settings_section_quests": {
     "description": "Section heading for quest filters",
     "context": "Settings page"
