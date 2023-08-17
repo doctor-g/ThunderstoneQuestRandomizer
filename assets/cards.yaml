@@ -1341,3 +1341,104 @@
     Level: 2
   - Name: Sleeping Tree King
     Level: 3
+
+- Quest: Rotten Roots
+  Number: 13
+  Heroes:
+  - Name: Amber Leafspark
+    Keywords: [Fey, Fighter, Hero]
+    Combo: [Elemental]
+    Memo: Amber is a masterful soldier among the fairy folk, showing tremendous versatility with Elemental Weapons.
+  - Name: Berhnhard the Prepared
+    Keywords: [Halfling, Wizard, Hero]
+    Memo: Bernhard imbues candles with magic spells, allowing him to use them over and over again, turn after turn.
+  - Name: Killian Silanus
+    Keywords: [Human, Cleric, Hero]
+    Combo: [Divine, Aberration, Demon, Undead]
+    Memo: Killian is a man on a crusade, fighting to rid the world of the demonic. He is especially strong against the Undead and beings that are not of this world.
+  - Name: Phelorna
+    Keywords: [Elf, Cleric, Wizard, Hero]
+    Memo: Phelorna is an elven priestess who cares for Ashbrow, the ancient tree guardian of the Deepwood. She is a master with potions and healing salves created from the plants of the forest.
+  - Name: The Highwind Three
+    Keywords: [Halfling, Rogue, Hero]
+    Combo: [Discard]
+    Memo: These three siblings will go anywhere looking for adventure (and profit). They can put their small fortune to use in a number of different ways while exploring dungeons.
+  - Name: Walnut Silvergrove
+    Keywords: [Fey, Fighter, Rogue, Hero]
+    Combo: [Bow]
+    Memo: As knight errant of the fairy wilds, Walnut is invaluable with a Bow, especially in confined spaces.
+  Marketplace:
+  - Name: Petal Pal
+    Keywords: [Plant, Ally]
+  - Name: Barkskin Armor
+    Keywords: [Elemental, Item]
+    Combo: [Fey]
+  - Name: Craftsman's Tools
+    Keywords: [Item]
+  - Name: Magic Flute
+    Keywords: [Magic, Item]
+    Combo: [Fey]
+  - Name: Shape Change
+    Keywords: [Arcane, Divine, Spell]
+  - Name: Spike Growth
+    Keywords: [Arcane, Elemental, Spell]
+  - Name: Strengthen Ally
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Ally]
+  - Name: Swarm Strike
+    Keywords: [Arcane, Spell]
+    Combo: [Plant]
+  - Name: Golden Horn
+    Keywords: [Blunt, Elemental, Weapon]
+    Combo: [Fey]
+  - Name: Leaf Blade
+    Keywords: [Edged, Elemental, Weapon]
+    Combo: [Fey]
+  - Name: Needle Bow
+    Keywords: [Bow, Weapon]
+    Combo: [Fey]
+  - Name: Treant Root
+    Keywords: [Blunt, Magic, Weapon]
+    Combo: [Elf, Fey]
+  Monsters:
+  - Name: Army Ants
+    Keywords: [Vermin]
+    Level: 1
+    Memo: This colony survives by working together to protect their queen, lending strength to one another, down to the very last.
+  - Name: Birds and Creatures
+    Keywords: [Beast, Vermin]
+    Level: 1
+    Memo: The common creatures of the forest aren't so timid when you're the size of their food.
+  - Name: Diminutive Druids
+    Keywords: [Humanoid]
+    Level: 2
+    Memo: Troubled by the imbalances of nature on even the smallest scale, a group of druids have adapted to life among the miniscule, and they're very hostile to outsiders. However, they may be easier to dismiss if you can appeal to their individual passions.
+  - Name: Tree Spirits
+    Keywords: [Abberation, Plant, Undead]
+    Level: 2
+    Memo: Shades of life and death stretch even to the smallest recesses of the world, animating even the fallen remains of the forest floor. These creatures are strengthened by what the Champions have discarded.
+  - Name: Fiendish Fairies
+    Keywords: [Demon, Fey, Humanoid]
+    Level: 3
+    Memo: These mischievous misfits have shared in the demonic power embraced by Filleath, making their normal shenanigans more dangerous. They love to play with their opponents a bit before attacking.
+  - Name: Mushroom Herd
+    Keywords: [Aberration, Plant]
+    Level: 3
+    Memo: The trees have legends all their own, including one of an ancient shepherd who looks after the mushrooms. As they grow, he herds them together for protection. Disturbing the herd could have dire consequences on others if you don't tread carefully.
+  Guardians:
+  - Name: Filleath, the Toxic
+    Keywords: [Demon, Fey, Humanoid, Guardian]
+    Combo: [Discard]
+  Dungeon Rooms:
+    - Name: Fairy Village
+      Level: 1
+    - Name: Gnarled Glade
+      Level: 2
+    - Name: Root Pools
+      Level: 3
+    - Name: Nest
+      Level: 1
+    - Name: Druid Hovel
+      Level: 2
+    - Name: Spore Field
+      Level: 3
