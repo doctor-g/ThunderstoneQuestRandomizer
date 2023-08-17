@@ -1246,3 +1246,98 @@
     Level: 3
   - Name: Split Cathedral
     Level: 3
+
+- Quest: Nature's Wrath
+  Number: 12
+  Heroes:
+    - Name: General Nyla Rivers
+      Keywords: [Human, Cleric, Fighter, Hero]
+      Memo: General Nyla's tactical experience makes her a great asset against magical foes. She is at her best at the forefront, leading other clerics to righteous victory.
+    - Name: Kheih
+      Keywords: [Avian, Beast, Elemental, Wizard, Hero]
+      Combo: [Elemental]
+      Memo: Kheih comes from an Avian tribe high in the mountains, above the clouds. She has a special connection to the storms that rage above, wielding elemental magic to disrupt the timing of her enemy's abilities.
+    - Name: Krakhar Stonehand
+      Keywords: [Dwarf, Elemental, Fighter, Wizard, Hero]
+      Memo: This powerful wizard is on a quest for power from the primal forces of creation. He grows stronger as Guardian Keys are revealed.
+    - Name: Pibbert the Dextrous
+      Keywords: [Gnome, Halfling, Rogue, Hero]
+      Meta: [Discard]
+      Memo: This clever inventor got tired of having his hands full... so he built more hands! The more hands he uses, the more dangerous he becomes.
+    - Name: Primelda Adhana
+      Keywords: [Elf, Human, Cleric, Rogue, Hero]
+      Memo: Primelda strides several different worlds. Not only is she half-elf, but she embraces the mystical side of nature in the midst of the urban realm. She is a druid of the city, making friends with all of the animal denizens there.
+    - Name: Strin Doxit
+      Keywords: [Elf, Fey, Fighter, Rogue, Hero]
+      Meta: [Discard]
+      Memo: A charming satyr, Strin has developed quite a romantic view of society and civilization, forsaking the fairy-folk of the world to embrace the creations of man.
+  Marketplace:
+  - Name: Flame Sprite
+    Keywords: [Elemental, Fey, Ally]
+    Meta: [Static]
+  - Name: Raven
+    Keywords: [Beast, Rogue, Ally]
+  - Name: Deck of Spirits
+    Keywords: [Magic, Static, Item]
+    Memo: Long ago, a rivalry between eight princes threatened to destroy their lands. Peace was established by a wizard who captured their souls within these cards, but their rivalry persists to this day. Each of these unique cards offers power in its own right, more so if you can use them together. However, they cannot bear being united for long, so timing is crucial.
+  - Name: Liquid Gold
+    Keywords: [Magic, Item]
+  - Name: Nyla's Shield
+    Keywords: [Item]
+  - Name: Animal Affinity
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Beast, Vermin, Ally]
+    Meta: [Discard]
+  - Name: Borrowed Power
+    Keywords: [Arcane, Chaos, Spell]
+  - Name: Precognition
+    Keywords: [Arcane, Spell]
+  - Name: Righteous Blast
+    Keywords: [Divine, Spell]
+  - Name: Bangarang
+    Keywords: [Blunt, Weapon]
+  - Name: Forest's Mischief
+    Keywords: [Blunt, Bow, Elemental, Weapon]
+  - Name: Lightning Rod
+    Keywords: [Blunt, Elemental, Magic, Weapon]
+  Monsters:
+  - Name: Mutant Beasties
+    Keywords: [Beast]
+    Level: 1
+    Memo: Kar'nomal has enlisted these creatures to seek the power of the elements. They grow stronger depending on the number of Guardian Keys found.
+  - Name: Flowering Fauna
+    Keywords: [ Beast, Plant]
+    Level: 1
+    Memo: The wilds have created some beasts of their own in their war against civilization. Beware. They are unpredictable, and it will take great cunning to sneak past them.
+  - Name: Elven Rebels
+    Keywords: [Humanoid]
+    Level: 2
+    Memo: Some elves have had enough of civilization's intrusions into nature, taking extreme measures to enact vengeance. These rebels will use your deck against you.
+  - Name: Troll Ruffians
+    Keywords: [Giant, Humanoid]
+    Level: 2
+    Memo: Kar'nomal's tribe are entirely loyal to his vision of a world reclaimed by the elements. They attack the Keep, destroying cards from the Village stacks.
+  - Name: The Consumed
+    Keywords: [Elemental, Humanoid, Beast, Plant]
+    Level: 3
+    Memo: These trolls have been consumde by elemental forces, losing all sense of what they were. They are extremely powerful, but searching for Guardian Keys may reveal a weak point.
+  - Name: Ent Army
+    Keywords: [Giant, Plant]
+    Level: 3
+    Memo: The trees have volunteered their own soldiers for Kar'nomal's fight. These mighty behemoths will punish you for filling your deck with manufactured goods.
+  Guardians:
+  - Name: Kar'nomal
+    Keywords: [Elemental, Giant, Humanoid, Guardian]
+  Dungeon Rooms:
+  - Name: Hostile Meadow
+    Level: 1
+  - Name: Crossroads
+    Level: 2
+  - Name: Forest Shrine
+    Level: 3
+  - Name: Overgrown Path
+    Level: 1
+  - Name: Reclaimed Outpost
+    Level: 2
+  - Name: Sleeping Tree King
+    Level: 3
