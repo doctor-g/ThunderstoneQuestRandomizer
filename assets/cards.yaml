@@ -1442,3 +1442,104 @@
       Level: 2
     - Name: Spore Field
       Level: 3
+
+
+- Quest: Raging Seas
+  Number: 15
+  Heroes:
+    - Name: Adaltrude Stickyfingers
+      Keywords: [Halfling, Cleric, Rogue]
+      Memo: Those who contribute to Adaltrude's cause don't really have a choice but do receive a blessing in return.
+    - Name: Gurgelion
+      Keywords: [Triton, Wizard]
+      Combo: [Arcane, Elemental]
+      Memo: 'Gurgelion explains the secret of sustained magic to surface dwellers: "If you can hold your breath, you can hold a spell."'
+    - Name: Josephine Morgan
+      Keywords: [Human, Cleric]
+      Memo: Ships often employ magic users to keep them safe from dangers at sea, especially from other ships. Josephine has grown up on the sea, lending her powers to protect others.
+    - Name: Nimiane
+      Keywords: [Triton, Fighter]
+      Meta: [Discard]
+      Combo: [Boarding Party, Beast, Vermin]
+      Memo: The mighty warrior scoffs at superstitious legends and rituals. Nimiane believes in making one's own luck.
+    - Name: Steele Gargkson
+      Keywords: [Human, Orc, Fighter, Wizard]
+      Combo: [Bow]
+      Memo: Raised on the sea, this cunning mercenary serves as a master gunner, attacking ships from afar with devastating balls of fire.
+    - Name: Taegen "The Fox" Glynfir
+      Keywords: [Elf, Fighter, Rogue]
+      Memo: The Fox is a master navigator and captain of the Silver Crow. His countless years at sea proves very rewarding for those interested in completing voyages of their own.
+  Marketplace:
+    - Name: Stowaway
+      Keywords: [Cursed, Static, Ally]
+    - Name: Bottle of Rum
+      Keywords: [Item]
+    - Name: Hidden Stash
+      Keywords: [Item]
+    - Name: Ship in a Bottle
+      Keywords: [Magic,Item]
+    - Name: Spyglass
+      Keywords: [Item]
+    - Name: Swab the Deck
+      Keywords: [Arcane, Spell]
+      Combo: [Boarding Party]
+    - Name: The Black Spot
+      Keywords: [Arcane, Spell]
+      Combo: [Wizard]
+    - Name: Whirlpool
+      Keywords: [Arcane, Chaos, Elemental, Spell]
+      Combo: [Wizard, Triton]
+    - Name: Cutlass
+      Keywords: [Edged, Weapon]
+      Combo: [Human, Rogue]
+    - Name: Épée
+      Keywords: [Edged, Weapon]
+      Combo: [Humanoid]
+    - Name: Mast Mauler
+      Keywords: [Bow, Magic, Weapon]
+      Combo: [Boarding Party, Wizard]
+    - Name: Trident
+      Keywords: [Blunt, Edged, Weapon]
+      Combo: [Triton]
+  Monsters:
+    - Name: Brigands
+      Keywords: [Humanoid]
+      Level: 1
+      Memo: This motley crew is united by their endless hunger for both cruelty and gold. The more money you have, the harder they fight.
+    - Name: House of Klubba
+      Level: 1
+      Keywords: [Aberration, Vermin]
+      Memo: This bizarre race of primitive scavengers are obsessed with trade. They constantly eye your gear, so perhaps a trade will brighten their disposition.
+    - Name: Murderous Mermaids
+      Level: 2
+      Keywords: [Elemental, Fey, Humanoid]
+      Memo: Sinuous and deadly, the mermaids entangle their prey until it either drowns or sheds its valuables in order to break free
+    - Name: Queen's Crew
+      Level: 2
+      Keywords: [Boarding Party, Humanoid]
+      Memo: You'd best repel these raiders if you can. Once they infest your ship, they plunder your stores and make it a chore to resupply.
+    - Name: Ghost Ship
+      Level: 3
+      Keywords: [Boarding Party, Swarm, Undead]
+      Memo: These enraged lost souls are best met with overwhelming force and a cleric's holy light.
+    - Name: Sea Creatures
+      Level: 3
+      Keywords: [Beast, Giant]
+      Memo: Strange, hideous monstrosities roam the ocean's depths. They are a deadly threat to those on the surface and a terrifying nightmare to those who slip beneath the waves.
+  Guardians:
+    - Name: Captain Susan Ferring
+      Keywords: [Humanoid]
+      Combo: [Rogue]
+  Dungeon Rooms:
+    - Name: Klubba Island
+      Level: 1
+    - Name: Pirate's Cove
+      Level: 1
+    - Name: Castaway Island
+      Level: 2
+    - Name: Shipwreck Island
+      Level: 2
+    - Name: Ghost Ship
+      Level: 3
+    - Name: The Great Reef
+      Level: 3
