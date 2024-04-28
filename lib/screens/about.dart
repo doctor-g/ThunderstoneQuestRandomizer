@@ -87,11 +87,9 @@ class _AboutPageState extends State<AboutPage> {
   Widget _makeLink(String url, var style) => InkWell(
         child: Text(url, style: style),
         onTap: () async {
-          if (await canLaunch(url)) {
-            await launch(
-              url,
-              forceSafariVC: false,
-            );
+          var uri = Uri.parse(url);
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
           }
         },
       );
