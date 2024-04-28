@@ -52,7 +52,8 @@ class _AboutPageState extends State<AboutPage> {
                         Text(
                             '${AppLocalizations.of(context)!.about_version} ${_packageInfo!.version}',
                             style: bodyTextStyle),
-                        Text('©2020–2023 Paul Gestwicki', style: bodyTextStyle),
+                        Text('©2020–${DateTime.now().year} Paul Gestwicki',
+                            style: bodyTextStyle),
                         _space(),
                         Text(
                             '${AppLocalizations.of(context)!.about_repository}:',
