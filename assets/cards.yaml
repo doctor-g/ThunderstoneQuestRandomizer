@@ -1453,7 +1453,8 @@
     - Name: Gurgelion
       Keywords: [Triton, Wizard]
       Combo: [Arcane, Elemental]
-      Memo: 'Gurgelion explains the secret of sustained magic to surface dwellers: "If you can hold your breath, you can hold a spell."'
+      Memo: |
+        Gurgelion explains the secret of sustained magic to surface dwellers: "If you can hold your breath, you can hold a spell."
     - Name: Josephine Morgan
       Keywords: [Human, Cleric]
       Memo: Ships often employ magic users to keep them safe from dangers at sea, especially from other ships. Josephine has grown up on the sea, lending her powers to protect others.
