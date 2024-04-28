@@ -1445,7 +1445,7 @@
 
 
 - Quest: Raging Seas
-  Number: 15
+  Number: 14
   Heroes:
     - Name: Adaltrude Stickyfingers
       Keywords: [Halfling, Cleric, Rogue]
@@ -1542,4 +1542,101 @@
     - Name: Ghost Ship
       Level: 3
     - Name: The Great Reef
+      Level: 3
+
+- Quest: Ancient Adversaries
+  Number: 15
+  Heroes:
+    - Name: Adallind the Noble
+      Keywords: [Halfling, Cleric]
+      Memo: Adallind's faith grows to meet whatever challenge the jungle throws at her, and her power grows to match.
+    - Name: Archibald
+      Keywords: [Beast, Wizard]
+      Combo: [Spell, Magic]
+      Memo: This primate happened upon the amulet of a fallen wizard, giving him advanced intelligence. Now, Archibald seeks more mystical items and secret knowledge in his quest for growth.
+    - Name: Duridmaes Runeseeker
+      Keywords: [Dwarf, Rogue]
+      Memo: Duridmaes has a nose for treasure, an eye for traps, and an ear for the sounds of approaching danger.
+    - Name: Iolas
+      Keywords: [Elf, Fighter, Rogue]
+      Memo: A renowned hunter, Iolas seeks the most formidable game. The only trophies he takes are his memories of the hunt and the lessons they've taught him.
+    - Name: Joanna
+      Keywords: [Human, Fighter]
+      Combo: [Discard]
+      Memo: The jungle is Joanna's home, and she holds no fear for even its deepest, darkest heart.
+    - Name: Mongoo
+      Keywords: [Fey, Cleric, Wizard]
+      Meta: [Discard]
+      Memo: No one can guess how old Mongoo is, least of all Mongoo himself. He is forever wandering, seeking new experiences and making new memories.
+  Marketplace:
+    - Name: Parrot
+      Keywords: [Beast, Rogue, Ally]
+    - Name: Fishing Rod
+      Keywords: [Item]
+    - Name: Pendant of Gifts
+      Keywords: [Magic, Item]
+    - Name: Star-Shaped Herb
+      Keywords: [Elemental, Magic, Item]
+    - Name: Po's Sight
+      Keywords: [Arcane, Elemental, Spell]
+    - Name: Summon Qaitu
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Wizard]
+    - Name: Tattoo
+      Keywords: [Arcane, Divine, Spell]
+    - Name: Teeth of the Earth
+      Keywords: [Arcane, Chaos, Elemental, Spell]
+      Combo: [Elemental, Weapon, Wizard]
+    - Name: Blowdart
+      Keywords: [Bow, Weapon, Elemental]
+      Combo: [Rogue]
+    - Name: Bonesword
+      Keywords: [Blunt, Edged, Elemental, Weapon]
+      Combo: [Cleric]
+    - Name: Master's Crossbow
+      Keywords: [Bow, Weapon]
+      Combo: [Rogue]
+    - Name: Spear
+      Keywords: [Edged, Weapon]
+      Meta: [Discard]
+  Monsters:
+    - Name: Halfling Mystics
+      Level: 1
+      Keywords: [Fey, Humanoid]
+      Memo: Isolation in the jungle has amplified these halflings' mental abilities but made them cruel toward others in their quest for the totems' power.
+    - Name: Jungle Threats
+      Level: 1
+      Keywords: [Beast, Plant]
+      Memo: The jungle is full of animals and plants that exhaust explorers, wearing away at their supplies, allies, and resolve.
+    - Name: Explorer Ghosts
+      Level: 2
+      Keywords: [Humanoid, Undead, Vermin]
+      Memo: Countless travelers have died in the jungle, but not all have stayed dead. Those who return are transformed by the land to do its bidding.
+    - Name: Tribal Elves
+      Level: 2
+      Keywords: [Humanoid]
+      Memo: Fearsome headhunters, the elves of the jungle recognize the totems' true power and seek it for themselves.
+    - Name: Celestial Half-Breeds
+      Level: 3
+      Keywords: [Elemental, Celestial, Humanoid]
+      Memo: Long ago, a band of celestial beings settled in a human village, intermingling until the distinctions between them dissolved. This diverse group can be punishing, but with great risk comes great reward.
+    - Name: Lava Dwarves
+      Level: 3
+      Keywords: [Elemental, Humanoid]
+      Memo: Beware the fiery touch of the dwarf tribe who worships Sigrios, lest they melt your equipment and set your flesh aflame.
+  Guardians:
+    - Name: Sigrios, The Mountain Thunder
+      Keywords: [Aberration, Elemental, Golem]
+  Dungeon Rooms:
+    - Name: River
+      Level: 1
+    - Name: Trading Post
+      Level: 1
+    - Name: Caves
+      Level: 2
+    - Name: Rope Bridge
+      Level: 2
+    - Name: Lava Den
+      Level: 3
+    - Name: Lost Temple
       Level: 3
