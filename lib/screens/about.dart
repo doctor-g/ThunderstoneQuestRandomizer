@@ -70,8 +70,8 @@ class _AboutPageState extends State<AboutPage> {
                         _space(),
                         Text(AppLocalizations.of(context)!.about_ownership,
                             style: bodyTextStyle),
-                        _makeLink(
-                            'https://www.alderac.com/thunderstone', linkStyle),
+                        _makeLink('https://www.alderac.com/thunderstone-quest/',
+                            linkStyle),
                         _space(),
                       ],
                     ),
