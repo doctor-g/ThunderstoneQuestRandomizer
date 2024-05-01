@@ -251,11 +251,7 @@ class _RandomizerPageState extends State<RandomizerPage>
             : Column(children: [
                 _subsectionHeading(
                     AppLocalizations.of(context)!.tableau_wilderness),
-                Text(
-                    _tableau!.wildernessMonster == WildernessMonster.GiantRat
-                        ? AppLocalizations.of(context)!.tableau_wilderness_rat
-                        : AppLocalizations.of(context)!
-                            .tableau_wilderness_mosquitoes,
+                Text(_tableau!.wildernessMonster!,
                     style: Theme.of(context).textTheme.bodyLarge),
               ]),
         ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1),

@@ -19,6 +19,7 @@ class ThunderstoneYamlCardParser {
     final empty = [];
     _quest = Quest(node['Quest']);
     _quest!.number = node['Number'];
+    _quest!.wilderness = node['Wilderness'];
 
     for (String key in node.keys) {
       if (key.startsWith("Quest_")) {

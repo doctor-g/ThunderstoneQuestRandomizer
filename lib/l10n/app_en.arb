@@ -272,13 +272,13 @@
     "context": "Settings > Mode",
     "placeholders": {
       "percent": {
-        "example": "75",
+        "example": "50",
         "description": "The percent chance"
       }
     }
   },
 
-  "settings_ratChance_hint": "Probability of Giant Rat vs. Arctic Mosquitoes. Requires Quest 7.",
+  "settings_ratChance_hint": "Probability of Giant Rat vs. randomly-selected Wilderness from available Quests",
   "@settings_ratChance_hint": {
     "description": "Explanation of the probability slider for giant rat chance.",
     "context": "Settings > Mode"

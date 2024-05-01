@@ -39,6 +39,7 @@ void main() {
   - Name: Monster2
     Level: 2
     Restriction: [NoSolo]
+  Wilderness: Wilderness1
 ''');
       quest = db.quests[0];
     });
@@ -116,6 +117,10 @@ void main() {
       expect(quest.monsters[1].name, equals('Monster2'));
       expect(quest.monsters[0].soloRestriction, isFalse);
       expect(quest.monsters[1].soloRestriction, isTrue);
+    });
+
+    test('Get the wilderness', () {
+      expect(quest.wilderness, equals('Wilderness1'));
     });
   });
 

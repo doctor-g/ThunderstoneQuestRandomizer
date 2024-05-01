@@ -14,9 +14,12 @@ class Randomizer {
     Tableau tableau = new Tableau();
 
     if (settings.randomizeWilderness) {
-      tableau.wildernessMonster = (_random.nextDouble() <= settings.ratChance)
-          ? WildernessMonster.GiantRat
-          : WildernessMonster.ArcticMosquitoes;
+      List<String> nonRatOptions = _collectWildernesses(db, settings);
+      if (nonRatOptions.isEmpty || _random.nextDouble() <= settings.ratChance) {
+        tableau.wildernessMonster = "Giant Rat";
+      } else {
+        tableau.wildernessMonster = _pickRandom(nonRatOptions);
+      }
     }
 
     if (settings.barricadesMode) {
@@ -51,6 +54,20 @@ class Randomizer {
         }
       }
     }
+  }
+
+  List<String> _collectWildernesses(CardDatabase db, SettingsModel settings) {
+    List<String> result = [];
+    for (var quest in db.quests) {
+      if (settings.includes(quest) && quest.wilderness != null) {
+        result.add(quest.wilderness!);
+      }
+    }
+    return result;
+  }
+
+  T _pickRandom<T>(List<T> list) {
+    return list[_random.nextInt(list.length)];
   }
 
   List<Hero> chooseHeroes(CardDatabase db, SettingsModel settings) {

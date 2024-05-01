@@ -35,7 +35,7 @@ class SettingsModel extends ChangeNotifier {
   final DoublePreference _comboBias =
       DoublePreference(key: 'comboBias', defaultValue: 0.4);
   final DoublePreference _ratChance =
-      DoublePreference(key: 'ratChance', defaultValue: 0.75);
+      DoublePreference(key: 'ratChance', defaultValue: 0.5);
   final StringPreference _language =
       StringPreference(key: 'lang', defaultValue: 'en');
   final BoolPreference _useCorruption =
