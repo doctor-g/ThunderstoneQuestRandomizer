@@ -118,10 +118,11 @@ class SettingsPage extends StatelessWidget {
                         children: [
                           _makeCheckbox(
                               context,
-                              AppLocalizations.of(context)!.settings_wilderness,
-                              settings.randomizeWilderness,
-                              (value) => settings.randomizeWilderness =
-                                  !settings.randomizeWilderness),
+                              AppLocalizations.of(context)!
+                                  .settings_wilderness_monster,
+                              settings.randomizeWildernessMonster,
+                              (value) => settings.randomizeWildernessMonster =
+                                  !settings.randomizeWildernessMonster),
                           Text(
                               AppLocalizations.of(context)!.settings_ratChance(
                                   _formatPercent(settings.ratChance)),
@@ -130,7 +131,7 @@ class SettingsPage extends StatelessWidget {
                             min: 0,
                             max: 1,
                             value: settings.ratChance,
-                            onChanged: settings.randomizeWilderness
+                            onChanged: settings.randomizeWildernessMonster
                                 ? (value) => settings.ratChance = value
                                 : null,
                           ),

@@ -12,6 +12,7 @@ void main() {
       db = parser.parse('''
 - Quest: The First Quest
   Number: 1
+  WildernessMonster: AlternativeToGiantRat
   Heroes:
     - Name: Hero1
       Keywords: [ Human, Fighter ]
@@ -39,7 +40,6 @@ void main() {
   - Name: Monster2
     Level: 2
     Restriction: [NoSolo]
-  Wilderness: Wilderness1
 ''');
       quest = db.quests[0];
     });
@@ -119,8 +119,8 @@ void main() {
       expect(quest.monsters[1].soloRestriction, isTrue);
     });
 
-    test('Get the wilderness', () {
-      expect(quest.wilderness, equals('Wilderness1'));
+    test('Get the wilderness monster', () {
+      expect(quest.wildernessMonster, equals('AlternativeToGiantRat'));
     });
   });
 

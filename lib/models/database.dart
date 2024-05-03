@@ -41,7 +41,7 @@ class Quest {
   final List<Guardian> _guardians = [];
   final List<Room> _rooms = [];
   final List<Monster> _monsters = [];
-  String? wilderness;
+  String? wildernessMonster;
 
   List<Hero> get heroes => _heroes;
   List<MarketplaceCard> get marketplaceCards => _marketplaceCards;

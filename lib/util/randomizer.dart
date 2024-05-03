@@ -13,8 +13,8 @@ class Randomizer {
     final maxTries = 10;
     Tableau tableau = new Tableau();
 
-    if (settings.randomizeWilderness) {
-      List<String> nonRatOptions = _collectWildernesses(db, settings);
+    if (settings.randomizeWildernessMonster) {
+      List<String> nonRatOptions = _collectWildernessMonsters(db, settings);
       if (nonRatOptions.isEmpty || _random.nextDouble() <= settings.ratChance) {
         tableau.wildernessMonster = "Giant Rat";
       } else {
@@ -56,11 +56,12 @@ class Randomizer {
     }
   }
 
-  List<String> _collectWildernesses(CardDatabase db, SettingsModel settings) {
+  List<String> _collectWildernessMonsters(
+      CardDatabase db, SettingsModel settings) {
     List<String> result = [];
     for (var quest in db.quests) {
-      if (settings.includes(quest) && quest.wilderness != null) {
-        result.add(quest.wilderness!);
+      if (settings.includes(quest) && quest.wildernessMonster != null) {
+        result.add(quest.wildernessMonster!);
       }
     }
     return result;

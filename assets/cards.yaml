@@ -693,9 +693,9 @@
 
 - Quest: Frozen in Time
   Number: 7
-  Wilderness: Arctic Mosquitoes
   Sets:
   - To the Barricades
+  WildernessMonster: Arctic Mosquitoes
   Heroes:
   - Name: Breezy
     Keywords: [ Human, Wizard, Hero ]
@@ -1345,7 +1345,7 @@
 
 - Quest: Rotten Roots
   Number: 13
-  Wilderness: Grub
+  WildernessMonster: Grub
   Heroes:
   - Name: Amber Leafspark
     Keywords: [Fey, Fighter, Hero]
@@ -1448,7 +1448,6 @@
 
 - Quest: Raging Seas
   Number: 14
-  Wilderness: Home Port
   Heroes:
     - Name: Adaltrude Stickyfingers
       Keywords: [Halfling, Cleric, Rogue]

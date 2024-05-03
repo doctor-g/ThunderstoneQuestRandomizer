@@ -128,18 +128,6 @@
     "context": "Home page with random tableau and wilderness generation enabled"
   },
 
-  "tableau_wilderness_rat": "Giant Rat",
-  "@tableau_wilderness_rat": {
-    "description": "The name of the default wilderness monster (Giant Rat).",
-    "context": "Home page with random tableau and wilderness generation enabled"
-  },
-
-  "tableau_wilderness_mosquitoes": "Arctic Mosquitoes",
-  "@tableau_wilderness_mosquitoes": {
-    "description": "The name of the alternative wilderness monster",
-    "context": "Home page with random tableau and wilderness generation enabled"
-  },
-
   "tableau_monsters": "Monsters",
   "@tableau_monsters": {
     "description": "Section header for listing the monsters in the tableau",
@@ -260,9 +248,9 @@
     "context": "Settings page"
   },
 
-  "settings_wilderness": "Randomize Wilderness",
-  "@settings_wilderness": {
-    "description": "Label for the toggle to include Wilderness (level 0) monster randomization",
+  "settings_wilderness_monster": "Randomize Level 0 Monster",
+  "@settings_wilderness_monster": {
+    "description": "Label for the toggle to include Wilderness (Level 0) monster randomization",
     "context": "Settings > Mode"
   },
 
@@ -278,7 +266,7 @@
     }
   },
 
-  "settings_ratChance_hint": "Probability of Giant Rat vs. randomly-selected Wilderness from available Quests",
+  "settings_ratChance_hint": "Probability of Giant Rat vs. randomly-selected Wilderness Monster from available Quests",
   "@settings_ratChance_hint": {
     "description": "Explanation of the probability slider for giant rat chance.",
     "context": "Settings > Mode"

@@ -24,8 +24,8 @@ class SettingsModel extends ChangeNotifier {
       BoolPreference(key: 'soloMode', defaultValue: false);
   final BoolPreference _smallTableau =
       BoolPreference(key: 'smallTableau', defaultValue: false);
-  final BoolPreference _randomizeWilderness =
-      BoolPreference(key: 'randomizeWilderness', defaultValue: false);
+  final BoolPreference _randomizeWildernessMonster =
+      BoolPreference(key: 'randomizeWildernessMonster', defaultValue: false);
   final BrightnessPreference _brightness =
       BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
   final IntPreference _heroStrategyIndex =
