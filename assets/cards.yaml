@@ -1649,3 +1649,105 @@
       Level: 3
     - Name: Lost Temple
       Level: 3
+
+- Quest: Twilight Souls
+  Number: 16
+  Heroes:
+    - Name: Arabella Talbard
+      Keywords: [Human, Fighter]
+      Combo: [Ally,Weapon]
+      Memo: A master strategist, Arabella makes use of every tool at her disposal to lead the charge. She is adept with weapons and allies, making regular use of both.
+    - Name: Odell Garothmuk
+      Keywords: [Orc, Rogue]
+      Memo: A daredevil at heart, Odell jumps at the chance to explore far off places, the farther the better. She is a powerful guide, able to find sources of light in the strangest of places.
+    - Name: Birinus the Inquisitive
+      Keywords: [Halfling, Wizard]
+      Combo: [Chaos, Ally]
+      Memo: Birinus saw power in darkness, exploring its potential to stabilize the spells of chaos. But he delved too far, and now is being hunted by dark creatures who know his name.
+    - Name: Asterra
+      Keywords: [Avian, Elf, Cleric]
+      Combo: [Demon, Undead, Vermin]
+      Memo: A cleric of the missing light goddess, Asterra spent weeks in an unwakeable trance. She awoke with renewed strength in her wings and a message to restore soul light.
+    - Name: Belkar Hammerwing
+      Keywords: [Dwarf, Cleric, Fighter]
+      Combo: [Bow,Edged]
+      Memo: Once a simple guard, Belkar wasn't seeking adventure. But now, he's learning about the dangers of the darkness and the power of faith. He is a mighty force with bows and edged weapons.
+    - Name: Reluvethel
+      Keywords: [Elf, Rogue, Wizard]
+      Memo: A rogue student of the magic arts, Reluvathel is more interested in lining his own pockets than beings of dark power. But with the rising tide of evil, even this tainted soul is seeking redemption. He makes careful use of light to fuel his magical powers.
+  Marketplace:
+    - Name: Giant Eagle
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Cleric, Rogue]
+    - Name: Strigine Mount
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Wizard]
+    - Name: Griffon
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Fighter]
+    - Name: Phosphorescent Helm
+      Keywords: [Magic, Item]
+    - Name: Hyperprism
+      Keywords: [Magic, Item]
+    - Name: Inner Light
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Demon, Undead, Vermin]
+    - Name: Nourishment
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Ally]
+    - Name: Dark Pact
+      Keywords: [Arcane, Chaos, Spell]
+    - Name: Personal Convergence
+      Keywords: [Divine, Spell]
+      Combo: [Ally]
+    - Name: Tulwar
+      Keywords: [Edged, Magic, Weapon]
+      Combo: [Ally]
+    - Name: Lance
+      Keywords: [Blunt, Edged, Weapon]
+      Combo: [Fighter]
+    - Name: Bola
+      Keywords: [Blunt, Bow, Weapon]
+    - Name: Chakram
+      Keywords: [Bow, Edged, Weapon]
+  Monsters:
+    - Name: Light Leeches
+      Level: 1
+      Keywords: [Aberration, Vermin]
+      Memo: These vampiric vermin are born of the darkness, but Prince Musaid's campaign has emboldened them to venture out with an insatiable hunger for soul light. It won't be easy to get past them without sacrificing a bit of yours.
+    - Name: The Fallen
+      Level: 1
+      Keywords: [Fey, Humanoid, Undead]
+      Memo: Occasionally, people lose their light and fall to their deaths. The most tragic of these remain as dark, vindictive spirits who masquerade as beautiful women to lure travelers through the sky to their deaths. If you find yourself faced with one of these creatures, be prepared to give something up.
+    - Name: Corvaxis
+      Level: 2
+      Keywords: [Beast, Humanoid]
+      Memo: The Corvaxis are a race of Avian creatures who revel in their greed. Good thing for you, they love to bargain.
+    - Name: Sky Lords
+      Level: 2
+      Keywords: [Giant, Humanoid]
+      Memo: These empyrean giants are solitary beings filled with cosmic energe kept contained by their mystical armor. They are considered deities by surface dwellers and don't take kindly to trespassers in their realm.
+    - Name: Shadow Demons
+      Level: 3
+      Keywords: [Demon, Elemental]
+      Memo: These otherworldly creatures make up Prince Musaid's invasion force. They are powerful brutes, but they are vulnerable to strong light... and there is no stronger light than the soul.
+    - Name: Deadly Drafts
+      Level: 3
+      Keywords: [Elemental]
+      Memo: High in the clouds, mystical forces converge into powerful storms with a life all their own. It will take more than your average tools of the trade to face off against these unpredictable elementals.
+  Guardians:
+    - Name: Prince Musaid, Child of Darkness
+      Keywords: [Demon, Elemental, Humanoid]
+  Dungeon Rooms:
+    - Name: Zephyr Shrine
+      Level: 1
+    - Name: Friendless Peak
+      Level: 2
+    - Name: Vimana
+      Level: 3
+    - Name: The Pillars
+      Level: 1
+    - Name: Canyon
+      Level: 2
+    - Name: Lost Aerie
+      Level: 3
