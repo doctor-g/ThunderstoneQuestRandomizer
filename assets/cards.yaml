@@ -86,6 +86,12 @@
     Keywords: [ Dragon, Swarm, Ezuzrius's Hatchling ]
     Level: 3
 
+- Quest: Warlord Promos
+  Guardians:
+    - Name: Stormwraith
+      Keywords: [Elemental, Humanoid, Undead, Guardian]
+      Meta: [Destroy ]
+
 - Quest: A Mirror in the Dark
   Number: 1
   Sets:
