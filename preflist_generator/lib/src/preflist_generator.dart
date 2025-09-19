@@ -11,9 +11,8 @@ class PrefListGenerator extends Generator {
     library.classes
         .where((element) => element.name == 'SettingsModel')
         .forEach((classElement) {
-      var prefs = classElement.fields.where((element) => element.type
-          .getDisplayString(withNullability: false)
-          .endsWith('Preference'));
+      var prefs = classElement.fields.where(
+          (element) => element.type.getDisplayString().endsWith('Preference'));
 
       if (prefs.length > 0) {
         buffer.write(
@@ -23,7 +22,7 @@ class PrefListGenerator extends Generator {
         buffer.writeln('];\n');
 
         prefs.forEach((pref) {
-          if (pref.name[0] != '_') {
+          if (pref.name![0] != '_') {
             throw UnsupportedError('Preference variables must be private');
           }
 
@@ -33,9 +32,8 @@ class PrefListGenerator extends Generator {
           // Find the type of preference (the parameter to Preference<T>)
           var type = (pref.type.element as ClassElement)
               .allSupertypes
-              .where((element) => element
-                  .getDisplayString(withNullability: false)
-                  .startsWith('Preference'))
+              .where((element) =>
+                  element.getDisplayString().startsWith('Preference'))
               .first
               .typeArguments[0];
 

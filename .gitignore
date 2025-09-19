@@ -44,3 +44,6 @@ app.*.map.json
 
 # source_gen generated files
 **/*.g.dart
+
+# Files generated for localization
+app_localizations**.dart

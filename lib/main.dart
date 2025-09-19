@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tqr/l10n/app_localizations.dart';
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/screens/randomizer.dart';
 import 'package:flutter_tqr/util/parser.dart';
@@ -7,12 +8,13 @@ import 'package:flutter_tqr/screens/about.dart';
 import 'package:flutter_tqr/screens/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-        create: (context) => SettingsModel(), child: _TQRandomizerApp()),
+      create: (context) => SettingsModel(),
+      child: _TQRandomizerApp(),
+    ),
   );
 }
 
@@ -26,14 +28,15 @@ class _TQRandomizerApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => Consumer<tq.CardDatabaseModel>(
-                builder: (context, dbmodel, child) => dbmodel.database == null
-                    ? _LoadingPage(dbmodel: dbmodel)
-                    : RandomizerPage(dbmodel.database!),
-              ),
+            builder: (context, dbmodel, child) => dbmodel.database == null
+                ? _LoadingPage(dbmodel: dbmodel)
+                : RandomizerPage(dbmodel.database!),
+          ),
           '/settings': (context) => Consumer<tq.CardDatabaseModel>(
-              builder: (context, dbmodel, child) => dbmodel.database == null
-                  ? Container()
-                  : SettingsPage(dbmodel.database!)),
+            builder: (context, dbmodel, child) => dbmodel.database == null
+                ? Container()
+                : SettingsPage(dbmodel.database!),
+          ),
           '/about': (context) => AboutPage(),
         },
         title: 'Thunderstone Quest Randomizer',
@@ -46,9 +49,15 @@ class _TQRandomizerApp extends StatelessWidget {
           fontFamily: 'Cormorant',
           textTheme: TextTheme(
             titleMedium: TextStyle(
-                fontSize: 32, fontWeight: FontWeight.bold, height: 1.5),
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              height: 1.5,
+            ),
             titleSmall: TextStyle(
-                fontSize: 22, fontStyle: FontStyle.italic, height: 1.5),
+              fontSize: 22,
+              fontStyle: FontStyle.italic,
+              height: 1.5,
+            ),
             bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(fontSize: 14),
           ),
@@ -87,8 +96,6 @@ class _LoadingPageState extends State<_LoadingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+    return Center(child: CircularProgressIndicator());
   }
 }

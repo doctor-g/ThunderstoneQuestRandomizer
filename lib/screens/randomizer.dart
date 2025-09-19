@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tqr/l10n/app_localizations.dart';
 import 'package:flutter_tqr/models/database.dart' as tq;
 import 'package:flutter_tqr/models/settings.dart';
 import 'package:flutter_tqr/models/tableau.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_tqr/util/barricades_blacklist.dart';
 import 'package:flutter_tqr/util/randomizer.dart';
 import 'package:flutter_tqr/util/tableau_failure.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RandomizerPage extends StatefulWidget {
   final tq.CardDatabase database;

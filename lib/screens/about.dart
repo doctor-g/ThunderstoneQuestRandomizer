@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tqr/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AboutPage extends StatefulWidget {
@@ -30,16 +30,12 @@ class _AboutPageState extends State<AboutPage> {
     final bodyTextStyle = textTheme.bodyLarge;
     final linkStyle = bodyTextStyle!.copyWith(color: Colors.blue);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.about_title),
-      ),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.about_title)),
       body: Center(
         child: _packageInfo == null
             ? CircularProgressIndicator()
             : ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: 600,
-                ),
+                constraints: BoxConstraints(maxWidth: 600),
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -50,28 +46,40 @@ class _AboutPageState extends State<AboutPage> {
                       children: <Widget>[
                         Text('$name', style: titleStyle),
                         Text(
-                            '${AppLocalizations.of(context)!.about_version} ${_packageInfo!.version}',
-                            style: bodyTextStyle),
-                        Text('©2020–${DateTime.now().year} Paul Gestwicki',
-                            style: bodyTextStyle),
+                          '${AppLocalizations.of(context)!.about_version} ${_packageInfo!.version}',
+                          style: bodyTextStyle,
+                        ),
+                        Text(
+                          '©2020–${DateTime.now().year} Paul Gestwicki',
+                          style: bodyTextStyle,
+                        ),
                         _space(),
                         Text(
-                            '${AppLocalizations.of(context)!.about_repository}:',
-                            style: bodyTextStyle),
+                          '${AppLocalizations.of(context)!.about_repository}:',
+                          style: bodyTextStyle,
+                        ),
                         _makeLink(
-                            'https://github.com/doctor-g/ThunderstoneQuestRandomizer',
-                            linkStyle),
+                          'https://github.com/doctor-g/ThunderstoneQuestRandomizer',
+                          linkStyle,
+                        ),
                         _space(),
-                        Text(AppLocalizations.of(context)!.about_license,
-                            style: bodyTextStyle),
+                        Text(
+                          AppLocalizations.of(context)!.about_license,
+                          style: bodyTextStyle,
+                        ),
                         _makeLink(
-                            'https://www.gnu.org/licenses/gpl-3.0.en.html',
-                            linkStyle),
+                          'https://www.gnu.org/licenses/gpl-3.0.en.html',
+                          linkStyle,
+                        ),
                         _space(),
-                        Text(AppLocalizations.of(context)!.about_ownership,
-                            style: bodyTextStyle),
-                        _makeLink('https://www.alderac.com/thunderstone-quest/',
-                            linkStyle),
+                        Text(
+                          AppLocalizations.of(context)!.about_ownership,
+                          style: bodyTextStyle,
+                        ),
+                        _makeLink(
+                          'https://www.alderac.com/thunderstone-quest/',
+                          linkStyle,
+                        ),
                         _space(),
                       ],
                     ),
@@ -85,12 +93,12 @@ class _AboutPageState extends State<AboutPage> {
   Widget _space() => Padding(padding: EdgeInsets.all(8));
 
   Widget _makeLink(String url, var style) => InkWell(
-        child: Text(url, style: style),
-        onTap: () async {
-          var uri = Uri.parse(url);
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          }
-        },
-      );
+    child: Text(url, style: style),
+    onTap: () async {
+      var uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      }
+    },
+  );
 }
