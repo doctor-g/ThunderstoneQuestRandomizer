@@ -7,11 +7,11 @@ import 'package:flutter_tqr/util/tableau_failure.dart';
 
 class Randomizer {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
-  Random _random = new Random();
+  final Random _random = Random();
 
   Tableau generateTableau(CardDatabase db, SettingsModel settings) {
     final maxTries = 10;
-    Tableau tableau = new Tableau();
+    Tableau tableau = Tableau();
 
     if (settings.randomizeWildernessMonster) {
       List<String> nonRatOptions = _collectWildernessMonsters(db, settings);
@@ -23,17 +23,18 @@ class Randomizer {
     }
 
     if (settings.barricadesMode) {
-      tableau.modes.add(GameMode.Barricades);
+      tableau.modes.add(GameMode.barricades);
     }
     if (settings.soloMode) {
-      tableau.modes.add(GameMode.Solo);
+      tableau.modes.add(GameMode.solo);
     }
     if (settings.smallTableau) {
-      tableau.modes.add(GameMode.SmallTableau);
+      tableau.modes.add(GameMode.smallTableau);
     }
     if (!settings.useCorruption) {
-      db = db
-          .where((card) => !card.combo.union(card.meta).contains('Corruption'));
+      db = db.where(
+        (card) => !card.combo.union(card.meta).contains('Corruption'),
+      );
     }
 
     int tries = 0;
@@ -41,8 +42,10 @@ class Randomizer {
       try {
         tableau.heroes = chooseHeroes(db, settings);
         tableau.guardian = chooseGuardian(db, settings, tableau);
-        tableau.dungeon =
-            generateDungeon(db, settings); // No combos for dungeon.
+        tableau.dungeon = generateDungeon(
+          db,
+          settings,
+        ); // No combos for dungeon.
         tableau.marketplace = chooseMarket(db, settings, tableau);
         tableau.monsters = chooseMonsters(db, settings, tableau);
         return tableau;
@@ -50,14 +53,16 @@ class Randomizer {
         tries++;
         print('Got exception: ${e.cause}\nTries remaining ${maxTries - tries}');
         if (tries >= maxTries) {
-          throw e;
+          rethrow;
         }
       }
     }
   }
 
   List<String> _collectWildernessMonsters(
-      CardDatabase db, SettingsModel settings) {
+    CardDatabase db,
+    SettingsModel settings,
+  ) {
     List<String> result = [];
     for (var quest in db.quests) {
       if (settings.includes(quest) && quest.wildernessMonster != null) {
@@ -80,13 +85,17 @@ class Randomizer {
       }
     }
 
-    List<Hero> result =
-        settings.heroSelectionStrategy.selectHeroesFrom(allHeroes);
+    List<Hero> result = settings.heroSelectionStrategy.selectHeroesFrom(
+      allHeroes,
+    );
     return result;
   }
 
   Marketplace chooseMarket(
-      CardDatabase db, SettingsModel settings, Tableau tableau) {
+    CardDatabase db,
+    SettingsModel settings,
+    Tableau tableau,
+  ) {
     // Get all possible market cards
     List<MarketplaceCard> allMarketCards = [];
     for (Quest quest in db.quests) {
@@ -98,15 +107,19 @@ class Randomizer {
       }
     }
     return settings.marketSelectionStrategy.selectMarketCardsFrom(
-        allMarketCards,
-        // If not using combo bias, then the bias is essentially 0%.
-        // That is, we never worry about whether a card has a combo or not.
-        settings.useComboBias ? settings.comboBias : 0.0,
-        tableau);
+      allMarketCards,
+      // If not using combo bias, then the bias is essentially 0%.
+      // That is, we never worry about whether a card has a combo or not.
+      settings.useComboBias ? settings.comboBias : 0.0,
+      tableau,
+    );
   }
 
   Guardian chooseGuardian(
-      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
+    CardDatabase db,
+    SettingsModel settings,
+    ComboFinder tableau,
+  ) {
     List<Guardian> allGuardians = [];
     for (Quest quest in db.quests) {
       if (settings.includes(quest)) {
@@ -143,42 +156,47 @@ class Randomizer {
     Map<int, List<Room>> availableRooms = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
       if (settings.includes(quest)) {
-        quest.rooms.forEach((element) {
+        for (var element in quest.rooms) {
           availableRooms[element.level]!.add(element);
-        });
+        }
       }
     }
 
-    Dungeon dungeon = new Dungeon();
-    [1, 2, 3].forEach((level) {
+    Dungeon dungeon = Dungeon();
+    for (var level in [1, 2, 3]) {
       List<Room> rooms = availableRooms[level]!;
-      [1, 2].forEach((_i) {
+      for (var _ in [1, 2]) {
         Room room = rooms.removeAt(_random.nextInt(rooms.length));
         dungeon.roomsMap[level]!.add(room);
-      });
-    });
+      }
+    }
     return dungeon;
   }
 
   List<Monster> chooseMonsters(
-      CardDatabase db, SettingsModel settings, ComboFinder tableau) {
+    CardDatabase db,
+    SettingsModel settings,
+    ComboFinder tableau,
+  ) {
     Map<int, List<Monster>> availableMonsters = {1: [], 2: [], 3: []};
     for (Quest quest in db.quests) {
       if (settings.includes(quest)) {
-        quest.monsters.forEach(
-            (monster) => availableMonsters[monster.level]!.add(monster));
+        for (var monster in quest.monsters) {
+          availableMonsters[monster.level]!.add(monster);
+        }
       }
     }
 
     if (settings.soloMode) {
-      [1, 2, 3].forEach((level) {
-        availableMonsters[level]!
-            .removeWhere((monster) => monster.soloRestriction);
-      });
+      for (var level in [1, 2, 3]) {
+        availableMonsters[level]!.removeWhere(
+          (monster) => monster.soloRestriction,
+        );
+      }
     }
 
     List<Monster> result = [];
-    [1, 2, 3].forEach((level) {
+    for (var level in [1, 2, 3]) {
       List<Monster> list = availableMonsters[level]!;
       bool done = false;
       while (!done && _seekCombo(settings)) {
@@ -194,7 +212,7 @@ class Randomizer {
         Monster monster = list[_random.nextInt(list.length)];
         result.add(monster);
       }
-    });
+    }
 
     return result;
   }

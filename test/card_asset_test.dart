@@ -11,16 +11,16 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     // Parse the data
-    ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+    ThunderstoneYamlCardParser parser = ThunderstoneYamlCardParser();
     String string = await rootBundle.loadString('assets/cards.yaml');
     database = parser.parse(string);
   });
 
   test('All cards have names', () {
-    database.quests.forEach((quest) {
-      quest.cards.forEach((card) {
+    for (var quest in database.quests) {
+      for (var card in quest.cards) {
         expect(card.name, isNotNull);
-      });
-    });
+      }
+    }
   });
 }

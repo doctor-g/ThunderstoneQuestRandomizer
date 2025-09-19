@@ -4,6 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AboutPage extends StatefulWidget {
+  const AboutPage({super.key});
+
   @override
   State<StatefulWidget> createState() => _AboutPageState();
 }
@@ -44,7 +46,7 @@ class _AboutPageState extends State<AboutPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('$name', style: titleStyle),
+                        Text(name, style: titleStyle),
                         Text(
                           '${AppLocalizations.of(context)!.about_version} ${_packageInfo!.version}',
                           style: bodyTextStyle,

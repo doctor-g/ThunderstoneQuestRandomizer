@@ -10,44 +10,77 @@ import 'database.dart';
 part 'settings.g.dart';
 
 class SettingsModel extends ChangeNotifier {
-  final StringSetPreference _excludedQuests =
-      StringSetPreference(key: 'exclude');
-  final BoolPreference _showMemo =
-      BoolPreference(key: 'showMemo', defaultValue: true);
-  final BoolPreference _showKeywords =
-      BoolPreference(key: 'showKeywords', defaultValue: true);
-  final BoolPreference _showQuest =
-      BoolPreference(key: 'showQuest', defaultValue: false);
-  final BoolPreference _barricadesMode =
-      BoolPreference(key: 'barricadesMode', defaultValue: false);
-  final BoolPreference _soloMode =
-      BoolPreference(key: 'soloMode', defaultValue: false);
-  final BoolPreference _smallTableau =
-      BoolPreference(key: 'smallTableau', defaultValue: false);
-  final BoolPreference _randomizeWildernessMonster =
-      BoolPreference(key: 'randomizeWildernessMonster', defaultValue: false);
-  final BrightnessPreference _brightness =
-      BrightnessPreference(key: 'lightMode', defaultValue: Brightness.light);
-  final IntPreference _heroStrategyIndex =
-      IntPreference(key: 'heroStrategyIndex', defaultValue: 0);
-  final BoolPreference _useComboBias =
-      BoolPreference(key: 'useComboBias', defaultValue: true);
-  final DoublePreference _comboBias =
-      DoublePreference(key: 'comboBias', defaultValue: 0.4);
-  final DoublePreference _ratChance =
-      DoublePreference(key: 'ratChance', defaultValue: 0.5);
-  final StringPreference _language =
-      StringPreference(key: 'lang', defaultValue: 'en');
-  final BoolPreference _useCorruption =
-      BoolPreference(key: 'useCorruption', defaultValue: true);
+  final StringSetPreference _excludedQuests = StringSetPreference(
+    key: 'exclude',
+  );
+  final BoolPreference _showMemo = BoolPreference(
+    key: 'showMemo',
+    defaultValue: true,
+  );
+  final BoolPreference _showKeywords = BoolPreference(
+    key: 'showKeywords',
+    defaultValue: true,
+  );
+  final BoolPreference _showQuest = BoolPreference(
+    key: 'showQuest',
+    defaultValue: false,
+  );
+  final BoolPreference _barricadesMode = BoolPreference(
+    key: 'barricadesMode',
+    defaultValue: false,
+  );
+  final BoolPreference _soloMode = BoolPreference(
+    key: 'soloMode',
+    defaultValue: false,
+  );
+  final BoolPreference _smallTableau = BoolPreference(
+    key: 'smallTableau',
+    defaultValue: false,
+  );
+  final BoolPreference _randomizeWildernessMonster = BoolPreference(
+    key: 'randomizeWildernessMonster',
+    defaultValue: false,
+  );
+  final BrightnessPreference _brightness = BrightnessPreference(
+    key: 'lightMode',
+    defaultValue: Brightness.light,
+  );
+  final IntPreference _heroStrategyIndex = IntPreference(
+    key: 'heroStrategyIndex',
+    defaultValue: 0,
+  );
+  final BoolPreference _useComboBias = BoolPreference(
+    key: 'useComboBias',
+    defaultValue: true,
+  );
+  final DoublePreference _comboBias = DoublePreference(
+    key: 'comboBias',
+    defaultValue: 0.4,
+  );
+  final DoublePreference _ratChance = DoublePreference(
+    key: 'ratChance',
+    defaultValue: 0.5,
+  );
+  final StringPreference _language = StringPreference(
+    key: 'lang',
+    defaultValue: 'en',
+  );
+  final BoolPreference _useCorruption = BoolPreference(
+    key: 'useCorruption',
+    defaultValue: true,
+  );
 
   SettingsModel() {
-    allPrefs.forEach((element) => element.addListener(() => notifyListeners()));
+    for (var element in allPrefs) {
+      element.addListener(() => notifyListeners());
+    }
   }
 
   void clear() {
     // We will notify all the listeners once, after resetting the values.
-    allPrefs.forEach((element) => element.reset(notifyListeners: false));
+    for (var element in allPrefs) {
+      element.reset(notifyListeners: false);
+    }
     notifyListeners();
   }
 
@@ -77,24 +110,26 @@ class SettingsModel extends ChangeNotifier {
   static final List<HeroSelectionStrategy> heroStrategies = [
     OnePerClassHeroSelectionStrategy(),
     FirstMatchHeroSelectionStrategy(),
-    RandomHeroSelectionStrategy()
+    RandomHeroSelectionStrategy(),
   ];
 }
 
 abstract class Strategy {
-  final Random _random = new Random();
+  final Random _random = Random();
   String get name;
 }
 
-abstract class HeroSelectionStrategy extends Strategy {
+sealed class HeroSelectionStrategy extends Strategy {
   static final classes = ['Fighter', 'Rogue', 'Cleric', 'Wizard'];
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes);
+  @override
   String get name;
 }
 
 // Selects the first four heroes that match the criteria that there
 // is at least one of each class.
 class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
+  @override
   String get name => 'First Match';
 
   final maxTries = 10;
@@ -104,18 +139,19 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     if (availableHeroes.length < 4) {
-      throw new TableauFailureException(
-          'Not enough heroes: ${availableHeroes.length}');
+      throw TableauFailureException(
+        'Not enough heroes: ${availableHeroes.length}',
+      );
     }
 
     int tries = 0;
     for (;;) {
       try {
         return _doSelection(availableHeroes);
-      } on TableauFailureException catch (e) {
+      } on TableauFailureException {
         tries++;
         if (tries >= maxTries) {
-          throw e;
+          rethrow;
         }
       }
     }
@@ -123,7 +159,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
 
   List<tq.Hero> _doSelection(List<tq.Hero> availableHeroes) {
     // Try a random set of four
-    Set<tq.Hero> result = new Set();
+    Set<tq.Hero> result = {};
 
     while (result.length < 4) {
       int index = _random.nextInt(availableHeroes.length);
@@ -149,6 +185,7 @@ class FirstMatchHeroSelectionStrategy extends HeroSelectionStrategy {
 // There are no constraints on this strategy: it just picks
 // completely at random.
 class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
+  @override
   String get name => 'Unconstrained';
 
   int heroes;
@@ -160,7 +197,7 @@ class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
     if (availableHeroes.length < heroes) {
-      throw new TableauFailureException('Not enough heroes to choose from.');
+      throw TableauFailureException('Not enough heroes to choose from.');
     }
     availableHeroes.shuffle();
     return availableHeroes.take(heroes).toList();
@@ -170,6 +207,7 @@ class RandomHeroSelectionStrategy extends HeroSelectionStrategy {
 // Each class has at least one hero. This is the selection strategy
 // from the rulebook.
 class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
+  @override
   String get name => 'Traditional';
   @override
   List<tq.Hero> selectHeroesFrom(List<tq.Hero> availableHeroes) {
@@ -183,12 +221,12 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
 
         // If there are no heroes of this class, or if they are
         // all already selected, then it's a failure.
-        if (heroesOfClass.length == 0 ||
+        if (heroesOfClass.isEmpty ||
             result.toSet().containsAll(heroesOfClass)) {
           throw TableauFailureException('Cannot pick heroes.');
         }
 
-        var hero;
+        tq.Hero hero;
         do {
           hero = heroesOfClass[_random.nextInt(heroesOfClass.length)];
         } while (result.contains(hero));
@@ -200,9 +238,10 @@ class OnePerClassHeroSelectionStrategy extends HeroSelectionStrategy {
 
 abstract class MarketSelectionStrategy extends Strategy {
   Marketplace selectMarketCardsFrom(
-      List<tq.MarketplaceCard> availableMarketCards,
-      double comboBias,
-      final Tableau tableau);
+    List<tq.MarketplaceCard> availableMarketCards,
+    double comboBias,
+    final Tableau tableau,
+  );
 }
 
 class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
@@ -211,9 +250,10 @@ class FirstFitMarketSelectionStrategy extends MarketSelectionStrategy {
 
   @override
   Marketplace selectMarketCardsFrom(
-      List<tq.MarketplaceCard> availableMarketCards,
-      double comboBias,
-      final Tableau tableau) {
+    List<tq.MarketplaceCard> availableMarketCards,
+    double comboBias,
+    final Tableau tableau,
+  ) {
     Random random = Random();
     StandardMarketplace marketplace = StandardMarketplace();
 
@@ -282,9 +322,10 @@ class SoloModeMarketSelectionStrategy extends MarketSelectionStrategy {
 
   @override
   Marketplace selectMarketCardsFrom(
-      List<tq.MarketplaceCard> availableMarketCards,
-      double comboBias,
-      Tableau tableau) {
+    List<tq.MarketplaceCard> availableMarketCards,
+    double comboBias,
+    Tableau tableau,
+  ) {
     Random random = Random();
     SoloModeMarketplace marketplace = SoloModeMarketplace();
     while (!marketplace.isFull) {

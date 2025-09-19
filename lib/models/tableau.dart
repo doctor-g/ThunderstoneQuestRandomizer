@@ -6,7 +6,7 @@ abstract class ComboFinder {
   bool hasCombo(Card card);
 }
 
-enum GameMode { Solo, Barricades, SmallTableau }
+enum GameMode { solo, barricades, smallTableau }
 
 class Tableau implements ComboFinder {
   String? wildernessMonster;
@@ -19,11 +19,11 @@ class Tableau implements ComboFinder {
   // Tracks whether this tableau was created in barricades mode.
   // This is needed to show in the UI a hint about this, independently of
   // the current state of the settings model.
-  Set<GameMode> modes = Set();
+  Set<GameMode> modes = {};
 
   // Get the set of all cards currently in play
   Set<Card> get allCards {
-    Set<Card> result = Set();
+    Set<Card> result = {};
     if (heroes != null) result.addAll(heroes!);
     if (marketplace != null) result.addAll(marketplace!.cards);
     if (guardian != null) result.add(guardian!);
@@ -34,26 +34,33 @@ class Tableau implements ComboFinder {
 
   // Get all the keywords of cards currently in play
   Set<String> get _keywords {
-    Set<String> result = Set();
-    allCards.forEach((card) => result.addAll(card.keywords));
+    Set<String> result = {};
+    for (var card in allCards) {
+      result.addAll(card.keywords);
+    }
     return result;
   }
 
   // Get all the combos of the cards currently in play
   Set<String> get _combos {
-    Set<String> result = Set();
-    allCards.forEach((card) => result.addAll(card.combo));
+    Set<String> result = {};
+    for (var card in allCards) {
+      result.addAll(card.combo);
+    }
     return result;
   }
 
   // Get all the meta on all the cards in play
   Set<String> get _meta {
-    Set<String> result = Set();
-    allCards.forEach((card) => result.addAll(card.meta));
+    Set<String> result = {};
+    for (var card in allCards) {
+      result.addAll(card.meta);
+    }
     return result;
   }
 
   // Given a card, see if it comboes with anything currently on the tableau.
+  @override
   bool hasCombo(Card card) {
     // First, check if any of the tableau's combo words
     // match keywords or meta on the card.
@@ -104,16 +111,19 @@ abstract class Marketplace {
 ///
 /// In this mode, the marketplace contains four cards of arbitrary type.
 class SoloModeMarketplace extends Marketplace {
-  List<MarketplaceCard> _cards = [];
+  final List<MarketplaceCard> _cards = [];
 
+  @override
   List<MarketplaceCard> get cards => UnmodifiableListView(_cards);
 
+  @override
   bool get isFull => cards.length == 4;
 
   void add(MarketplaceCard card) {
     _cards.add(card);
   }
 
+  @override
   List<MarketplaceCard> get allAllies =>
       cards.where((card) => card.keywords.contains("Ally")).toList();
 
@@ -139,27 +149,33 @@ class StandardMarketplace extends Marketplace {
   final MarketplaceRow weapons = MarketplaceRow();
   final AnyMarketplaceRow anys = AnyMarketplaceRow();
 
+  @override
   bool get isFull =>
       spells.isFull && items.isFull && weapons.isFull && anys.isFull;
 
+  @override
   List<MarketplaceCard> get cards =>
       anys.cards + spells.cards + items.cards + weapons.cards;
 
+  @override
   List<MarketplaceCard> get allSpells =>
       spells.cards +
       anys.cards.where((card) => card.keywords.contains("Spell")).toList();
+  @override
   List<MarketplaceCard> get allItems =>
       items.cards +
       anys.cards.where((card) => card.keywords.contains("Item")).toList();
+  @override
   List<MarketplaceCard> get allWeapons =>
       weapons.cards +
       anys.cards.where((card) => card.keywords.contains("Weapon")).toList();
+  @override
   List<MarketplaceCard> get allAllies =>
       anys.cards.where((card) => card.keywords.contains("Ally")).toList();
 }
 
 class MarketplaceRow {
-  List<MarketplaceCard> _slots = [];
+  final List<MarketplaceCard> _slots = [];
 
   void add(MarketplaceCard card) {
     assert(!isFull);
@@ -177,18 +193,21 @@ class AnyMarketplaceRow extends MarketplaceRow {
   bool canTake(Card card) {
     if (isFull) return false;
     if (_slots.length == 1 &&
-        !_haveDifferentTypes(_slots[0], card as MarketplaceCard))
+        !_haveDifferentTypes(_slots[0], card as MarketplaceCard)) {
       return false;
-    else
+    } else {
       return true;
+    }
   }
 
   bool _haveDifferentTypes(MarketplaceCard card1, MarketplaceCard card2) {
     const List<String> types = ["Spell", "Item", "Ally", "Weapon"];
-    Set<String> card1Types =
-        Set.of(card1.keywords.where((keyword) => types.contains(keyword)));
-    Set<String> card2Types =
-        Set.of(card2.keywords.where((keyword) => types.contains(keyword)));
+    Set<String> card1Types = Set.of(
+      card1.keywords.where((keyword) => types.contains(keyword)),
+    );
+    Set<String> card2Types = Set.of(
+      card2.keywords.where((keyword) => types.contains(keyword)),
+    );
     // There are different types if the difference is nonempty.
     return (card1Types.difference(card2Types)).isNotEmpty;
   }

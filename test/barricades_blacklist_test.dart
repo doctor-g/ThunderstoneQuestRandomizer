@@ -12,20 +12,21 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
 
     // Parse the data
-    ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+    ThunderstoneYamlCardParser parser = ThunderstoneYamlCardParser();
     String string = await rootBundle.loadString('assets/cards.yaml');
     database = parser.parse(string);
   });
 
   test('All barricades blacklist cards are in the cards database', () {
-    var cards = Set<Card>();
-    database.quests.forEach((quest) {
-      quest.cards.forEach((card) {
+    var cards = <Card>{};
+    for (var quest in database.quests) {
+      for (var card in quest.cards) {
         cards.add(card);
-      });
-    });
-    var filteredCards =
-        cards.where((card) => barricadesBlacklist.contains(card.name));
+      }
+    }
+    var filteredCards = cards.where(
+      (card) => barricadesBlacklist.contains(card.name),
+    );
     expect(filteredCards.length == barricadesBlacklist.length, isTrue);
   });
 }

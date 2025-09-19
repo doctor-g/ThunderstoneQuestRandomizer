@@ -11,15 +11,15 @@ import 'package:provider/provider.dart';
 class RandomizerPage extends StatefulWidget {
   final tq.CardDatabase database;
 
-  RandomizerPage(this.database);
+  const RandomizerPage(this.database, {super.key});
 
   @override
-  _RandomizerPageState createState() => _RandomizerPageState();
+  State<RandomizerPage> createState() => _RandomizerPageState();
 }
 
 class _RandomizerPageState extends State<RandomizerPage>
     with SingleTickerProviderStateMixin {
-  Randomizer _randomizer = new Randomizer();
+  final Randomizer _randomizer = Randomizer();
   Tableau? _tableau;
   bool _failure = false;
 
@@ -36,10 +36,7 @@ class _RandomizerPageState extends State<RandomizerPage>
       ..addListener(() {
         setState(() {});
       });
-    _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(_controller);
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     super.initState();
   }
 
@@ -61,8 +58,9 @@ class _RandomizerPageState extends State<RandomizerPage>
         var settings = Provider.of<SettingsModel>(context, listen: false);
         var database = widget.database;
         if (settings.barricadesMode) {
-          database = database
-              .where((card) => !barricadesBlacklist.contains(card.name));
+          database = database.where(
+            (card) => !barricadesBlacklist.contains(card.name),
+          );
         }
         _tableau = _randomizer.generateTableau(database, settings);
         _controller.duration = _forwardDuration;
@@ -95,23 +93,27 @@ class _RandomizerPageState extends State<RandomizerPage>
             onPressed: () => Navigator.pushNamed(context, '/settings'),
           ),
           IconButton(
-              icon: Icon(Icons.info),
-              onPressed: () => Navigator.pushNamed(context, '/about')),
+            icon: Icon(Icons.info),
+            onPressed: () => Navigator.pushNamed(context, '/about'),
+          ),
         ],
       ),
       body: Center(
         child: _tableau == null
             ? (_failure
-                ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(AppLocalizations.of(context)!.home_no_tableau,
-                        style: Theme.of(context).textTheme.bodyLarge),
-                  )
-                : WelcomeMessage())
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.home_no_tableau,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    )
+                  : WelcomeMessage())
             : SingleChildScrollView(
                 child: FadeTransition(
                   opacity: _animation,
-                  child: MediaQuery.of(context).size.width >
+                  child:
+                      MediaQuery.of(context).size.width >
                           _maxWidthForSingleColumn
                       ? Column(
                           children: [
@@ -126,10 +128,10 @@ class _RandomizerPageState extends State<RandomizerPage>
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      ..._guardianAndDungeonAndMonsters()
+                                      ..._guardianAndDungeonAndMonsters(),
                                     ],
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             _makeModeReminder(context),
@@ -151,9 +153,11 @@ class _RandomizerPageState extends State<RandomizerPage>
         onPressed: () => _randomize(context),
         tooltip: AppLocalizations.of(context)!.home_randomize,
         child: ImageIcon(
-          AssetImage(settingsNotifier.brightness == Brightness.light
-              ? "assets/dice_white.png"
-              : "assets/dice_black.png"),
+          AssetImage(
+            settingsNotifier.brightness == Brightness.light
+                ? "assets/dice_white.png"
+                : "assets/dice_black.png",
+          ),
         ),
       ),
     );
@@ -164,7 +168,7 @@ class _RandomizerPageState extends State<RandomizerPage>
 
   List<Widget> _section(String name, [List<tq.Card>? contents]) {
     var result = <Widget>[
-      Text(name, style: Theme.of(context).textTheme.titleMedium)
+      Text(name, style: Theme.of(context).textTheme.titleMedium),
     ];
     if (contents != null) {
       contents.sort(_cardSorter);
@@ -173,8 +177,11 @@ class _RandomizerPageState extends State<RandomizerPage>
     return result;
   }
 
-  List<Widget> _subsection(String name, List<tq.Card> contents,
-      {bool sort = true}) {
+  List<Widget> _subsection(
+    String name,
+    List<tq.Card> contents, {
+    bool sort = true,
+  }) {
     if (contents.isEmpty) {
       return <Widget>[];
     } else {
@@ -183,7 +190,7 @@ class _RandomizerPageState extends State<RandomizerPage>
       }
       return [
         _subsectionHeading(name),
-        ...contents.map((card) => CardWidget(card: card)).toList()
+        ...contents.map((card) => CardWidget(card: card)),
       ];
     }
   }
@@ -213,16 +220,24 @@ class _RandomizerPageState extends State<RandomizerPage>
 
     return [
       ..._section(
-          AppLocalizations.of(context)!.tableau_heroes, _tableau!.heroes),
+        AppLocalizations.of(context)!.tableau_heroes,
+        _tableau!.heroes,
+      ),
       Divider(),
       ..._section(AppLocalizations.of(context)!.tableau_marketplace),
       ..._subsection(AppLocalizations.of(context)!.tableau_items, allItems),
       ..._subsection(
-          AppLocalizations.of(context)!.tableau_spells, market.allSpells),
+        AppLocalizations.of(context)!.tableau_spells,
+        market.allSpells,
+      ),
       ..._subsection(
-          AppLocalizations.of(context)!.tableau_weapons, market.allWeapons),
+        AppLocalizations.of(context)!.tableau_weapons,
+        market.allWeapons,
+      ),
       ..._subsection(
-          AppLocalizations.of(context)!.tableau_allies, nonItemAllies)
+        AppLocalizations.of(context)!.tableau_allies,
+        nonItemAllies,
+      ),
     ];
   }
 
@@ -231,35 +246,50 @@ class _RandomizerPageState extends State<RandomizerPage>
       return [];
     } else {
       return [
-        ..._section(AppLocalizations.of(context)!.tableau_guardian,
-            [_tableau!.guardian!]),
+        ..._section(AppLocalizations.of(context)!.tableau_guardian, [
+          _tableau!.guardian!,
+        ]),
         Divider(),
         ..._section(AppLocalizations.of(context)!.tableau_dungeon),
-        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(1),
-            _tableau!.dungeon!.roomsMap[1]!,
-            sort: false),
-        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(2),
-            _tableau!.dungeon!.roomsMap[2]!,
-            sort: false),
-        ..._subsection(AppLocalizations.of(context)!.tableau_dungeon_level(3),
-            _tableau!.dungeon!.roomsMap[3]!,
-            sort: false),
+        ..._subsection(
+          AppLocalizations.of(context)!.tableau_dungeon_level(1),
+          _tableau!.dungeon!.roomsMap[1]!,
+          sort: false,
+        ),
+        ..._subsection(
+          AppLocalizations.of(context)!.tableau_dungeon_level(2),
+          _tableau!.dungeon!.roomsMap[2]!,
+          sort: false,
+        ),
+        ..._subsection(
+          AppLocalizations.of(context)!.tableau_dungeon_level(3),
+          _tableau!.dungeon!.roomsMap[3]!,
+          sort: false,
+        ),
         Divider(),
         ..._section(AppLocalizations.of(context)!.tableau_monsters),
         _tableau!.wildernessMonster == null
             ? Container()
-            : Column(children: [
-                _subsectionHeading(
-                    AppLocalizations.of(context)!.tableau_wilderness),
-                Text(_tableau!.wildernessMonster!,
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ]),
-        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1),
-            [_tableau!.monsters![0]]),
-        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(2),
-            [_tableau!.monsters![1]]),
-        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(3),
-            [_tableau!.monsters![2]]),
+            : Column(
+                children: [
+                  _subsectionHeading(
+                    AppLocalizations.of(context)!.tableau_wilderness,
+                  ),
+                  Text(
+                    _tableau!.wildernessMonster!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(1), [
+          _tableau!.monsters![0],
+        ]),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(2), [
+          _tableau!.monsters![1],
+        ]),
+        ..._subsection(AppLocalizations.of(context)!.tableau_monster_level(3), [
+          _tableau!.monsters![2],
+        ]),
       ];
     }
   }
@@ -267,10 +297,11 @@ class _RandomizerPageState extends State<RandomizerPage>
   Widget _makeModeReminder(BuildContext context) {
     List<String> reminders = [];
 
-    final bool barricadesMode = _tableau!.modes.contains(GameMode.Barricades);
-    final bool soloMode = _tableau!.modes.contains(GameMode.Solo);
-    final bool smallTableauMode =
-        _tableau!.modes.contains(GameMode.SmallTableau);
+    final bool barricadesMode = _tableau!.modes.contains(GameMode.barricades);
+    final bool soloMode = _tableau!.modes.contains(GameMode.solo);
+    final bool smallTableauMode = _tableau!.modes.contains(
+      GameMode.smallTableau,
+    );
 
     if (barricadesMode) {
       reminders.add(AppLocalizations.of(context)!.tableau_barricades_hint);
@@ -288,11 +319,12 @@ class _RandomizerPageState extends State<RandomizerPage>
       return Column(
         children: [
           Divider(),
-          Text(reminder,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontFamily: 'CormorantSC')),
+          Text(
+            reminder,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontFamily: 'CormorantSC'),
+          ),
         ],
       );
     } else {
@@ -302,6 +334,8 @@ class _RandomizerPageState extends State<RandomizerPage>
 }
 
 class WelcomeMessage extends StatelessWidget {
+  const WelcomeMessage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -309,13 +343,17 @@ class WelcomeMessage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(AppLocalizations.of(context)!.appTitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            AppLocalizations.of(context)!.appTitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(AppLocalizations.of(context)!.home_instructions,
-                style: Theme.of(context).textTheme.bodyLarge),
+            child: Text(
+              AppLocalizations.of(context)!.home_instructions,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ],
       ),
@@ -324,55 +362,59 @@ class WelcomeMessage extends StatelessWidget {
 }
 
 class CardWidget extends StatelessWidget {
-  late final tq.Card card;
+  final tq.Card card;
 
-  CardWidget({Key? key, required tq.Card card}) : super(key: key) {
-    this.card = card;
-  }
+  const CardWidget({super.key, required this.card});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<SettingsModel>(
       builder: (BuildContext context, SettingsModel settings, Widget? child) =>
           Column(
-        children: <Widget>[
-          Text(
-            card.getLocalizedName(settings.language) +
-                (card.runtimeType == tq.Guardian
-                    ? '\n' +
-                        AppLocalizations.of(context)!.tableau_guardian_level(
-                            _toRoman((card as tq.Guardian).level!))
-                    : ''),
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.center,
+            children: <Widget>[
+              Text(
+                card.getLocalizedName(settings.language) +
+                    (card.runtimeType == tq.Guardian
+                        ? '\n${AppLocalizations.of(
+                                context,
+                              )!.tableau_guardian_level(
+                                _toRoman((card as tq.Guardian).level!),
+                              )}'
+                        : ''),
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.center,
+              ),
+              settings.showQuest
+                  ? Text(
+                      card.quest.number == null
+                          ? card.quest.getLocalizedName(settings.language)
+                          : AppLocalizations.of(context)!.tableau_quest_source(
+                              card.quest.number!,
+                              card.quest.getLocalizedName(settings.language),
+                            ),
+                    )
+                  : Container(),
+              settings.showKeywords
+                  ? Wrap(
+                      direction: Axis.horizontal,
+                      alignment: WrapAlignment.center,
+                      children: _makeKeywordRow(context, card.keywords),
+                    )
+                  : Container(),
+              card.getLocalizedMemo(settings.language) == null ||
+                      !settings.showMemo
+                  ? Container()
+                  : ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 400),
+                      child: Text(
+                        card.getLocalizedMemo(settings.language)!,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+              Container(height: 6),
+            ],
           ),
-          settings.showQuest
-              ? Text(card.quest.number == null
-                  ? card.quest.getLocalizedName(settings.language)
-                  : AppLocalizations.of(context)!.tableau_quest_source(
-                      card.quest.number!,
-                      card.quest.getLocalizedName(settings.language)))
-              : Container(),
-          settings.showKeywords
-              ? Wrap(
-                  children: _makeKeywordRow(context, card.keywords),
-                  direction: Axis.horizontal,
-                  alignment: WrapAlignment.center,
-                )
-              : Container(),
-          card.getLocalizedMemo(settings.language) == null || !settings.showMemo
-              ? Container()
-              : ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 400),
-                  child: Text(card.getLocalizedMemo(settings.language)!,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium),
-                ),
-          Container(
-            height: 6,
-          )
-        ],
-      ),
     );
   }
 
@@ -394,11 +436,14 @@ class CardWidget extends StatelessWidget {
   List<Widget> _makeKeywordRow(BuildContext context, List<String> keywords) {
     List<Widget> result = [];
     for (var i = 0; i < keywords.length; i++) {
-      result.add(Text(keywords[i],
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontFamily: 'CormorantSC')));
+      result.add(
+        Text(
+          keywords[i],
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(fontFamily: 'CormorantSC'),
+        ),
+      );
       if (i < keywords.length - 1) {
         result.add(Text(' • '));
       }

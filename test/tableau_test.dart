@@ -10,7 +10,7 @@ void main() {
       expect(marketplace.isFull, isFalse);
     });
 
-    MarketplaceCard _withKeyword(String keyword) {
+    MarketplaceCard withKeyword(String keyword) {
       var cardBuilder = MarketplaceCardBuilder();
       cardBuilder.keywords = [keyword];
       cardBuilder.quest = Quest("Test");
@@ -18,19 +18,25 @@ void main() {
       return cardBuilder.build();
     }
 
-    MarketplaceCard _spell() => _withKeyword("Spell");
-    MarketplaceCard _item() => _withKeyword("Item");
-    MarketplaceCard _weapon() => _withKeyword("Weapon");
-    MarketplaceCard _ally() => _withKeyword("Ally");
+    MarketplaceCard spell() => withKeyword("Spell");
+    MarketplaceCard item() => withKeyword("Item");
+    MarketplaceCard weapon() => withKeyword("Weapon");
+    MarketplaceCard ally() => withKeyword("Ally");
 
     test('Full marketplace is full', () {
       StandardMarketplace marketplace = StandardMarketplace();
-      [_spell(), _spell()]
-          .forEach((element) => marketplace.spells.add(element));
-      [_item(), _item()].forEach((element) => marketplace.items.add(element));
-      [_weapon(), _weapon()]
-          .forEach((element) => marketplace.weapons.add(element));
-      [_ally(), _ally()].forEach((element) => marketplace.anys.add(element));
+      for (var element in [spell(), spell()]) {
+        marketplace.spells.add(element);
+      }
+      for (var element in [item(), item()]) {
+        marketplace.items.add(element);
+      }
+      for (var element in [weapon(), weapon()]) {
+        marketplace.weapons.add(element);
+      }
+      for (var element in [ally(), ally()]) {
+        marketplace.anys.add(element);
+      }
       expect(marketplace.isFull, isTrue);
     });
 
@@ -54,7 +60,7 @@ void main() {
 
     test('Marketplace with a spell in any slot will return it as a spell', () {
       StandardMarketplace marketplace = StandardMarketplace();
-      marketplace.anys.add(_spell());
+      marketplace.anys.add(spell());
       expect(marketplace.allSpells.length, 1);
     });
   });
@@ -86,7 +92,7 @@ void main() {
     test('Combo with keyword on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        makeHero(keywords: ['X'])
+        makeHero(keywords: ['X']),
       ];
       Monster monster = makeMonster(combo: ['X']);
       expect(tableau.hasCombo(monster), isTrue);
@@ -95,7 +101,7 @@ void main() {
     test('Combo with combo on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        makeHero(combo: ['X'])
+        makeHero(combo: ['X']),
       ];
       Monster monster = makeMonster(keywords: ['X']);
       expect(tableau.hasCombo(monster), isTrue);
@@ -104,7 +110,7 @@ void main() {
     test('Combo with meta on tableau', () {
       Tableau tableau = Tableau();
       tableau.heroes = [
-        makeHero(meta: ['X'])
+        makeHero(meta: ['X']),
       ];
       Monster monster = makeMonster(combo: ['X']);
       expect(tableau.hasCombo(monster), isTrue);

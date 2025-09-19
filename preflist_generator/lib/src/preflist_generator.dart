@@ -14,14 +14,14 @@ class PrefListGenerator extends Generator {
       var prefs = classElement.fields.where(
           (element) => element.type.getDisplayString().endsWith('Preference'));
 
-      if (prefs.length > 0) {
+      if (prefs.isNotEmpty) {
         buffer.write(
             'extension PreferenceManager on SettingsModel {\n List<Preference> get allPrefs => [');
         var names = prefs.map((element) => '${element.name}').toList();
         buffer.write(names.join(','));
         buffer.writeln('];\n');
 
-        prefs.forEach((pref) {
+        for (var pref in prefs) {
           if (pref.name![0] != '_') {
             throw UnsupportedError('Preference variables must be private');
           }
@@ -41,7 +41,7 @@ class PrefListGenerator extends Generator {
           buffer.writeln('$type get $name => ${pref.name}.value;');
           buffer
               .writeln('set $name($type value) => ${pref.name}.value = value;');
-        });
+        }
 
         buffer.writeln('}');
       }

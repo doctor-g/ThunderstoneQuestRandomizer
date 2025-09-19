@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
   };
   final CardDatabase database;
 
-  SettingsPage(this.database);
+  const SettingsPage(this.database, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -273,13 +273,13 @@ class SettingsPage extends StatelessWidget {
                             items: SettingsModel.heroStrategies
                                 .map(
                                   (strategy) => DropdownMenuItem(
+                                    value: strategy,
                                     child: Text(
                                       _localizeName(context, strategy),
                                       style: Theme.of(
                                         context,
                                       ).textTheme.bodyLarge,
                                     ),
-                                    value: strategy,
                                   ),
                                 )
                                 .toList(),
@@ -330,17 +330,17 @@ class SettingsPage extends StatelessWidget {
     BuildContext context,
     String title,
     bool value,
-    void onChanged(bool value),
+    void Function(bool value) onChanged,
   ) {
     final TextStyle checkboxTextStyle =
         Theme.of(context).textTheme.bodyLarge as TextStyle;
     return StatefulBuilder(
-      builder: (context, _setState) => CheckboxListTile(
+      builder: (context, setState) => CheckboxListTile(
         title: Text(title, style: checkboxTextStyle),
         controlAffinity: ListTileControlAffinity.leading,
         value: value,
         onChanged: (value) {
-          _setState(() => onChanged(value!));
+          setState(() => onChanged(value!));
         },
       ),
     );
@@ -359,32 +359,24 @@ class SettingsPage extends StatelessWidget {
     BuildContext context,
     HeroSelectionStrategy strategy,
   ) {
-    switch (strategy.runtimeType) {
-      case FirstMatchHeroSelectionStrategy:
+    switch (strategy) {
+      case FirstMatchHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_firstmatch_desc;
-      case OnePerClassHeroSelectionStrategy:
+      case OnePerClassHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_traditional_desc;
-      case RandomHeroSelectionStrategy:
+      case RandomHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_unconstrained_desc;
-      default:
-        throw Exception(
-          "Unrecognized hero selection strategy type: ${strategy.runtimeType}",
-        );
     }
   }
 
   String _localizeName(BuildContext context, HeroSelectionStrategy strategy) {
-    switch (strategy.runtimeType) {
-      case FirstMatchHeroSelectionStrategy:
+    switch (strategy) {
+      case FirstMatchHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_firstmatch_name;
-      case OnePerClassHeroSelectionStrategy:
+      case OnePerClassHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_traditional_name;
-      case RandomHeroSelectionStrategy:
+      case RandomHeroSelectionStrategy():
         return AppLocalizations.of(context)!.heroselection_unconstrained_name;
-      default:
-        throw Exception(
-          "Unrecognized hero selection strategy type: ${strategy.runtimeType}",
-        );
     }
   }
 
@@ -398,11 +390,11 @@ class SettingsPage extends StatelessWidget {
         items: _supportedLanguages.entries
             .map(
               (entry) => DropdownMenuItem(
+                value: entry.key,
                 child: Text(
                   entry.value,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                value: entry.key,
               ),
             )
             .toList(),
@@ -421,7 +413,10 @@ class SettingsPage extends StatelessWidget {
 
   String _formatPercent(double percent) => '${(percent * 100).truncate()}%';
 
-  _createComboBiasLabelTheme(BuildContext context, SettingsModel settings) {
+  TextStyle _createComboBiasLabelTheme(
+    BuildContext context,
+    SettingsModel settings,
+  ) {
     final theme = Theme.of(context).textTheme.titleSmall!;
     return settings.useComboBias
         ? theme

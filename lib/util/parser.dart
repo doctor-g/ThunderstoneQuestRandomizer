@@ -54,7 +54,7 @@ class ThunderstoneYamlCardParser {
     }
 
     for (var entry in node['Monsters'] ?? empty) {
-      MonsterBuilder builder = new MonsterBuilder();
+      MonsterBuilder builder = MonsterBuilder();
       _parseCard(entry, builder);
       if (entry['Restriction'] != null) {
         for (var restriction in entry['Restriction']) {
@@ -71,9 +71,10 @@ class ThunderstoneYamlCardParser {
   }
 
   // Parse the shared elements of all cards
-  void _parseCard(var entry, CardBuilder cardBuilder) {
-    if (_quest == null)
+  void _parseCard(dynamic entry, CardBuilder cardBuilder) {
+    if (_quest == null) {
       throw Exception("_quest must be initialized before calling this method");
+    }
     cardBuilder.quest = _quest!;
     cardBuilder.name = entry['Name'];
 

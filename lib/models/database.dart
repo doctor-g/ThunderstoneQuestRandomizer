@@ -17,15 +17,17 @@ class CardDatabase {
   CardDatabase(this.quests);
 
   CardDatabase where(bool Function(Card card) filter) {
-    return CardDatabase(quests.map((quest) {
-      Quest newQuest = Quest(quest.name);
-      quest.cards.forEach((element) {
-        if (filter.call(element)) {
-          newQuest.add(element);
+    return CardDatabase(
+      quests.map((quest) {
+        Quest newQuest = Quest(quest.name);
+        for (var element in quest.cards) {
+          if (filter.call(element)) {
+            newQuest.add(element);
+          }
         }
-      });
-      return newQuest;
-    }).toList());
+        return newQuest;
+      }).toList(),
+    );
   }
 }
 
@@ -62,46 +64,28 @@ class Quest {
   List<Monster> get monsters => _monsters;
 
   List<Card> get cards => <Card>[
-        ..._heroes,
-        ..._marketplaceCards,
-        ..._guardians,
-        ..._rooms,
-        ..._monsters,
-      ];
+    ..._heroes,
+    ..._marketplaceCards,
+    ..._guardians,
+    ..._rooms,
+    ..._monsters,
+  ];
 
   Quest(this.name);
 
   void add(Card card) {
-    switch (card.runtimeType) {
-      case Hero:
-        {
-          _heroes.add(card as Hero);
-        }
-        break;
-      case MarketplaceCard:
-        {
-          _marketplaceCards.add(card as MarketplaceCard);
-        }
-        break;
-      case Guardian:
-        {
-          _guardians.add(card as Guardian);
-        }
-        break;
-      case Room:
-        {
-          _rooms.add(card as Room);
-        }
-        break;
-      case Monster:
-        {
-          _monsters.add(card as Monster);
-        }
-        break;
-      default:
-        {
-          throw new Exception("Illegal State");
-        }
+    switch (card) {
+      case Hero():
+        _heroes.add(card);
+
+      case MarketplaceCard():
+        _marketplaceCards.add(card);
+      case Guardian():
+        _guardians.add(card);
+      case Room():
+        _rooms.add(card);
+      case Monster():
+        _monsters.add(card);
     }
   }
 
@@ -116,7 +100,7 @@ class CannotBuildException implements Exception {
   CannotBuildException(this.cause);
 }
 
-abstract class Card {
+sealed class Card {
   late Quest quest;
 
   /// The canonical (English) name of the card.
@@ -131,16 +115,16 @@ abstract class Card {
   List<String> keywords = [];
   String? memo;
   late final Map<String, String> localizedMemos;
-  Set<String> combo = Set();
-  Set<String> meta = Set();
+  Set<String> combo = {};
+  Set<String> meta = {};
 
   Card(CardBuilder builder)
-      : localizedNames = builder.localizedNames,
-        memo = builder.memo,
-        localizedMemos = builder.localizedMemos,
-        keywords = builder.keywords,
-        combo = builder.combo,
-        meta = builder.meta {
+    : localizedNames = builder.localizedNames,
+      memo = builder.memo,
+      localizedMemos = builder.localizedMemos,
+      keywords = builder.keywords,
+      combo = builder.combo,
+      meta = builder.meta {
     // Process the required elements, without which we cannot build a card.
     if (builder.quest == null) {
       throw CannotBuildException("Card has no quest");
@@ -148,8 +132,8 @@ abstract class Card {
     if (builder.name == null) {
       throw CannotBuildException("Card has no name");
     }
-    this.quest = builder.quest!;
-    this.name = builder.name!;
+    quest = builder.quest!;
+    name = builder.name!;
   }
 
   /// Get the name of this card, localized to the given language code.
@@ -177,12 +161,12 @@ abstract class CardBuilder {
   List<String> keywords = [];
   String? memo;
   final Map<String, String> localizedMemos = {};
-  Set<String> combo = Set();
-  Set<String> meta = Set();
+  Set<String> combo = {};
+  Set<String> meta = {};
 }
 
 class Hero extends Card {
-  Hero(HeroBuilder builder) : super(builder);
+  Hero(HeroBuilder super.builder);
 }
 
 class HeroBuilder extends CardBuilder {
@@ -192,7 +176,7 @@ class HeroBuilder extends CardBuilder {
 }
 
 class MarketplaceCard extends Card {
-  MarketplaceCard(MarketplaceCardBuilder builder) : super(builder);
+  MarketplaceCard(MarketplaceCardBuilder super.builder);
 }
 
 class MarketplaceCardBuilder extends CardBuilder {
@@ -204,40 +188,35 @@ class MarketplaceCardBuilder extends CardBuilder {
 class Guardian extends Card {
   int? level;
 
-  Guardian(GuardianBuilder builder)
-      : level = builder.level,
-        super(builder);
+  Guardian(GuardianBuilder super.builder) : level = builder.level;
 }
 
 class GuardianBuilder extends CardBuilder {
   int? level;
   Guardian build() {
-    return new Guardian(this);
+    return Guardian(this);
   }
 }
 
 class Room extends Card {
   int? level;
 
-  Room(RoomBuilder builder)
-      : this.level = builder.level,
-        super(builder);
+  Room(RoomBuilder super.builder) : level = builder.level;
 }
 
 class RoomBuilder extends CardBuilder {
   int? level;
   Room build() {
-    return new Room(this);
+    return Room(this);
   }
 }
 
 class Monster extends Card {
   int? level;
   bool soloRestriction;
-  Monster(MonsterBuilder builder)
-      : this.level = builder.level,
-        this.soloRestriction = builder.soloRestriction ?? false,
-        super(builder);
+  Monster(MonsterBuilder super.builder)
+    : level = builder.level,
+      soloRestriction = builder.soloRestriction ?? false;
 }
 
 class MonsterBuilder extends CardBuilder {
@@ -246,6 +225,6 @@ class MonsterBuilder extends CardBuilder {
   bool? soloRestriction;
 
   Monster build() {
-    return new Monster(this);
+    return Monster(this);
   }
 }

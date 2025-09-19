@@ -70,9 +70,9 @@ class _TQRandomizerApp extends StatelessWidget {
 }
 
 class _LoadingPage extends StatefulWidget {
-  late final tq.CardDatabaseModel dbmodel;
+  final tq.CardDatabaseModel dbmodel;
 
-  _LoadingPage({Key? key, required this.dbmodel}) : super(key: key);
+  const _LoadingPage({required this.dbmodel});
 
   @override
   State<StatefulWidget> createState() => _LoadingPageState();
@@ -87,7 +87,7 @@ class _LoadingPageState extends State<_LoadingPage> {
     // there is no translation in place, so it would be premature
     // to implement.
     rootBundle.loadString('assets/cards.yaml').then((data) {
-      ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+      ThunderstoneYamlCardParser parser = ThunderstoneYamlCardParser();
       var database = parser.parse(data);
       widget.dbmodel.database = database;
     });

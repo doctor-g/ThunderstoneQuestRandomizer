@@ -8,7 +8,7 @@ void main() {
     late Quest quest;
 
     setUp(() {
-      ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+      ThunderstoneYamlCardParser parser = ThunderstoneYamlCardParser();
       db = parser.parse('''
 - Quest: The First Quest
   Number: 1
@@ -62,7 +62,9 @@ void main() {
 
     test('Get the hero keywords', () {
       expect(
-          quest.heroes[0].keywords, containsAllInOrder(['Human', 'Fighter']));
+        quest.heroes[0].keywords,
+        containsAllInOrder(['Human', 'Fighter']),
+      );
     });
 
     test('Read the hero memo', () {
@@ -128,7 +130,7 @@ void main() {
     late Quest quest;
 
     setUp(() {
-      ThunderstoneYamlCardParser parser = new ThunderstoneYamlCardParser();
+      ThunderstoneYamlCardParser parser = ThunderstoneYamlCardParser();
       CardDatabase db = parser.parse('''
 - Quest: One
   Quest_es: Uno

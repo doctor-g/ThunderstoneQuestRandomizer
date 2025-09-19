@@ -1,8 +1,7 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class Preference<T> extends ChangeNotifier {
+sealed class Preference<T> extends ChangeNotifier {
   final T defaultValue;
   final String key;
 
@@ -16,7 +15,7 @@ abstract class Preference<T> extends ChangeNotifier {
     _initializeFromUserPreferences();
   }
 
-  _initializeFromUserPreferences() async {
+  Future<void> _initializeFromUserPreferences() async {
     var prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(key)) {
       value = _loadFrom(prefs);
@@ -29,7 +28,7 @@ abstract class Preference<T> extends ChangeNotifier {
   T _loadFrom(SharedPreferences prefs);
 
   /// Reset this preference to its default value.
-  reset({bool notifyListeners = true}) {
+  void reset({bool notifyListeners = true}) {
     // If we should notify listeners, simply call the mutator method.
     if (notifyListeners) {
       value = defaultValue;
@@ -60,12 +59,11 @@ abstract class Preference<T> extends ChangeNotifier {
   }
 
   /// Write this preference's value to the preferences store.
-  _writeValue(SharedPreferences prefs);
+  void _writeValue(SharedPreferences prefs);
 }
 
 class BoolPreference extends Preference<bool> {
-  BoolPreference({required key, required defaultValue})
-      : super(key: key, defaultValue: defaultValue);
+  BoolPreference({required super.key, required super.defaultValue});
 
   @override
   bool _loadFrom(SharedPreferences prefs) => prefs.getBool(key)!;
@@ -75,8 +73,7 @@ class BoolPreference extends Preference<bool> {
 }
 
 class IntPreference extends Preference<int> {
-  IntPreference({required key, required defaultValue})
-      : super(key: key, defaultValue: defaultValue);
+  IntPreference({required super.key, required super.defaultValue});
 
   @override
   int _loadFrom(SharedPreferences prefs) => prefs.getInt(key)!;
@@ -86,8 +83,7 @@ class IntPreference extends Preference<int> {
 }
 
 class DoublePreference extends Preference<double> {
-  DoublePreference({required key, required defaultValue})
-      : super(key: key, defaultValue: defaultValue);
+  DoublePreference({required super.key, required super.defaultValue});
 
   @override
   double _loadFrom(SharedPreferences prefs) => prefs.getDouble(key)!;
@@ -97,8 +93,7 @@ class DoublePreference extends Preference<double> {
 }
 
 class StringPreference extends Preference<String> {
-  StringPreference({required key, required defaultValue})
-      : super(key: key, defaultValue: defaultValue);
+  StringPreference({required super.key, required super.defaultValue});
 
   @override
   String _loadFrom(SharedPreferences prefs) => prefs.getString(key)!;
@@ -108,8 +103,7 @@ class StringPreference extends Preference<String> {
 }
 
 class BrightnessPreference extends Preference<Brightness> {
-  BrightnessPreference({required key, required defaultValue})
-      : super(key: key, defaultValue: defaultValue);
+  BrightnessPreference({required super.key, required super.defaultValue});
 
   @override
   Brightness _loadFrom(SharedPreferences prefs) =>
@@ -121,7 +115,7 @@ class BrightnessPreference extends Preference<Brightness> {
 }
 
 class StringSetPreference extends Preference<Set<String>> {
-  StringSetPreference({required key}) : super(key: key, defaultValue: Set());
+  StringSetPreference({required super.key}) : super(defaultValue: {});
 
   /// Get the list of excluded names.
   ///
@@ -148,6 +142,7 @@ class StringSetPreference extends Preference<Set<String>> {
     }
   }
 
+  @override
   void _updatePrefs() async {
     var preferences = await SharedPreferences.getInstance();
     // If the user's preference is not the default value, record it.
