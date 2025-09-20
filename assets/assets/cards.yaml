@@ -1,0 +1,1845 @@
+# Cards Database
+#
+## Meta
+#
+# For things that are not keywords, you can use one of these as Meta:
+# - Diseased
+# - Thunderstone
+# - Dagger
+# - Frozen (frozen wounds)
+# - Destroy (destroy effects)
+# - Dice (involves dice)
+# - Discard (involves discarding or searching through discarded cards)
+# - Static (can gain the static keyword, but doesn't have it inherently)
+# - Lycanthrope (heroes who become lycanthropes as they level up)
+#
+## Localization
+#
+# The user-facing fields can be specified in multiple languages by appending an
+# underscore and the language code to the end of the key. For example:
+# - Quest: Bandits of Black Rock
+#   Quest_es: Banditos de Black Rock
+#   Quest_fr: Bandits de Black Rock
+#
+# The following entries can be localized: Quest, Name (Hero, Marketplace cards,
+# Dungeon rooms, Guardians, and Monsters), and Memo.
+#
+
+- Quest: Bandits of Black Rock
+  Quest_fr: Bandits de Black Rock
+  Sets:
+  - Champion
+  Heroes:
+  - Name: Edlin
+    Keywords: [ Human, Fighter, Hero ]
+    Combo: [ Weapon ]
+  Marketplace:
+  - Name: Scionic Annals
+    Name_fr: Annales Scioniques
+    Keywords: [ Magic, Item ]
+    Combo: [ Spell ]
+  - Name: Dark Fire Touch
+    Keywords: [ Chaos, Elemental, Spell ]
+  - Name: Rapier
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Human, Humanoid, Rogue ]
+  Guardians: []
+  Dungeon Rooms: []
+  Monsters:
+  - Name: Black Rock Bandits
+    Keywords: [ Humanoid ]
+    Level: 1
+    Memo: They attack your Marketplace cards.
+
+- Quest: Champion Promos
+  Sets:
+  - Champion
+  Heroes:
+  - Name: Outlands
+    Keywords: [ Human, Fighter, Hero ]
+  - Name: Stalker
+    Keywords: [ Elf, Rogue, Hero ]
+    Memo: Stalker uses Gear tokens for strength and provides Light at level 3.
+  - Name: The Yellow Knight
+    Keywords: [ Human, Fighter, Hero ]
+  Marketplace:
+  - Name: Necklace of Dawn
+    Keywords: [ Magic, Item ]
+  - Name: Form of the Juggernaut
+    Keywords: [ Arcane, Spell ]
+  - Name: Hand Axe
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Dwarf, Giant, Plant ]
+  Guardians: []
+  Dungeon Rooms: []
+  Monsters: []
+
+- Quest: New Horizons Promos
+  Guardians:
+  - Name: Ezuzrius the Noble
+    Keywords: [Giant, Dragon, Guardian]
+    Meta: [Dice, Destroy]
+
+- Quest: Ezuzrius's Hatchlings
+  Monsters:
+  - Name: Dragon Whelps
+    Keywords: [ Dragon, Swarm, Ezuzrius's Hatchling ]
+    Level: 3
+
+- Quest: Warlord Promos
+  Guardians:
+    - Name: Stormwraith
+      Keywords: [Elemental, Humanoid, Undead, Guardian]
+      Meta: [Destroy ]
+
+- Quest: A Mirror in the Dark
+  Number: 1
+  Sets:
+  - Base Game
+  - Champion
+  Heroes:
+  - Name: Gorlandor
+    Keywords: [ Human, Fighter, Hero ]
+    Combo: [ Weapon ]
+  - Name: Hawkswood
+    Keywords: [ Avian, Elf, Rogue, Hero ]
+  - Name: Pylorian
+    Keywords: [ Human, Wizard, Hero ]
+    Memo: Arcane Spell specialist
+    Combo: [ Arcane, Spell ]
+  - Name: Scathian
+    Keywords: [ Halfling, Rogue, Wizard, Hero ]
+  - Name: Silverhelm
+    Keywords: [Cleric, Fighter]
+    Combo: [ Weapon ]
+  - Name: Stormhand
+    Keywords: [ Dwarf, Fighter, Hero ]
+    Memo: Edged Weapon specialist
+    Combo: [ Edged ]
+  Marketplace:
+  - Name: Amulet of Infravision
+    Keywords: [Magic,Item]
+    Combo: [Rogue]
+  - Name: Gem of Healing
+    Keywords: [Magic,Item]
+  - Name: Tome of Knowledge
+    Keywords: [Item]
+  - Name: Fireball
+    Keywords: [Elemental,Spell]
+  - Name: Future Vision
+    Keywords: [Arcane,Divine,Spell]
+    Combo: [ Cleric, Wizard ]
+  - Name: Magic Missile
+    Keywords: [Arcane,Spell]
+    Combo: [ Wizard ]
+  - Name: Moonlight
+    Keywords: [Elemental,Spell]
+    Combo: [ Wizard ]
+  - Name: Hammer
+    Keywords: [Blunt, Weapon]
+  - Name: Maul
+    Keywords: [Blunt,Weapon]
+    Combo: [Dwarf]
+  - Name: Shortbow
+    Keywords: [Bow, Weapon]
+    Combo: [Elf,Rogue]
+  - Name: Shortspear
+    Keywords: [Edged,Weapon]
+  - Name: Shortsword
+    Keywords: [Edged, Weapon]
+    Combo: [Weapon]
+  Guardians:
+  - Name: Smorga the Queen
+    Keywords: [Humanoid, Vermin, Guardian]
+  Dungeon Rooms:
+  - Name: Abandoned Gate
+    Level: 1
+  - Name: Mine
+    Level: 1
+  - Name: Crypt
+    Level: 2
+  - Name: Sunken Well
+    Level: 2
+  - Name: Throne Room
+    Level: 3
+  - Name: Vault
+    Level: 3
+  Monsters:
+  - Name: Kobold Skirmishers
+    Keywords: [ Humanoid ]
+    Level: 1
+  - Name: Goblin Grunts
+    Keywords: [ Humanoid ]
+    Level: 1
+  - Name: Hobgoblin Brutes
+    Level: 2
+    Keywords: [ Humanoid]
+    Memo: They attack heroes and their equipment.
+  - Name: Spider Terrors
+    Keywords: [Giant, Vermin]
+    Meta: [ Diseased ]
+    Memo: They wound heavily (Wounds and Wound Cards) and are drawn to equipment.
+    Level: 2
+  - Name: Ancient Adventurers
+    Level: 3
+    Keywords: [Undead]
+  - Name: Goblin King's Guard
+    Level: 3
+    Keywords: [Humanoid]
+
+- Quest: Total Eclipse of the Sun
+  Number: 2
+  Sets:
+  - Base Game
+  - Champion
+  Heroes:
+  - Name: Avania
+    Keywords: [ Celestial, Human, Cleric, Hero ]
+  - Name: Brimstone
+    Keywords: [ Dwarf, Rogue, Hero]
+    Memo: The more Light you have, the more powerful Brimstone gets.
+  - Name: Ehrlingal
+    Keywords: [ Halfling, Rogue, Hero ]
+    Memo: Ehrlingal provides Light at level 2 and is a Dagger specialist.
+    Combo: [ Dagger ]
+  - Name: Felin
+    Keywords: [ Elf, Cleric, Wizard, Hero ]
+    Memo: Felin can shapeshift her form, depending on the situation.
+  - Name: Gendarme
+    Keywords: [ Dwarf, Wizard, Hero ]
+    Memo: Gendarme uses secret Dwarven magic to empower your weapons.
+    Combo: [ Weapon ]
+  - Name: Sephilest
+    Keywords: [ Elf, Fighter, Hero ]
+  Marketplace:
+  - Name: Elven Ring
+    Keywords: [ Magic, Item ]
+    Combo: [ Elf, Discard ]
+  - Name: Headband of Intellect
+    Keywords: [ Magic, Item ]
+  - Name: Strength Gauntlets
+    Keywords: [ Magic, Item ]
+  - Name: Wand of Light
+    Keywords: [ Magic, Item ]
+    Combo: [ Cleric, Wizard, Rogue ]
+  - Name: Arcane Touch
+    Keywords: [ Arcane, Spell ]
+    Combo: [ Wizard ]
+  - Name: Consecration
+    Keywords: [ Divine, Spell ]
+    Combo: [ Cleric ]
+  - Name: Lightning Bolt
+    Keywords: [ Elemental, Spell ]
+    Combo: [ Wizard ]
+  - Name: Nature's Fury
+    Keywords: [ Elemental, Spell ]
+    Combo: [ Wizard ]
+  - Name: Longbow
+    Keywords: [ Bow, Weapon ]
+  - Name: Longsword
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Human ]
+  - Name: Punching Dagger
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Halfling, Dagger ]
+    Meta: [ Dagger ]
+  - Name: Quarterstaff
+    Keywords: [ Blunt, Weapon ]
+  Guardians:
+  - Name: Guardian of the Sun
+    Keywords: [Elemental, Golem, Guardian]
+    Meta: [Discard]
+  Dungeon Rooms:
+  - Name: Fairy Meadow
+    Level: 1
+  - Name: Ominous Looking Road
+    Level: 1
+  - Name: Hollow Tree
+    Level: 2
+  - Name: Tree House
+    Level: 2
+  - Name: Elven Outpost
+    Level: 3
+  - Name: Elven Ruins
+    Level: 3
+  Monsters:
+  - Name: Twisted Creatures
+    Keywords: [ Beast ]
+    Level: 1
+  - Name: Woodland Sprites
+    Keywords: [ Fey ]
+    Meta: [ Diseased ]
+    Level: 1
+    Memo: They deal Wound Cards.
+  - Name: Corrupted Elves
+    Keywords: [ Humanoid ]
+    Level: 2
+    Memo: Destroy your XP or suffer their wrath.
+  - Name: Foundational Keepers
+    Keywords: [ Elemental, Giant, Humanoid ]
+    Level: 2
+    Memo: These Ogres attack as soon as they refill the Dungeon (but not at game setup).
+  - Name: Corrupted Centaurs
+    Keywords: [ Beast, Humanoid ]
+    Level: 3
+    Memo: They are each susceptible to a particular Class, but resilient against others.
+  - Name: Treefolk
+    Keywords: [ Giant, Plant ]
+    Level: 3
+    Memo: They are worth much more if you defeat them convincingly.
+
+- Quest: Risen from the Mire
+  Number: 3
+  Sets:
+  - Champion
+  Heroes:
+  - Name: Baharan
+    Keywords: [ Triton, Cleric, Hero ]
+    Memo: Baharan uses strange magics, allowing you to discard cards for extra bonuses.
+    Meta: [ Discard ]
+  - Name: Darameric
+    Keywords: [ Elf, Cleric, Wizard, Hero ]
+  - Name: Linsha
+    Keywords: [ Human, Fighter, Hero ]
+    Combo: [ Weapon ]
+  - Name: Markennan
+    Keywords: [ Human, Fighter, Hero ]
+    Memo: Blunt Weapon specialist.
+    Combo: [ Blunt ]
+  - Name: Nimblefingers
+    Keywords: [ Elf, Rogue, Hero ]
+  - Name: Regalen
+    Keywords: [ Elf, Wizard, Hero ]
+  Marketplace:
+  - Name: Crystal of Scrying
+    Keywords: [ Magic, Item ]
+  - Name: Holy Symbol
+    Keywords: [ Divine, Item ]
+    Combo: [ Cleric, Demon, Undead ]
+  - Name: Potion of Stamina
+    Keywords: [ Magic, Item ]
+  - Name: Ring of Learning
+    Keywords: [ Magic, Item ]
+    Combo: [ Weapon ]
+  - Name: Arcane Aura
+    Keywords: [ Arcane, Spell ]
+    Combo: [ Wizard ]
+  - Name: Charm Monster
+    Keywords: [ Arcane, Spell ]
+    Combo: [ Wizard ]
+  - Name: Enchant Weapons
+    Keywords: [ Arcane, Spell ]
+    Combo: [ Wizard, Weapon ]
+  - Name: Vampiric Touch
+    Keywords: [ Chaos, Spell ]
+  - Name: Battle Axe
+    Keywords: [ Edged, Weapon ]
+  - Name: Boomerang
+    Keywords: [ Blunt, Edged, Weapon ]
+    Combo: [ Discard ]
+  - Name: Crystal Dagger
+    Keywords: [ Edged, Magic, Weapon ]
+    Meta: [ Dagger ]
+    Combo: [ Wizard, Spell]
+  - Name: Holy Mace
+    Keywords: [ Blunt, Divine, Weapon ]
+    Combo: [ Demon, Undead ]
+  Guardians:
+  - Name: Baalok, the Flesh Weaver
+    Keywords: [Undead, Lich, Guardian]
+    Meta: [Destroy]
+  Dungeon Rooms:
+  - Name: Alchemy Chamber
+    Level: 1
+  - Name: The Servant's Tombs
+    Level: 1
+  - Name: Bog
+    Level: 2
+  - Name: Sunken Graveyard
+    Level: 2
+  - Name: Blood Altar Room
+    Level: 3
+  - Name: The Lich's Tomb
+    Level: 3
+  Monsters:
+  - Name: Ensnaring Vines
+    Keywords: [ Plant ]
+    Level: 1
+  - Name: Bog Zombies
+    Keywords: [ Undead ]
+    Meta: [ Diseased ]
+    Level: 1
+    Memo: They deal Wound Cards.
+  - Name: Chaos Lizards
+    Keywords: [ Humanoid ]
+    Meta: [ Dice ]
+    Level: 2
+    Memo: They discard your cards based no the outcome of dice rolls.
+  - Name: Moor Skeletons
+    Keywords: [ Undead ]
+    Level: 2
+    Memo: They deal Wound Cards and are resistant to Physical Attack and Edged Weapons.
+  - Name: Marsh Trolls
+    Keywords: [ Giant ]
+    Level: 3
+    Memo: They have immunities to different cards.
+  - Name: Swamp Spirits
+    Keywords: [ Undead ]
+    Level: 3
+    Memo: They hunger for (attack) your Heroes.
+
+- Quest: At the Foundations of the World
+  Number: 4
+  Sets:
+  - Champion
+  Heroes:
+  - Name: Darkrend
+    Keywords: [ Human, Wizard, Hero ]
+    Memo: Using forbidden blood magic, Darkrend inflicts Wounds to power her attacks.
+  - Name: Grimwolf
+    Keywords: [ Undead, Human, Fighter, Hero ]
+    Memo: Risen to complete his mission, Grimwolf bleeds to power himself.
+  - Name: Honormain
+    Keywords: [ Human, Cleric, Hero ]
+  - Name: Jadress
+    Keywords: [ Elf, Rogue, Hero ]
+    Memo: Bow Weapon specialist
+    Combo: [ Bow ]
+  - Name: Moonblades
+    Keywords: [ Human, Fighter, Rogue, Hero ]
+  - Name: Stormskull
+    Keywords: [ Human, Orc, Wizard, Hero ]
+    Combo: [ Spell ]
+  Marketplace:
+  - Name: Damilu Huskie
+    Keywords: [ Ally, Item ]
+    Combo: [ Discard, Destroy ]
+  - Name: Daramere's Cloak
+    Keywords: [ Magic, Item ]
+    Combo: [ Discard, Destroy ]
+  - Name: Potion of Light
+    Keywords: [ Magic, Item ]
+  - Name: Ring of Proficiency
+    Keywords: [ Magic, Item ]
+  - Name: Death Pact
+    Keywords: [ Chaos, Spell ]
+    Combo: [ Wizard ]
+  - Name: Mirror Image
+    Keywords: [ Arcane, Chaos, Spell ]
+  - Name: Tempest
+    Keywords: [ Elemental, Spell ]
+    Combo: [ Fighter, Cleric, Rogue, Wizard ]
+  - Name: True Seeing
+    Keywords: [ Arcane, Divine, Spell ]
+    Combo: [ Wizard, Cleric ]
+  - Name: Broadsword
+    Keywords: [ Edged, Weapon ]
+  - Name: Crossbow
+    Keywords: [ Bow, Weapon ]
+    Combo: [ Rogue ]
+  - Name: Flail
+    Keywords: [ Blunt, Weapon ]
+  - Name: Two-Handed Sword
+    Keywords: [ Edged, Weapon ]
+  Guardians:
+  - Name: Miricelle, Scion Defender
+    Keywords: [Demon, Humanoid, Guardian]
+    Meta: [Dice]
+  Dungeon Rooms:
+  - Name: Air Temple
+    Level: 1
+  - Name: Water Temple
+    Level: 1
+  - Name: Earth Temple
+    Level: 2
+  - Name: Fire Temple
+    Level: 2
+  - Name: Abyssal Temple
+    Level: 3
+  - Name: Celestial Temple
+    Level: 3
+  Monsters:
+  - Name: Air Servitors
+    Keywords: [ Elemental ]
+    Level: 1
+    Memo: They tend to be vulnerable to Magic Attack.
+  - Name: Water Servitors
+    Keywords: [ Elemental ]
+    Level: 1
+    Memo: They move throughout the Dungeon, making it unpredictable.
+  - Name: Earth Servitors
+    Keywords: [ Elemental ]
+    Level: 2
+    Memo: They are strong against Physical Attack.
+  - Name: Fire Servitors
+    Keywords: [ Elemental ]
+    Combo: [ Weapon ]
+    Level: 2
+    Memo: They attack your Skill and Weapons.
+  - Name: Divine Founders
+    Keywords: [ Elemental, Celestial ]
+    Level: 3
+    Memo: They judge (attack) your Heroes harshly.
+  - Name: Abyssal Founders
+    Keywords: [ Elemental, Demon ]
+    Level: 3
+    Meta: [ Dice ]
+    Memo: The chaotic nature of their dice rolls make them unpredictable.
+
+- Quest: Ripples in Time
+  Number: 5
+  Sets:
+  - Champion
+  Heroes:
+  - Name: Aird
+    Keywords: [ Human, Rogue, Hero ]
+    Memo: Aird uses your opponents' strengths against them.
+    Meta: [ Discard ]
+  - Name: Arcanian
+    Keywords: [ Human, Wizard, Hero ]
+    Memo: Arcanian's sorcery changes dice rolls. She also provides Light at level 2.
+    Combo: [ Dice ]
+  - Name: Dunardic
+    Keywords: [ Human, Fighter, Hero ]
+    Memo: Once a Town Guard, Dunardic uses your Experience Points as a resource.
+  - Name: Regian
+    Keywords: [ Human, Cleric, Hero ]
+    Combo: [ Diseased ]
+  - Name: Terakian
+    Keywords: [ Human, Cleric, Fighter, Hero ]
+    Memo: Potion specialist.
+  - Name: Veris
+    Keywords: [ Elf, Wizard, Hero ]
+    Memo: Veris has the ability to make Weapons glow bright.
+    Combo: [ Weapon ]
+  Marketplace:
+  - Name: Amulet of Power
+    Keywords: [ Magic, Item ]
+  - Name: Lightstone Gem
+    Keywords: [ Magic, Item ]
+  - Name: Nature's Amulet
+    Keywords: [ Magic, Item ]
+  - Name: Ring of Spell Storing
+    Keywords: [ Magic, Item ]
+    Combo: [ Spell ]
+  - Name: Creeping Death
+    Keywords: [ Chaos, Spell ]
+    Combo: [ Wizard ]
+    Meta: [ Diseased ]
+  - Name: Frost Bolt
+    Keywords: [ Elemental, Spell ]
+  - Name: Mind Control
+    Keywords: [ Arcane, Chaos, Spell ]
+    Combo: [ Wizard ]
+  - Name: Summon Storm
+    Keywords: [ Elemental, Spell ]
+    Combo: [ Wizard ]
+  - Name: Cursed Mace
+    Keywords: [ Blunt, Cursed, Weapon ]
+    Combo: [ Cleric ]
+  - Name: King's Sword
+    Keywords: [ Edged, Weapon ]
+  - Name: Longspear
+    Keywords: [ Edged, Weapon ]
+  - Name: Magi Staff
+    Keywords: [ Blunt, Magic, Weapon ]
+  Guardians:
+  - Name: Death Sentinel
+    Keywords: [Golem, Doomknight, Guardian]
+    Meta: [Dice]
+  Dungeon Rooms:
+  - Name: Gate Cavern
+    Level: 1
+  - Name: Dangerous Passageway
+    Level: 2
+  - Name: Fire Chasm
+    Level: 3
+  Monsters:
+  - Name: Doomknights
+    Keywords: [ Undead ]
+    Level: 1
+    Memo: They attack Heroes who try to move through their room.
+  - Name: Gnoll Raiders
+    Keywords: [ Humanoid ]
+    Combo: [ Weapon ]
+    Level: 1
+    Memo: They destroy your Weapons and Gear.
+  - Name: Minions of Chaos
+    Keywords: [ Demon ]
+    Meta: [ Destroy ]
+    Level: 2
+    Memo: They destroy your Heroes based on the outcome of dice rolls.
+  - Name: Torments
+    Keywords: [ Elemental ]
+    Level: 2
+    Memo: They are strong against Magic Attack.
+  - Name: Ancient Wyrms
+    Keywords: [ Dragon ]
+    Level: 3
+    Memo: They like to snack on (attack) your Heroes.
+  - Name: Ancient Protectors
+    Keywords: [ Golem ]
+    Level: 3
+    Memo: They are immune to Heroes with low Skill.
+
+- Quest: What Lies Beneath
+  Number: 6
+  Sets:
+  - To the Barricades
+  Heroes:
+  - Name: Graeme Crawford
+    Keywords: [ Human, Cleric, Fighter, Hero ]
+    Memo: This grizzled veteran may not like you, but he'll heal you. When the situation calls for it, he can imbue his attack with Magic Damage.
+    Combo: [ Diseased ]
+  - Name: Khomros
+    Keywords: [ Triton, Fighter, Hero ]
+    Memo: Better at battling the Aberrations and Plants of the sewer, Khomros uses whatever weapons he finds (discards from your deck).
+    Combo: [ Aberration, Plant, Weapon, Fighter ]
+  - Name: Ophialyn the Tracker
+    Keywords: [ Elf, Human, Fighter, Hero ]
+    Memo: Ophialyn is the best hunter of Beasts, Fey, Giants, Golems, and Humanoids. She learns to track like a Rogue at level 2.
+    Combo: [ Beast, Fey, Dragon, Elemental, Giant, Golem, Humanoid ]
+  - Name: Runiva Highstone
+    Keywords: [ Dwarf, Wizard, Hero ]
+    Memo: Experienced at battling Beasts and Giants, Runiva will light the path if she can find (discard from your deck) the right spell.
+    Combo: [ Beast, Giant, Spell ]
+  - Name: Uvina the Delver
+    Keywords: [ Halfling, Rogue, Hero ]
+    Memo: Uvina delves through (discards from) your deck, getting extra Gear for your next venture.
+    Combo: [ Discard ]
+    Meta: [ Discard ]
+  - Name: Wiltran Proudmore
+    Keywords: [ Halfling, Cleric, Hero ]
+    Memo: Wiltran brews potions and focuses his efforts on healing your Diseased Wounds by discarding them straight out of your deck. He learns the Wizardly arts at level 2.
+    Combo: [ Diseased, Discard ]
+    Meta: [ Discard ]
+  Marketplace:
+  - Name: Bracers of Cleansing
+    Keywords: [ Magic, Item ]
+    Combo: [ Diseased ]
+  - Name: Neverending Rope Spool
+    Keywords: [ Magic, Item ]
+    Combo: [ Rogue ]
+    Meta: [ Rogue ]
+  - Name: Studded Leather Shirt
+    Keywords: [ Item ]
+    Combo: [ Human, Weapon, Fighter ]
+  - Name: Wand of Illumination
+    Keywords: [ Magic, Item ]
+    Combo: [ Cleric, Wizard, Halfling ]
+  - Name: Acid Burst
+    Keywords: [ Arcane, Elemental, Spell ]
+    Combo: [ Aberration, Golem, Humanoid, Wizard ]
+  - Name: Ascendance
+    Keywords: [ Arcane, Divine, Chaos, Spell ]
+    Combo: [ Wizard, Cleric ]
+  - Name: Cure Disease
+    Keywords: [ Divine, Spell ]
+    Combo: [ Diseased, Cleric ]
+  - Name: Haste
+    Keywords: [ Chaos, Spell ]
+    Combo: [ Discard ]
+  - Name: Bastard Sword
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Human, Fighter ]
+  - Name: Battlepick
+    Keywords: [ Edged, Weapon ]
+  - Name: Cleaner's Net
+    Keywords: [ Blunt, Weapon ]
+    Combo: [ Plant, Swarm, Vermin ]
+  - Name: The Five Points
+    Keywords: [ Edged, Weapon ]
+    Combo: [ Dwarf, Triton ]
+  Guardians:
+  - Name: Hive Mind
+    Keywords: [Aberration, Humanoid, Guardian]
+    Meta: [Dice, Discard]
+  Dungeon Rooms:
+  - Name: Junction
+    Level: 1
+  - Name: Rat Nest
+    Level: 1
+  - Name: Ghoul Nest
+    Level: 2
+  - Name: Trog Village
+    Level: 2
+  - Name: Arches
+    Level: 3
+  - Name: Catacombs
+    Level: 3
+  Monsters:
+  - Name: Drain Dwellers
+    Keywords: [ Beast ]
+    Level: 1
+    Memo: They attack you when you try to move out of their room.
+  - Name: Plague Rats
+    Keywords: [ Vermin, Swarm ]
+    Meta: [ Diseased, Dice ]
+    Level: 1
+    Memo: This swarm can number in dozens or hundreds, but it often brings disease. (This Swarm gains +1d6 Health.)
+  - Name: Ghoulish Scavengers
+    Keywords: [ Undead ]
+    Meta: [ Diseased ]
+    Level: 2
+    Memo: THey use your diseases against you.
+  - Name: Sewer Trogs
+    Keywords: [ Humanoid ]
+    Level: 2
+    Memo: The Sewer Trogs are heavy wounders.
+  - Name: Shapeless Spawns
+    Keywords: [ Aberration ]
+    Meta: [ Diseased ]
+    Level: 3
+    Memo: These Aberrations of the deep grow stronger with your Wound Cards.
+  - Name: Waste Wyrms
+    Keywords: [ Giant, Vermin ]
+    Meta: [ Diseased ]
+    Level: 3
+    Memo: Heavy wounders that deal both Wound Cards and Wounds.
+
+- Quest: Frozen in Time
+  Number: 7
+  Sets:
+  - To the Barricades
+  WildernessMonster: Arctic Mosquitoes
+  Heroes:
+  - Name: Breezy
+    Keywords: [ Human, Wizard, Hero ]
+    Memo: A master of the elemental arts.
+    Combo: [ Elemental ]
+  - Name: Drulfal the Primordial
+    Keywords: [ Elemental, Dwarf, Cleric, Hero ]
+    Memo: Drulfal is adept at both wielding and withstanding the elements.
+    Combo: [ Elemental, Frozen ]
+  - Name: Lefira
+    Keywords: [ Halfling, Fighter, Hero ]
+    Memo: Lefira gets the most out of Bread tokens and Edged Weapons. She produces Gold at level 2.
+    Combo: [ Edged ]
+  - Name: Lilande
+    Keywords: [ Elf, Rogue, Hero ]
+    Memo: This elven bard learns the arts of Wizard at level 2 and the Fighter at level 3. Lilande's tale is best if you have a Side Quest or Prestige Class to relate.
+    Combo: [ Spell ]
+  - Name: Rugduhr Blackmane
+    Keywords: [ Demon, Dwarf, Rogue, Hero ]
+    Memo: Rugdhur maximizes his Gear while he hunts the one he once served.
+    Combo: [ Demon, Undead ]
+  - Name: Samly Thrackson
+    Keywords: [ Human, Orc, Cleric, Fighter, Hero ]
+    Memo: Samly destroys the impurities and inefficencies he finds in decks.
+  Marketplace:
+  - Name: Eternal Flame
+    Keywords: [ Elemental, Magic, Item ]
+    Combo: [ Dwarf, Cleric ]
+  - Name: Ice Climbing Gear
+    Keywords: [ Item ]
+    Combo: [ Halfling, Rogue ]
+  - Name: Snow Trekking Tools
+    Keywords: [ Item ]
+    Combo: [ Frozen, Discard ]
+  - Name: Tent
+    Keywords: [ Item ]
+  - Name: Blizzard
+    Keywords: [ Elemental, Spell ]
+    Combo: [ Frozen ]
+    Meta: [ Frozen ]
+  - Name: Cone of Cold
+    Keywords: [ Arcane, Chaos, Elemental, Spell ]
+    Combo: [ Wizard ]
+  - Name: Create Fire
+    Keywords: [ Elemental, Spell ]
+  - Name: Inner Fire
+    Keywords: [ Arcane, Divine, Elemental, Spell ]
+    Combo: [ Cleric, Wizard ]
+  - Name: Fire Rod
+    Keywords: [ Magic, Elemental, Weapon ]
+    Combo: [ Human, Cleric, Wizard, Rogue ]
+  - Name: Flaming Hammer
+    Keywords: [ Blunt, Weapon ]
+    Bonus: [ Dwarf, Orc ]
+  - Name: Frost Bow
+    Keywords: [ Magic, Bow, Elemental, Weapon ]
+    Combo: [ Celestial, Demon, Elemental, Elf ]
+  - Name: Mechanical Harpoon
+    Keywords: [ Bow, Edged, Weapon ]
+    Combo: [ Halfling, Rogue ]
+  Guardians:
+  - Name: Orgrum Coldthunder
+    Keywords: [Elemental,Giant,Humanoid,Bloodfrost Chieftain,Guardian]
+    Meta: [ Frozen ]
+  Dungeon Rooms:
+  - Name: Icy Glade
+    Level: 1
+  - Name: Volcanic Hot Springs
+    Level: 1
+  - Name: Orc Tribute Site
+    Level: 2
+  - Name: Tundra Chasms
+    Level: 2
+  - Name: Adlet Hunting Ground
+    Level: 3
+  - Name: Glacial Tomb
+    Level: 3
+  Monsters:
+  - Name: Arctic Animals
+    Keywords: [ Beast ]
+    Meta: [ Frozen ]
+    Level: 1
+    Memo: Arctic Animals are well-adapted to stalking their chilled prey, attacking as you enter or leave the room.
+  - Name: Abyssal Servants
+    Keywords: [ Elemental, Demon ]
+    Meta: [ Frozen ]
+    Level: 1
+    Memo: Abyssal Servants chill your bones, reducing your HP.
+  - Name: Bloodfrost Clan
+    Keywords: [ Elemental, Humanoid ]
+    Meta: [ Frozen ]
+    Level: 2
+    Memo: Unimpeded by the cold, the Bloodfrost Clan strikes hard and fast, both before and after battle.
+  - Name: Tundra Wolf Pack
+    Keywords: [ Beast, Swarm ]
+    Meta: [ Frozen, Dice ]
+    Level: 2
+    Memo: A Tundra Wolf Pack's numbers and attacks are as fast as they are unpredictable, striking before and after battle. (This Swarm gains +1d6 Health.)
+  - Name: Frozen Natives
+    Keywords: [ Humanoid, Beast ]
+    Meta: [ Frozen ]
+    Level: 3
+    Memo: An ancient race of half-dog, half-humas, the Adlet attacks are devestatingly unpredictable.
+  - Name: Ice Behemoths
+    Keywords: [ Elemental, Giant, Humanoid ]
+    Meta: [ Frozen ]
+    Level: 3
+    Memo: The arctic wastes abound with high Health behemoths who ask no questions.
+
+- Quest: Vengeful Sands
+  Number: 8
+  Sets:
+  - New Horizons
+  Heroes:
+  - Name: Cirrok
+    Keywords:
+    - Rogue
+  - Name: Duriggim Soulbrand
+    Keywords: [ Dwarf, Cleric, Wizard, Hero ]
+    Memo: Duriggim uses Chaos magic to help heal your Wounds. At later levels, he experiments on your other Heroes.
+    Combo: [ Chaos ]
+  - Name: Rien Mandroux
+    Keywords: [ Avian, Elf, Fighter, Hero ]
+    Memo: Rien works best when you have a good balance of keywords in your deck.
+    Combo: [ Ally, Item, Spell, Weapon ]
+  - Name: Hemna Granitesunder
+    Keywords: [ Dwarf, Fighter, Hero ]
+    Memo: Hemna gets the most out of your cards, especially your Starter Lanterns.
+    Combo: [ Discard ]
+  - Name: Shakir the Sailor
+    Keywords: [ Human, Rogue, Hero ]
+    Memo: Shakir is always looking for Treasure on his voyages. Provides Light at later levels.
+  - Name: Shawna Hopesinger
+    Keywords: [ Halfling, Rogue, Wizard, Hero ]
+    Memo: Shawna is a master storyteller, bringing great rewards during the Village Phase.
+    Combo: [ Destroy ]
+  - Name: Cirrok
+    Keywords: [ Avian, Beast, Rogue, Hero ]
+    Memo: Cirrok maximizes your Village Phases, though is not strong in battle.
+  Marketplace:
+  - Name: Spices
+    Keywords: [ Item ]
+  - Name: Bag of Gems
+    Keywords: [ Item ]
+    Combo: [ Avian, Halfling ]
+  - Name: Thunderstone Potion
+    Keywords: [ Magic, Item ]
+    Meta: [ Thunderstone ]
+  - Name: Mummify
+    Keywords: [ Chaos, Divine, Spell ]
+    Combo: [ Cleric ]
+  - Name: Navigate the Labyrinth
+    Keywords: [ Chaos, Spell ]
+    Combo: [ Cleric, Wizard ]
+    Meta: [ Static ]
+  - Name: Open Sesame
+    Keywords: [ Arcane, Chaos, Spell ]
+    Combo: [ Wizard ]
+  - Name: Summon Help
+    Keywords: [ Arcane, Chaos, Spell ]
+    Combo: [ Wizard ]
+  - Name: Avian Bow
+    Keywords: [ Magic, Bow, Weapon ]
+    Combo: [ Avian ]
+  - Name: Khopesh
+    Keywords: [ Edged, Weapon ]
+  - Name: Scimitar
+    Keywords: [ Edged, Weapon ]
+  - Name: Camel
+    Keywords: [ Beast, Ally ]
+    Meta: [ Static ]
+  - Name: Desert Wolf
+    Keywords: [ Beast, Ally ]
+    Combo: [ Avian ]
+  Monsters:
+  - Name: Beetle Bevy
+    Keywords: [ Vermin, Swarm ]
+    Meta: [ Dice ]
+    Level: 1
+    Memo: This Swarm has +1d6 Health and feasts on (destroys) your tokens.
+  - Name: Desert Dwellers
+    Keywords: [ Beast ]
+    Meta: [ Diseased ]
+    Level: 1
+  - Name: Naga Nomads
+    Keywords: [ Beast, Fey, Humanoid ]
+    Meta: [ Diseased ]
+    Level: 2
+    Memo: These snake-people are very quick, unless you know their tactics.
+  - Name: Sand Spirits
+    Keywords: [ Demon, Djinn ]
+    Meta: [ Diseased ]
+    Level: 2
+    Memo: They discard your cards Left and Right.
+    Restriction: [NoSolo]
+  - Name: Arid Atrocities
+    Keywords: [ Giant, Beast ]
+    Combo: [ Ally ]
+    Meta: [ Destroy ]
+    Level: 3
+    Memo: These relentless brutes assault (destroy) your Allies and Heroes.
+  - Name: Amtephetes's Forces
+    Keywords: [ Undead ]
+    Meta: [ Diseased ]
+    Level: 3
+    Memo: These (mostly) undead Monsters strike you hardest in the dark.
+  Guardians:
+  - Name: Amtephetes VII, The Wicked
+    Keywords: [Humanoid,Undead,Guardian]
+  Dungeon Rooms:
+  - Name: Dragon Blood Forest
+    Level: 1
+  - Name: Merchant Caravan
+    Level: 1
+  - Name: Naga Nest
+    Level: 2
+  - Name: Oasis
+    Level: 2
+  - Name: Chalk Desert
+    Level: 3
+  - Name: Royal Tomb
+    Level: 3
+
+- Quest: Clockwork Destiny
+  Number: 9
+  Sets:
+  - New Horizons
+  Heroes:
+  - Name: Tilka the Sculptor
+    Keywords: [ Gnome, Halfling, Rogue, Hero ]
+    Memo: Tilka spends little time improving herself, focusing her efforts on building her Thunderstone Protector army.
+  - Name: Hamrulir Oakenborn
+    Keywords: [ Dwarf, Fighter, Hero ]
+    Memo: Give Hamrulir a Blunt Weapon, and he will disable (smash) the trap as well as any Rogue.
+    Combo: [ Blunt, Golem, Undead ]
+  - Name: Liss
+    Keywords: [ Celestial, Human, Wizard, Hero ]
+    Memo: Liss is a Chaos specialist who harnesses the power of Thunderstones.
+    Combo: [Chaos, Thunderstone]
+  - Name: Baraqiel
+    Keywords: [ Avian, Beast, Celestial, Cleric, Hero ]
+    Memo: Baraqiel will keep you healed and will get the most out of you Bows and Spells.
+    Combo: [ Bow, Spell ]
+  - Name: Shenaris
+    Keywords: [ Elf, Urquean, Cleric, Hero ]
+    Memo: Shenaris is an imbuer, and as such is always looking for a good deal at The Marketplace. She produces gold starting at Level 2.
+  - Name: Caslech
+    Keywords: [ Urquean, Rogue, Hero]
+    Memo: As Caslech levels up, he unlocks his magical potenetial, and imbues it in his Bow.
+    Combo: [Bow, Spell]
+  Marketplace:
+  - Name: Crystal Light
+    Keywords: [ Magic, Item ]
+    Combo: [ Thunderstone ]
+  - Name: Plate Armor
+    Keywords: [ Item ]
+    Combo: [ Dwarf, Orc, Destroy, Discard ]
+  - Name: Thunderstone Elixer
+    Keywords: [ Magic, Item ]
+    Meta: [ Thunderstone ]
+  - Name: Thunderstone Ore
+    Keywords: [ Magic, Item ]
+    Meta: [ Thunderstone ]
+  - Name: Animate Dead
+    Keywords: [ Arcane, Divine, Chaos, Spell ]
+    Combo: [ Cleric, Wizard, Destroy ]
+  - Name: Construct Protector
+    Keywords: [ Chaos, Spell ]
+    Combo: [ Dwarf, Gnome, Urquean ]
+  - Name: Mend
+    Keywords: [ Chaos, Divine, Spell ]
+    Combo: [ Urquean, Thunderstone ]
+  - Name: Thunderstone Ritual
+    Keywords: [ Arcane, Chaos, Divine, Elemental, Spell ]
+    Combo: [ Urquean, Wizard, Cleric ]
+    Meta: [ Thunderstone ]
+  - Name: Transmutation
+    Keywords: [ Chaos, Elemental, Spell ]
+  - Name: Keltarian Bow
+    Keywords: [ Bow, Weapon ]
+    Combo: [ Elf, Human, Urquean ]
+  - Name: Thunderstone Hammer
+    Keywords: [ Blunt, Magic, Weapon ]
+    Combo: [ Dwarf, Urquean ]
+    Meta: [ Thunderstone ]
+  - Name: Thunderstone Rod
+    Keywords: [ Blunt, Magic, Weapon ]
+    Meta: [ Thunderstone, Discard ]
+    Combo: [ Wizard, Spell ]
+  Monsters:
+  - Name: Material Spirits
+    Keywords: [ Elemental, Undead ]
+    Level: 1
+    Memo: The Clockwork Lich has gathered these Elementals, many of whom are Djinn.
+  - Name: Mystical Kobolds
+    Keywords: [ Fey, Humanoid ]
+    Combo: [ Thunderstone ]
+    Level: 1
+    Memo: These Fey creatures steal your Thunderstones when you leave and give them to others.
+    Restriction: [ NoSolo ]
+  - Name: C.C.O.V. Gang
+    Keywords: [ Humanoid, Golem ]
+    Level: 2
+    Memo: These enhanced ruffians strike hard and fast when you enter and leave the room.
+  - Name: Gremlins
+    Keywords: [ Humanoid, Demon, Swarm ]
+    Meta: [ Dice ]
+    Level: 2
+    Memo: This unpredictable Swarm has +1d6 Health and eats (destroys) your Thunderstones.
+  - Name: Automatons
+    Keywords: [ Golem, Swarm ]
+    Meta: [ Dice, Thunderstone ]
+    Level: 3
+    Memo: This Thunderstone-powerered swarm has +2d6 Health and also, if you do not have your own Thunderstones, +1d6 Armor.
+  - Name: Mech Menaces
+    Keywords: [ Giant, Golem ]
+    Level: 3
+    Memo: These half-beast, half-machine monstrosities are heavily armored, but weakened as Guardian Keys are found.
+  Guardians:
+  - Name: Thavroh Anvilbane
+    Keywords: [Humanoid, C.C.O.V. Boss, Guardian]
+    Meta: [ Discard ]
+  Dungeon Rooms:
+  - Name: Magic Mines
+    Level: 1
+  - Name: Sacred Site
+    Level: 1
+  - Name: Keltarian Laboratory
+    Level: 2
+  - Name: Town Square
+    Level: 2
+  - Name: Dark Forge
+    Level: 3
+  - Name: Twilight Portal
+    Level: 3
+
+- Quest: Darkness Rising
+  Number: 10
+  Sets:
+  - The Enemies Among Us
+  Heroes:
+  - Name: Mirak Ilaskas
+    Keywords: [Human, Cleric, Rogue, Hero]
+    Combo: [Corruption, Blunt]
+    Memo: A unique dual-class Hero with a calming After Battle influence on others.
+  - Name: Barmin Ironclaw
+    Keywords: [Dwarf, Fighter, Hero]
+    Meta: [ Lycanthrope ]
+    Memo: Barmin is a back-alley Fighter who thrives off the intimidation that keeps lesser warriors from delving too deep into the Dungeon.
+  - Name: Kaiya Winters
+    Keywords: [Human, Fighter, Wizard, Hero]
+    Memo: A dual-class monster hunter who is deadly with a whip, Kaiya can help control the call of the darkness, enabling you to discard Static Corruptions.
+  - Name: Stelias the Dark
+    Keywords: [Halfling, Rogue, Hero]
+    Combo: [Ally]
+    Meta: [Undead]
+    Memo: A brazen thief, Stelias draws strength from other Heroes in battle and learns from every battle he finds himself in.
+  - Name: Karn Wulfric
+    Keywords: [Human, Cleric, Hero]
+    Meta: [Lycanthrope]
+    Combo: [Corruption]
+    Memo: This inquisitive healer revels in the strength offered by Mortas' corrupting influence. But he may lose himself on the journey.
+  - Name: Ursulette
+    Keywords: [Elf, Wizard, Hero]
+    Combo: [Arcane, Chaos]
+    Meta: [Undead]
+    Memo: As a wielder of magic, Ursulette dances on the line of light and dark. Under Mortas' influence, she moves even closer to the darkness.
+  Marketplace:
+  - Name: Dreamcatcher
+    Keywords: [Cursed, Magic, Item]
+    Meta: [Corruption, Discard]
+  - Name: Torch
+    Keywords: [Item]
+    Combo: [Beast, Vermin]
+  - Name: Grimwood Wand
+    Keywords: [Magic, Item]
+    Combo: [Aberration, Djinn, Undead, Golem]
+  - Name: Black Cat
+    Keywords: [Beast, Rogue, Ally]
+  - Name: Balanced Staff
+    Keywords: [Blunt, Edged, Weapon]
+  - Name: Whip
+    Keywords: [Weapon]
+    Combo: [Cleric]
+  - Name: Bow of the Beast
+    Keywords: [Magic, Bow, Weapon]
+    Combo: [Rogue, Beast, Vermin, Lycanthrope, Undead]
+  - Name: Pitchfork
+    Keywords: [Blunt, Edged, Weapon]
+  - Name: Morning Dawn
+    Keywords: [Arcane, Divine, Elemental, Spell]
+    Combo: [Undead, Lycanthrope]
+  - Name: Dance with the Devil
+    Keywords: [Arcane, Chaos, Spell]
+    Combo: [Corruption]
+    Meta: [Discard]
+  - Name: Superior Mind
+    Keywords: [Arcane, Spell]
+  - Name: Exorcise
+    Keywords: [Divine, Spell]
+    Combo: [Cleric]
+  Monsters:
+  - Name: Bloodthirsty Beasts
+    Keywords: [Vermin, Swarm]
+    Meta: [Corruption]
+    Memo: These swarming vermin are minions of Count Mortas, spreading his Corruption.
+    Level: 1
+  - Name: Possessed Objects
+    Keywords: [Golem]
+    Memo: Even the furniture in Mortas' castle is a corruption of life, Golems that strike at you when your back is turned.
+    Level: 1
+  - Name: Fearsome Phantasms
+    Memo: The Ebonwood has given life to the nightmares of its people. Now these bizarre creations prey on your Heroes, gaining strength as they do.
+    Level: 2
+    Meta: [Corruption]
+  - Name: Enthralled Villagers
+    Keywords: [Humanoid]
+    Combo: [Corruption]
+    Memo: The citizens of the Ebonwood have lived in fear of Mortas for centuries. Their paranoia causes them to lash out at anyone bearing the Count's Corruption.
+    Level: 2
+  - Name: Lost Lycanthropes
+    Keywords: [Beast, Humanoid]
+    Combo: [Corruption]
+    Memo: These Humanoids turned primal Beasts only respond to their own kind. Only those who share their bestial nature can avoid their strongest attacks.
+    Level: 3
+  - Name: Vicious Vampires
+    Level: 3
+    Keywords: [Humanoid, Undead]
+    Combo: [Corruption]
+    Memo: As the Ebonwood traverses the world, Mortas' craving for life has seduced others to his ways. These gladly spread his Corruption to draw more under his thrall.
+  Guardians:
+  - Name: Count Leander Mortas
+    Keywords: [Humanoid, Undead, Guardian]
+    Meta: [Dice]
+    Combo: [Corruption]
+  Dungeon Rooms:
+  - Name: Village Square
+    Level: 1
+    Combo: [Corruption]
+  - Name: Foggy Forest
+    Level: 1
+  - Name: Great Hall
+    Level: 2
+  - Name: The Pens
+    Level: 2
+    Combo: [Corruption]
+  - Name: Shallow Graves
+    Level: 3
+  - Name: Count's Quarters
+    Level: 3
+
+- Quest: Miricelle's Return
+  Number: 11
+  Sets:
+  - The Enemies Among Us
+  Heroes:
+  - Name: Sibyl
+    Keywords: [Elf, Elemental, Cleric, Wizard, Hero]
+    Combo: [Elemental]
+    Meta: [Discard]
+    Memo: A denizen from the Earth Temple, this half-gargoyle is an Elemental master, offering some great deck-cycling abilities under the right circumstances.
+  - Name: Armatir the Proud
+    Keywords: [Elf, Orc, Fighter, Hero]
+    Memo: This young half-breed fighter has a lot to prove to the world, preferring to take on foes himself whenever possible.
+  - Name: Gilora the Trickster
+    Keywords: [Halfling, Wizard, Rogue, Hero]
+    Memo: A master illusionist, Gilora can pull from her experience to create temporary additions to your hand, becoming more versatile as she advances.
+  - Name: Corster the Shade
+    Keywords: [Halfling, Rogue, Hero]
+    Memo: A master of the shadows, this diminutive ninja gets stronger the darker the Dungeon Room.
+  - Name: Leila and Zurien
+    Keywords: [Human, Undead, Cleric, Rogue, Hero]
+    Combo: [Celestial, Demon, Divine]
+    Memo: Leila was a simple priestess until she was possessed by an invading Scion, Zurien. However, Zurien is a renegade among her own people, disagreeing with their hostile takeover. As a result, Zurien has formed a symbiotic relationship with Leila as they work together to show the Scions another way.
+  - Name: Donatien Pinnick
+    Keywords: [Human, Fighter, Hero]
+    Combo: [Dagger]
+    Memo: A Fighter with deadly accuracy from a distance, this Hero is most effective with lots of Daggers and turns any Weapon into a Bow.
+  Marketplace:
+  - Name: Potion of Giant Strength
+    Keywords: [Magic, Item]
+  - Name: Manacles
+    Keywords: [Item]
+  - Name: Traveling Merchant
+    Keywords: [Magic, Ally]
+  - Name: Riftling
+    Keywords: [Aberration, Beast, Ally]
+    Meta: [Static]
+  - Name: Glaive
+    Keywords: [Blunt, Bow, Edged, Weapon]
+  - Name: Stone Maul
+    Keywords: [Blunt, Elemental, Magic, Weapon]
+    Combo: [Elemental]
+  - Name: Midnight Katana
+    Keywords: [Edged, Magic, Weapon]
+  - Name: Throwing Dagger
+    Keywords: [Bow, Edged, Weapon]
+    Combo: [Dagger]
+    Meta: [Dagger]
+  - Name: Phantasm
+    Keywords: [Arcane, Chaos, Elemental, Spell]
+  - Name: Sonic Scream
+    Keywords: [Arcane, Elemental, Spell]
+  - Name: Spirit Shield
+    Keywords: [Divine, Spell]
+    Combo: [Aberration, Demon, Undead]
+  - Name: Banish
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Aberration, Celestial, Demon, Undead]
+  Monsters:
+  - Name: Treacherous Turncoats
+    Level: 1
+    Keywords: [Humanoid]
+    Memo: These former Heroes have seen Miricelle's return as a changing in the tide, and they have no desire to get crushed by the wave.
+  - Name: Possessed Protagonists
+    Level: 1
+    Keywords: [Humanoid]
+    Memo: As the Scions take possession of the life in this world, they inevitably have taken control of some of the Keep's most revered Heroes. Drive out the Scion within and bring them back to your side.
+  - Name: Orcish Allies
+    Level: 2
+    Keywords: [Humanoid]
+    Memo: The last of a dwindling orc bloodline, the Wrathpride Clan have aligned themselves with Miricelle out of desparation. Their envy drives them now, making them more ferocious the better off you are.
+  - Name: Resurrected Remnants
+    Level: 2
+    Keywords: [Humanoid, Undead]
+    Memo: In their frantic quest to establish themselves in this world, the Scions have taken to animating corpses of Thunderstone Keep's fallen Heroes.
+  - Name: Rift Natives
+    Level: 3
+    Keywords: [Aberration, Beast, Vermin]
+    Memo: Miricelle's ritual has opened portals throughout the region to usher the Scions forth, but not all of them access the Stormlands. These Monsters are the Aberrations that live in the spaces between dimensions.
+  - Name: Scion Invaders
+    Level: 3
+    Keywords: [Celestial, Demon, Undead, Swarm]
+    Memo: The Scions, ancestral spirits to both Celestials and Demons, were thwarted in their efforts to create a new world for themselves. Now they desire this one instead, but Divine Clerics can help keep these powerful poltergiests at bay.
+  Guardians:
+  - Name: Miricelle, World Destroyer
+    Keywords: [Humanoid, Celestial, Demon, Guardian]
+    Combo: [Ally, Hero, Item, Spell, Weapon]
+  Dungeon Rooms:
+  - Name: Broken Road
+    Level: 1
+  - Name: Village Breach
+    Level: 1
+  - Name: Mixed Marsh
+    Level: 2
+  - Name: Warped Wood
+    Level: 2
+  - Name: Shattered Cave
+    Level: 3
+  - Name: Split Cathedral
+    Level: 3
+
+- Quest: Nature's Wrath
+  Number: 12
+  Heroes:
+    - Name: General Nyla Rivers
+      Keywords: [Human, Cleric, Fighter, Hero]
+      Memo: General Nyla's tactical experience makes her a great asset against magical foes. She is at her best at the forefront, leading other clerics to righteous victory.
+    - Name: Kheih
+      Keywords: [Avian, Beast, Elemental, Wizard, Hero]
+      Combo: [Elemental]
+      Memo: Kheih comes from an Avian tribe high in the mountains, above the clouds. She has a special connection to the storms that rage above, wielding elemental magic to disrupt the timing of her enemy's abilities.
+    - Name: Krakhar Stonehand
+      Keywords: [Dwarf, Elemental, Fighter, Wizard, Hero]
+      Memo: This powerful wizard is on a quest for power from the primal forces of creation. He grows stronger as Guardian Keys are revealed.
+    - Name: Pibbert the Dextrous
+      Keywords: [Gnome, Halfling, Rogue, Hero]
+      Meta: [Discard]
+      Memo: This clever inventor got tired of having his hands full... so he built more hands! The more hands he uses, the more dangerous he becomes.
+    - Name: Primelda Adhana
+      Keywords: [Elf, Human, Cleric, Rogue, Hero]
+      Memo: Primelda strides several different worlds. Not only is she half-elf, but she embraces the mystical side of nature in the midst of the urban realm. She is a druid of the city, making friends with all of the animal denizens there.
+    - Name: Strin Doxit
+      Keywords: [Elf, Fey, Fighter, Rogue, Hero]
+      Meta: [Discard]
+      Memo: A charming satyr, Strin has developed quite a romantic view of society and civilization, forsaking the fairy-folk of the world to embrace the creations of man.
+  Marketplace:
+  - Name: Flame Sprite
+    Keywords: [Elemental, Fey, Ally]
+    Meta: [Static]
+  - Name: Raven
+    Keywords: [Beast, Rogue, Ally]
+  - Name: Deck of Spirits
+    Keywords: [Magic, Static, Item]
+    Memo: Long ago, a rivalry between eight princes threatened to destroy their lands. Peace was established by a wizard who captured their souls within these cards, but their rivalry persists to this day. Each of these unique cards offers power in its own right, more so if you can use them together. However, they cannot bear being united for long, so timing is crucial.
+  - Name: Liquid Gold
+    Keywords: [Magic, Item]
+  - Name: Nyla's Shield
+    Keywords: [Item]
+  - Name: Animal Affinity
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Beast, Vermin, Ally]
+    Meta: [Discard]
+  - Name: Borrowed Power
+    Keywords: [Arcane, Chaos, Spell]
+  - Name: Precognition
+    Keywords: [Arcane, Spell]
+  - Name: Righteous Blast
+    Keywords: [Divine, Spell]
+  - Name: Bangarang
+    Keywords: [Blunt, Weapon]
+  - Name: Forest's Mischief
+    Keywords: [Blunt, Bow, Elemental, Weapon]
+  - Name: Lightning Rod
+    Keywords: [Blunt, Elemental, Magic, Weapon]
+  Monsters:
+  - Name: Mutant Beasties
+    Keywords: [Beast]
+    Level: 1
+    Memo: Kar'nomal has enlisted these creatures to seek the power of the elements. They grow stronger depending on the number of Guardian Keys found.
+  - Name: Flowering Fauna
+    Keywords: [ Beast, Plant]
+    Level: 1
+    Memo: The wilds have created some beasts of their own in their war against civilization. Beware. They are unpredictable, and it will take great cunning to sneak past them.
+  - Name: Elven Rebels
+    Keywords: [Humanoid]
+    Level: 2
+    Memo: Some elves have had enough of civilization's intrusions into nature, taking extreme measures to enact vengeance. These rebels will use your deck against you.
+  - Name: Troll Ruffians
+    Keywords: [Giant, Humanoid]
+    Level: 2
+    Memo: Kar'nomal's tribe are entirely loyal to his vision of a world reclaimed by the elements. They attack the Keep, destroying cards from the Village stacks.
+  - Name: The Consumed
+    Keywords: [Elemental, Humanoid, Beast, Plant]
+    Level: 3
+    Memo: These trolls have been consumde by elemental forces, losing all sense of what they were. They are extremely powerful, but searching for Guardian Keys may reveal a weak point.
+  - Name: Ent Army
+    Keywords: [Giant, Plant]
+    Level: 3
+    Memo: The trees have volunteered their own soldiers for Kar'nomal's fight. These mighty behemoths will punish you for filling your deck with manufactured goods.
+  Guardians:
+  - Name: Kar'nomal
+    Keywords: [Elemental, Giant, Humanoid, Guardian]
+  Dungeon Rooms:
+  - Name: Hostile Meadow
+    Level: 1
+  - Name: Crossroads
+    Level: 2
+  - Name: Forest Shrine
+    Level: 3
+  - Name: Overgrown Path
+    Level: 1
+  - Name: Reclaimed Outpost
+    Level: 2
+  - Name: Sleeping Tree King
+    Level: 3
+
+- Quest: Rotten Roots
+  Number: 13
+  WildernessMonster: Grub
+  Heroes:
+  - Name: Amber Leafspark
+    Keywords: [Fey, Fighter, Hero]
+    Combo: [Elemental]
+    Memo: Amber is a masterful soldier among the fairy folk, showing tremendous versatility with Elemental Weapons.
+  - Name: Berhnhard the Prepared
+    Keywords: [Halfling, Wizard, Hero]
+    Memo: Bernhard imbues candles with magic spells, allowing him to use them over and over again, turn after turn.
+  - Name: Killian Silanus
+    Keywords: [Human, Cleric, Hero]
+    Combo: [Divine, Aberration, Demon, Undead]
+    Memo: Killian is a man on a crusade, fighting to rid the world of the demonic. He is especially strong against the Undead and beings that are not of this world.
+  - Name: Phelorna
+    Keywords: [Elf, Cleric, Wizard, Hero]
+    Memo: Phelorna is an elven priestess who cares for Ashbrow, the ancient tree guardian of the Deepwood. She is a master with potions and healing salves created from the plants of the forest.
+  - Name: The Highwind Three
+    Keywords: [Halfling, Rogue, Hero]
+    Combo: [Discard]
+    Memo: These three siblings will go anywhere looking for adventure (and profit). They can put their small fortune to use in a number of different ways while exploring dungeons.
+  - Name: Walnut Silvergrove
+    Keywords: [Fey, Fighter, Rogue, Hero]
+    Combo: [Bow]
+    Memo: As knight errant of the fairy wilds, Walnut is invaluable with a Bow, especially in confined spaces.
+  Marketplace:
+  - Name: Petal Pal
+    Keywords: [Plant, Ally]
+  - Name: Barkskin Armor
+    Keywords: [Elemental, Item]
+    Combo: [Fey]
+  - Name: Craftsman's Tools
+    Keywords: [Item]
+  - Name: Magic Flute
+    Keywords: [Magic, Item]
+    Combo: [Fey]
+  - Name: Shape Change
+    Keywords: [Arcane, Divine, Spell]
+  - Name: Spike Growth
+    Keywords: [Arcane, Elemental, Spell]
+  - Name: Strengthen Ally
+    Keywords: [Arcane, Divine, Spell]
+    Combo: [Ally]
+  - Name: Swarm Strike
+    Keywords: [Arcane, Spell]
+    Combo: [Plant]
+  - Name: Golden Horn
+    Keywords: [Blunt, Elemental, Weapon]
+    Combo: [Fey]
+  - Name: Leaf Blade
+    Keywords: [Edged, Elemental, Weapon]
+    Combo: [Fey]
+  - Name: Needle Bow
+    Keywords: [Bow, Weapon]
+    Combo: [Fey]
+  - Name: Treant Root
+    Keywords: [Blunt, Magic, Weapon]
+    Combo: [Elf, Fey]
+  Monsters:
+  - Name: Army Ants
+    Keywords: [Vermin]
+    Level: 1
+    Memo: This colony survives by working together to protect their queen, lending strength to one another, down to the very last.
+  - Name: Birds and Creatures
+    Keywords: [Beast, Vermin]
+    Level: 1
+    Memo: The common creatures of the forest aren't so timid when you're the size of their food.
+  - Name: Diminutive Druids
+    Keywords: [Humanoid]
+    Level: 2
+    Memo: Troubled by the imbalances of nature on even the smallest scale, a group of druids have adapted to life among the miniscule, and they're very hostile to outsiders. However, they may be easier to dismiss if you can appeal to their individual passions.
+  - Name: Tree Spirits
+    Keywords: [Abberation, Plant, Undead]
+    Level: 2
+    Memo: Shades of life and death stretch even to the smallest recesses of the world, animating even the fallen remains of the forest floor. These creatures are strengthened by what the Champions have discarded.
+  - Name: Fiendish Fairies
+    Keywords: [Demon, Fey, Humanoid]
+    Level: 3
+    Memo: These mischievous misfits have shared in the demonic power embraced by Filleath, making their normal shenanigans more dangerous. They love to play with their opponents a bit before attacking.
+  - Name: Mushroom Herd
+    Keywords: [Aberration, Plant]
+    Level: 3
+    Memo: The trees have legends all their own, including one of an ancient shepherd who looks after the mushrooms. As they grow, he herds them together for protection. Disturbing the herd could have dire consequences on others if you don't tread carefully.
+  Guardians:
+  - Name: Filleath, the Toxic
+    Keywords: [Demon, Fey, Humanoid, Guardian]
+    Combo: [Discard]
+  Dungeon Rooms:
+    - Name: Fairy Village
+      Level: 1
+    - Name: Gnarled Glade
+      Level: 2
+    - Name: Root Pools
+      Level: 3
+    - Name: Nest
+      Level: 1
+    - Name: Druid Hovel
+      Level: 2
+    - Name: Spore Field
+      Level: 3
+
+
+- Quest: Raging Seas
+  Number: 14
+  Heroes:
+    - Name: Adaltrude Stickyfingers
+      Keywords: [Halfling, Cleric, Rogue]
+      Memo: Those who contribute to Adaltrude's cause don't really have a choice but do receive a blessing in return.
+    - Name: Gurgelion
+      Keywords: [Triton, Wizard]
+      Combo: [Arcane, Elemental]
+      Memo: |
+        Gurgelion explains the secret of sustained magic to surface dwellers: "If you can hold your breath, you can hold a spell."
+    - Name: Josephine Morgan
+      Keywords: [Human, Cleric]
+      Memo: Ships often employ magic users to keep them safe from dangers at sea, especially from other ships. Josephine has grown up on the sea, lending her powers to protect others.
+    - Name: Nimiane
+      Keywords: [Triton, Fighter]
+      Meta: [Discard]
+      Combo: [Boarding Party, Beast, Vermin]
+      Memo: The mighty warrior scoffs at superstitious legends and rituals. Nimiane believes in making one's own luck.
+    - Name: Steele Gargkson
+      Keywords: [Human, Orc, Fighter, Wizard]
+      Combo: [Bow]
+      Memo: Raised on the sea, this cunning mercenary serves as a master gunner, attacking ships from afar with devastating balls of fire.
+    - Name: Taegen "The Fox" Glynfir
+      Keywords: [Elf, Fighter, Rogue]
+      Memo: The Fox is a master navigator and captain of the Silver Crow. His countless years at sea proves very rewarding for those interested in completing voyages of their own.
+  Marketplace:
+    - Name: Stowaway
+      Keywords: [Cursed, Static, Ally]
+    - Name: Bottle of Rum
+      Keywords: [Item]
+    - Name: Hidden Stash
+      Keywords: [Item]
+    - Name: Ship in a Bottle
+      Keywords: [Magic,Item]
+    - Name: Spyglass
+      Keywords: [Item]
+    - Name: Swab the Deck
+      Keywords: [Arcane, Spell]
+      Combo: [Boarding Party]
+    - Name: The Black Spot
+      Keywords: [Arcane, Spell]
+      Combo: [Wizard]
+    - Name: Whirlpool
+      Keywords: [Arcane, Chaos, Elemental, Spell]
+      Combo: [Wizard, Triton]
+    - Name: Cutlass
+      Keywords: [Edged, Weapon]
+      Combo: [Human, Rogue]
+    - Name: Épée
+      Keywords: [Edged, Weapon]
+      Combo: [Humanoid]
+    - Name: Mast Mauler
+      Keywords: [Bow, Magic, Weapon]
+      Combo: [Boarding Party, Wizard]
+    - Name: Trident
+      Keywords: [Blunt, Edged, Weapon]
+      Combo: [Triton]
+  Monsters:
+    - Name: Brigands
+      Keywords: [Humanoid]
+      Level: 1
+      Memo: This motley crew is united by their endless hunger for both cruelty and gold. The more money you have, the harder they fight.
+    - Name: House of Klubba
+      Level: 1
+      Keywords: [Aberration, Vermin]
+      Memo: This bizarre race of primitive scavengers are obsessed with trade. They constantly eye your gear, so perhaps a trade will brighten their disposition.
+    - Name: Murderous Mermaids
+      Level: 2
+      Keywords: [Elemental, Fey, Humanoid]
+      Memo: Sinuous and deadly, the mermaids entangle their prey until it either drowns or sheds its valuables in order to break free
+    - Name: Queen's Crew
+      Level: 2
+      Keywords: [Boarding Party, Humanoid]
+      Memo: You'd best repel these raiders if you can. Once they infest your ship, they plunder your stores and make it a chore to resupply.
+    - Name: Ghost Ship
+      Level: 3
+      Keywords: [Boarding Party, Swarm, Undead]
+      Memo: These enraged lost souls are best met with overwhelming force and a cleric's holy light.
+    - Name: Sea Creatures
+      Level: 3
+      Keywords: [Beast, Giant]
+      Memo: Strange, hideous monstrosities roam the ocean's depths. They are a deadly threat to those on the surface and a terrifying nightmare to those who slip beneath the waves.
+  Guardians:
+    - Name: Captain Susan Ferring
+      Keywords: [Humanoid]
+      Combo: [Rogue]
+  Dungeon Rooms:
+    - Name: Klubba Island
+      Level: 1
+    - Name: Pirate's Cove
+      Level: 1
+    - Name: Castaway Island
+      Level: 2
+    - Name: Shipwreck Island
+      Level: 2
+    - Name: Ghost Ship
+      Level: 3
+    - Name: The Great Reef
+      Level: 3
+
+- Quest: Ancient Adversaries
+  Number: 15
+  Heroes:
+    - Name: Adallind the Noble
+      Keywords: [Halfling, Cleric]
+      Memo: Adallind's faith grows to meet whatever challenge the jungle throws at her, and her power grows to match.
+    - Name: Archibald
+      Keywords: [Beast, Wizard]
+      Combo: [Spell, Magic]
+      Memo: This primate happened upon the amulet of a fallen wizard, giving him advanced intelligence. Now, Archibald seeks more mystical items and secret knowledge in his quest for growth.
+    - Name: Duridmaes Runeseeker
+      Keywords: [Dwarf, Rogue]
+      Memo: Duridmaes has a nose for treasure, an eye for traps, and an ear for the sounds of approaching danger.
+    - Name: Iolas
+      Keywords: [Elf, Fighter, Rogue]
+      Memo: A renowned hunter, Iolas seeks the most formidable game. The only trophies he takes are his memories of the hunt and the lessons they've taught him.
+    - Name: Joanna
+      Keywords: [Human, Fighter]
+      Combo: [Discard]
+      Memo: The jungle is Joanna's home, and she holds no fear for even its deepest, darkest heart.
+    - Name: Mongoo
+      Keywords: [Fey, Cleric, Wizard]
+      Meta: [Discard]
+      Memo: No one can guess how old Mongoo is, least of all Mongoo himself. He is forever wandering, seeking new experiences and making new memories.
+  Marketplace:
+    - Name: Parrot
+      Keywords: [Beast, Rogue, Ally]
+    - Name: Fishing Rod
+      Keywords: [Item]
+    - Name: Pendant of Gifts
+      Keywords: [Magic, Item]
+    - Name: Star-Shaped Herb
+      Keywords: [Elemental, Magic, Item]
+    - Name: Po's Sight
+      Keywords: [Arcane, Elemental, Spell]
+    - Name: Summon Qaitu
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Wizard]
+    - Name: Tattoo
+      Keywords: [Arcane, Divine, Spell]
+    - Name: Teeth of the Earth
+      Keywords: [Arcane, Chaos, Elemental, Spell]
+      Combo: [Elemental, Weapon, Wizard]
+    - Name: Blowdart
+      Keywords: [Bow, Weapon, Elemental]
+      Combo: [Rogue]
+    - Name: Bonesword
+      Keywords: [Blunt, Edged, Elemental, Weapon]
+      Combo: [Cleric]
+    - Name: Master's Crossbow
+      Keywords: [Bow, Weapon]
+      Combo: [Rogue]
+    - Name: Spear
+      Keywords: [Edged, Weapon]
+      Meta: [Discard]
+  Monsters:
+    - Name: Halfling Mystics
+      Level: 1
+      Keywords: [Fey, Humanoid]
+      Memo: Isolation in the jungle has amplified these halflings' mental abilities but made them cruel toward others in their quest for the totems' power.
+    - Name: Jungle Threats
+      Level: 1
+      Keywords: [Beast, Plant]
+      Memo: The jungle is full of animals and plants that exhaust explorers, wearing away at their supplies, allies, and resolve.
+    - Name: Explorer Ghosts
+      Level: 2
+      Keywords: [Humanoid, Undead, Vermin]
+      Memo: Countless travelers have died in the jungle, but not all have stayed dead. Those who return are transformed by the land to do its bidding.
+    - Name: Tribal Elves
+      Level: 2
+      Keywords: [Humanoid]
+      Memo: Fearsome headhunters, the elves of the jungle recognize the totems' true power and seek it for themselves.
+    - Name: Celestial Half-Breeds
+      Level: 3
+      Keywords: [Elemental, Celestial, Humanoid]
+      Memo: Long ago, a band of celestial beings settled in a human village, intermingling until the distinctions between them dissolved. This diverse group can be punishing, but with great risk comes great reward.
+    - Name: Lava Dwarves
+      Level: 3
+      Keywords: [Elemental, Humanoid]
+      Memo: Beware the fiery touch of the dwarf tribe who worships Sigrios, lest they melt your equipment and set your flesh aflame.
+  Guardians:
+    - Name: Sigrios, The Mountain Thunder
+      Keywords: [Aberration, Elemental, Golem]
+  Dungeon Rooms:
+    - Name: River
+      Level: 1
+    - Name: Trading Post
+      Level: 1
+    - Name: Caves
+      Level: 2
+    - Name: Rope Bridge
+      Level: 2
+    - Name: Lava Den
+      Level: 3
+    - Name: Lost Temple
+      Level: 3
+
+- Quest: Twilight Souls
+  Number: 16
+  Heroes:
+    - Name: Arabella Talbard
+      Keywords: [Human, Fighter]
+      Combo: [Ally,Weapon]
+      Memo: A master strategist, Arabella makes use of every tool at her disposal to lead the charge. She is adept with weapons and allies, making regular use of both.
+    - Name: Odell Garothmuk
+      Keywords: [Orc, Rogue]
+      Memo: A daredevil at heart, Odell jumps at the chance to explore far off places, the farther the better. She is a powerful guide, able to find sources of light in the strangest of places.
+    - Name: Birinus the Inquisitive
+      Keywords: [Halfling, Wizard]
+      Combo: [Chaos, Ally]
+      Memo: Birinus saw power in darkness, exploring its potential to stabilize the spells of chaos. But he delved too far, and now is being hunted by dark creatures who know his name.
+    - Name: Asterra
+      Keywords: [Avian, Elf, Cleric]
+      Combo: [Demon, Undead, Vermin]
+      Memo: A cleric of the missing light goddess, Asterra spent weeks in an unwakeable trance. She awoke with renewed strength in her wings and a message to restore soul light.
+    - Name: Belkar Hammerwing
+      Keywords: [Dwarf, Cleric, Fighter]
+      Combo: [Bow,Edged]
+      Memo: Once a simple guard, Belkar wasn't seeking adventure. But now, he's learning about the dangers of the darkness and the power of faith. He is a mighty force with bows and edged weapons.
+    - Name: Reluvethel
+      Keywords: [Elf, Rogue, Wizard]
+      Memo: A rogue student of the magic arts, Reluvathel is more interested in lining his own pockets than beings of dark power. But with the rising tide of evil, even this tainted soul is seeking redemption. He makes careful use of light to fuel his magical powers.
+  Marketplace:
+    - Name: Giant Eagle
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Cleric, Rogue]
+    - Name: Strigine Mount
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Wizard]
+    - Name: Griffon
+      Keywords: [Beast, Avian, Ally]
+      Combo: [Fighter]
+    - Name: Phosphorescent Helm
+      Keywords: [Magic, Item]
+    - Name: Hyperprism
+      Keywords: [Magic, Item]
+    - Name: Inner Light
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Demon, Undead, Vermin]
+    - Name: Nourishment
+      Keywords: [Arcane, Divine, Spell]
+      Combo: [Ally]
+    - Name: Dark Pact
+      Keywords: [Arcane, Chaos, Spell]
+    - Name: Personal Convergence
+      Keywords: [Divine, Spell]
+      Combo: [Ally]
+    - Name: Tulwar
+      Keywords: [Edged, Magic, Weapon]
+      Combo: [Ally]
+    - Name: Lance
+      Keywords: [Blunt, Edged, Weapon]
+      Combo: [Fighter]
+    - Name: Bola
+      Keywords: [Blunt, Bow, Weapon]
+    - Name: Chakram
+      Keywords: [Bow, Edged, Weapon]
+  Monsters:
+    - Name: Light Leeches
+      Level: 1
+      Keywords: [Aberration, Vermin]
+      Memo: These vampiric vermin are born of the darkness, but Prince Musaid's campaign has emboldened them to venture out with an insatiable hunger for soul light. It won't be easy to get past them without sacrificing a bit of yours.
+    - Name: The Fallen
+      Level: 1
+      Keywords: [Fey, Humanoid, Undead]
+      Memo: Occasionally, people lose their light and fall to their deaths. The most tragic of these remain as dark, vindictive spirits who masquerade as beautiful women to lure travelers through the sky to their deaths. If you find yourself faced with one of these creatures, be prepared to give something up.
+    - Name: Corvaxis
+      Level: 2
+      Keywords: [Beast, Humanoid]
+      Memo: The Corvaxis are a race of Avian creatures who revel in their greed. Good thing for you, they love to bargain.
+    - Name: Sky Lords
+      Level: 2
+      Keywords: [Giant, Humanoid]
+      Memo: These empyrean giants are solitary beings filled with cosmic energe kept contained by their mystical armor. They are considered deities by surface dwellers and don't take kindly to trespassers in their realm.
+    - Name: Shadow Demons
+      Level: 3
+      Keywords: [Demon, Elemental]
+      Memo: These otherworldly creatures make up Prince Musaid's invasion force. They are powerful brutes, but they are vulnerable to strong light... and there is no stronger light than the soul.
+    - Name: Deadly Drafts
+      Level: 3
+      Keywords: [Elemental]
+      Memo: High in the clouds, mystical forces converge into powerful storms with a life all their own. It will take more than your average tools of the trade to face off against these unpredictable elementals.
+  Guardians:
+    - Name: Prince Musaid, Child of Darkness
+      Keywords: [Demon, Elemental, Humanoid]
+  Dungeon Rooms:
+    - Name: Zephyr Shrine
+      Level: 1
+    - Name: Friendless Peak
+      Level: 2
+    - Name: Vimana
+      Level: 3
+    - Name: The Pillars
+      Level: 1
+    - Name: Canyon
+      Level: 2
+    - Name: Lost Aerie
+      Level: 3
+
+- Quest: The All-Consuming Hive
+  Number: 17
+  Heroes:
+    - Name: Jaxon Esford
+      Keywords: [Human, Cleric]
+      Combo: [Blunt]
+      Memo: Once a member of the noble court, Esford bore witness to Sidura's descent into madness. He has mastered the art of cleansing those she's infected and wields blunt weapons with deadly force.
+    - Name: Hayden Hart
+      Keywords: [Aberration, Humanoid, Undead, Fighter]
+      Memo: Hart was rescued before his transformation was complete, but has been forever scarred by his experience. Now on a path of vengeance, he makes use of his new physiology, drawing strength from wound cards.
+    - Name: Elgamorin
+      Keywords: [Elf, Human, Rogue]
+      Combo: [Ally]
+      Memo: The ranger Elgamorin is a master scout, even without light. He has volunteered to guide bands of warriors into the worm.
+    - Name: Cathamis
+      Keywords: [Elf, Wizard]
+      Meta: [Discard]
+      Memo: An exceptional scholar and researcher, Cathamis has been sent by her order to study the strange, subterranean life forms. She likes to collect tissue samples for study, mich to the disgust of the rest of her party.
+    - Name: Lady Bruda Ironcrown
+      Keywords: [Dwarf, Fighter, Wizard]
+      Memo: The ruler of a neighboring mountain kingdom, Lady Bruda has set aside her crown to take up arms against the worm hive. She is an inspirational leader, making the most of a diverse assault force.
+    - Name: Sybenn the Redeemed
+      Keywords: [Halfling, Cleric, Rogue]
+      Memo: Sybenn was an assassin before being called to duty by his god. He now takes life with one hand and restores it with the other, and is a master at finding the right resources for the job.
+  Marketplace:
+    - Name: Deeprock Guide
+      Keywords: [Humanoid, Ally]
+    - Name: Mandibled Retriever
+      Keywords: [Vermin,Ally]
+      Combo: [Discard]
+    - Name: Crown of Cleansing
+      Keywords: [Magic, Item]
+    - Name: Anti-Venom Brew
+      Keywords: [Item]
+    - Name: Word of Stasis
+      Keywords: [Arcane, Spell]
+    - Name: Hand of Restoration
+      Keywords: [Divine, Spell]
+    - Name: Shrink
+      Keywords: [Arcane, Spell]
+    - Name: Desiccation
+      Keywords: [Arcane, Chaos, Spell]
+    - Name: Ignition Bow
+      Keywords: [Bow, Edged, Elemental, Magic, Weapon]
+    - Name: Shell-Cracker
+      Keywords: [Blunt, Weapon]
+    - Name: Resin Blade
+      Keywords: [Edged, Elemental, Weapon]
+    - Name: Wasteland Stinger
+      Keywords: [Blunt, Edged, Weapon]
+  Monsters:
+    - Name: Wormlings
+      Level: 1
+      Keywords: [Vermin, Swarm]
+      Memo: These wriggling beasts are the main workers of the worm hive. They hunt and work in swarming packs that can quickly overwhelm the unwary.
+    - Name: Children of the Worm
+      Level: 1
+      Keywords: [Humanoid]
+      Memo: The appearance of Sidura's towers has drawn out a small, but devoted, cult of the deep-dwellers' deities. These fanatics serve and worship the creatures, hoping to be harvested and transformed. Perhaps, someday soon, they'll get their wish.
+    - Name: Hive Horde
+      Level: 2
+      Keywords: [Vermin,Swarm]
+      Memo: These are the swarming hordes of the great worm, thriving in their purpose of taking captives and preparing them for transformation.
+    - Name: Undead Mutants
+      Level: 2
+      Keywords: [Humanoid, Undead, Vermin]
+      Memo: Captives are transformed into insect-like hybrids. Some don't survive the process, but don't quite die either. The result is undead abominations, mad and toxic.
+    - Name: Hybrids
+      Level: 3
+      Keywords: [Humanoid, Vermin]
+      Memo: These monstrous creatures are the fully mutated servants of the worm queen, the pinnacle of strength and Sidura's vision for all.
+    - Name: Mind Worms
+      Level: 3
+      Keywords: [Vermin]
+      Memo: These worms serve as conduits for the hive mind's influence, which goes deeper than most realize. They must be defeated, but doing so may have unintended consequences.
+  Guardians:
+    - Name: Sidura the Sorceress
+      Keywords: [Demon, Humanoid, Vermin]
+  Dungeon Rooms:
+    - Name: The Buttresses
+      Level: 1
+    - Name: The Tunnels
+      Level: 1
+    - Name: Captive Cells
+      Level: 2
+    - Name: Egg Chambers
+      Level: 2
+    - Name: The Mind Chamber
+      Level: 3
+    - Name: Habitation Zone
+      Level: 3
