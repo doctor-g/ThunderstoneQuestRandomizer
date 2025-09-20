@@ -1751,3 +1751,95 @@
       Level: 2
     - Name: Lost Aerie
       Level: 3
+
+- Quest: The All-Consuming Hive
+  Number: 17
+  Heroes:
+    - Name: Jaxon Esford
+      Keywords: [Human, Cleric]
+      Combo: [Blunt]
+      Memo: Once a member of the noble court, Esford bore witness to Sidura's descent into madness. He has mastered the art of cleansing those she's infected and wields blunt weapons with deadly force.
+    - Name: Hayden Hart
+      Keywords: [Aberration, Humanoid, Undead, Fighter]
+      Memo: Hart was rescued before his transformation was complete, but has been forever scarred by his experience. Now on a path of vengeance, he makes use of his new physiology, drawing strength from wound cards.
+    - Name: Elgamorin
+      Keywords: [Elf, Human, Rogue]
+      Combo: [Ally]
+      Memo: The ranger Elgamorin is a master scout, even without light. He has volunteered to guide bands of warriors into the worm.
+    - Name: Cathamis
+      Keywords: [Elf, Wizard]
+      Meta: [Discard]
+      Memo: An exceptional scholar and researcher, Cathamis has been sent by her order to study the strange, subterranean life forms. She likes to collect tissue samples for study, mich to the disgust of the rest of her party.
+    - Name: Lady Bruda Ironcrown
+      Keywords: [Dwarf, Fighter, Wizard]
+      Memo: The ruler of a neighboring mountain kingdom, Lady Bruda has set aside her crown to take up arms against the worm hive. She is an inspirational leader, making the most of a diverse assault force.
+    - Name: Sybenn the Redeemed
+      Keywords: [Halfling, Cleric, Rogue]
+      Memo: Sybenn was an assassin before being called to duty by his god. He now takes life with one hand and restores it with the other, and is a master at finding the right resources for the job.
+  Marketplace:
+    - Name: Deeprock Guide
+      Keywords: [Humanoid, Ally]
+    - Name: Mandibled Retriever
+      Keywords: [Vermin,Ally]
+      Combo: [Discard]
+    - Name: Crown of Cleansing
+      Keywords: [Magic, Item]
+    - Name: Anti-Venom Brew
+      Keywords: [Item]
+    - Name: Word of Stasis
+      Keywords: [Arcane, Spell]
+    - Name: Hand of Restoration
+      Keywords: [Divine, Spell]
+    - Name: Shrink
+      Keywords: [Arcane, Spell]
+    - Name: Desiccation
+      Keywords: [Arcane, Chaos, Spell]
+    - Name: Ignition Bow
+      Keywords: [Bow, Edged, Elemental, Magic, Weapon]
+    - Name: Shell-Cracker
+      Keywords: [Blunt, Weapon]
+    - Name: Resin Blade
+      Keywords: [Edged, Elemental, Weapon]
+    - Name: Wasteland Stinger
+      Keywords: [Blunt, Edged, Weapon]
+  Monsters:
+    - Name: Wormlings
+      Level: 1
+      Keywords: [Vermin, Swarm]
+      Memo: These wriggling beasts are the main workers of the worm hive. They hunt and work in swarming packs that can quickly overwhelm the unwary.
+    - Name: Children of the Worm
+      Level: 1
+      Keywords: [Humanoid]
+      Memo: The appearance of Sidura's towers has drawn out a small, but devoted, cult of the deep-dwellers' deities. These fanatics serve and worship the creatures, hoping to be harvested and transformed. Perhaps, someday soon, they'll get their wish.
+    - Name: Hive Horde
+      Level: 2
+      Keywords: [Vermin,Swarm]
+      Memo: These are the swarming hordes of the great worm, thriving in their purpose of taking captives and preparing them for transformation.
+    - Name: Undead Mutants
+      Level: 2
+      Keywords: [Humanoid, Undead, Vermin]
+      Memo: Captives are transformed into insect-like hybrids. Some don't survive the process, but don't quite die either. The result is undead abominations, mad and toxic.
+    - Name: Hybrids
+      Level: 3
+      Keywords: [Humanoid, Vermin]
+      Memo: These monstrous creatures are the fully mutated servants of the worm queen, the pinnacle of strength and Sidura's vision for all.
+    - Name: Mind Worms
+      Level: 3
+      Keywords: [Vermin]
+      Memo: These worms serve as conduits for the hive mind's influence, which goes deeper than most realize. They must be defeated, but doing so may have unintended consequences.
+  Guardians:
+    - Name: Sidura the Sorceress
+      Keywords: [Demon, Humanoid, Vermin]
+  Dungeon Rooms:
+    - Name: The Buttresses
+      Level: 1
+    - Name: The Tunnels
+      Level: 1
+    - Name: Captive Cells
+      Level: 2
+    - Name: Egg Chambers
+      Level: 2
+    - Name: The Mind Chamber
+      Level: 3
+    - Name: Habitation Zone
+      Level: 3
